@@ -8,23 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30814f48-4561-4241-9534-f3f750295f9c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib5.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/classes/com/sicdlib/web/UserAction.class" afterPath="$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/classes/com/sicdlib/web/UserAction.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/socialmind/com/sicdlib/web/UserAction.class" afterPath="$PROJECT_DIR$/out/production/socialmind/com/sicdlib/web/UserAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/socialmind_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/socialmind_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/classes/jdbc.properties" afterPath="$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/classes/jdbc.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/socialmind/jdbc.properties" afterPath="$PROJECT_DIR$/out/production/socialmind/jdbc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource/jdbc.properties" afterPath="$PROJECT_DIR$/resource/jdbc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/socialmind.iml" afterPath="$PROJECT_DIR$/socialmind.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java" afterPath="$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java" />
     </list>
     <ignored path="weibomonitor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -748,12 +737,20 @@
       <workItem from="1509200386554" duration="4294000" />
       <workItem from="1509239337487" duration="3707000" />
       <workItem from="1509269558308" duration="241000" />
-      <workItem from="1509275158940" duration="1519000" />
+      <workItem from="1509275158940" duration="1558000" />
     </task>
+    <task id="LOCAL-00001" summary="modified user">
+      <created>1509276709649</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1509276709649</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18962000" />
+    <option name="totallyTimeSpent" value="19001000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -807,7 +804,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="modified user" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified user" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
