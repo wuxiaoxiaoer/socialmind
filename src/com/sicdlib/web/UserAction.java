@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+//用户管理模块
 @Controller
 @RequestMapping("/user/*")
 public class UserAction {
