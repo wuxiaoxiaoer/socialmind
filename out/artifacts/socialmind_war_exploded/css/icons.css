@@ -1,0 +1,70 @@
+@charset 'UTF-8';
+@font-face {
+  font-family: 'entypo';
+  font-style: 'normal';
+  font-weight: 'normal';
+  src: url('http://weloveiconfonts.com/api/fonts/entypo/entypo.eot');
+  src: url('http://weloveiconfonts.com/api/fonts/entypo/entypo.eot?#iefix') format('eot'), 
+  url('http://weloveiconfonts.com/api/fonts/entypo/entypo.woff') format('woff'), 
+  url('http://weloveiconfonts.com/api/fonts/entypo/entypo.ttf') format('truetype'), 
+  url('http://weloveiconfonts.com/api/fonts/entypo/entypo.svg#entypo') format('svg');
+}
+[class*="icon-"]:before { font-family: 'entypo', sans-serif; }
+/* ICONS */
+.icon-tog:before { content: '\2630'; } /* TOGGLE */
+.icon-exx:before { content: '\274C'; } /* X */
+.icon-upl:before { content: '\E711'; } /* UPLOAD */
+.icon-sea:before { content: '\1F50D';} /* SEARCH */
+.icon-arc:before { content: '\E771'; } /* ARCHIVE */
+.icon-rss:before { content: '\E73A'; } /* RSS */
+.icon-ran:before { content: '\1F500';} /* RANDOM */
+.icon-ask:before { content: '\E718'; } /* ASK */
+.icon-sub:before { content: '\E74D'; } /* SUBMIT */
+.icon-bar:before { content: '\E764'; } /* BIG DOWN ARROW */
+.icon-uar:before { content: '\E75F'; } /* UP ARROW */
+.icon-dar:before { content: '\E75C'; } /* DOWN ARROW */
+.icon-lar:before { content: '\E75D'; } /* LEFT ARROW */
+.icon-rar:before { content: '\E75E'; } /* RIGHT ARROW */
+.icon-set:before { content: '\2699'; } /* SETTINGS */
+.icon-per:before { content: '\1F517';} /* PERMALINK */
+.icon-sha:before { content: '\E73C'; } /* SHARE */
+.icon-clo:before { content: '\2716'; } /* CLOSE */
+.icon-lay:before { content: '\268F'; } /* LAYOUT */
+.icon-new:before { content: '\1F4A5';} /* NEW */
+.icon-use:before { content: '\1F464';} /* USER */
+.icon-cre:before { content: '\1F465';} /* CREW */
+.icon-car:before { content: '\E73D'; } /* CART */
+.icon-hea:before { content: '\2661'; } /* HEART */
+.icon-lik:before { content: '\1F44D';} /* LIKE */
+.icon-mai:before { content: '\2709'; } /* MAIL */
+.icon-pho:before { content: '\1F4DE';} /* PHONE */
+.icon-inf:before { content: '\E705'; } /* INFO */
+.icon-hel:before { content: '\E704'; } /* HELP */
+.icon-off:before { content: '\E741'; } /* LOGOFF */
+.icon-pla:before { content: '\25B6'; } /* PLAY */
+.icon-pau:before { content: '\2016'; } /* PAUSE */
+.icon-sto:before { content: '\25A0'; } /* STOP */
+.icon-rec:before { content: '\25CF'; } /* RECORD */
+.icon-pre:before { content: '\23EA'; } /* PREVIOUS */
+.icon-nex:before { content: '\23E9'; } /* NEXT */
+.icon-not:before { content: '\266A'; } /* NOTE */
+.icon-vol:before { content: '\1F50A';} /* VOLUME */
+.icon-mut:before { content: '\1F507';} /* MUTE */
+/* SOCIAL */
+.icon-goo:before { content: '\F30F'; } /* GOOGLE+ */
+.icon-lin:before { content: '\F318'; } /* LINKEDIN */
+.icon-fac:before { content: '\F30C'; } /* FACEBOOK */
+.icon-twi:before { content: '\F309'; } /* TWITTER */
+.icon-tum:before { content: '\F315'; } /* TUMBLR */
+.icon-fli:before { content: '\F303'; } /* FLICKR */
+.icon-ins:before { content: '\F32D'; } /* INSTAGRAM */
+.icon-pin:before { content: '\F312'; } /* PINTEREST */
+.icon-dri:before { content: '\F31B'; } /* DIBBBLE */
+.icon-beh:before { content: '\F34E'; } /* BEHANCE */
+.icon-git:before { content: '\F300'; } /* GITHUB */
+.icon-cod:before { content: '\E714'; } /* CODEPEN */
+.icon-sou:before { content: '\F348'; } /* SOUNDCLOUD */
+.icon-rdi:before { content: '\F324'; } /* RDIO */
+.icon-las:before { content: '\F321'; } /* LAST.FM */
+.icon-you:before { content: '\25B6'; } /* YOUTUBE */
+.icon-vim:before { content: '\F306'; } /* VIMEO */

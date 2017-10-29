@@ -1,0 +1,34 @@
+
+
+
+.small { color: #666; font-size: 0.875em; }
+.large { font-size: 1.25em; }
+
+input[type="text"] {
+    padding: 0.5em;
+}
+
+button#datepicker-button {
+    margin-bottom: 3em;
+}
+
+.flow-element {
+    display: inline-block;
+    margin-right: 3em;
+    vertical-align: top;
+}
+.flow-element:last-child {
+    margin-right: 0;
+}
+.flow-element input {
+    margin-top: 0;
+}
+
+#container {
+    min-height: 15em;
+}
+.demo-container{width:800px;margin:0 auto;}
+.demo-container h3{text-align:center;}
+.demo-container ul li{float:left;width:170px;height:55px;margin:10px;}
+.demo-container ul li a{display:block;width:170px;height:55px;background:#eee;text-decoration:none;text-align:center;line-height:55px;border-radius:3px;}
+.demo-container ul li a:hover{background-color:#ddd;text-decoration:underline;}
