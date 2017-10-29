@@ -44,8 +44,6 @@ public class UserAction {
 	public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		String u_name = req.getParameter("u_name");
 		String u_pwd = req.getParameter("u_pwd");
-//		得到角色类型
-//		Integer usertype_id = Integer.parseInt(req.getParameter("usertype_id"));
 		boolean isRemPwd = Boolean.parseBoolean(req.getParameter("isRemPwd"));
 		System.out.println(u_name+":"+u_pwd);
 		PrintWriter out = resp.getWriter();
@@ -86,55 +84,7 @@ public class UserAction {
 		}
 		out.print("failure");
 	}
-	
-//	//管理员登录模块
-//	@RequestMapping
-//	public void adminlogin(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-//		String u_name = req.getParameter("u_name");
-//		String u_pwd = req.getParameter("u_pwd");
-////			得到角色类型
-////			Integer usertype_id = Integer.parseInt(req.getParameter("usertype_id"));
-//		boolean isRemPwd = Boolean.parseBoolean(req.getParameter("isRemPwd"));
-//		System.out.println(u_name+":"+u_pwd);
-//		PrintWriter out = resp.getWriter();
-//		HttpSession session = req.getSession();
-//		PropertyFilter filters = new PropertyFilter("u_name",u_name);
-//		List<User> searchUsers = userService.search(filters);
-//		if (searchUsers.size()!=0) {
-//			if(searchUsers.get(0)!=null){
-//				if (MD5Util.validatePassword(searchUsers.get(0).getU_pwd(), u_pwd)) {
-//					if(isRemPwd){
-//						Cookie u_nameCookie = new Cookie("u_name", URLEncoder.encode(u_name,"UTF-8"));
-//						Cookie u_pwdCookie = new Cookie("u_pwd", u_pwd);
-//						u_nameCookie.setPath(req.getContextPath()+"/");
-//						u_pwdCookie.setPath(req.getContextPath()+"/");
-//						
-//						u_nameCookie.setMaxAge(7*24*60*60);
-//						u_pwdCookie.setMaxAge(7*24*60*60);
-//						
-//						resp.addCookie(u_nameCookie);
-//						resp.addCookie(u_pwdCookie);
-//					} else if(!isRemPwd){
-//						Cookie u_name_temp_cookie = new Cookie("u_name", null);
-//						u_name_temp_cookie.setMaxAge(0);
-//						Cookie u_pwd_temp_cookie = new Cookie("u_pwd", null);
-//						u_pwd_temp_cookie.setMaxAge(0);
-//						
-//						u_name_temp_cookie.setPath(req.getContextPath()+"/");
-//						u_pwd_temp_cookie.setPath(req.getContextPath()+"/");
-//						
-//						resp.addCookie(u_name_temp_cookie);
-//						resp.addCookie(u_pwd_temp_cookie);
-//					}					
-//					session.setAttribute("user", searchUsers.get(0));
-//					out.print("success");
-//					return ;
-//				}
-//			}
-//		}
-//		out.print("failure");
-//	}
-	
+
 	//注册模块--开始
 	@RequestMapping(value="register/{id}", method = RequestMethod.GET)
 	public String register(@PathVariable String id){
@@ -221,7 +171,6 @@ public class UserAction {
 	}
 	
 	//注册模块--结束
-	
 	@RequestMapping
 	public String add(User user) {
 		userService.saveOrUpdate(user);
@@ -237,15 +186,7 @@ public class UserAction {
 		model.addAttribute("page", page);
 		return "user/list";
 	}
-	
-	@RequestMapping("list/{pageNo}")
-	public String list(@PathVariable int pageNo, Model model) {
-		Page<User> page = new Page<User>(5);
-		page.setPageNo(pageNo);
-		userService.loadAll(page);
-		model.addAttribute("page", page);
-		return "user/list";
-	}
+
 	
 	@InitBinder
 	public void init(WebDataBinder binder) {

@@ -2,709 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30814f48-4561-4241-9534-f3f750295f9c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/analyser.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/DEMO.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/editmanageusers.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/kwmanage.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/manager.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/manageusers.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/searchkeyword.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/stopwords.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/background/weibosManager.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/beans.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/AuthFunctionList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Authority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Authority_AuthFunctionList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Authority_AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Corpus_Essays.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Corpus_Essays.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Corpus_StopWords.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Corpus_StopWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Corpus_WordList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Corpus_WordList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/EssaySimilarityDegree.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/KeyWords.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/KeyWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/SentenceCluster.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/User.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/User.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserGroup_UserType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserGroup_UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserType_Authority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/UserType_Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/User_userGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/User_userGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/User_userType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/User_userType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/WbComment.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/WbComment.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/WbUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/WbUser.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Weibo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/entity/Weibo.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/interceptor/CommonInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/interceptor/adminInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/Corpus_EssaysService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/Corpus_StopWordsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/Corpus_WordListService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/KeyWordsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/UserTypeService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/User_userTypeService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/service/WeiboService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/test/KeyWordsTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$ByValueComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/CosineSimilary.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$ByValueComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/MD5Util/MD5Util.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/TeleValidUtil/TeleValidCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/fileUtil/FileUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/mailUtil/SendMails$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/mailUtil/SendMails.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/mailUtil/SendPop3Mails$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/mailUtil/SendPop3Mails.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/util/mailUtil/ValidationCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/web/Back_KeyWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/web/Back_StopWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/web/Back_UserAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/web/Back_WeibosAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/web/IndexAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/web/KeyWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/sicdlib/web/UserAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/json/JsonMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/mvc/DatePropertyEditor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/mvc/DateWebBindingInitializer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/orm/HibernateDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/orm/SimpleHibernateDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/orm/support/MatchType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/orm/support/Page.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/orm/support/PropertyFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/service/DefaultEntityManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/service/EntityManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/util/BeanValidators.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/util/HibernateWebUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/edu/xjtsoft/base/util/ReflectionUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/jdbc.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/IKAnalyzer-2012.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/activation.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/antlr-2.7.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/apache-struts-1.2.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/commons-codec-1.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/commons-httpclient-3.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/commons-logging-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/javax.mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/jsoup-1.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/jsoup-1.9.1-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/jsoup-1.9.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/lucene-core-3.4.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-acl-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-cas-client-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-config-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-core-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-ldap-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-openid-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-taglibs-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/spring-security-web-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/taobao-sdk-java-auto-source.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/lib/taobao-sdk-java-auto.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/springmvc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/latest.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/maps.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/perkeymaps.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/search.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/spring-security.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/weibolists.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/adminlogin.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/icons.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/opensans.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/openwindow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/pikaday.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/reset.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/site.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/css/templatemo-style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/fonts/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/fonts/fontawesome-webfont.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/back_font.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/background.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/bicycle.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/checkbox-radio-sheet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/10.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/11.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/6.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/7.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/8.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/9.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/mt_portrait.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/rmrb.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/xlsd.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/demo/zgxww.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/fore_background.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/fore_background2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/icon-link.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/angle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/dian.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/left_angle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/left_right_side.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/left_side.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/san.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/openwindow/top_botto_side.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/person.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/profile-photo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/sunset-big.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/images/sunset.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/city_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/city_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/city_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/industrial_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/industrial_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/industrial_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/nature_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/nature_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/img/nature_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/data/jquery.vmap.sampledata.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/jquery.vmap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/jquery.vmap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/jquery.vmap.packed.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/jqvmap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/continents/jquery.vmap.africa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/continents/jquery.vmap.asia.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/continents/jquery.vmap.australia.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/continents/jquery.vmap.europe.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/continents/jquery.vmap.north-america.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/continents/jquery.vmap.south-america.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/continents/readme.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.algeria.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.brazil.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.europe.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.france.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.germany.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.russia.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.usa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jqvmap/maps/jquery.vmap.world.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/bootstrap-filestyle.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/delayLoading.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/jquery-1.11.2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/jquery-migrate-1.2.1.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/jquery.filterizr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/moment.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/openwindow_js.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/pikaday.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/prefixfree.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/register.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/js/templatemo-script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jsp/back_static/header.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jsp/back_static/left.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jsp/statics/foot.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jsp/statics/header.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/jsp/statics/left.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebRoot/register.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/analyser.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/DEMO.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/editmanageusers.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/kwmanage.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/manager.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/manageusers.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/searchkeyword.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/stopwords.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/background/weibosManager.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/beans.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/AuthFunctionList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Authority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Authority_AuthFunctionList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Authority_AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Corpus_Essays.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Corpus_Essays.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Corpus_StopWords.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Corpus_StopWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Corpus_WordList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Corpus_WordList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/EssaySimilarityDegree.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/KeyWords.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/KeyWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/SentenceCluster.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/User.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/User.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserGroup_UserType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserGroup_UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserType_Authority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/UserType_Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/User_userGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/User_userGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/User_userType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/User_userType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/WbComment.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/WbComment.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/WbUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/WbUser.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Weibo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/entity/Weibo.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/interceptor/CommonInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/interceptor/adminInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/Corpus_EssaysService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/Corpus_StopWordsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/Corpus_WordListService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/KeyWordsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/UserTypeService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/User_userTypeService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/service/WeiboService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/test/KeyWordsTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment$ByValueComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/CNSegment.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/CosineSimilary.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization$ByValueComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/CNSegment/TextSummarization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/MD5Util/MD5Util.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/TeleValidUtil/TeleValidCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/fileUtil/FileUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/mailUtil/SendMails$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/mailUtil/SendMails.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/mailUtil/SendPop3Mails$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/mailUtil/SendPop3Mails.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/util/mailUtil/ValidationCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/web/Back_KeyWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/web/Back_StopWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/web/Back_UserAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/web/Back_WeibosAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/web/IndexAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/web/KeyWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/com/sicdlib/web/UserAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/json/JsonMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/mvc/DatePropertyEditor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/mvc/DateWebBindingInitializer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/orm/HibernateDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/orm/SimpleHibernateDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/orm/support/MatchType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/orm/support/Page.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/orm/support/PropertyFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/service/DefaultEntityManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/service/EntityManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/util/BeanValidators.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/util/HibernateWebUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/edu/xjtsoft/base/util/ReflectionUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/jdbc.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/IKAnalyzer-2012.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/activation.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/antlr-2.7.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/apache-struts-1.2.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/commons-codec-1.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/commons-httpclient-3.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/commons-logging-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/javax.mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/jsoup-1.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/jsoup-1.9.1-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/jsoup-1.9.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/junit-4.10.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/lucene-core-3.4.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-acl-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-cas-client-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-config-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-core-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-ldap-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-openid-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-taglibs-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/spring-security-web-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/taobao-sdk-java-auto-source.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/lib/taobao-sdk-java-auto.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/classes/springmvc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/latest.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/IKAnalyzer-2012.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/activation.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/antlr-2.7.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/apache-struts-1.2.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.javassist-3.3.0.ga.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.javax.transaction-1.1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.javax.validation-1.0.0.GA.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.net.sf.cglib-2.2.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.aopalliance-1.0.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.beanutils-1.8.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.collections-3.2.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.dbcp-1.2.2.osgi.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.fileupload-1.2.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.io-1.4.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.lang-2.1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.logging-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.apache.commons.pool-1.5.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.dom4j-1.6.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.hibernate-3.3.1.GA.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.hibernate.validator-4.0.2.GA.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.org.jaxen-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.slf4j.api-1.5.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/com.springsource.slf4j.jcl-1.5.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/commons-codec-1.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/commons-httpclient-3.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/commons-logging-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/jackson-core-asl-1.9.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/jackson-mapper-asl-1.9.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/jackson-xc-1.9.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/javax.mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/jsoup-1.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/jsoup-1.9.1-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/jsoup-1.9.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/jstl-1.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/junit-4.10.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/lucene-core-3.4.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/mysql-connector-java-3.1.13-bin.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.aop-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.asm-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.aspects-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.beans-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.context-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.context.support-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.core-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.expression-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.jdbc-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.orm-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.transaction-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.web-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/org.springframework.web.servlet-3.0.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/servlet-api.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-acl-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-cas-client-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-config-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-core-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-ldap-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-openid-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-taglibs-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/spring-security-web-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/taobao-sdk-java-auto-source.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/lib/taobao-sdk-java-auto.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/maps.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/perkeymaps.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/search.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/spring-security.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/web.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/WEB-INF/weibolists.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/adminlogin.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/icons.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/opensans.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/openwindow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/pikaday.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/reset.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/site.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/css/templatemo-style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/fonts/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/fonts/fontawesome-webfont.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/back_font.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/background.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/bicycle.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/checkbox-radio-sheet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/10.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/11.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/6.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/7.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/8.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/9.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/mt_portrait.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/rmrb.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/xlsd.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/demo/zgxww.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/fore_background.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/fore_background2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/icon-link.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/angle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/dian.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/left_angle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/left_right_side.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/left_side.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/san.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/openwindow/top_botto_side.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/person.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/profile-photo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/sunset-big.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/images/sunset.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/city_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/city_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/city_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/industrial_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/industrial_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/industrial_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/nature_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/nature_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/img/nature_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/data/jquery.vmap.sampledata.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/jquery.vmap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/jquery.vmap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/jquery.vmap.packed.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/jqvmap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/continents/jquery.vmap.africa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/continents/jquery.vmap.asia.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/continents/jquery.vmap.australia.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/continents/jquery.vmap.europe.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/continents/jquery.vmap.north-america.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/continents/jquery.vmap.south-america.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/continents/readme.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.algeria.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.brazil.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.europe.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.france.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.germany.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.russia.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.usa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jqvmap/maps/jquery.vmap.world.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/bootstrap-filestyle.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/delayLoading.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/jquery-1.11.2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/jquery-migrate-1.2.1.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/jquery.filterizr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/moment.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/openwindow_js.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/pikaday.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/prefixfree.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/register.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/js/templatemo-script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jsp/back_static/header.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jsp/back_static/left.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jsp/statics/foot.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jsp/statics/header.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/jsp/statics/left.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/login.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/weibomonitor_war_exploded/register.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/AuthFunctionList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Authority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Authority_AuthFunctionList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Authority_AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Corpus_Essays.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Corpus_Essays.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Corpus_StopWords.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Corpus_StopWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Corpus_WordList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Corpus_WordList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/EssaySimilarityDegree.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/KeyWords.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/KeyWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/SentenceCluster.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/User.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/User.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserGroup_UserType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserGroup_UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserType_Authority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/UserType_Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/User_userGroup.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/User_userGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/User_userType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/User_userType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/WbComment.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/WbComment.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/WbUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/WbUser.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Weibo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/entity/Weibo.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/interceptor/CommonInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/interceptor/adminInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/Corpus_EssaysService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/Corpus_StopWordsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/Corpus_WordListService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/KeyWordsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/UserTypeService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/User_userTypeService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/service/WeiboService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/test/KeyWordsTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/CNSegment$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/CNSegment$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/CNSegment$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/CNSegment$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/CNSegment$ByValueComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/CNSegment.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/CosineSimilary.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/TextSummarization$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/TextSummarization$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/TextSummarization$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/TextSummarization$ByValueComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/CNSegment/TextSummarization.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/MD5Util/MD5Util.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/TeleValidUtil/TeleValidCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/fileUtil/FileUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/mailUtil/SendMails$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/mailUtil/SendMails.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/mailUtil/SendPop3Mails$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/mailUtil/SendPop3Mails.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/util/mailUtil/ValidationCode.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/web/Back_KeyWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/web/Back_StopWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/web/Back_UserAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/web/Back_WeibosAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/web/IndexAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/web/KeyWordsAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/com/sicdlib/web/UserAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/json/JsonMapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/mvc/DatePropertyEditor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/mvc/DateWebBindingInitializer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/orm/HibernateDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/orm/SimpleHibernateDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/orm/support/MatchType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/orm/support/Page.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/orm/support/PropertyFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/service/DefaultEntityManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/service/EntityManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/util/BeanValidators.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/util/HibernateWebUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/edu/xjtsoft/base/util/ReflectionUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/IKAnalyzer-2012.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/activation.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/antlr-2.7.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/apache-struts-1.2.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/commons-codec-1.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/commons-httpclient-3.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/commons-logging-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/javax.mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/jsoup-1.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/jsoup-1.9.1-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/jsoup-1.9.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/junit-4.10.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/lucene-core-3.4.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-acl-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-cas-client-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-config-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-core-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-ldap-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-openid-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-taglibs-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/spring-security-web-3.0.3.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/taobao-sdk-java-auto-source.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/weibomonitor/lib/taobao-sdk-java-auto.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/AuthFunctionList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Authority.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Authority_AuthFunctionList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Authority_AuthFunctionList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Corpus_Essays.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Corpus_Essays.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Corpus_StopWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Corpus_StopWords.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Corpus_WordList.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Corpus_WordList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/EssaySimilarityDegree.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/KeyWords.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/KeyWords.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/SentenceCluster.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserGroup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserGroup_UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserGroup_UserType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserType_Authority.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/UserType_Authority.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/User_userGroup.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/User_userGroup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/User_userType.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/User_userType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/WbComment.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/WbComment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/WbUser.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/WbUser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Weibo.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/Weibo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/interceptor/CommonInterceptor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/interceptor/adminInterceptor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/service/Corpus_EssaysService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/service/Corpus_StopWordsService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/service/Corpus_WordListService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/service/KeyWordsService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/service/UserTypeService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/service/User_userTypeService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/service/WeiboService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/test/KeyWordsTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/util/CNSegment/CNSegment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/util/CNSegment/CosineSimilary.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/util/CNSegment/TextSummarization.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/util/fileUtil/FileUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/Back_KeyWordsAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/Back_StopWordsAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/Back_UserAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/Back_WeibosAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/IndexAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/KeyWordsAction.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource/jdbc.properties" afterPath="$PROJECT_DIR$/resource/jdbc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource/springmvc.xml" afterPath="$PROJECT_DIR$/resource/springmvc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/User.hbm.xml" afterPath="$PROJECT_DIR$/src/com/sicdlib/entity/User.hbm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sicdlib/entity/User.java" afterPath="$PROJECT_DIR$/src/com/sicdlib/entity/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java" afterPath="$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/weibomonitor.iml" afterPath="$PROJECT_DIR$/socialmind.iml" />
     </list>
     <ignored path="weibomonitor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -726,12 +25,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserAction.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserAction.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
-              <folding />
+            <state relative-caret-position="483">
+              <caret line="187" column="5" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -739,8 +40,8 @@
       <file leaf-file-name="login.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WebRoot/login.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+            <state relative-caret-position="168">
+              <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -784,18 +85,8 @@
       <file leaf-file-name="springmvc.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource/springmvc.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-31">
+            <state relative-caret-position="273">
               <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/web.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="63" column="19" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -833,8 +124,8 @@
         <option value="$PROJECT_DIR$/src/com/sicdlib/entity/User.java" />
         <option value="$PROJECT_DIR$/resource/springmvc.xml" />
         <option value="$PROJECT_DIR$/resource/beans.xml" />
-        <option value="$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java" />
       </list>
     </option>
   </component>
@@ -884,6 +175,7 @@
     <panes>
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -965,18 +257,8 @@
               <option name="myItemId" value="sicdlib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="socialmind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="socialmind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resource" />
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -990,13 +272,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="out" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sicdlib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1005,7 +290,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15136719" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/out2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1452,6 +737,7 @@
         </SHUTDOWN>
       </ConfigurationWrapper>
       <method>
+        <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
           <artifact name="socialmind:war exploded" />
           <artifact name="socialmind:war exploded" />
@@ -1485,30 +771,29 @@
       <workItem from="1509198383371" duration="1943000" />
       <workItem from="1509200386554" duration="4294000" />
       <workItem from="1509239337487" duration="3707000" />
+      <workItem from="1509269558308" duration="241000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17202000" />
+    <option name="totallyTimeSpent" value="17443000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-13" y="130" width="1692" height="1026" extended-state="1" />
-    <editor active="true" />
+    <frame x="-13" y="130" width="1692" height="1026" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38004485" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17524509" sideWeight="0.49253732" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17524509" sideWeight="0.49253732" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5074627" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1516,12 +801,14 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36883408" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36883408" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38004485" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1550,9 +837,82 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding>
+            <element signature="e#493#494#0" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#875#876#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/entity/User.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/springmvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="966">
           <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1581,7 +941,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1610,12 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1646,12 +1002,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1674,12 +1024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1687,12 +1031,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1700,12 +1038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1713,12 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1726,12 +1052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1760,14 +1080,6 @@
     <entry file="file://$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/classes/jdbc.properties" />
     <entry file="file://$PROJECT_DIR$/src/com/sicdlib/test/KeyWordsTest.java" />
     <entry file="file://$PROJECT_DIR$/src/com/sicdlib/interceptor/adminInterceptor.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sicdlib/util/fileUtil/FileUtil.java" />
     <entry file="file://$PROJECT_DIR$/src/com/sicdlib/interceptor/CommonInterceptor.java" />
     <entry file="file://$PROJECT_DIR$/.idea/artifacts/socialmind_war_exploded.xml">
@@ -1778,6 +1090,45 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/out/artifacts/socialmind_war_exploded/WEB-INF/classes/com/sicdlib/entity/AuthFunctionList.class" />
+    <entry file="file://$PROJECT_DIR$/resource/beans.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-535">
+          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="63" column="19" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/springmvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/entity/User.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sicdlib/entity/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -1791,64 +1142,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/entity/User.hbm.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resource/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+        <state relative-caret-position="420">
+          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WebRoot/login.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        <state relative-caret-position="168">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource/beans.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/sicdlib/web/UserAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-535">
-          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
+        <state relative-caret-position="483">
+          <caret line="187" column="5" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="5" />
           <folding>
-            <element signature="e#1086#1099#0" expanded="true" />
-            <element signature="e#1143#1159#0" expanded="true" />
-            <element signature="e#1196#1214#0" expanded="true" />
-            <element signature="e#1251#1269#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resource/springmvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-31">
-          <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="63" column="19" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
