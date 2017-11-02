@@ -1,6 +1,8 @@
 package com.sicdlib.web;
 
 import com.sicdlib.entity.User;
+import com.sicdlib.entity.UserEntity;
+import com.sicdlib.service.UserEntityService;
 import com.sicdlib.service.UserService;
 import com.sicdlib.util.MD5Util.MD5Util;
 import com.sicdlib.util.TeleValidUtil.TeleValidCode;
@@ -39,24 +41,27 @@ public class UserAction {
 
 	@Autowired(required=true)
 	private UserService userService;
+
+	@Autowired
+	private UserEntityService userEntityService;
 	
 	//登录模块
 	@RequestMapping
 	public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		String u_name = req.getParameter("u_name");
-		String u_pwd = req.getParameter("u_pwd");
+		String username = req.getParameter("username");
+		String userpwd = req.getParameter("userpwd");
 		boolean isRemPwd = Boolean.parseBoolean(req.getParameter("isRemPwd"));
-		System.out.println(u_name+":"+u_pwd);
 		PrintWriter out = resp.getWriter();
 		HttpSession session = req.getSession();
-		PropertyFilter filters = new PropertyFilter("u_name",u_name);
-		List<User> searchUsers = userService.search(filters);
+		PropertyFilter filters = new PropertyFilter("userName",username);
+		List<UserEntity> searchUsers = userEntityService.search(filters);
+		System.out.println(username + " : " + searchUsers.get(0));
 		if (searchUsers.size()!=0) {
 			if(searchUsers.get(0)!=null){
-				if (MD5Util.validatePassword(searchUsers.get(0).getU_pwd(), u_pwd)) {
+				if (MD5Util.validatePassword(searchUsers.get(0).getPassword(), userpwd)) {
 					if(isRemPwd){
-						Cookie u_nameCookie = new Cookie("u_name", URLEncoder.encode(u_name,"UTF-8"));
-						Cookie u_pwdCookie = new Cookie("u_pwd", u_pwd);
+						Cookie u_nameCookie = new Cookie("username", URLEncoder.encode(username,"UTF-8"));
+						Cookie u_pwdCookie = new Cookie("userpwd", userpwd);
 						u_nameCookie.setPath(req.getContextPath()+"/");
 						u_pwdCookie.setPath(req.getContextPath()+"/");
 						
@@ -66,9 +71,9 @@ public class UserAction {
 						resp.addCookie(u_nameCookie);
 						resp.addCookie(u_pwdCookie);
 					} else if(!isRemPwd){
-						Cookie u_name_temp_cookie = new Cookie("u_name", null);
+						Cookie u_name_temp_cookie = new Cookie("username", null);
 						u_name_temp_cookie.setMaxAge(0);
-						Cookie u_pwd_temp_cookie = new Cookie("u_pwd", null);
+						Cookie u_pwd_temp_cookie = new Cookie("userpwd", null);
 						u_pwd_temp_cookie.setMaxAge(0);
 						
 						u_name_temp_cookie.setPath(req.getContextPath()+"/");
