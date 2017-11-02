@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "spider_error_log", schema = "socialmind", catalog = "")
 public class SpiderErrorLogEntity {
     private String logId;
     private String ip;
@@ -16,8 +12,6 @@ public class SpiderErrorLogEntity {
     private String spiderId;
     private String errorTime;
 
-    @Id
-    @Column(name = "logID")
     public String getLogId() {
         return logId;
     }
@@ -26,8 +20,6 @@ public class SpiderErrorLogEntity {
         this.logId = logId;
     }
 
-    @Basic
-    @Column(name = "IP")
     public String getIp() {
         return ip;
     }
@@ -36,8 +28,6 @@ public class SpiderErrorLogEntity {
         this.ip = ip;
     }
 
-    @Basic
-    @Column(name = "errorItem")
     public String getErrorItem() {
         return errorItem;
     }
@@ -46,8 +36,6 @@ public class SpiderErrorLogEntity {
         this.errorItem = errorItem;
     }
 
-    @Basic
-    @Column(name = "errorDetails")
     public String getErrorDetails() {
         return errorDetails;
     }
@@ -56,8 +44,6 @@ public class SpiderErrorLogEntity {
         this.errorDetails = errorDetails;
     }
 
-    @Basic
-    @Column(name = "websiteID")
     public String getWebsiteId() {
         return websiteId;
     }
@@ -66,8 +52,6 @@ public class SpiderErrorLogEntity {
         this.websiteId = websiteId;
     }
 
-    @Basic
-    @Column(name = "spiderID")
     public String getSpiderId() {
         return spiderId;
     }
@@ -76,8 +60,6 @@ public class SpiderErrorLogEntity {
         this.spiderId = spiderId;
     }
 
-    @Basic
-    @Column(name = "errorTime")
     public String getErrorTime() {
         return errorTime;
     }

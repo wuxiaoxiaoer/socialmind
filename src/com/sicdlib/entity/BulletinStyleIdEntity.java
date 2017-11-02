@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "bulletin_style_id", schema = "socialmind", catalog = "")
 public class BulletinStyleIdEntity {
     private String bulletinStyleId;
     private String name;
@@ -18,8 +14,6 @@ public class BulletinStyleIdEntity {
     private Integer likeNumber;
     private Integer collectNumber;
 
-    @Id
-    @Column(name = "bulletinStyleID")
     public String getBulletinStyleId() {
         return bulletinStyleId;
     }
@@ -28,8 +22,6 @@ public class BulletinStyleIdEntity {
         this.bulletinStyleId = bulletinStyleId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -38,8 +30,6 @@ public class BulletinStyleIdEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "introduction")
     public String getIntroduction() {
         return introduction;
     }
@@ -48,8 +38,6 @@ public class BulletinStyleIdEntity {
         this.introduction = introduction;
     }
 
-    @Basic
-    @Column(name = "coverGraph")
     public String getCoverGraph() {
         return coverGraph;
     }
@@ -58,8 +46,6 @@ public class BulletinStyleIdEntity {
         this.coverGraph = coverGraph;
     }
 
-    @Basic
-    @Column(name = "URL")
     public String getUrl() {
         return url;
     }
@@ -68,8 +54,6 @@ public class BulletinStyleIdEntity {
         this.url = url;
     }
 
-    @Basic
-    @Column(name = "uploadTime")
     public String getUploadTime() {
         return uploadTime;
     }
@@ -78,8 +62,6 @@ public class BulletinStyleIdEntity {
         this.uploadTime = uploadTime;
     }
 
-    @Basic
-    @Column(name = "downloadNumber")
     public Integer getDownloadNumber() {
         return downloadNumber;
     }
@@ -88,8 +70,6 @@ public class BulletinStyleIdEntity {
         this.downloadNumber = downloadNumber;
     }
 
-    @Basic
-    @Column(name = "likeNumber")
     public Integer getLikeNumber() {
         return likeNumber;
     }
@@ -98,8 +78,6 @@ public class BulletinStyleIdEntity {
         this.likeNumber = likeNumber;
     }
 
-    @Basic
-    @Column(name = "collectNumber")
     public Integer getCollectNumber() {
         return collectNumber;
     }

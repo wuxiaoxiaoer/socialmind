@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "user", schema = "socialmind", catalog = "")
 public class UserEntity {
     private String userId;
     private String userName;
@@ -18,8 +14,6 @@ public class UserEntity {
     private Byte isAuthenticated;
     private String address;
 
-    @Id
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -28,8 +22,6 @@ public class UserEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "userName")
     public String getUserName() {
         return userName;
     }
@@ -38,8 +30,6 @@ public class UserEntity {
         this.userName = userName;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -48,8 +38,6 @@ public class UserEntity {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -58,8 +46,6 @@ public class UserEntity {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "roleID")
     public String getRoleId() {
         return roleId;
     }
@@ -68,8 +54,6 @@ public class UserEntity {
         this.roleId = roleId;
     }
 
-    @Basic
-    @Column(name = "registrantID")
     public String getRegistrantId() {
         return registrantId;
     }
@@ -78,8 +62,6 @@ public class UserEntity {
         this.registrantId = registrantId;
     }
 
-    @Basic
-    @Column(name = "userType")
     public String getUserType() {
         return userType;
     }
@@ -88,8 +70,6 @@ public class UserEntity {
         this.userType = userType;
     }
 
-    @Basic
-    @Column(name = "isAuthenticated")
     public Byte getIsAuthenticated() {
         return isAuthenticated;
     }
@@ -98,8 +78,6 @@ public class UserEntity {
         this.isAuthenticated = isAuthenticated;
     }
 
-    @Basic
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }

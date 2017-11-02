@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "clean_log_manager", schema = "socialmind", catalog = "")
 public class CleanLogManagerEntity {
     private String cleanLogId;
     private String userId;
@@ -15,8 +11,6 @@ public class CleanLogManagerEntity {
     private String cleanStategyId;
     private String cleanLocationId;
 
-    @Id
-    @Column(name = "cleanLogID")
     public String getCleanLogId() {
         return cleanLogId;
     }
@@ -25,8 +19,6 @@ public class CleanLogManagerEntity {
         this.cleanLogId = cleanLogId;
     }
 
-    @Basic
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -35,8 +27,6 @@ public class CleanLogManagerEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "self_defining_value")
     public String getSelfDefiningValue() {
         return selfDefiningValue;
     }
@@ -45,8 +35,6 @@ public class CleanLogManagerEntity {
         this.selfDefiningValue = selfDefiningValue;
     }
 
-    @Basic
-    @Column(name = "cleanTime")
     public String getCleanTime() {
         return cleanTime;
     }
@@ -55,8 +43,6 @@ public class CleanLogManagerEntity {
         this.cleanTime = cleanTime;
     }
 
-    @Basic
-    @Column(name = "cleanStategyID")
     public String getCleanStategyId() {
         return cleanStategyId;
     }
@@ -65,8 +51,6 @@ public class CleanLogManagerEntity {
         this.cleanStategyId = cleanStategyId;
     }
 
-    @Basic
-    @Column(name = "cleanLocationID")
     public String getCleanLocationId() {
         return cleanLocationId;
     }

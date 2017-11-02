@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "person_user", schema = "socialmind", catalog = "")
 public class PersonUserEntity {
     private String userId;
     private String sex;
@@ -16,8 +12,6 @@ public class PersonUserEntity {
     private String career;
     private String realName;
 
-    @Id
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -26,8 +20,6 @@ public class PersonUserEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "sex")
     public String getSex() {
         return sex;
     }
@@ -36,8 +28,6 @@ public class PersonUserEntity {
         this.sex = sex;
     }
 
-    @Basic
-    @Column(name = "birthday")
     public String getBirthday() {
         return birthday;
     }
@@ -46,8 +36,6 @@ public class PersonUserEntity {
         this.birthday = birthday;
     }
 
-    @Basic
-    @Column(name = "phoneNumber")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -56,8 +44,6 @@ public class PersonUserEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    @Basic
-    @Column(name = "hobby")
     public String getHobby() {
         return hobby;
     }
@@ -66,8 +52,6 @@ public class PersonUserEntity {
         this.hobby = hobby;
     }
 
-    @Basic
-    @Column(name = "career")
     public String getCareer() {
         return career;
     }
@@ -76,8 +60,6 @@ public class PersonUserEntity {
         this.career = career;
     }
 
-    @Basic
-    @Column(name = "realName")
     public String getRealName() {
         return realName;
     }

@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "event", schema = "socialmind", catalog = "")
 public class EventEntity {
     private String objectId;
     private String eventSummary;
@@ -14,8 +10,6 @@ public class EventEntity {
     private String eventOverTime;
     private String introduction;
 
-    @Id
-    @Column(name = "objectID")
     public String getObjectId() {
         return objectId;
     }
@@ -24,8 +18,6 @@ public class EventEntity {
         this.objectId = objectId;
     }
 
-    @Basic
-    @Column(name = "eventSummary")
     public String getEventSummary() {
         return eventSummary;
     }
@@ -34,8 +26,6 @@ public class EventEntity {
         this.eventSummary = eventSummary;
     }
 
-    @Basic
-    @Column(name = "eventBeainTime")
     public String getEventBeainTime() {
         return eventBeainTime;
     }
@@ -44,8 +34,6 @@ public class EventEntity {
         this.eventBeainTime = eventBeainTime;
     }
 
-    @Basic
-    @Column(name = "eventOverTime")
     public String getEventOverTime() {
         return eventOverTime;
     }
@@ -54,8 +42,6 @@ public class EventEntity {
         this.eventOverTime = eventOverTime;
     }
 
-    @Basic
-    @Column(name = "introduction")
     public String getIntroduction() {
         return introduction;
     }

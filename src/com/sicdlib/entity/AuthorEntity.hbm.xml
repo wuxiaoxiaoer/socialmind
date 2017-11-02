@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.AuthorEntity" table="author" schema="socialmind">
+        <id name="authorId" column="authorID"/>
+        <property name="name" column="name"/>
+        <property name="sex" column="sex"/>
+        <property name="birthday" column="birthday"/>
+        <property name="address" column="address"/>
+        <property name="focusNumber" column="focusNumber"/>
+        <property name="fansNumber" column="fansNumber"/>
+        <property name="age" column="age"/>
+        <property name="friendNumber" column="friendNumber"/>
+        <property name="replayNumber" column="replayNumber"/>
+        <property name="clickNumber" column="clickNumber"/>
+        <property name="loginNumber" column="loginNumber"/>
+        <property name="introduction" column="introduction"/>
+        <property name="registrationTime" column="registrationTime"/>
+        <property name="educationBackground" column="educationBackground"/>
+        <property name="career" column="career"/>
+        <property name="elitePostNumber" column="elitePostNumber"/>
+        <property name="score" column="score"/>
+        <property name="onlineTime" column="onlineTime"/>
+        <property name="fameDegree" column="fameDegree"/>
+        <property name="lastLoginTime" column="lastLoginTime"/>
+        <property name="workUnit" column="workUnit"/>
+        <property name="updateArticalTime" column="updateArticalTime"/>
+        <property name="phoneNumber" column="phoneNumber"/>
+        <property name="reputation" column="reputation"/>
+        <property name="getReward" column="getReward"/>
+        <property name="giveReward" column="giveReward"/>
+        <property name="isCertification" column="isCertification"/>
+        <property name="portraitUrl" column="portraitURL"/>
+        <property name="realName" column="realName"/>
+        <property name="sexualOrientation" column="sexualOrientation"/>
+        <property name="email" column="email"/>
+        <property name="qq" column="QQ"/>
+        <property name="bloodType" column="bloodType"/>
+        <property name="isBigV" column="isBigV"/>
+    </class>
+</hibernate-mapping>

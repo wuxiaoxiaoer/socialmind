@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.ObjectEntity" table="object" schema="socialmind">
+        <id name="objectId" column="objectID"/>
+        <property name="scanNumber" column="scanNumber"/>
+        <property name="collectNumber" column="collectNumber"/>
+        <property name="likeNumber" column="likeNumber"/>
+        <property name="trueNumber" column="trueNumber"/>
+        <property name="falseNumber" column="falseNumber"/>
+        <property name="name" column="name"/>
+        <property name="addTime" column="addTime"/>
+        <property name="place" column="place"/>
+        <property name="objectType" column="objectType"/>
+        <property name="objectFatherId" column="objectFatherID"/>
+        <property name="commentNumber" column="commentNumber"/>
+    </class>
+</hibernate-mapping>

@@ -21,11 +21,11 @@
   </head>
   <body id="login">
     <div class="container">
-      <form class="form-signin" action="login">
+      <form class="form-signin" action="user/login" method="post">
         <h2 class="form-signin-heading">请登录</h2>
         <input type="text" name="username" class="input-block-level" placeholder="用户名">
         <input type="password" name="userpwd" class="input-block-level" placeholder="密码">
-		<div class="control-group">
+		<%--<div class="control-group">
             <div class="controls">
                 <select id="select01" name="userType" class="input-block-level">
                     <option value="individual">个人用户</option>
@@ -34,7 +34,7 @@
                     <option value="institution">事业单位用户</option>
                 </select>
             </div>
-        </div>
+        </div>--%>
 
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> 记住用户
@@ -43,6 +43,7 @@
       </form>
 
     </div>
+
     <!-- /container -->
     <script src="foreground/vendors/jquery-1.9.1.min.js"></script>
     <script src="foreground/bootstrap/js/bootstrap.min.js"></script>

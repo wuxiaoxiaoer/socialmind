@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "gov_user", schema = "socialmind", catalog = "")
 public class GovUserEntity {
     private String userId;
     private String bossName;
@@ -17,8 +13,6 @@ public class GovUserEntity {
     private String idBack;
     private String provePicture;
 
-    @Id
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -27,8 +21,6 @@ public class GovUserEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "bossName")
     public String getBossName() {
         return bossName;
     }
@@ -37,8 +29,6 @@ public class GovUserEntity {
         this.bossName = bossName;
     }
 
-    @Basic
-    @Column(name = "govName")
     public String getGovName() {
         return govName;
     }
@@ -47,8 +37,6 @@ public class GovUserEntity {
         this.govName = govName;
     }
 
-    @Basic
-    @Column(name = "type")
     public String getType() {
         return type;
     }
@@ -57,8 +45,6 @@ public class GovUserEntity {
         this.type = type;
     }
 
-    @Basic
-    @Column(name = "govCode")
     public String getGovCode() {
         return govCode;
     }
@@ -67,8 +53,6 @@ public class GovUserEntity {
         this.govCode = govCode;
     }
 
-    @Basic
-    @Column(name = "IDFront")
     public String getIdFront() {
         return idFront;
     }
@@ -77,8 +61,6 @@ public class GovUserEntity {
         this.idFront = idFront;
     }
 
-    @Basic
-    @Column(name = "IDBack")
     public String getIdBack() {
         return idBack;
     }
@@ -87,8 +69,6 @@ public class GovUserEntity {
         this.idBack = idBack;
     }
 
-    @Basic
-    @Column(name = "provePicture")
     public String getProvePicture() {
         return provePicture;
     }

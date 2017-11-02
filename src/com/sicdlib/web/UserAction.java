@@ -44,10 +44,18 @@ public class UserAction {
 
 	@Autowired
 	private UserEntityService userEntityService;
+
+    //登录模块
+    @RequestMapping("login")
+    public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String username = req.getParameter("username");
+        String userpwd = req.getParameter("userpwd");
+        userEntityService.findUsers(username);
+    }
 	
 	//登录模块
-	@RequestMapping
-	public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+	@RequestMapping("login1")
+	public void login1(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		String username = req.getParameter("username");
 		String userpwd = req.getParameter("userpwd");
 		boolean isRemPwd = Boolean.parseBoolean(req.getParameter("isRemPwd"));
@@ -55,7 +63,13 @@ public class UserAction {
 		HttpSession session = req.getSession();
 		PropertyFilter filters = new PropertyFilter("userName",username);
 		List<UserEntity> searchUsers = userEntityService.search(filters);
-		if (searchUsers.size()!=0) {
+        System.out.println(userpwd + " : " + MD5Util.generatePassword(userpwd));
+
+        System.out.println(searchUsers.size());
+        if (searchUsers.size() != 0){
+            System.out.println(searchUsers.get(0).getUserName());
+        }
+        if (searchUsers.size()!=0) {
 			if(searchUsers.get(0)!=null){
 				if (MD5Util.validatePassword(searchUsers.get(0).getPassword(), userpwd)) {
 					if(isRemPwd){

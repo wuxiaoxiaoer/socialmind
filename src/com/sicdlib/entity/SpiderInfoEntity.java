@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "spider_info", schema = "socialmind", catalog = "")
 public class SpiderInfoEntity {
     private String spiderId;
     private String spiderName;
@@ -18,8 +14,6 @@ public class SpiderInfoEntity {
     private String spiderState;
     private String spiderConfigId;
 
-    @Id
-    @Column(name = "spiderID")
     public String getSpiderId() {
         return spiderId;
     }
@@ -28,8 +22,6 @@ public class SpiderInfoEntity {
         this.spiderId = spiderId;
     }
 
-    @Basic
-    @Column(name = "spiderName")
     public String getSpiderName() {
         return spiderName;
     }
@@ -38,8 +30,6 @@ public class SpiderInfoEntity {
         this.spiderName = spiderName;
     }
 
-    @Basic
-    @Column(name = "addTime")
     public String getAddTime() {
         return addTime;
     }
@@ -48,8 +38,6 @@ public class SpiderInfoEntity {
         this.addTime = addTime;
     }
 
-    @Basic
-    @Column(name = "spiderSourcePath")
     public String getSpiderSourcePath() {
         return spiderSourcePath;
     }
@@ -58,8 +46,6 @@ public class SpiderInfoEntity {
         this.spiderSourcePath = spiderSourcePath;
     }
 
-    @Basic
-    @Column(name = "fileName")
     public String getFileName() {
         return fileName;
     }
@@ -68,8 +54,6 @@ public class SpiderInfoEntity {
         this.fileName = fileName;
     }
 
-    @Basic
-    @Column(name = "websiteID")
     public String getWebsiteId() {
         return websiteId;
     }
@@ -78,8 +62,6 @@ public class SpiderInfoEntity {
         this.websiteId = websiteId;
     }
 
-    @Basic
-    @Column(name = "fileID")
     public String getFileId() {
         return fileId;
     }
@@ -88,8 +70,6 @@ public class SpiderInfoEntity {
         this.fileId = fileId;
     }
 
-    @Basic
-    @Column(name = "spiderState")
     public String getSpiderState() {
         return spiderState;
     }
@@ -98,8 +78,6 @@ public class SpiderInfoEntity {
         this.spiderState = spiderState;
     }
 
-    @Basic
-    @Column(name = "spiderConfigID")
     public String getSpiderConfigId() {
         return spiderConfigId;
     }

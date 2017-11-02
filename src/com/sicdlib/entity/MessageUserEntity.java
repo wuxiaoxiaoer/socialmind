@@ -1,20 +1,14 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "message_user", schema = "socialmind", catalog = "")
 public class MessageUserEntity {
     private String messageUserId;
     private String userId;
     private String messageId;
     private String state;
 
-    @Id
-    @Column(name = "messageUserID")
     public String getMessageUserId() {
         return messageUserId;
     }
@@ -23,8 +17,6 @@ public class MessageUserEntity {
         this.messageUserId = messageUserId;
     }
 
-    @Basic
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -33,8 +25,6 @@ public class MessageUserEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "messageID")
     public String getMessageId() {
         return messageId;
     }
@@ -43,8 +33,6 @@ public class MessageUserEntity {
         this.messageId = messageId;
     }
 
-    @Basic
-    @Column(name = "state")
     public String getState() {
         return state;
     }

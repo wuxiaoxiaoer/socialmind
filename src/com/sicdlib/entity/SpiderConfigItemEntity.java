@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "spider_config_item", schema = "socialmind", catalog = "")
 public class SpiderConfigItemEntity {
     private String spiderConfigItemId;
     private String spiderConfigId;
@@ -14,8 +10,6 @@ public class SpiderConfigItemEntity {
     private String configItemValue;
     private String note;
 
-    @Id
-    @Column(name = "spiderConfigItemID")
     public String getSpiderConfigItemId() {
         return spiderConfigItemId;
     }
@@ -24,8 +18,6 @@ public class SpiderConfigItemEntity {
         this.spiderConfigItemId = spiderConfigItemId;
     }
 
-    @Basic
-    @Column(name = "spiderConfigID")
     public String getSpiderConfigId() {
         return spiderConfigId;
     }
@@ -34,8 +26,6 @@ public class SpiderConfigItemEntity {
         this.spiderConfigId = spiderConfigId;
     }
 
-    @Basic
-    @Column(name = "configItemName")
     public String getConfigItemName() {
         return configItemName;
     }
@@ -44,8 +34,6 @@ public class SpiderConfigItemEntity {
         this.configItemName = configItemName;
     }
 
-    @Basic
-    @Column(name = "configItemValue")
     public String getConfigItemValue() {
         return configItemValue;
     }
@@ -54,8 +42,6 @@ public class SpiderConfigItemEntity {
         this.configItemValue = configItemValue;
     }
 
-    @Basic
-    @Column(name = "note")
     public String getNote() {
         return note;
     }

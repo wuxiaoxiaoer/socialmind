@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "spider_config", schema = "socialmind", catalog = "")
 public class SpiderConfigEntity {
     private String spiderConfigId;
     private String configTime;
@@ -15,8 +11,6 @@ public class SpiderConfigEntity {
     private String filePath;
     private Integer spiderFrequency;
 
-    @Id
-    @Column(name = "spiderConfigID")
     public String getSpiderConfigId() {
         return spiderConfigId;
     }
@@ -25,8 +19,6 @@ public class SpiderConfigEntity {
         this.spiderConfigId = spiderConfigId;
     }
 
-    @Basic
-    @Column(name = "configTime")
     public String getConfigTime() {
         return configTime;
     }
@@ -35,8 +27,6 @@ public class SpiderConfigEntity {
         this.configTime = configTime;
     }
 
-    @Basic
-    @Column(name = "spiderRunTime")
     public String getSpiderRunTime() {
         return spiderRunTime;
     }
@@ -45,8 +35,6 @@ public class SpiderConfigEntity {
         this.spiderRunTime = spiderRunTime;
     }
 
-    @Basic
-    @Column(name = "logPath")
     public String getLogPath() {
         return logPath;
     }
@@ -55,8 +43,6 @@ public class SpiderConfigEntity {
         this.logPath = logPath;
     }
 
-    @Basic
-    @Column(name = "filePath")
     public String getFilePath() {
         return filePath;
     }
@@ -65,8 +51,6 @@ public class SpiderConfigEntity {
         this.filePath = filePath;
     }
 
-    @Basic
-    @Column(name = "spiderFrequency")
     public Integer getSpiderFrequency() {
         return spiderFrequency;
     }

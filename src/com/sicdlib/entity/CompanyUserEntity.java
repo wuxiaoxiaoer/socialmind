@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "company_user", schema = "socialmind", catalog = "")
 public class CompanyUserEntity {
     private String userId;
     private String bossName;
@@ -16,8 +12,6 @@ public class CompanyUserEntity {
     private String idBack;
     private String businessLicence;
 
-    @Id
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -26,8 +20,6 @@ public class CompanyUserEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "bossName")
     public String getBossName() {
         return bossName;
     }
@@ -36,8 +28,6 @@ public class CompanyUserEntity {
         this.bossName = bossName;
     }
 
-    @Basic
-    @Column(name = "IDFront")
     public String getIdFront() {
         return idFront;
     }
@@ -46,8 +36,6 @@ public class CompanyUserEntity {
         this.idFront = idFront;
     }
 
-    @Basic
-    @Column(name = "companyName")
     public String getCompanyName() {
         return companyName;
     }
@@ -56,8 +44,6 @@ public class CompanyUserEntity {
         this.companyName = companyName;
     }
 
-    @Basic
-    @Column(name = "type")
     public String getType() {
         return type;
     }
@@ -66,8 +52,6 @@ public class CompanyUserEntity {
         this.type = type;
     }
 
-    @Basic
-    @Column(name = "IDBack")
     public String getIdBack() {
         return idBack;
     }
@@ -76,8 +60,6 @@ public class CompanyUserEntity {
         this.idBack = idBack;
     }
 
-    @Basic
-    @Column(name = "businessLicence")
     public String getBusinessLicence() {
         return businessLicence;
     }

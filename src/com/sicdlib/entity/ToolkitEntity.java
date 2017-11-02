@@ -1,20 +1,14 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "toolkit", schema = "socialmind", catalog = "")
 public class ToolkitEntity {
     private String toolkitId;
     private String toolkitName;
     private String toolkitDescribe;
     private String userId;
 
-    @Id
-    @Column(name = "toolkitID")
     public String getToolkitId() {
         return toolkitId;
     }
@@ -23,8 +17,6 @@ public class ToolkitEntity {
         this.toolkitId = toolkitId;
     }
 
-    @Basic
-    @Column(name = "toolkitName")
     public String getToolkitName() {
         return toolkitName;
     }
@@ -33,8 +25,6 @@ public class ToolkitEntity {
         this.toolkitName = toolkitName;
     }
 
-    @Basic
-    @Column(name = "toolkitDescribe")
     public String getToolkitDescribe() {
         return toolkitDescribe;
     }
@@ -43,8 +33,6 @@ public class ToolkitEntity {
         this.toolkitDescribe = toolkitDescribe;
     }
 
-    @Basic
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }

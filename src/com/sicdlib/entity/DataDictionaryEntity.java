@@ -1,20 +1,14 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "data_dictionary", schema = "socialmind", catalog = "")
 public class DataDictionaryEntity {
     private String attributeValue;
     private String note;
     private String attributeName;
     private String dataDictionaryId;
 
-    @Basic
-    @Column(name = "attributeValue")
     public String getAttributeValue() {
         return attributeValue;
     }
@@ -23,8 +17,6 @@ public class DataDictionaryEntity {
         this.attributeValue = attributeValue;
     }
 
-    @Basic
-    @Column(name = "note")
     public String getNote() {
         return note;
     }
@@ -33,8 +25,6 @@ public class DataDictionaryEntity {
         this.note = note;
     }
 
-    @Basic
-    @Column(name = "attributeName")
     public String getAttributeName() {
         return attributeName;
     }
@@ -43,8 +33,6 @@ public class DataDictionaryEntity {
         this.attributeName = attributeName;
     }
 
-    @Id
-    @Column(name = "dataDictionaryID")
     public String getDataDictionaryId() {
         return dataDictionaryId;
     }

@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "tb_user", schema = "socialmind", catalog = "")
 public class TbUserEntity {
     private int uId;
     private String uName;
@@ -15,8 +11,6 @@ public class TbUserEntity {
     private String uMail;
     private Boolean uSex;
 
-    @Id
-    @Column(name = "u_id")
     public int getuId() {
         return uId;
     }
@@ -25,8 +19,6 @@ public class TbUserEntity {
         this.uId = uId;
     }
 
-    @Basic
-    @Column(name = "u_name")
     public String getuName() {
         return uName;
     }
@@ -35,8 +27,6 @@ public class TbUserEntity {
         this.uName = uName;
     }
 
-    @Basic
-    @Column(name = "u_pwd")
     public String getuPwd() {
         return uPwd;
     }
@@ -45,8 +35,6 @@ public class TbUserEntity {
         this.uPwd = uPwd;
     }
 
-    @Basic
-    @Column(name = "u_telphone")
     public String getuTelphone() {
         return uTelphone;
     }
@@ -55,8 +43,6 @@ public class TbUserEntity {
         this.uTelphone = uTelphone;
     }
 
-    @Basic
-    @Column(name = "u_mail")
     public String getuMail() {
         return uMail;
     }
@@ -65,8 +51,6 @@ public class TbUserEntity {
         this.uMail = uMail;
     }
 
-    @Basic
-    @Column(name = "u_sex")
     public Boolean getuSex() {
         return uSex;
     }

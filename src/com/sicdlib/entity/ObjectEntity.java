@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "object", schema = "socialmind", catalog = "")
 public class ObjectEntity {
     private String objectId;
     private Integer scanNumber;
@@ -21,8 +17,6 @@ public class ObjectEntity {
     private String objectFatherId;
     private Integer commentNumber;
 
-    @Id
-    @Column(name = "objectID")
     public String getObjectId() {
         return objectId;
     }
@@ -31,8 +25,6 @@ public class ObjectEntity {
         this.objectId = objectId;
     }
 
-    @Basic
-    @Column(name = "scanNumber")
     public Integer getScanNumber() {
         return scanNumber;
     }
@@ -41,8 +33,6 @@ public class ObjectEntity {
         this.scanNumber = scanNumber;
     }
 
-    @Basic
-    @Column(name = "collectNumber")
     public Integer getCollectNumber() {
         return collectNumber;
     }
@@ -51,8 +41,6 @@ public class ObjectEntity {
         this.collectNumber = collectNumber;
     }
 
-    @Basic
-    @Column(name = "likeNumber")
     public Integer getLikeNumber() {
         return likeNumber;
     }
@@ -61,8 +49,6 @@ public class ObjectEntity {
         this.likeNumber = likeNumber;
     }
 
-    @Basic
-    @Column(name = "trueNumber")
     public Integer getTrueNumber() {
         return trueNumber;
     }
@@ -71,8 +57,6 @@ public class ObjectEntity {
         this.trueNumber = trueNumber;
     }
 
-    @Basic
-    @Column(name = "falseNumber")
     public Integer getFalseNumber() {
         return falseNumber;
     }
@@ -81,8 +65,6 @@ public class ObjectEntity {
         this.falseNumber = falseNumber;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -91,8 +73,6 @@ public class ObjectEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "addTime")
     public String getAddTime() {
         return addTime;
     }
@@ -101,8 +81,6 @@ public class ObjectEntity {
         this.addTime = addTime;
     }
 
-    @Basic
-    @Column(name = "place")
     public String getPlace() {
         return place;
     }
@@ -111,8 +89,6 @@ public class ObjectEntity {
         this.place = place;
     }
 
-    @Basic
-    @Column(name = "objectType")
     public String getObjectType() {
         return objectType;
     }
@@ -121,8 +97,6 @@ public class ObjectEntity {
         this.objectType = objectType;
     }
 
-    @Basic
-    @Column(name = "objectFatherID")
     public String getObjectFatherId() {
         return objectFatherId;
     }
@@ -131,8 +105,6 @@ public class ObjectEntity {
         this.objectFatherId = objectFatherId;
     }
 
-    @Basic
-    @Column(name = "commentNumber")
     public Integer getCommentNumber() {
         return commentNumber;
     }

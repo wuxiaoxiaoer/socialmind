@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "article", schema = "socialmind", catalog = "")
 public class ArticleEntity {
     private String articleId;
     private String sourceArticleId;
@@ -30,8 +26,6 @@ public class ArticleEntity {
     private String websiteId;
     private String objectId;
 
-    @Id
-    @Column(name = "articleID")
     public String getArticleId() {
         return articleId;
     }
@@ -40,8 +34,6 @@ public class ArticleEntity {
         this.articleId = articleId;
     }
 
-    @Basic
-    @Column(name = "sourceArticleID")
     public String getSourceArticleId() {
         return sourceArticleId;
     }
@@ -50,8 +42,6 @@ public class ArticleEntity {
         this.sourceArticleId = sourceArticleId;
     }
 
-    @Basic
-    @Column(name = "authorID")
     public String getAuthorId() {
         return authorId;
     }
@@ -60,8 +50,6 @@ public class ArticleEntity {
         this.authorId = authorId;
     }
 
-    @Basic
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -70,8 +58,6 @@ public class ArticleEntity {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "keyWords")
     public String getKeyWords() {
         return keyWords;
     }
@@ -80,8 +66,6 @@ public class ArticleEntity {
         this.keyWords = keyWords;
     }
 
-    @Basic
-    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -90,8 +74,6 @@ public class ArticleEntity {
         this.content = content;
     }
 
-    @Basic
-    @Column(name = "postTime")
     public String getPostTime() {
         return postTime;
     }
@@ -100,8 +82,6 @@ public class ArticleEntity {
         this.postTime = postTime;
     }
 
-    @Basic
-    @Column(name = "commentNumber")
     public Integer getCommentNumber() {
         return commentNumber;
     }
@@ -110,8 +90,6 @@ public class ArticleEntity {
         this.commentNumber = commentNumber;
     }
 
-    @Basic
-    @Column(name = "scanNumber")
     public Integer getScanNumber() {
         return scanNumber;
     }
@@ -120,8 +98,6 @@ public class ArticleEntity {
         this.scanNumber = scanNumber;
     }
 
-    @Basic
-    @Column(name = "participationNumber")
     public Integer getParticipationNumber() {
         return participationNumber;
     }
@@ -130,8 +106,6 @@ public class ArticleEntity {
         this.participationNumber = participationNumber;
     }
 
-    @Basic
-    @Column(name = "replyNumber")
     public Integer getReplyNumber() {
         return replyNumber;
     }
@@ -140,8 +114,6 @@ public class ArticleEntity {
         this.replyNumber = replyNumber;
     }
 
-    @Basic
-    @Column(name = "likeNumber")
     public Integer getLikeNumber() {
         return likeNumber;
     }
@@ -150,8 +122,6 @@ public class ArticleEntity {
         this.likeNumber = likeNumber;
     }
 
-    @Basic
-    @Column(name = "recommendNumber")
     public Integer getRecommendNumber() {
         return recommendNumber;
     }
@@ -160,8 +130,6 @@ public class ArticleEntity {
         this.recommendNumber = recommendNumber;
     }
 
-    @Basic
-    @Column(name = "collectNumber")
     public Integer getCollectNumber() {
         return collectNumber;
     }
@@ -170,8 +138,6 @@ public class ArticleEntity {
         this.collectNumber = collectNumber;
     }
 
-    @Basic
-    @Column(name = "giveReward")
     public Integer getGiveReward() {
         return giveReward;
     }
@@ -180,8 +146,6 @@ public class ArticleEntity {
         this.giveReward = giveReward;
     }
 
-    @Basic
-    @Column(name = "transmitNumber")
     public Integer getTransmitNumber() {
         return transmitNumber;
     }
@@ -190,8 +154,6 @@ public class ArticleEntity {
         this.transmitNumber = transmitNumber;
     }
 
-    @Basic
-    @Column(name = "trampleNumber")
     public Integer getTrampleNumber() {
         return trampleNumber;
     }
@@ -200,8 +162,6 @@ public class ArticleEntity {
         this.trampleNumber = trampleNumber;
     }
 
-    @Basic
-    @Column(name = "newsResource")
     public String getNewsResource() {
         return newsResource;
     }
@@ -210,8 +170,6 @@ public class ArticleEntity {
         this.newsResource = newsResource;
     }
 
-    @Basic
-    @Column(name = "similarDegree")
     public Integer getSimilarDegree() {
         return similarDegree;
     }
@@ -220,8 +178,6 @@ public class ArticleEntity {
         this.similarDegree = similarDegree;
     }
 
-    @Basic
-    @Column(name = "websiteID")
     public String getWebsiteId() {
         return websiteId;
     }
@@ -230,8 +186,6 @@ public class ArticleEntity {
         this.websiteId = websiteId;
     }
 
-    @Basic
-    @Column(name = "objectID")
     public String getObjectId() {
         return objectId;
     }

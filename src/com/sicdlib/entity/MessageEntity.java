@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "message", schema = "socialmind", catalog = "")
 public class MessageEntity {
     private String messageId;
     private String messageTitle;
@@ -14,8 +10,6 @@ public class MessageEntity {
     private String messageTime;
     private String adminId;
 
-    @Id
-    @Column(name = "messageID")
     public String getMessageId() {
         return messageId;
     }
@@ -24,8 +18,6 @@ public class MessageEntity {
         this.messageId = messageId;
     }
 
-    @Basic
-    @Column(name = "messageTitle")
     public String getMessageTitle() {
         return messageTitle;
     }
@@ -34,8 +26,6 @@ public class MessageEntity {
         this.messageTitle = messageTitle;
     }
 
-    @Basic
-    @Column(name = "messageContent")
     public String getMessageContent() {
         return messageContent;
     }
@@ -44,8 +34,6 @@ public class MessageEntity {
         this.messageContent = messageContent;
     }
 
-    @Basic
-    @Column(name = "messageTime")
     public String getMessageTime() {
         return messageTime;
     }
@@ -54,8 +42,6 @@ public class MessageEntity {
         this.messageTime = messageTime;
     }
 
-    @Basic
-    @Column(name = "adminID")
     public String getAdminId() {
         return adminId;
     }

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.ToolEntity" table="tool" schema="socialmind">
+        <id name="toolId" column="toolID"/>
+        <property name="toolName" column="toolName"/>
+        <property name="version" column="version"/>
+        <property name="versionDescribe" column="versionDescribe"/>
+        <property name="jarUrl" column="jarUrl"/>
+        <property name="toolkitId" column="toolkitID"/>
+        <property name="state" column="state"/>
+        <property name="uploadTime" column="uploadTime"/>
+        <property name="userId" column="userID"/>
+    </class>
+</hibernate-mapping>

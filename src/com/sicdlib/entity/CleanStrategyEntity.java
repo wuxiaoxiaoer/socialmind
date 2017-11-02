@@ -1,19 +1,13 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "clean_strategy", schema = "socialmind", catalog = "")
 public class CleanStrategyEntity {
     private String name;
     private String cleanStategyId;
     private String type;
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -22,8 +16,6 @@ public class CleanStrategyEntity {
         this.name = name;
     }
 
-    @Id
-    @Column(name = "cleanStategyID")
     public String getCleanStategyId() {
         return cleanStategyId;
     }
@@ -32,8 +24,6 @@ public class CleanStrategyEntity {
         this.cleanStategyId = cleanStategyId;
     }
 
-    @Basic
-    @Column(name = "type")
     public String getType() {
         return type;
     }

@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "bulletin", schema = "socialmind", catalog = "")
 public class BulletinEntity {
     private String bulletinId;
     private String name;
@@ -16,8 +12,6 @@ public class BulletinEntity {
     private String generateTime;
     private String bulletinStyleId;
 
-    @Id
-    @Column(name = "bulletinID")
     public String getBulletinId() {
         return bulletinId;
     }
@@ -26,8 +20,6 @@ public class BulletinEntity {
         this.bulletinId = bulletinId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -36,8 +28,6 @@ public class BulletinEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "introduction")
     public String getIntroduction() {
         return introduction;
     }
@@ -46,8 +36,6 @@ public class BulletinEntity {
         this.introduction = introduction;
     }
 
-    @Basic
-    @Column(name = "bulletinURL")
     public String getBulletinUrl() {
         return bulletinUrl;
     }
@@ -56,8 +44,6 @@ public class BulletinEntity {
         this.bulletinUrl = bulletinUrl;
     }
 
-    @Basic
-    @Column(name = "bulletinType")
     public String getBulletinType() {
         return bulletinType;
     }
@@ -66,8 +52,6 @@ public class BulletinEntity {
         this.bulletinType = bulletinType;
     }
 
-    @Basic
-    @Column(name = "generateTime")
     public String getGenerateTime() {
         return generateTime;
     }
@@ -76,8 +60,6 @@ public class BulletinEntity {
         this.generateTime = generateTime;
     }
 
-    @Basic
-    @Column(name = "bulletinStyleID")
     public String getBulletinStyleId() {
         return bulletinStyleId;
     }

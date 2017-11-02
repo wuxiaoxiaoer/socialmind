@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "permission", schema = "socialmind", catalog = "")
 public class PermissionEntity {
     private String permissionId;
     private String nameLogic;
@@ -15,8 +11,6 @@ public class PermissionEntity {
     private String resourceId;
     private String operateId;
 
-    @Id
-    @Column(name = "permissionID")
     public String getPermissionId() {
         return permissionId;
     }
@@ -25,8 +19,6 @@ public class PermissionEntity {
         this.permissionId = permissionId;
     }
 
-    @Basic
-    @Column(name = "name_logic")
     public String getNameLogic() {
         return nameLogic;
     }
@@ -35,8 +27,6 @@ public class PermissionEntity {
         this.nameLogic = nameLogic;
     }
 
-    @Basic
-    @Column(name = "permission_physics")
     public String getPermissionPhysics() {
         return permissionPhysics;
     }
@@ -45,8 +35,6 @@ public class PermissionEntity {
         this.permissionPhysics = permissionPhysics;
     }
 
-    @Basic
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -55,8 +43,6 @@ public class PermissionEntity {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "resourceID")
     public String getResourceId() {
         return resourceId;
     }
@@ -65,8 +51,6 @@ public class PermissionEntity {
         this.resourceId = resourceId;
     }
 
-    @Basic
-    @Column(name = "operateID")
     public String getOperateId() {
         return operateId;
     }

@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "indicator_value", schema = "socialmind", catalog = "")
 public class IndicatorValueEntity {
     private String indicatorValueId;
     private String objectId;
@@ -15,8 +11,6 @@ public class IndicatorValueEntity {
     private String dimensionName;
     private String timeSolt;
 
-    @Id
-    @Column(name = "indicatorValueID")
     public String getIndicatorValueId() {
         return indicatorValueId;
     }
@@ -25,8 +19,6 @@ public class IndicatorValueEntity {
         this.indicatorValueId = indicatorValueId;
     }
 
-    @Basic
-    @Column(name = "objectID")
     public String getObjectId() {
         return objectId;
     }
@@ -35,8 +27,6 @@ public class IndicatorValueEntity {
         this.objectId = objectId;
     }
 
-    @Basic
-    @Column(name = "indicatorValue")
     public String getIndicatorValue() {
         return indicatorValue;
     }
@@ -45,8 +35,6 @@ public class IndicatorValueEntity {
         this.indicatorValue = indicatorValue;
     }
 
-    @Basic
-    @Column(name = "indexName")
     public String getIndexName() {
         return indexName;
     }
@@ -55,8 +43,6 @@ public class IndicatorValueEntity {
         this.indexName = indexName;
     }
 
-    @Basic
-    @Column(name = "dimensionName")
     public String getDimensionName() {
         return dimensionName;
     }
@@ -65,8 +51,6 @@ public class IndicatorValueEntity {
         this.dimensionName = dimensionName;
     }
 
-    @Basic
-    @Column(name = "timeSolt")
     public String getTimeSolt() {
         return timeSolt;
     }

@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "author", schema = "socialmind", catalog = "")
 public class AuthorEntity {
     private String authorId;
     private String name;
@@ -44,8 +40,6 @@ public class AuthorEntity {
     private String bloodType;
     private Byte isBigV;
 
-    @Id
-    @Column(name = "authorID")
     public String getAuthorId() {
         return authorId;
     }
@@ -54,8 +48,6 @@ public class AuthorEntity {
         this.authorId = authorId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -64,8 +56,6 @@ public class AuthorEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "sex")
     public String getSex() {
         return sex;
     }
@@ -74,8 +64,6 @@ public class AuthorEntity {
         this.sex = sex;
     }
 
-    @Basic
-    @Column(name = "birthday")
     public String getBirthday() {
         return birthday;
     }
@@ -84,8 +72,6 @@ public class AuthorEntity {
         this.birthday = birthday;
     }
 
-    @Basic
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -94,8 +80,6 @@ public class AuthorEntity {
         this.address = address;
     }
 
-    @Basic
-    @Column(name = "focusNumber")
     public Integer getFocusNumber() {
         return focusNumber;
     }
@@ -104,8 +88,6 @@ public class AuthorEntity {
         this.focusNumber = focusNumber;
     }
 
-    @Basic
-    @Column(name = "fansNumber")
     public Integer getFansNumber() {
         return fansNumber;
     }
@@ -114,8 +96,6 @@ public class AuthorEntity {
         this.fansNumber = fansNumber;
     }
 
-    @Basic
-    @Column(name = "age")
     public Integer getAge() {
         return age;
     }
@@ -124,8 +104,6 @@ public class AuthorEntity {
         this.age = age;
     }
 
-    @Basic
-    @Column(name = "friendNumber")
     public Integer getFriendNumber() {
         return friendNumber;
     }
@@ -134,8 +112,6 @@ public class AuthorEntity {
         this.friendNumber = friendNumber;
     }
 
-    @Basic
-    @Column(name = "replayNumber")
     public Integer getReplayNumber() {
         return replayNumber;
     }
@@ -144,8 +120,6 @@ public class AuthorEntity {
         this.replayNumber = replayNumber;
     }
 
-    @Basic
-    @Column(name = "clickNumber")
     public Integer getClickNumber() {
         return clickNumber;
     }
@@ -154,8 +128,6 @@ public class AuthorEntity {
         this.clickNumber = clickNumber;
     }
 
-    @Basic
-    @Column(name = "loginNumber")
     public Integer getLoginNumber() {
         return loginNumber;
     }
@@ -164,8 +136,6 @@ public class AuthorEntity {
         this.loginNumber = loginNumber;
     }
 
-    @Basic
-    @Column(name = "introduction")
     public String getIntroduction() {
         return introduction;
     }
@@ -174,8 +144,6 @@ public class AuthorEntity {
         this.introduction = introduction;
     }
 
-    @Basic
-    @Column(name = "registrationTime")
     public String getRegistrationTime() {
         return registrationTime;
     }
@@ -184,8 +152,6 @@ public class AuthorEntity {
         this.registrationTime = registrationTime;
     }
 
-    @Basic
-    @Column(name = "educationBackground")
     public String getEducationBackground() {
         return educationBackground;
     }
@@ -194,8 +160,6 @@ public class AuthorEntity {
         this.educationBackground = educationBackground;
     }
 
-    @Basic
-    @Column(name = "career")
     public String getCareer() {
         return career;
     }
@@ -204,8 +168,6 @@ public class AuthorEntity {
         this.career = career;
     }
 
-    @Basic
-    @Column(name = "elitePostNumber")
     public Integer getElitePostNumber() {
         return elitePostNumber;
     }
@@ -214,8 +176,6 @@ public class AuthorEntity {
         this.elitePostNumber = elitePostNumber;
     }
 
-    @Basic
-    @Column(name = "score")
     public Integer getScore() {
         return score;
     }
@@ -224,8 +184,6 @@ public class AuthorEntity {
         this.score = score;
     }
 
-    @Basic
-    @Column(name = "onlineTime")
     public String getOnlineTime() {
         return onlineTime;
     }
@@ -234,8 +192,6 @@ public class AuthorEntity {
         this.onlineTime = onlineTime;
     }
 
-    @Basic
-    @Column(name = "fameDegree")
     public Integer getFameDegree() {
         return fameDegree;
     }
@@ -244,8 +200,6 @@ public class AuthorEntity {
         this.fameDegree = fameDegree;
     }
 
-    @Basic
-    @Column(name = "lastLoginTime")
     public String getLastLoginTime() {
         return lastLoginTime;
     }
@@ -254,8 +208,6 @@ public class AuthorEntity {
         this.lastLoginTime = lastLoginTime;
     }
 
-    @Basic
-    @Column(name = "workUnit")
     public String getWorkUnit() {
         return workUnit;
     }
@@ -264,8 +216,6 @@ public class AuthorEntity {
         this.workUnit = workUnit;
     }
 
-    @Basic
-    @Column(name = "updateArticalTime")
     public String getUpdateArticalTime() {
         return updateArticalTime;
     }
@@ -274,8 +224,6 @@ public class AuthorEntity {
         this.updateArticalTime = updateArticalTime;
     }
 
-    @Basic
-    @Column(name = "phoneNumber")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -284,8 +232,6 @@ public class AuthorEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    @Basic
-    @Column(name = "reputation")
     public Integer getReputation() {
         return reputation;
     }
@@ -294,8 +240,6 @@ public class AuthorEntity {
         this.reputation = reputation;
     }
 
-    @Basic
-    @Column(name = "getReward")
     public Integer getGetReward() {
         return getReward;
     }
@@ -304,8 +248,6 @@ public class AuthorEntity {
         this.getReward = getReward;
     }
 
-    @Basic
-    @Column(name = "giveReward")
     public Integer getGiveReward() {
         return giveReward;
     }
@@ -314,8 +256,6 @@ public class AuthorEntity {
         this.giveReward = giveReward;
     }
 
-    @Basic
-    @Column(name = "isCertification")
     public Byte getIsCertification() {
         return isCertification;
     }
@@ -324,8 +264,6 @@ public class AuthorEntity {
         this.isCertification = isCertification;
     }
 
-    @Basic
-    @Column(name = "portraitURL")
     public String getPortraitUrl() {
         return portraitUrl;
     }
@@ -334,8 +272,6 @@ public class AuthorEntity {
         this.portraitUrl = portraitUrl;
     }
 
-    @Basic
-    @Column(name = "realName")
     public String getRealName() {
         return realName;
     }
@@ -344,8 +280,6 @@ public class AuthorEntity {
         this.realName = realName;
     }
 
-    @Basic
-    @Column(name = "sexualOrientation")
     public String getSexualOrientation() {
         return sexualOrientation;
     }
@@ -354,8 +288,6 @@ public class AuthorEntity {
         this.sexualOrientation = sexualOrientation;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -364,8 +296,6 @@ public class AuthorEntity {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "QQ")
     public String getQq() {
         return qq;
     }
@@ -374,8 +304,6 @@ public class AuthorEntity {
         this.qq = qq;
     }
 
-    @Basic
-    @Column(name = "bloodType")
     public String getBloodType() {
         return bloodType;
     }
@@ -384,8 +312,6 @@ public class AuthorEntity {
         this.bloodType = bloodType;
     }
 
-    @Basic
-    @Column(name = "isBigV")
     public Byte getIsBigV() {
         return isBigV;
     }

@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "log", schema = "socialmind", catalog = "")
 public class LogEntity {
     private String logId;
     private String userId;
@@ -19,8 +15,6 @@ public class LogEntity {
     private String targetPage;
     private String stayTime;
 
-    @Id
-    @Column(name = "logID")
     public String getLogId() {
         return logId;
     }
@@ -29,8 +23,6 @@ public class LogEntity {
         this.logId = logId;
     }
 
-    @Basic
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -39,8 +31,6 @@ public class LogEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "IP")
     public String getIp() {
         return ip;
     }
@@ -49,8 +39,6 @@ public class LogEntity {
         this.ip = ip;
     }
 
-    @Basic
-    @Column(name = "logTime")
     public String getLogTime() {
         return logTime;
     }
@@ -59,8 +47,6 @@ public class LogEntity {
         this.logTime = logTime;
     }
 
-    @Basic
-    @Column(name = "methodLogicName")
     public String getMethodLogicName() {
         return methodLogicName;
     }
@@ -69,8 +55,6 @@ public class LogEntity {
         this.methodLogicName = methodLogicName;
     }
 
-    @Basic
-    @Column(name = "method")
     public String getMethod() {
         return method;
     }
@@ -79,8 +63,6 @@ public class LogEntity {
         this.method = method;
     }
 
-    @Basic
-    @Column(name = "param")
     public String getParam() {
         return param;
     }
@@ -89,8 +71,6 @@ public class LogEntity {
         this.param = param;
     }
 
-    @Basic
-    @Column(name = "sourcePage")
     public String getSourcePage() {
         return sourcePage;
     }
@@ -99,8 +79,6 @@ public class LogEntity {
         this.sourcePage = sourcePage;
     }
 
-    @Basic
-    @Column(name = "targetPage")
     public String getTargetPage() {
         return targetPage;
     }
@@ -109,8 +87,6 @@ public class LogEntity {
         this.targetPage = targetPage;
     }
 
-    @Basic
-    @Column(name = "stayTime")
     public String getStayTime() {
         return stayTime;
     }

@@ -1,18 +1,12 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "operate", schema = "socialmind", catalog = "")
 public class OperateEntity {
     private String operateId;
     private String operateName;
 
-    @Id
-    @Column(name = "operateID")
     public String getOperateId() {
         return operateId;
     }
@@ -21,8 +15,6 @@ public class OperateEntity {
         this.operateId = operateId;
     }
 
-    @Basic
-    @Column(name = "operateName")
     public String getOperateName() {
         return operateName;
     }

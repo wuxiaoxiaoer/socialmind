@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "clean_location", schema = "socialmind", catalog = "")
 public class CleanLocationEntity {
     private String cleanLocationId;
     private String tableId;
@@ -15,8 +11,6 @@ public class CleanLocationEntity {
     private String columnFamily;
     private Integer timeStamp;
 
-    @Id
-    @Column(name = "cleanLocationID")
     public String getCleanLocationId() {
         return cleanLocationId;
     }
@@ -25,8 +19,6 @@ public class CleanLocationEntity {
         this.cleanLocationId = cleanLocationId;
     }
 
-    @Basic
-    @Column(name = "tableID")
     public String getTableId() {
         return tableId;
     }
@@ -35,8 +27,6 @@ public class CleanLocationEntity {
         this.tableId = tableId;
     }
 
-    @Basic
-    @Column(name = "columnName")
     public String getColumnName() {
         return columnName;
     }
@@ -45,8 +35,6 @@ public class CleanLocationEntity {
         this.columnName = columnName;
     }
 
-    @Basic
-    @Column(name = "rowkey")
     public String getRowkey() {
         return rowkey;
     }
@@ -55,8 +43,6 @@ public class CleanLocationEntity {
         this.rowkey = rowkey;
     }
 
-    @Basic
-    @Column(name = "columnFamily")
     public String getColumnFamily() {
         return columnFamily;
     }
@@ -65,8 +51,6 @@ public class CleanLocationEntity {
         this.columnFamily = columnFamily;
     }
 
-    @Basic
-    @Column(name = "timeStamp")
     public Integer getTimeStamp() {
         return timeStamp;
     }

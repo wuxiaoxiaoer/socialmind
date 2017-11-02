@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "institution_user", schema = "socialmind", catalog = "")
 public class InstitutionUserEntity {
     private String bossName;
     private String idFront;
@@ -17,8 +13,6 @@ public class InstitutionUserEntity {
     private String registerGraph;
     private String userId;
 
-    @Basic
-    @Column(name = "bossName")
     public String getBossName() {
         return bossName;
     }
@@ -27,8 +21,6 @@ public class InstitutionUserEntity {
         this.bossName = bossName;
     }
 
-    @Basic
-    @Column(name = "IDFront")
     public String getIdFront() {
         return idFront;
     }
@@ -37,8 +29,6 @@ public class InstitutionUserEntity {
         this.idFront = idFront;
     }
 
-    @Basic
-    @Column(name = "IDBack")
     public String getIdBack() {
         return idBack;
     }
@@ -47,8 +37,6 @@ public class InstitutionUserEntity {
         this.idBack = idBack;
     }
 
-    @Basic
-    @Column(name = "institutionName")
     public String getInstitutionName() {
         return institutionName;
     }
@@ -57,8 +45,6 @@ public class InstitutionUserEntity {
         this.institutionName = institutionName;
     }
 
-    @Basic
-    @Column(name = "type")
     public String getType() {
         return type;
     }
@@ -67,8 +53,6 @@ public class InstitutionUserEntity {
         this.type = type;
     }
 
-    @Basic
-    @Column(name = "institudeCode")
     public String getInstitudeCode() {
         return institudeCode;
     }
@@ -77,8 +61,6 @@ public class InstitutionUserEntity {
         this.institudeCode = institudeCode;
     }
 
-    @Basic
-    @Column(name = "registerGraph")
     public String getRegisterGraph() {
         return registerGraph;
     }
@@ -87,8 +69,6 @@ public class InstitutionUserEntity {
         this.registerGraph = registerGraph;
     }
 
-    @Id
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }

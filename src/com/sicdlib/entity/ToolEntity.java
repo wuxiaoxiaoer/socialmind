@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "tool", schema = "socialmind", catalog = "")
 public class ToolEntity {
     private String toolId;
     private String toolName;
@@ -18,8 +14,6 @@ public class ToolEntity {
     private String uploadTime;
     private String userId;
 
-    @Id
-    @Column(name = "toolID")
     public String getToolId() {
         return toolId;
     }
@@ -28,8 +22,6 @@ public class ToolEntity {
         this.toolId = toolId;
     }
 
-    @Basic
-    @Column(name = "toolName")
     public String getToolName() {
         return toolName;
     }
@@ -38,8 +30,6 @@ public class ToolEntity {
         this.toolName = toolName;
     }
 
-    @Basic
-    @Column(name = "version")
     public String getVersion() {
         return version;
     }
@@ -48,8 +38,6 @@ public class ToolEntity {
         this.version = version;
     }
 
-    @Basic
-    @Column(name = "versionDescribe")
     public String getVersionDescribe() {
         return versionDescribe;
     }
@@ -58,8 +46,6 @@ public class ToolEntity {
         this.versionDescribe = versionDescribe;
     }
 
-    @Basic
-    @Column(name = "jarUrl")
     public String getJarUrl() {
         return jarUrl;
     }
@@ -68,8 +54,6 @@ public class ToolEntity {
         this.jarUrl = jarUrl;
     }
 
-    @Basic
-    @Column(name = "toolkitID")
     public String getToolkitId() {
         return toolkitId;
     }
@@ -78,8 +62,6 @@ public class ToolEntity {
         this.toolkitId = toolkitId;
     }
 
-    @Basic
-    @Column(name = "state")
     public String getState() {
         return state;
     }
@@ -88,8 +70,6 @@ public class ToolEntity {
         this.state = state;
     }
 
-    @Basic
-    @Column(name = "uploadTime")
     public String getUploadTime() {
         return uploadTime;
     }
@@ -98,8 +78,6 @@ public class ToolEntity {
         this.uploadTime = uploadTime;
     }
 
-    @Basic
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }

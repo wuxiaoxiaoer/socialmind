@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "article_comment", schema = "socialmind", catalog = "")
 public class ArticleCommentEntity {
     private String articleCommentId;
     private String sourceCommentId;
@@ -19,8 +15,6 @@ public class ArticleCommentEntity {
     private String articleId;
     private String fatherCommentId;
 
-    @Id
-    @Column(name = "article_commentID")
     public String getArticleCommentId() {
         return articleCommentId;
     }
@@ -29,8 +23,6 @@ public class ArticleCommentEntity {
         this.articleCommentId = articleCommentId;
     }
 
-    @Basic
-    @Column(name = "sourceCommentID")
     public String getSourceCommentId() {
         return sourceCommentId;
     }
@@ -39,8 +31,6 @@ public class ArticleCommentEntity {
         this.sourceCommentId = sourceCommentId;
     }
 
-    @Basic
-    @Column(name = "authorID")
     public String getAuthorId() {
         return authorId;
     }
@@ -49,8 +39,6 @@ public class ArticleCommentEntity {
         this.authorId = authorId;
     }
 
-    @Basic
-    @Column(name = "likeNumber")
     public Integer getLikeNumber() {
         return likeNumber;
     }
@@ -59,8 +47,6 @@ public class ArticleCommentEntity {
         this.likeNumber = likeNumber;
     }
 
-    @Basic
-    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -69,8 +55,6 @@ public class ArticleCommentEntity {
         this.content = content;
     }
 
-    @Basic
-    @Column(name = "commentTime")
     public String getCommentTime() {
         return commentTime;
     }
@@ -79,8 +63,6 @@ public class ArticleCommentEntity {
         this.commentTime = commentTime;
     }
 
-    @Basic
-    @Column(name = "replayNumber")
     public Integer getReplayNumber() {
         return replayNumber;
     }
@@ -89,8 +71,6 @@ public class ArticleCommentEntity {
         this.replayNumber = replayNumber;
     }
 
-    @Basic
-    @Column(name = "graphURL")
     public String getGraphUrl() {
         return graphUrl;
     }
@@ -99,8 +79,6 @@ public class ArticleCommentEntity {
         this.graphUrl = graphUrl;
     }
 
-    @Basic
-    @Column(name = "articleID")
     public String getArticleId() {
         return articleId;
     }
@@ -109,8 +87,6 @@ public class ArticleCommentEntity {
         this.articleId = articleId;
     }
 
-    @Basic
-    @Column(name = "fatherCommentID")
     public String getFatherCommentId() {
         return fatherCommentId;
     }

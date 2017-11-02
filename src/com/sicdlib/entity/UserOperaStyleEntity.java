@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "user_opera_style", schema = "socialmind", catalog = "")
 public class UserOperaStyleEntity {
     private String userStyleId;
     private String userId;
@@ -14,8 +10,6 @@ public class UserOperaStyleEntity {
     private String operaId;
     private String operaType;
 
-    @Id
-    @Column(name = "userStyleID")
     public String getUserStyleId() {
         return userStyleId;
     }
@@ -24,8 +18,6 @@ public class UserOperaStyleEntity {
         this.userStyleId = userStyleId;
     }
 
-    @Basic
-    @Column(name = "userID")
     public String getUserId() {
         return userId;
     }
@@ -34,8 +26,6 @@ public class UserOperaStyleEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "bulletinStyleID")
     public String getBulletinStyleId() {
         return bulletinStyleId;
     }
@@ -44,8 +34,6 @@ public class UserOperaStyleEntity {
         this.bulletinStyleId = bulletinStyleId;
     }
 
-    @Basic
-    @Column(name = "operaID")
     public String getOperaId() {
         return operaId;
     }
@@ -54,8 +42,6 @@ public class UserOperaStyleEntity {
         this.operaId = operaId;
     }
 
-    @Basic
-    @Column(name = "operaType")
     public String getOperaType() {
         return operaType;
     }

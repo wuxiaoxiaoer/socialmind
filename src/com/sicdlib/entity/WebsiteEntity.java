@@ -1,12 +1,8 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "website", schema = "socialmind", catalog = "")
 public class WebsiteEntity {
     private String websiteId;
     private String websiteName;
@@ -14,8 +10,6 @@ public class WebsiteEntity {
     private String containTableId;
     private String websiteTypeId;
 
-    @Id
-    @Column(name = "websiteID")
     public String getWebsiteId() {
         return websiteId;
     }
@@ -24,8 +18,6 @@ public class WebsiteEntity {
         this.websiteId = websiteId;
     }
 
-    @Basic
-    @Column(name = "websiteName")
     public String getWebsiteName() {
         return websiteName;
     }
@@ -34,8 +26,6 @@ public class WebsiteEntity {
         this.websiteName = websiteName;
     }
 
-    @Basic
-    @Column(name = "websiteURL")
     public String getWebsiteUrl() {
         return websiteUrl;
     }
@@ -44,8 +34,6 @@ public class WebsiteEntity {
         this.websiteUrl = websiteUrl;
     }
 
-    @Basic
-    @Column(name = "containTableID")
     public String getContainTableId() {
         return containTableId;
     }
@@ -54,8 +42,6 @@ public class WebsiteEntity {
         this.containTableId = containTableId;
     }
 
-    @Basic
-    @Column(name = "websiteTypeID")
     public String getWebsiteTypeId() {
         return websiteTypeId;
     }

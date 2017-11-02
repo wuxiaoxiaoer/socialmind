@@ -1,19 +1,13 @@
 package com.sicdlib.entity;
 
-import javax.persistence.*;
-
 /**
  * Created by DeMH on 2017/11/2.
  */
-@Entity
-@Table(name = "notice_role", schema = "socialmind", catalog = "")
 public class NoticeRoleEntity {
     private String noticeRoleId;
     private String noticeId;
     private String roleId;
 
-    @Id
-    @Column(name = "noticeRoleID")
     public String getNoticeRoleId() {
         return noticeRoleId;
     }
@@ -22,8 +16,6 @@ public class NoticeRoleEntity {
         this.noticeRoleId = noticeRoleId;
     }
 
-    @Basic
-    @Column(name = "noticeID")
     public String getNoticeId() {
         return noticeId;
     }
@@ -32,8 +24,6 @@ public class NoticeRoleEntity {
         this.noticeId = noticeId;
     }
 
-    @Basic
-    @Column(name = "roleID")
     public String getRoleId() {
         return roleId;
     }
