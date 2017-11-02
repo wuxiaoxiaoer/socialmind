@@ -38,7 +38,11 @@
 				hibernate.show_sql=true
 				hibernate.hbm2ddl.auto=update
 			</value>
-		</property>
+            <props>
+                <prop key="hibernate.connection.url">jdbc:mysql://192.168.1.249:3306/socialmind</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
 	</bean>
 	
 	<!-- 事务配置 -->

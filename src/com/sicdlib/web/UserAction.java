@@ -43,20 +43,19 @@ public class UserAction {
 	//登录模块
 	@RequestMapping
 	public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		String u_name = req.getParameter("u_name");
-		String u_pwd = req.getParameter("u_pwd");
+		String username = req.getParameter("username");
+		String userpwd = req.getParameter("userpwd");
 		boolean isRemPwd = Boolean.parseBoolean(req.getParameter("isRemPwd"));
-		System.out.println(u_name+":"+u_pwd);
 		PrintWriter out = resp.getWriter();
 		HttpSession session = req.getSession();
-		PropertyFilter filters = new PropertyFilter("u_name",u_name);
+		PropertyFilter filters = new PropertyFilter("userName",username);
 		List<User> searchUsers = userService.search(filters);
 		if (searchUsers.size()!=0) {
 			if(searchUsers.get(0)!=null){
-				if (MD5Util.validatePassword(searchUsers.get(0).getU_pwd(), u_pwd)) {
+				if (MD5Util.validatePassword(searchUsers.get(0).getU_pwd(), userpwd)) {
 					if(isRemPwd){
-						Cookie u_nameCookie = new Cookie("u_name", URLEncoder.encode(u_name,"UTF-8"));
-						Cookie u_pwdCookie = new Cookie("u_pwd", u_pwd);
+						Cookie u_nameCookie = new Cookie("u_name", URLEncoder.encode(username,"UTF-8"));
+						Cookie u_pwdCookie = new Cookie("u_pwd", userpwd);
 						u_nameCookie.setPath(req.getContextPath()+"/");
 						u_pwdCookie.setPath(req.getContextPath()+"/");
 						

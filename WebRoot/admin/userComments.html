@@ -79,9 +79,9 @@
 		<li><a href="semanticsToolkits.html">语义工具集管理</a></li>
 	  </ul>
 	</li>
-    <li><a href="tables.html"><i class="icon icon-th"></i> <span>用户留言管理</span></a><span class="label">1</span>
+    <li><a href="tables.html"><i class="icon icon-th"></i> <span>用户评论管理</span></a><span class="label">1</span>
 		<ul>
-		<li><a href="userComments.html">用户留言管理</a></li>
+		<li><a href="userComments.html">用户评论管理</a></li>
 	  </ul>
 	</li>
     <li><a href="grid.html"><i class="icon icon-fullscreen"></i> <span>用户管理</span></a><span class="label">1</span>
@@ -113,7 +113,7 @@
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Tables</a> </div>
-    <h1>用户留言管理（审、删、展示）</h1>
+    <h1>用户评论管理（审、删、展示）</h1>
   </div>
   <div class="container-fluid">
     <div class="row-fluid">
@@ -121,22 +121,29 @@
         <div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="icon-th"></i></span> 
-            <h5>待审核用户留言 共25条</h5>
+            <h5>待审核用户评论 共25条</h5>
+			<div class="fr" style="margin: 0.5% 10% 0 0;">
+				<a href="#" class="btn btn-primary btn-mini">批量删除</a> 
+				<a href="#" class="btn btn-success btn-mini">批量审核通过</a> 
+				<a href="#" class="btn btn-danger btn-mini">批量审核不通过</a>
+			</div>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-					<th>序号</th>
+				  <th><input type="checkbox" />&nbsp&nbsp是否选中</th>
+				  <th>序号</th>
                   <th>用户类型</th>
                   <th>用户名</th>
                   <th>事件名</th>
-                  <th>留言内容</th>
+                  <th>评论内容</th>
 				  <th>审核</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>1</td>
                   <td>个人用户</td>
                   <td>小明</td>
@@ -145,7 +152,9 @@
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Update"><i class="icon-ok"></i></a> 
 				  <span class="label label-inverse">No</span></td>
                 </tr>
+				
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>2</td>
                   <td>个人用户</td>
                   <td>小明</td>
@@ -154,7 +163,9 @@
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Update"><i class="icon-ok"></i></a> 
 					<span class="label label-inverse">No</span></td>
                 </tr> 
+				
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>3</td>
                   <td>个人用户</td>
                   <td>小明</td>
@@ -162,7 +173,9 @@
                   <td class="center">改变了主要矛盾，厉害了我的国！</td>
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Update"><i class="icon-ok"></i></a> <span class="label label-inverse">No</span></td>
                 </tr> 
+				
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>4</td>
                   <td>个人用户</td>
                   <td>小明</td>
@@ -170,7 +183,9 @@
                   <td class="center">改变了主要矛盾，厉害了我的国！</td>
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Update"><i class="icon-ok"></i></a> <span class="label label-inverse">No</span></td>
                 </tr> 
+				
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>5</td>
                   <td>个人用户</td>
                   <td>小明</td>
@@ -187,23 +202,28 @@
 		<div class="widget-box">
           <div class="widget-title">
              <span class="icon"><i class="icon-th"></i></span> 
-            <h5>用户留言展示 共500条</h5>
+            <h5>用户评论展示 共500条</h5>
+			<div class="fr" style="margin: 0.5% 10% 0 0;">
+				<a href="#" class="btn btn-primary btn-mini">批量删除</a> 
+			</div>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
+				<th><input type="checkbox" />&nbsp&nbsp是否选中</th>
 				<th>序号</th>
                   <th>用户类型</th>
                   <th>用户名</th>
                   <th>事件名</th>
-                  <th>留言内容</th>
+                  <th>评论内容</th>
 				  <th>状态</th>
 				  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>1</td>
                   <td>政府用户</td>
                   <td>西安市政府</td>
@@ -213,6 +233,7 @@
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Delete"><i class="icon-remove"></i></a></td>
                 </tr>   
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>2</td>
                   <td>政府用户</td>
                   <td>西安市政府</td>
@@ -222,6 +243,7 @@
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Delete"><i class="icon-remove"></i></a></td>
                 </tr>
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>3</td>
                   <td>政府用户</td>
                   <td>西安市政府</td>
@@ -231,6 +253,7 @@
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Delete"><i class="icon-remove"></i></a></td>
                 </tr>
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>4</td>
                   <td>政府用户</td>
                   <td>西安市政府</td>
@@ -240,6 +263,7 @@
 				  <td class="taskOptions"><a href="#" class="tip-top" data-original-title="Delete"><i class="icon-remove"></i></a></td>
                 </tr>
 				<tr class="gradeX">
+				<td><input type="checkbox" /></td>
 				<td>5</td>
                   <td>政府用户</td>
                   <td>西安市政府</td>
