@@ -42,7 +42,8 @@
         <button class="btn btn-large btn-primary">登录</button>
       </form>
 
-    </div> <!-- /container -->
+    </div>
+    <!-- /container -->
     <script src="foreground/vendors/jquery-1.9.1.min.js"></script>
     <script src="foreground/bootstrap/js/bootstrap.min.js"></script>
   </body>

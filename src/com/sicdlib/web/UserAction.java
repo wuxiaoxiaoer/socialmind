@@ -55,13 +55,12 @@ public class UserAction {
 		HttpSession session = req.getSession();
 		PropertyFilter filters = new PropertyFilter("userName",username);
 		List<UserEntity> searchUsers = userEntityService.search(filters);
-		System.out.println(username + " : " + searchUsers.get(0));
 		if (searchUsers.size()!=0) {
 			if(searchUsers.get(0)!=null){
 				if (MD5Util.validatePassword(searchUsers.get(0).getPassword(), userpwd)) {
 					if(isRemPwd){
-						Cookie u_nameCookie = new Cookie("username", URLEncoder.encode(username,"UTF-8"));
-						Cookie u_pwdCookie = new Cookie("userpwd", userpwd);
+						Cookie u_nameCookie = new Cookie("u_name", URLEncoder.encode(username,"UTF-8"));
+						Cookie u_pwdCookie = new Cookie("u_pwd", userpwd);
 						u_nameCookie.setPath(req.getContextPath()+"/");
 						u_pwdCookie.setPath(req.getContextPath()+"/");
 						
@@ -71,9 +70,9 @@ public class UserAction {
 						resp.addCookie(u_nameCookie);
 						resp.addCookie(u_pwdCookie);
 					} else if(!isRemPwd){
-						Cookie u_name_temp_cookie = new Cookie("username", null);
+						Cookie u_name_temp_cookie = new Cookie("u_name", null);
 						u_name_temp_cookie.setMaxAge(0);
-						Cookie u_pwd_temp_cookie = new Cookie("userpwd", null);
+						Cookie u_pwd_temp_cookie = new Cookie("u_pwd", null);
 						u_pwd_temp_cookie.setMaxAge(0);
 						
 						u_name_temp_cookie.setPath(req.getContextPath()+"/");
