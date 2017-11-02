@@ -2,3 +2,4 @@ socialmind.iml
 out/*
 .idea/*
 *.class
+*.iml
