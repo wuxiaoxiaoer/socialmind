@@ -7,10 +7,11 @@
     <class name="com.sicdlib.entity.CompanyUserEntity" table="company_user" schema="socialmind">
         <id name="userId" column="userID"/>
         <property name="bossName" column="bossName"/>
-        <property name="idFront" column="IDFront"/>
+        <property name="idFrontUrl" column="IDFrontUrl"/>
         <property name="companyName" column="companyName"/>
         <property name="type" column="type"/>
-        <property name="idBack" column="IDBack"/>
-        <property name="businessLicence" column="businessLicence"/>
+        <property name="idBackUrl" column="IDBackUrl"/>
+        <property name="businessLicenceUrl" column="businessLicenceUrl"/>
+        <property name="businessLicenceId" column="businessLicenceId"/>
     </class>
 </hibernate-mapping>

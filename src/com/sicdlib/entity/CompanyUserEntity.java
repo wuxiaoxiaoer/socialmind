@@ -6,11 +6,12 @@ package com.sicdlib.entity;
 public class CompanyUserEntity {
     private String userId;
     private String bossName;
-    private String idFront;
+    private String idFrontUrl;
     private String companyName;
     private String type;
-    private String idBack;
-    private String businessLicence;
+    private String idBackUrl;
+    private String businessLicenceUrl;
+    private String businessLicenceId;
 
     public String getUserId() {
         return userId;
@@ -28,13 +29,6 @@ public class CompanyUserEntity {
         this.bossName = bossName;
     }
 
-    public String getIdFront() {
-        return idFront;
-    }
-
-    public void setIdFront(String idFront) {
-        this.idFront = idFront;
-    }
 
     public String getCompanyName() {
         return companyName;
@@ -52,20 +46,36 @@ public class CompanyUserEntity {
         this.type = type;
     }
 
-    public String getIdBack() {
-        return idBack;
+    public String getIdFrontUrl() {
+        return idFrontUrl;
     }
 
-    public void setIdBack(String idBack) {
-        this.idBack = idBack;
+    public void setIdFrontUrl(String idFrontUrl) {
+        this.idFrontUrl = idFrontUrl;
     }
 
-    public String getBusinessLicence() {
-        return businessLicence;
+    public String getIdBackUrl() {
+        return idBackUrl;
     }
 
-    public void setBusinessLicence(String businessLicence) {
-        this.businessLicence = businessLicence;
+    public void setIdBackUrl(String idBackUrl) {
+        this.idBackUrl = idBackUrl;
+    }
+
+    public String getBusinessLicenceUrl() {
+        return businessLicenceUrl;
+    }
+
+    public void setBusinessLicenceUrl(String businessLicenceUrl) {
+        this.businessLicenceUrl = businessLicenceUrl;
+    }
+
+    public String getBusinessLicenceId() {
+        return businessLicenceId;
+    }
+
+    public void setBusinessLicenceId(String businessLicenceId) {
+        this.businessLicenceId = businessLicenceId;
     }
 
     @Override
@@ -77,25 +87,26 @@ public class CompanyUserEntity {
 
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         if (bossName != null ? !bossName.equals(that.bossName) : that.bossName != null) return false;
-        if (idFront != null ? !idFront.equals(that.idFront) : that.idFront != null) return false;
+        if (idFrontUrl != null ? !idFrontUrl.equals(that.idFrontUrl) : that.idFrontUrl != null) return false;
         if (companyName != null ? !companyName.equals(that.companyName) : that.companyName != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (idBack != null ? !idBack.equals(that.idBack) : that.idBack != null) return false;
-        if (businessLicence != null ? !businessLicence.equals(that.businessLicence) : that.businessLicence != null)
+        if (idBackUrl != null ? !idBackUrl.equals(that.idBackUrl) : that.idBackUrl != null) return false;
+        if (businessLicenceUrl != null ? !businessLicenceUrl.equals(that.businessLicenceUrl) : that.businessLicenceUrl != null)
             return false;
+        return businessLicenceId != null ? businessLicenceId.equals(that.businessLicenceId) : that.businessLicenceId == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (bossName != null ? bossName.hashCode() : 0);
-        result = 31 * result + (idFront != null ? idFront.hashCode() : 0);
+        result = 31 * result + (idFrontUrl != null ? idFrontUrl.hashCode() : 0);
         result = 31 * result + (companyName != null ? companyName.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (idBack != null ? idBack.hashCode() : 0);
-        result = 31 * result + (businessLicence != null ? businessLicence.hashCode() : 0);
+        result = 31 * result + (idBackUrl != null ? idBackUrl.hashCode() : 0);
+        result = 31 * result + (businessLicenceUrl != null ? businessLicenceUrl.hashCode() : 0);
+        result = 31 * result + (businessLicenceId != null ? businessLicenceId.hashCode() : 0);
         return result;
     }
 }

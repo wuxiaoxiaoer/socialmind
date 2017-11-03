@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var isRemPwd = $("#c1").is(':checked');
 			$.ajax({
 				type:'post',
-				url:'user/login?u_name='+u_name+'&u_pwd='+u_pwd+'&isRemPwd='+isRemPwd,
+				url:'user/login?username='+u_name+'&userpwd='+u_pwd+'&isRemPwd='+isRemPwd,
 				success:function(msg){
 					if('success' == msg){
 						location.href= "<%=basePath%>index";
