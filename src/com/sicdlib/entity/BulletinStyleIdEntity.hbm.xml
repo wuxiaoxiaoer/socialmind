@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.BulletinStyleIdEntity" table="bulletin_style_id" schema="socialmind">
+        <id name="bulletinStyleId" column="bulletinStyleID"/>
+        <property name="name" column="name"/>
+        <property name="introduction" column="introduction"/>
+        <property name="coverGraph" column="coverGraph"/>
+        <property name="url" column="URL"/>
+        <property name="uploadTime" column="uploadTime"/>
+        <property name="downloadNumber" column="downloadNumber"/>
+        <property name="likeNumber" column="likeNumber"/>
+        <property name="collectNumber" column="collectNumber"/>
+    </class>
+</hibernate-mapping>

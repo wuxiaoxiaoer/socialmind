@@ -7,7 +7,7 @@ public class MD5Util {
 	private final static String[] hexDigits = {"0", "1", "2", "3", "4",  
         "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};  
       
-    /** * 把inputString加密     */  
+    /** * 把inputString加密  */
     public static String generatePassword(String inputString){  
         return encodeByMD5(inputString);  
     }  

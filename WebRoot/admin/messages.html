@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="css/uniform.css" />
+		<link rel="stylesheet" href="css/select2.css" />		
 		<link rel="stylesheet" href="css/maruti-style.css" />
 		<link rel="stylesheet" href="css/maruti-media.css" class="skin-color" />	
 	</head>
@@ -41,8 +43,9 @@
   <button type="submit" class="tip-left" title="Search"><i class="icon-search icon-white"></i></button>
 </div>
 <!--close-top-Header-menu-->
+<!--close-top-Header-menu-->           
 
-		<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i></a>
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i></a>
   <ul>
   <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>首页</span></a></li>
     <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>爬虫</span><span class="label">3</span></a>
@@ -102,66 +105,24 @@
     
     <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>个人中心</span> <span class="label">1</span></a>
       <ul>
-        <li><a href="gallery.html">个人信息管理</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="chat.html">Chat option</a></li>
+        <li><a href="my.html">个人信息管理</a></li>
       </ul>
     </li>
 
   </ul>
 </div>
-		
-		
-		
+
+  </ul>
+		</div>
 		<div id="content">
 			<div id="content-header">
 				<div id="breadcrumb">
-				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+				<a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
 				<a href="#">Form elements</a>
-				<a href="#" class="current">Form wizard</a>
-			</div>
-                <h1>事件指标统计</h1>
-				
-			</div>
-									<div class="container-fluid">
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="icon-pencil"></i>
-								</span>
-								<h5>数据指标指标</h5>
-							</div>
-          <div class="widget-content nopadding">
-                    <ul class="quick-actions">
-					  <li> <a href="#"> <i class="icon-book"></i> 总事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-cabinet"></i> 昨日新增事件数</a> </li>
-					  <li> <a href="#"> <i class="icon-calendar"></i> 最近一周新增事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-client"></i> 最近一月新增事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-database"></i> 平均每周新增事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-download"></i> 积极情感事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-graph"></i> 消极情感事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-home"></i>用户参与总人次 </a> </li>
-					  <li> <a href="#"> <i class="icon-lock"></i> 事件最长时间跨度</a> </li>
-					  <li> <a href="#"> <i class="icon-mail"></i>事件最短时间跨度 </a> </li>
-					  <li> <a href="#"> <i class="icon-pdf"></i> 最活跃的网站 </a> </li>
-					  <li> <a href="#"> <i class="icon-people"></i> 最近一年最活跃事件 </a> </li>
-					  <li> <a href="#"> <i class="icon-piechart"></i> 最近一月最活跃事件 </a> </li>
-					  <li> <a href="#"> <i class="icon-search"></i> 最近一周最活跃事件</a> </li>
-					  <li> <a href="#"> <i class="icon-shopping-bag"></i>该系统访问次数最多事件 </a> </li>
-					  <li> <a href="#"> <i class="icon-survey"></i> 该系统访问次数最多主题 </a> </li>
-					  <li> <a href="#"> <i class="icon-tag"></i> 包含事件最多的主题 </a> </li>
-					   <li> <a href="#"> <i class="icon-user"></i> 包含事件最少的主题</a> </li>
-					</ul>
-                      
-                     
-                  </div>
-						</div>
-					</div>
+				<a href="#" class="current">Validation</a>
 				</div>
+                <h1>消息管理</h1>
 			</div>
-
 			
 			<div class="container-fluid">
 				<div class="row-fluid">
@@ -169,32 +130,106 @@
 						<div class="widget-box">
 							<div class="widget-title">
 								<span class="icon">
-									<i class="icon-pencil"></i>
+									<i class="icon-info-sign"></i>									
 								</span>
-								<h5>舆情指标具体展示</h5>
+								<h5>新增消息</h5>
 							</div>
 							<div class="widget-content nopadding">
-
-                                
+								<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                                    <div class="control-group">
+                                        <label class="control-label">选择用户：</label>
+                                        <div class="controls">
+                                            <button class="btn btn-success">选择角色下某些用户</button>
+                                        </div>
+                                    </div>
+									<div class="control-group">
+                                        <label class="control-label">消息标题：</label>
+                                        <div class="controls">
+                                            <input type="text" name="required" id="required">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">消息内容：</label>
+                                        <div class="controls">
+                                            <textarea style="height:150px;"></textarea>
+                                        </div>
+                                    </div>
+									<input style="margin-left:12%;" type="submit" value="发送消息" class="btn btn-success">
+                                    
+                                </form>
 							</div>
-						</div>
+						</div>			
 					</div>
 				</div>
-			</div>			
-
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="icon-info-sign"></i>									
+								</span>
+								<h5>消息</h5>
+							</div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>序号</th>               
+                  <th>标题</th>
+                  <th>消息内容</th>
+				  <th>发布时间</th>
+				  <th>发送人</th>
+				  <th>接收用户</th>
+				  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="gradeX">
+                  <td>1</td>
+                  <td><a href="#" style="color:blue;">系统升级</a></td>
+                  <td>企业版本系统升级2.0！</td>
+				  <td>2017-10-23 04:46</td>
+				  <td>小明管理员</td>
+				  <td>小红、小强</td>
+				  <td><a href="#" style="color: red">删除</a></td>
+                </tr>
+                <tr class="gradeX">
+                  <td>1</td>
+                  <td><a href="#" style="color:blue;">系统升级</a></td>
+                  <td>企业版本系统升级2.0！</td>
+				  <td>2017-10-23 04:46</td>
+				  <td>小明管理员</td>
+				  <td>小红、小强</td>
+				  <td><a href="#"  style="color: red">删除</a></td>
+                </tr>
+				<tr class="gradeX">
+                  <td>1</td>
+                  <td><a href="#" style="color:blue;">系统升级</a></td>
+                  <td>企业版本系统升级2.0！</td>
+				  <td>2017-10-23 04:46</td>
+				  <td>小明管理员</td>
+				  <td>小红、小强</td>
+				  <td><a href="#"  style="color: red">删除</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 		</div>
-		
-		<div class="row-fluid">
+		</div>
+
+
+							<div class="row-fluid">
       <div id="footer" class="span12"> 2012 &copy; Marutii Admin. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a> </div>
     </div>
-            
             <script src="js/jquery.min.js"></script>
             <script src="js/jquery.ui.custom.js"></script>
             <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.uniform.js"></script>
+            <script src="js/select2.min.js"></script>
             <script src="js/jquery.validate.js"></script>
-            <script src="js/jquery.wizard.js"></script>
             <script src="js/maruti.js"></script>
-            <script src="js/maruti.wizard.js"></script>
+            <script src="js/maruti.form_validation.js"></script>
 	</body>
 
 </html>

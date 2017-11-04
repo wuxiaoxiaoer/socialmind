@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.DataDictionaryEntity" table="data_dictionary" schema="socialmind">
+        <id name="dataDictionaryId" column="dataDictionaryID"/>
+        <property name="attributeValue" column="attributeValue"/>
+        <property name="note" column="note"/>
+        <property name="attributeName" column="attributeName"/>
+    </class>
+</hibernate-mapping>
