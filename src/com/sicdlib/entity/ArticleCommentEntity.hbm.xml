@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.ArticleCommentEntity" table="article_comment" schema="socialmind">
+        <id name="articleCommentId" column="article_commentID"/>
+        <property name="sourceCommentId" column="sourceCommentID"/>
+        <property name="authorId" column="authorID"/>
+        <property name="likeNumber" column="likeNumber"/>
+        <property name="content" column="content"/>
+        <property name="commentTime" column="commentTime"/>
+        <property name="replayNumber" column="replayNumber"/>
+        <property name="graphUrl" column="graphURL"/>
+        <property name="articleId" column="articleID"/>
+        <property name="fatherCommentId" column="fatherCommentID"/>
+    </class>
+</hibernate-mapping>

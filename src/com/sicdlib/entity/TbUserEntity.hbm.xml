@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.TbUserEntity" table="tb_user" schema="socialmind">
+        <id name="uId" column="u_id"/>
+        <property name="uName" column="u_name"/>
+        <property name="uPwd" column="u_pwd"/>
+        <property name="uTelphone" column="u_telphone"/>
+        <property name="uMail" column="u_mail"/>
+        <property name="uSex" column="u_sex"/>
+    </class>
+</hibernate-mapping>

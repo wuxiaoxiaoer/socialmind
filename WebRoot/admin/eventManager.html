@@ -66,10 +66,10 @@
 			<li><a href="dataClean_diary.html">数据清洗日志管理</a></li>
 		  </ul>
 	</li>
-	 <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>事件管理</span><span class="label">1</span></a>
+	 <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>舆情对象管理</span><span class="label">1</span></a>
 		<ul>
-		<li><a href="eventManager.html">事件管理</a></li>
-		<li><a href="form-common.html">事件统计</a></li>
+		<li><a href="eventManager.html">舆情对象管理</a></li>
+		<li><a href="form-common.html">舆情对象统计</a></li>
 	  </ul>
 	</li>
 	<li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>主题管理</span><span class="label">1</span></a>
@@ -93,7 +93,7 @@
 	  </ul>
 	</li>
     <li class="submenu"> <a href="roleManagement.html"><i class="icon icon-th-list"></i> <span>角色管理</span> <span class="label">1</span></a>
-			<ul>
+		  <ul>
 			<li><a href="roleManagement.html">角色管理</a></li>
 		  </ul>
     </li>
@@ -123,7 +123,7 @@
                     <a href="#" class="tip-bottom">Form elements</a>
                     <a href="#" class="current">Common elements</a>
                 </div>
-        		<h1>事件管理（对事件的增、删、展示）</h1>
+        		<h1>舆情对象管理（对舆情对象的增、删、展示）</h1>
 				
 			</div>
 			
@@ -135,7 +135,7 @@
 								<span class="icon">
 									<i class="icon-align-justify"></i>									
 								</span>
-								<h5>新增事件</h5>
+								<h5>新增舆情对象</h5>
 							</div>
 							<div class="widget-content nopadding">
 								<form action="#" method="get" class="form-horizontal">
@@ -155,19 +155,38 @@
 											</select>
 										</div>
 									</div>
+									<div class="control-group">
+										<label class="control-label">网站名称：</label>
+										<div class="controls">
+											<select>
+												<option>全部</option>
+												<option>豆瓣</option>
+												<option>微博</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">舆情对象类型：</label>
+										<div class="controls">
+											<select>
+												<option>事件</option>
+												<option>实体</option>
+											</select>
+										</div>
+									</div>
                                     <div class="control-group">
-										<label class="control-label">事件名称：</label>
+										<label class="control-label">舆情对象名称：</label>
 										<div class="controls"><input type="text" class="span20" placeholder="Last name" /></div>
 									</div>
 									
 									<div class="control-group">
-										<label class="control-label">事件描述：</label>
+										<label class="control-label">舆情对象描述：</label>
 										<div class="controls">
-											<textarea class="span20" >为更好的抽取事件相关的文章....</textarea>
+											<textarea class="span20" >为更好的抽取舆情对象相关的文章....</textarea>
 										</div>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn btn-success">创建事件，一键事件分析</button>
+										<button type="submit" class="btn btn-success">创建舆情对象，一键舆情对象分析</button>
 									</div>
 								</form>
 							</div>
@@ -182,28 +201,46 @@
 								<span class="icon">
 									<i class="icon-align-justify"></i>									
 								</span>
-								<h5>事件自动生成</h5>
+								<h5>舆情对象自动生成</h5>
 							</div>
 							<div class="widget-content nopadding">
 								<form action="#" method="get" class="form-horizontal">
 									<div class="control-group">
 										<label class="control-label">主题名称：</label>
 										<div class="controls ">
-											<div class="select2-container" id="s2id_autogen1">
-											<div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select style="display: none;">
+											<select style="display: none;">
 												<option>请选择：</option>
 												<option>科技</option>
 												<option>社会</option>
 												<option>民生</option>
 												<option>军事</option>
 												<option>...</option>
-												<option>Seventh option</option>
-												<option>Eighth option</option>
 											</select>
-											<button type="submit" class="btn btn-success">事件自动生成，一键事件分析</button>
 										</div>
-									</div>
-                                    
+										
+										<label class="control-label">网站名称：</label>
+										<div class="controls ">
+											<select style="display: none;">
+												<option>请选择：</option>
+												<option>全部</option>
+												<option>豆瓣</option>
+												<option>微博</option>
+											</select>
+										</div>
+										
+										<label class="control-label">舆情对象类型：</label>
+										<div class="controls ">
+											<select style="display: none;">
+												<option>请选择：</option>
+												<option>全部</option>
+												<option>豆瓣</option>
+												<option>微博</option>
+											</select>
+										</div>
+									</div>											
+									<div class="form-actions">
+										<button type="submit" class="btn btn-success">舆情对象自动生成，一键舆情对象分析</button>
+									</div>                                    
 								</form>
 							</div>
 						</div>						
@@ -217,7 +254,7 @@
 								<span class="icon">
 									<i class="icon-align-justify"></i>	
 								</span>
-								<h5>科技事件展示 共100条</h5>
+								<h5>科技舆情对象展示 共100条</h5>
 							</div>
 							<img src="images/ours/eventslist.png" alt="">
 							<button style="float:right; color:white; background-color:orange; border:0px;">展开...</button>
@@ -233,7 +270,7 @@
 								<span class="icon">
 									<i class="icon-align-justify"></i>	
 								</span>
-								<h5>社会事件展示 共200条</h5>
+								<h5>社会舆情对象展示 共200条</h5>
 							</div>
 							<img src="images/ours/eventslist.png" alt="">
 							<button style="float:right; color:white; background-color:orange; border:0px;">展开...</button>

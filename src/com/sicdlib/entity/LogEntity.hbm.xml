@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.LogEntity" table="log" schema="socialmind">
+        <id name="logId" column="logID"/>
+        <property name="userId" column="userID"/>
+        <property name="ip" column="IP"/>
+        <property name="logTime" column="logTime"/>
+        <property name="methodLogicName" column="methodLogicName"/>
+        <property name="method" column="method"/>
+        <property name="param" column="param"/>
+        <property name="sourcePage" column="sourcePage"/>
+        <property name="targetPage" column="targetPage"/>
+        <property name="stayTime" column="stayTime"/>
+    </class>
+</hibernate-mapping>
