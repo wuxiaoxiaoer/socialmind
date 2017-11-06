@@ -69,24 +69,14 @@
             <h1 style="color: #FFF;">Socialmind大平台</h1>
 
         </div>
-      <form class="form-signin" action="user/login" method="post"  onsubmit="return login()" style="opacity:0.90; margin-top:1.9%;">
+      <form class="form-signin" action="user/login" method="post" style="opacity:0.90; margin-top:1.9%;">
         <h2 class="form-signin-heading">Login</h2>
         <input type="text"  value="<%=u_name%>" name="username" id="username" class="input-block-level" onblur="usernameIsString();" />
           <label id="lab_username" style="color:red"></label>
         <input type="password" value="<%=u_pwd%>" name="userpwd" id="password"  class="input-block-level" onblur="pwdIsString();"/>
           <label id="lab_pwd" style="color:red"></label>
-		<%--<div class="control-group">
-            <div class="controls">
-                <select id="select01" name="userType" class="input-block-level">
-                    <option value="individual">个人用户</option>
-                    <option value="company">企业用户</option>
-                    <option value="government">政府用户</option>
-                    <option value="institution">事业单位用户</option>
-                </select>
-            </div>
-        </div>--%>
-        <label class="checkbox" style="width:20%">
-          <input type="checkbox" <%=checked%> id="c1" name="cc"> 记住用户
+		  <label class="checkbox" style="width:20%">
+          <input type="checkbox" <%=checked%> id="c1" name="isRemPwd"> 记住用户
         </label>
           <label id="prompt" style="color: red;float:right; margin-top:-10%;"></label>
 

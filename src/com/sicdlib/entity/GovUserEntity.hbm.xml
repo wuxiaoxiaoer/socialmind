@@ -10,8 +10,8 @@
         <property name="govName" column="govName"/>
         <property name="type" column="type"/>
         <property name="govCode" column="govCode"/>
-        <property name="idFront" column="IDFront"/>
-        <property name="idBack" column="IDBack"/>
-        <property name="provePicture" column="provePicture"/>
+        <property name="idFrontUrl" column="IDFrontUrl"/>
+        <property name="idBackUrl" column="IDBackUrl"/>
+        <property name="govCodeUrl" column="govCodeUrl"/>
     </class>
 </hibernate-mapping>
