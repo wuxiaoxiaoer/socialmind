@@ -1,5 +1,7 @@
 package com.sicdlib.entity;
 
+import java.util.UUID;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
