@@ -61,8 +61,8 @@
 											 <td>${v.description}</td>
 
 											 <td align="center">
-												<i class="icon-edit"></i>
-												<i class="icon-remove"></i>
+												<a  onclick="popModel('${v.roleId}','${v.roleName}','${v.description}')"><i class="icon-edit"></i></a>
+												 <a  onclick="deleteRole('${v.roleId}');"><i class="icon-remove"></i></a>
 											 </td>
 										</tr>
 									</c:forEach>
@@ -88,6 +88,33 @@
 
 
 		</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog">
+	<div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+		<h3 id="myModalLabel">修改角色</h3>
+	</div>
+	<div class="modal-body">
+
+		<input type="text"  id="id" ><br/>
+		角色名：<input type="text" id="roleNewName" ><br/>
+		角色描述：<input type="text" id="roleNewDesc" >
+	</div>
+
+	<div class="modal-footer">
+
+		<a href="#" class="btn btn-primary"  onclick="updateRole()" >保存</a>
+		<a href="#" class="btn">取消</a>
+
+	</div>
+</div>
+
+
+
+
 			
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.ui.custom.js"></script>
@@ -95,7 +122,6 @@
 <script src="js/maruti.js"></script>
 
 <script>
-
 	/*增加角色*/
     function addRole(){
         var roleName = $("#roleName").val();
@@ -105,18 +131,85 @@
         $.ajax({
             async : false,//将async设置为false,才能使得return 返回true/false有效
             type : 'post',
-            url : 'addRole?roleName='+roleName,
+            url : 'addRole?roleName='+roleName+'&roleDesc='+roleDesc,
             success : function(str){
                 if('success'==str) {
                     location.reload(true);//重新加载
 				} else {
                     alert("失败！！！");
 				}
-
-
             }
         });
     }
+
+	/*弹出修改角色*/
+    function popModel(roleId,roelName,roleDesc){
+
+        document.getElementById("id").value=roleId;
+        document.getElementById("roleNewName").value=roelName;
+        document.getElementById("roleNewDesc").value=roleDesc;
+
+        $('#myModal').modal('show');
+
+    }
+
+	/*弹出修改角色*/
+    function updateRole(){
+        var id = $("#id").val();
+        var roleNewName = $("#roleNewName").val();
+        var roleNewDesc = $("#roleNewDesc").val();
+
+        var result = false;
+        $.ajax({
+            async : false,//将async设置为false,才能使得return 返回true/false有效
+            type : 'post',
+            url : 'updateRole?roleNewName='+roleNewName+'&roleNewDesc='+roleNewDesc+'&id='+ id,
+            success : function(str){
+                if('success'==str) {
+                    location.reload(true);//重新加载
+                } else {
+                    alert("失败！！！");
+                }
+            }
+        });
+
+    }
+
+	/*删除角色*/
+    function deleteRole(roleId) {
+
+        var result = false;
+        if (confirm("确定删除吗 ?") == false) {
+            return;
+        }
+
+        $.ajax({
+            async : false,
+            type : 'post',
+            url : 'deleteRole?roleId=' + roleId,
+            success : function(msg) {
+                if (msg == 'success') {
+                    alert("删除成功");
+                    window.location.reload();
+                    result = true;
+                } else {
+                    alert("删除失败");
+                    result = false;
+                }
+            }
+        });
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
@@ -125,22 +218,6 @@
 
 
 
-
-
-
-
-
-
-
-
 </body>
-
-
-
-
-
-
-
-
 
 </html>

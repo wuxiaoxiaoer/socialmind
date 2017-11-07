@@ -48,6 +48,7 @@ public class AdminRoleManageController {
 		String roleName = req.getParameter("roleName");
 		String roleDesc = req.getParameter("roleDesc");
 
+
 		RoleEntity role = new RoleEntity();
 		role.setRoleName(roleName);
 		role.setDescription(roleDesc);
@@ -67,12 +68,18 @@ public class AdminRoleManageController {
      */
     @RequestMapping(value="updateRole")
     public void updateRole(HttpServletRequest req, HttpServletResponse res) throws IOException{
-        String roleName = req.getParameter("roleId");
+        String roleNewName = req.getParameter("roleNewName");
+        String roleNewDesc = req.getParameter("roleNewDesc");
+        String id = req.getParameter("id");
 
+        RoleEntity role = new RoleEntity();
+        role.setRoleName(roleNewName);
+        role.setDescription(roleNewDesc);
+        role.setRoleId(id);
 
-        //roleService.saveOrUpdate(role);
-        //out.print("success");
-
+        PrintWriter out = res.getWriter();
+        roleService.saveOrUpdate(role);
+        out.print("success");
     }
 
 
@@ -89,10 +96,10 @@ public class AdminRoleManageController {
 	@RequestMapping("deleteRole")
 	public void deleteRole(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
-		String roleID = req.getParameter("roleID");
+		String roleId = req.getParameter("roleId");
 		PrintWriter out = res.getWriter();
 
-		roleService.remove(roleID);
+		roleService.remove(roleId);
 		out.print("success");
 
 	}
