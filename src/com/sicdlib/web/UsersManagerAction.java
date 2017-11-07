@@ -49,11 +49,7 @@ public class UsersManagerAction {
         //审核与删除用户：isisAuthenticated为0，未审核；1；审核通过；-1审核不通过；no，删除用户
         if (op.equals("userVerify") && !userId.equals("1") && !isisAuthenticated.equals("100")){
             UserEntity user = userEntityService.load(userId);
-<<<<<<< HEAD
-            user.setIsAuthenticated(Byte.decode(isisAuthenticated));
-=======
             user.setIsAuthenticated(isisAuthenticated);
->>>>>>> bb9e04196edce7287aef6edeabefe62af1ff924e
             userEntityService.saveOrUpdate(user);
         }
 
@@ -63,11 +59,7 @@ public class UsersManagerAction {
             for (String uid : userIds){
                 System.out.println("用户ID:" + uid);
                 UserEntity user = userEntityService.load(uid);
-<<<<<<< HEAD
-                user.setIsAuthenticated(Byte.decode(isisAuthenticated));
-=======
                 user.setIsAuthenticated(isisAuthenticated);
->>>>>>> bb9e04196edce7287aef6edeabefe62af1ff924e
                 userEntityService.saveOrUpdate(user);
             }
         }
