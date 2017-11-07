@@ -69,7 +69,7 @@
             <h1 style="color: #FFF;">Socialmind大平台</h1>
 
         </div>
-      <form class="form-signin" action="user/login" method="post"  onsubmit="return login()" style="opacity:0.90; margin-top:1.9%;">
+      <form class="form-signin" action="user/login" method="post" style="opacity:0.90; margin-top:1.9%;">
         <h2 class="form-signin-heading">Login</h2>
         <input type="text"  value="<%=u_name%>" name="username" id="username" class="input-block-level" onblur="usernameIsString();" />
           <label id="lab_username" style="color:red"></label>
