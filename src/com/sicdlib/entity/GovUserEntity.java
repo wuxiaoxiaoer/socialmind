@@ -9,9 +9,9 @@ public class GovUserEntity {
     private String govName;
     private String type;
     private String govCode;
-    private String idFront;
-    private String idBack;
-    private String provePicture;
+    private String idFrontUrl;
+    private String idBackUrl;
+    private String govCodeUrl;
 
     public String getUserId() {
         return userId;
@@ -53,28 +53,28 @@ public class GovUserEntity {
         this.govCode = govCode;
     }
 
-    public String getIdFront() {
-        return idFront;
+    public String getIdFrontUrl() {
+        return idFrontUrl;
     }
 
-    public void setIdFront(String idFront) {
-        this.idFront = idFront;
+    public void setIdFrontUrl(String idFrontUrl) {
+        this.idFrontUrl = idFrontUrl;
     }
 
-    public String getIdBack() {
-        return idBack;
+    public String getIdBackUrl() {
+        return idBackUrl;
     }
 
-    public void setIdBack(String idBack) {
-        this.idBack = idBack;
+    public void setIdBackUrl(String idBackUrl) {
+        this.idBackUrl = idBackUrl;
     }
 
-    public String getProvePicture() {
-        return provePicture;
+    public String getGovCodeUrl() {
+        return govCodeUrl;
     }
 
-    public void setProvePicture(String provePicture) {
-        this.provePicture = provePicture;
+    public void setGovCodeUrl(String govCodeUrl) {
+        this.govCodeUrl = govCodeUrl;
     }
 
     @Override
@@ -89,11 +89,10 @@ public class GovUserEntity {
         if (govName != null ? !govName.equals(that.govName) : that.govName != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (govCode != null ? !govCode.equals(that.govCode) : that.govCode != null) return false;
-        if (idFront != null ? !idFront.equals(that.idFront) : that.idFront != null) return false;
-        if (idBack != null ? !idBack.equals(that.idBack) : that.idBack != null) return false;
-        if (provePicture != null ? !provePicture.equals(that.provePicture) : that.provePicture != null) return false;
+        if (idFrontUrl != null ? !idFrontUrl.equals(that.idFrontUrl) : that.idFrontUrl != null) return false;
+        if (idBackUrl != null ? !idBackUrl.equals(that.idBackUrl) : that.idBackUrl != null) return false;
+        return govCodeUrl != null ? govCodeUrl.equals(that.govCodeUrl) : that.govCodeUrl == null;
 
-        return true;
     }
 
     @Override
@@ -103,9 +102,9 @@ public class GovUserEntity {
         result = 31 * result + (govName != null ? govName.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (govCode != null ? govCode.hashCode() : 0);
-        result = 31 * result + (idFront != null ? idFront.hashCode() : 0);
-        result = 31 * result + (idBack != null ? idBack.hashCode() : 0);
-        result = 31 * result + (provePicture != null ? provePicture.hashCode() : 0);
+        result = 31 * result + (idFrontUrl != null ? idFrontUrl.hashCode() : 0);
+        result = 31 * result + (idBackUrl != null ? idBackUrl.hashCode() : 0);
+        result = 31 * result + (govCodeUrl != null ? govCodeUrl.hashCode() : 0);
         return result;
     }
 }
