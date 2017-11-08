@@ -1,5 +1,7 @@
 package com.sicdlib.entity;
 
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
@@ -16,6 +18,16 @@ public class ObjectEntity {
     private String objectType;
     private String objectFatherId;
     private Integer commentNumber;
+    /**一个舆情对象对应着多个指标值 */
+    private Set<IndicatorValueEntity> indicatorValues;
+
+    public Set<IndicatorValueEntity> getIndicatorValues() {
+        return indicatorValues;
+    }
+
+    public void setIndicatorValues(Set<IndicatorValueEntity> indicatorValues) {
+        this.indicatorValues = indicatorValues;
+    }
 
     public String getObjectId() {
         return objectId;

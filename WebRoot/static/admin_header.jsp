@@ -64,7 +64,7 @@
         </li>
         <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>舆情对象管理</span><span class="label">1</span></a>
             <ul>
-                <li><a href="eventManager.html">舆情对象管理</a></li>
+                <li><a href="<%=basePath%>object/objectsManager">舆情对象管理</a></li>
                 <li><a href="event_stats.html">舆情对象统计</a></li>
                 <!--<li><a href="eventManager.html">实体管理</a></li>
                 <li><a href="form-common.html">实体统计</a></li>-->
@@ -75,9 +75,9 @@
                 <li><a href="topics.html">主题管理</a></li>
             </ul>
         </li>
-        <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>语义工具集</span><span class="label">1</span></a>
+        <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>算法工具集</span><span class="label">1</span></a>
             <ul>
-                <li><a href="semanticsToolkits.html">语义工具集管理</a></li>
+                <li><a href="semanticsToolkits.html">算法工具集管理</a></li>
             </ul>
         </li>
         <li><a href="tables.html"><i class="icon icon-th"></i> <span>用户评论管理</span></a><span class="label">1</span>

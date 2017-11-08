@@ -1,76 +1,46 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.sicdlib.entity.UserEntity" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    //UserEntity user = (UserEntity) session.getAttribute("user");
+%>
+
 <!DOCTYPE html>
 <html class="no-js">
     
     <head>
-        <title>Admin Home Page</title>
+        <base href="<%=basePath%>foreground/"/>
+        <title>首页 - Socialmind大平台</title>
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="vendors/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                //通过调用新浪IP地址库接口查询用户当前所在国家、省份、城市、运营商信息
+                $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){
+                    $(".country").html(remote_ip_info.country);
+                    $(".province").html(remote_ip_info.province);
+                    $(".city").html(remote_ip_info.city);
+                    $(".isp").html(remote_ip_info.isp);
+                });
+            });
+        </script>
     </head>
     
     <body>
-              <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="#">social mind舆情分析平台</a>
-                    <div class="nav-collapse collapse">
-					    <ul class="nav pull-right">
-                            <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 吴连伟 <i class="caret"></i>
 
-                                </a>
-                                <ul class="dropdown-menu">
-								    <li>
-                                        <a tabindex="-1" href="person_info.html">个人中心</a>
-                                    </li>
-									<li>
-                                        <a tabindex="-1" href="notification.html">通知  <font color="blue">1</font></a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="login.html">Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav">
-							<li class="">
-                                <a href="index_gov.html">主页</a>
-                            </li>
-                            <li class="">
-                                <a href="heatIndex.html">热度指标</a>
-                            </li>
-                            <li class="">
-                                <a href="emotionMap.html">情绪地图</a>
-                            </li>
-                            <li class="">
-                                <a href="info_dectection.html">信息监测</a>
-                            </li>
-							<li class="">
-                                <a href="../WEB-INF/foreground/fullRetrival.html">全文检索</a>
-                            </li>
-							<li class="">
-                                <a href="event.html">全网事件分析</a>
-                            </li>
-							<li class="">
-                                <a href="makeReporter_1.html">简报制作</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
+    <!-- 引入头模板 -->
+    <jsp:include page="/static/fore_header.jsp"/>
+
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
@@ -93,7 +63,6 @@
                         <li>
                             <a href="buttons.html"><i class="icon-chevron-right"></i>日志中事件动态</a>
                         </li>
-                       
                     </ul>
                 </div>
                 
@@ -103,23 +72,24 @@
                         <div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>欢迎您！</h4>
-                        	事业单位用户</div>
-                        	<div class="navbar">
-                            	<div class="navbar-inner">
-	                                <ul class="breadcrumb">
-	                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <li>
-	                                        <a href="#">Dashboard</a> <span class="divider">/</span>	
-	                                    </li>
-	                                    <li>
-	                                        <a href="#">Settings</a> <span class="divider">/</span>	
-	                                    </li>
-	                                    <li class="active">Tools</li>
-	                                </ul>
-                            	</div>
-                        	</div>
-                    	</div>
+                        	<c:out value="${sessionScope.commomUser.role.roleName}"/>用户, 当前您所处的位置: <span class="country"></span>-<span class="province"></span>-<span class="city"></span></div>
+                            <div></div>
+                            <div class="navbar">
+                                    <div class="navbar-inner">
+                                        <ul class="breadcrumb">
+                                            <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                            <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                            <li>
+                                                <a href="#">Dashboard</a> <span class="divider">/</span>
+                                            </li>
+                                            <li>
+                                                <a href="#">Settings</a> <span class="divider">/</span>
+                                            </li>
+                                            <li class="active">Tools</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
@@ -131,7 +101,6 @@
                                 <div class="span3">
                                     <div class="chart" data-percent="73">73%</div>
                                     <div class="chart-bottom-heading"><span class="label label-info">新增该单位相关事件数</span>
-
                                     </div>
                                 </div>
                                 <div class="span3">
@@ -149,7 +118,6 @@
                                 <div class="span3">
                                     <div class="chart" data-percent="13">13%</div>
                                     <div class="chart-bottom-heading"><span class="label label-info">新增下属动态数</span>
-
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +129,7 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">该单位相关事件排行</div>
+                                    <div class="muted pull-left">热门事件排行</div>
 									<div class="pull-right"><span class="badge badge-info" style="background-color:#f89406">更多...</span></div>
                                     <div class="pull-right"><span class="badge badge-info">最新</span></div>
 									<div class="pull-right"><span class="badge badge-info">最热</span></div>
@@ -177,24 +145,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>十九大召开</td>
-                                                <td>219</td>
-                                                <td>2017-10-19 08:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Vincent</td>
-                                                <td>Gabriel</td>
-                                                <td>@gabrielva</td>
-                                            </tr>
+                                          <c:forEach items="${top5DynamicObjIndexs}" var="d" varStatus="sts">
+                                              <tr>
+                                                  <td>${sts.index + 1}</td>
+                                                  <td><a>${d.object.name}</a></td>
+                                                  <td>${d.hotValue}</td>
+                                                  <td>${d.object.addTime}</td>
+                                              </tr>
+                                          </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -205,42 +163,30 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">单位内部事件挖掘</div>
-									<div class="pull-right"><span class="badge badge-info" style="background-color:#f89406">更多...</span></div>
+                                    <div class="muted pull-left"><span class="city"></span>-当地事件排行</div>
+                                    <div class="pull-right"><span class="badge badge-info" style="background-color:#f89406">更多...</span></div>
                                     <div class="pull-right"><span class="badge badge-info">最新</span></div>
-									<div class="pull-right"><span class="badge badge-info">增长最快</span></div>
-									<div class="pull-right"><a href="manageInterDataSources.html" style="text-decoration:none; color:#333;"><span class="badge badge-info" style="background-color: #1b561b;">
-									+管理</span></a></div>
+                                    <div class="pull-right"><span class="badge badge-info">最热</span></div>
                                 </div>
                                 <div class="block-content collapse in">
                                     <table class="table table-striped">
                                         <thead>
-                                            <tr>
-                                                <th>序号</th>
-                                                <th>事件名称</th>
-                                                <th>热度</th>
-                                                <th>时间</th>
-                                            </tr>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>事件名称</th>
+                                            <th>热度</th>
+                                            <th>时间</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach items="${top5DynamicAddressObjIndexs}" var="d" varStatus="sts">
                                             <tr>
-                                                <td>1</td>
-                                                <td>内部信息</td>
-                                                <td>219</td>
-                                                <td>2017-10-19 08:00</td>
+                                                <td>${sts.index + 1}</td>
+                                                <td><a>${d.object.name}</a></td>
+                                                <td>${d.hotValue}</td>
+                                                <td>${d.object.addTime}</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jacket</td>
-                                                <td>01/02/2013</td>
-                                                <td>$335.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Shoes</td>
-                                                <td>01/02/2013</td>
-                                                <td>$29.99</td>
-                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -391,7 +337,6 @@
             </footer>
         </div>
         <!--/.fluid-container-->
-        <script src="vendors/jquery-1.9.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="assets/scripts.js"></script>

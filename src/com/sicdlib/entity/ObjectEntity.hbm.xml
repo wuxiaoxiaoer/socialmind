@@ -17,5 +17,10 @@
         <property name="objectType" column="objectType"/>
         <property name="objectFatherId" column="objectFatherID"/>
         <property name="commentNumber" column="commentNumber"/>
+        <!-- 一个舆情对象对应多个指标 -->
+        <set name="indicatorValues">
+            <key column="objectID"></key>
+            <one-to-many class="com.sicdlib.entity.IndicatorValueEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>
