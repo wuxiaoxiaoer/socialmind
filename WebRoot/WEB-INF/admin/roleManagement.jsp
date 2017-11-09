@@ -12,10 +12,10 @@
 <head>
 		<title>角色管理</title><meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-		<link rel="stylesheet" href="css/maruti-style.css" />
-		<link rel="stylesheet" href="css/maruti-media.css" class="skin-color" />	
+		<link rel="stylesheet" href="admin/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="admin/css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="admin/css/maruti-style.css" />
+		<link rel="stylesheet" href="admin/css/maruti-media.css" class="skin-color" />
 </head>
 <body>
 
@@ -99,9 +99,9 @@
 	</div>
 	<div class="modal-body">
 
-		<input type="text"  id="id" ><br/>
+		<input type="text"  style="display: none;" id="id" ><br/>
 		角色名：<input type="text" id="roleNewName" ><br/>
-		角色描述：<input type="text" id="roleNewDesc" >
+		描  述：<input type="text" id="roleNewDesc" >
 	</div>
 
 	<div class="modal-footer">
@@ -113,13 +113,14 @@
 </div>
 
 
-
+<!-- 引入后台尾部模板 -->
+<jsp:include page="/static/admin_footer.jsp"></jsp:include>
 
 			
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.ui.custom.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/maruti.js"></script>
+<script src="admin/js/jquery.min.js"></script>
+<script src="admin/js/jquery.ui.custom.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<script src="admin/js/maruti.js"></script>
 
 <script>
 	/*增加角色*/
