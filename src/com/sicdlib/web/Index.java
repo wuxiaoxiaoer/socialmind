@@ -27,4 +27,12 @@ public class Index {
 		return "/WEB-INF/foreground/info_dectection";
 	}
 
+	//全网事件分析
+	@RequestMapping(value="event", method = RequestMethod.GET)
+	public String event(){
+		return "/WEB-INF/foreground/event";
+	}
+
+
+
 }

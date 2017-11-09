@@ -51,7 +51,7 @@
                         <a href="fullRetrival.html">全文检索</a>
                     </li>
                     <li class="">
-                        <a href="event.html">全网事件分析</a>
+                        <a href="<%=basePath%>event">全网事件分析</a>
                     </li>
                     <li class="">
                         <a href="makeReporter_1.html">简报制作</a>

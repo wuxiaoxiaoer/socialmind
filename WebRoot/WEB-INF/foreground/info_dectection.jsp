@@ -7,21 +7,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <title>信息监测 - socialmind大平台</title>
-        <!-- Bootstrap -->
-        <link href="foreground/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="foreground/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="foreground/assets/styles.css" rel="stylesheet" media="screen">
-        <link href="foreground/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="foreground/vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <script src="foreground/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
+
+    <jsp:include page="/static/fore_headInfo.jsp"/>
     
     <body>
 
@@ -66,9 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
 							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
 							</div>
                             
                         </div>
@@ -78,10 +65,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="pull-right"><span class="badge badge-warning">刷新</span>
                                 </div>
                             </div>
-							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
+							<div class="block-content collapse in">
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
 							</div>
                             
                         </div>
@@ -91,10 +78,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="pull-right"><span class="badge badge-warning">刷新</span>
                                 </div>
                             </div>
-							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
+							<div class="block-content collapse in">
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
 							</div>
                             
                         </div>
@@ -104,10 +91,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="pull-right"><span class="badge badge-warning">刷新</span>
                                 </div>
                             </div>
-							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
+							<div class="block-content collapse in">
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
 							</div>
                         </div>
                 </div>
