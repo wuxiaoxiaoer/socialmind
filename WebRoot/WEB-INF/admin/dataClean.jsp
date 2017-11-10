@@ -1,19 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 2017/9/6
-  Time: 17:07
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <html>
-<%--<jsp:include page="static/head_jsp.jsp"/>--%>
 <head>
+  <base href="<%=basePath%>admin/"/>
+  <script src="js/etljs/echarts.min.js"></script>
   <script src="js/etljs/html5.js"></script>
   <![endif]-->
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -58,7 +52,7 @@
   <script src="js/etljs/plugins/bootstrap-checkbox.js"></script>
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="js/etljs/echarts.js"></script>
+  <script src="js/datasources/amazonmenu.js"></script>
   <script type="text/javascript">
       var ac_siteURL='';  //PHP Application üzerinde autocomplete verisi işlenmesi için temel adres tanımlaması için
   </script>
@@ -295,21 +289,22 @@
 
 </head>
 <body style="overflow: hidden">
+<%--<jsp:include page="/static/admin_header.jsp"></jsp:include>--%>
 <div>
   <!--BEGIN BACK TO TOP-->
   <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
   <!--END BACK TO TOP-->
-  <jsp:include page="static/headerInfo.jsp"/>
+  <%--<jsp:include page="static/headerInfo.jsp"/>--%>
   <div id="wrapper">
 
-  <jsp:include page="static/leftNav_one.jsp"/>
+  <%--<jsp:include page="static/leftNav_one.jsp"/>--%>
     <!--BEGIN PAGE WRAPPER-->
     <div id="page-wrapper">
       <!--BEGIN TITLE & BREADCRUMB PAGE-->
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
           <div class="page-title">
-            <font color="#808080">数据清洗</font></div>
+            <span style="color: #808080; ">数据清洗</span></div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -1080,13 +1075,14 @@
 
 
 
-<script src="js/js1/echarts.min.js"></script>
-  <script>
-      jQuery(function(){
-          amazonmenu.init({
-              menuid: 'mysidebarmenu'
-          })
-      })
-  </script>
+
+
+<script>
+    jQuery(function(){
+        amazonmenu.init({
+            menuid: 'mysidebarmenu'
+        })
+    })
+</script>
 </body>
 </html>

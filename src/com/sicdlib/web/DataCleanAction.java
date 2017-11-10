@@ -18,6 +18,7 @@ import java.util.Map;
 
 //数据清洗
 @Controller
+@RequestMapping("/*")
 public class DataCleanAction {
     @Autowired
     @Qualifier("dataCleanService")
