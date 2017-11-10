@@ -10,12 +10,12 @@
   <script src="js/etljs/echarts.min.js"></script>
   <script src="js/etljs/html5.js"></script>
   <![endif]-->
-  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <%--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
   <!-- core js files -->
   <script>src="js/etljs/jquery.js"</script>
   <script src="js/etljs/jquery-1.11.0.min.js"></script>
   <%--下面这个包有问题--%>
-  <%--<script src="js/etljs/bootstrap.min.js"></script>--%>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/etljs/modernizr.custom.js"></script>
   <script src="js/etljs/core.js"></script>
   <script>src="js/etljs/mock.js"</script>
@@ -534,8 +534,10 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <li><a href="#">删除该列</a></li>
-                              <li><a href="#">删除首尾多余空格</a></li>
-                              <li><a href="#">将字符串中间的空格改为一个</a></li>
+                              <li><a href="#">删除字符串中多余空格</a></li>
+                              <li><a href="#">删除字符串中的\n</a></li>
+                              <li><a href="#">删除字符串中的标签及其中间的值</a></li>
+                              <li><a href="#">删除字符串中的标签不删除其中间的值</a></li>
                               <li><a href="#">修改某特定字符串</a></li>
                             </ul>
                           </div>
