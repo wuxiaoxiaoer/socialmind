@@ -22,9 +22,18 @@ public class ArticleEntity {
     private Integer transmitNumber;
     private Integer trampleNumber;
     private String newsResource;
-    private Integer similarDegree;
+    private Double similarDegree;
     private String websiteId;
-    private String objectId;
+    /** 多个文章对应这一个对象 */
+    private ObjectEntity objectEntity;
+
+    public ObjectEntity getObjectEntity() {
+        return objectEntity;
+    }
+
+    public void setObjectEntity(ObjectEntity objectEntity) {
+        this.objectEntity = objectEntity;
+    }
 
     public String getArticleId() {
         return articleId;
@@ -170,11 +179,11 @@ public class ArticleEntity {
         this.newsResource = newsResource;
     }
 
-    public Integer getSimilarDegree() {
+    public Double getSimilarDegree() {
         return similarDegree;
     }
 
-    public void setSimilarDegree(Integer similarDegree) {
+    public void setSimilarDegree(Double similarDegree) {
         this.similarDegree = similarDegree;
     }
 
@@ -184,14 +193,6 @@ public class ArticleEntity {
 
     public void setWebsiteId(String websiteId) {
         this.websiteId = websiteId;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
     }
 
     @Override
@@ -229,9 +230,8 @@ public class ArticleEntity {
         if (similarDegree != null ? !similarDegree.equals(that.similarDegree) : that.similarDegree != null)
             return false;
         if (websiteId != null ? !websiteId.equals(that.websiteId) : that.websiteId != null) return false;
-        if (objectId != null ? !objectId.equals(that.objectId) : that.objectId != null) return false;
+        return objectEntity != null ? objectEntity.equals(that.objectEntity) : that.objectEntity == null;
 
-        return true;
     }
 
     @Override
@@ -256,7 +256,7 @@ public class ArticleEntity {
         result = 31 * result + (newsResource != null ? newsResource.hashCode() : 0);
         result = 31 * result + (similarDegree != null ? similarDegree.hashCode() : 0);
         result = 31 * result + (websiteId != null ? websiteId.hashCode() : 0);
-        result = 31 * result + (objectId != null ? objectId.hashCode() : 0);
+        result = 31 * result + (objectEntity != null ? objectEntity.hashCode() : 0);
         return result;
     }
 }

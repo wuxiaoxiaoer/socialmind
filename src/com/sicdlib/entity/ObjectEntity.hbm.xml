@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.ObjectEntity" table="object" schema="socialmind">
@@ -21,6 +21,11 @@
         <set name="indicatorValues">
             <key column="objectID"></key>
             <one-to-many class="com.sicdlib.entity.IndicatorValueEntity"></one-to-many>
+        </set>
+        <!--一个舆情对象对应着多个文章-->
+        <set name="articles">
+            <key column="objectID"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleEntity"></one-to-many>
         </set>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,6 @@
 package com.sicdlib.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,8 +19,18 @@ public class ObjectEntity {
     private String objectType;
     private String objectFatherId;
     private Integer commentNumber;
-    /**一个舆情对象对应着多个指标值 */
-    private Set<IndicatorValueEntity> indicatorValues;
+    /** 一个舆情对象对应着多个指标值 */
+    private Set<IndicatorValueEntity> indicatorValues = new HashSet<>();
+    /** 一个对象对应着多个文章 */
+    private Set<ArticleEntity> articles = new HashSet<>();
+
+    public Set<ArticleEntity> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<ArticleEntity> articles) {
+        this.articles = articles;
+    }
 
     public Set<IndicatorValueEntity> getIndicatorValues() {
         return indicatorValues;
