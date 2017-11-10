@@ -29,7 +29,7 @@ public class DataCleanAction {
         return "/WEB-INF/admin/dataClean";
     }
 
-    @RequestMapping("TableServlet")
+    @RequestMapping("/admin/TableServlet")
     public void tbForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");
@@ -48,11 +48,11 @@ public class DataCleanAction {
         Gson gson = new Gson();
 //        String strHead = gson.toJson(tHeadValue);
         String strBody = gson.toJson(tBodyValue.get(0))+"++"+gson.toJson(tBodyValue.get(2));
-//        System.out.println("发送给前台:"+strBody);
+        System.out.println("发送给前台:"+strBody);
     out.write(strBody);                     //将str字符传输到前台
     }
 
-    @RequestMapping("ClickTableServlet")
+    @RequestMapping("/admin/ClickTableServlet")
     public void clickTable(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");
@@ -60,7 +60,7 @@ public class DataCleanAction {
         String tableName =request.getParameter("tableName");
         String columnName =request.getParameter("column");
         Map<String,Integer> orderResult = dataCleanService.getOrder(tableName,columnName);
-//        System.out.println("controller中的result:"+result);
+        System.out.println("controller中的result:"+orderResult);
         PrintWriter out=response.getWriter();       //向客户端发送字符数据
 
 //        Gson gson = new Gson();

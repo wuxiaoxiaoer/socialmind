@@ -1,6 +1,9 @@
 package com.sicdlib.util.PhoenixUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class PhoenixUtil{
@@ -22,46 +25,50 @@ public class PhoenixUtil{
         return cc;
     }
 
-    public static void main(String[] args){
-
-        PhoenixUtil util =new PhoenixUtil();
-        util.upsertColumnWithRegex("test2","content","\\n","");
-//        util.deleteColumn("test","author_name");
-//        util.upsertColumn("test","name","青岛人","河北省石家庄");
-
-            //增加一列
-//            String sql ="ALTER TABLE \"bbs_china_author_test\" ADD \"info\".\"yiming\" varchar(30) VERSIONS=5";
-//            Statement stmt =conn.createStatement();
-//            stmt.execute(sql);
-
-//            String sql ="ALTER TABLE \"bbs_china_author_test\" ADD \"info\".\"yiming\" varchar(30) VERSIONS=5";
-//            String sal="ALTER TABLE \"bbs_china_author_test\" DROP COLUMN info.yiming", parent_id";
-            //删除一行
-
-
-    }
+//    public static void main(String[] args){
+//
+//        PhoenixUtil util =new PhoenixUtil();
+//        util.upsertColumnWithRegex("test2","content","\\n","");
+////        util.deleteColumn("test","author_name");
+////        util.upsertColumn("test","name","青岛人","河北省石家庄");
+//
+//            //增加一列
+////            String sql ="ALTER TABLE \"bbs_china_author_test\" ADD \"info\".\"yiming\" varchar(30) VERSIONS=5";
+////            Statement stmt =conn.createStatement();
+////            stmt.execute(sql);
+//
+////            String sql ="ALTER TABLE \"bbs_china_author_test\" ADD \"info\".\"yiming\" varchar(30) VERSIONS=5";
+////            String sal="ALTER TABLE \"bbs_china_author_test\" DROP COLUMN info.yiming", parent_id";
+//            //删除一行
+//
+//
+//    }
     //phoenix的查询方法,目前限制查询一列
-    public void Select(String tableName){
+    public List<Map<String, Object>> Select(String tableName,int limits){
         PhoenixUtil util =new PhoenixUtil();
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
         try{
             Connection conn =util.GetConnection();
-            String sql="Select * FROM \""+tableName+"\" limit 5";
+            String sql="Select * FROM \""+tableName+"\" limit "+limits;
 
             //将一列的字符串中的<>及其中内容删掉
 //            int col = rs.getMetaData().getColumnCount();
             Statement stmt =conn.createStatement();
-            ResultSet set = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(sql);
 //            List list =new ArrayList();
-            while(set.next()){
-                System.out.println(set.getString(1));
-                System.out.println(set.getString(2));
-            }
-            set.close();
+//            while(set.next()){
+////                System.out.println(set.getString(1));
+////                System.out.println(set.getString(2));
+//                result.add(set);
+//            }
+            GetList getList=new GetList();
+            result = getList.getListFromRs(rs);
+            rs.close();
             stmt.close();
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return result;
     }
     //删除一行,列名columnName的值为value的一行.
     public void deleteRow(String tableName,String columnName,String value){

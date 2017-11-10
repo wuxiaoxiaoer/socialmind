@@ -386,21 +386,21 @@
                     <h6><i class="fa fa-cloud"> </i>请选择要操作的数据表</h6>
 
                     <div id="btn_bbs_china">
-                      <a href="javascript:display('bbs_china_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_china_author</a>
-                      <a href="javascript:display('bbs_china_comment')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_china_comment</a>
-                      <a href="javascript:display('bbs_china_post')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_china_post</a>
+                      <a href="javascript:display('bbs_china_author_copy')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_china_author</a>
+                      <a href="javascript:display('bbs_china_comment_copy')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_china_comment</a>
+                      <a href="javascript:display('bbs_china_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_china_post</a>
                     </div>
                     <div id="btn_bbs_mop">
-                      <a href="javascript:display('bbs_mop_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_mop_author</a>
-                      <a href="javascript:display('bbs_mop_comment')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_mop_comment</a>
-                      <a href="javascript:display('bbs_mop_post')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_mop_post</a>
-                      <a href="javascript:display('bbs_mop_fans')" class="btn btn-success tipSag" original-title="Lorem ipsum dolar sit amed">bbs_mop_fans</a>
+                      <a href="javascript:display('bbs_mop_author_copy')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_mop_author</a>
+                      <a href="javascript:display('bbs_mop_comment_copy')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_mop_comment</a>
+                      <a href="javascript:display('bbs_mop_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_mop_post</a>
+                      <a href="javascript:display('bbs_mop_fans_copy')" class="btn btn-success tipSag" original-title="Lorem ipsum dolar sit amed">bbs_mop_fans</a>
                     </div>
                     <div id="btn_bbs_news">
-                      <a href="javascript:display('bbs_news_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_news_author</a>
-                      <a href="javascript:display('bbs_news_comment')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_news_comment</a>
-                      <a href="javascript:display('bbs_news_post')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_news_post</a>
-                      <a href="javascript:display('bbs_news_fans')" class="btn btn-success tipSag" original-title="Lorem ipsum dolar sit amed">bbs_news_fans</a>
+                      <a href="javascript:display('bbs_news_author_copy')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_news_author</a>
+                      <a href="javascript:display('bbs_news_comment_copy')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_news_comment</a>
+                      <a href="javascript:display('bbs_news_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_news_post</a>
+                      <a href="javascript:display('bbs_news_fans_copy')" class="btn btn-success tipSag" original-title="Lorem ipsum dolar sit amed">bbs_news_fans</a>
                     </div>
                     <div id="btn_bbs_people">
                       <a href="javascript:display('bbs_people_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_people_author</a>
