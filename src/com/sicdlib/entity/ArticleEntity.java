@@ -22,9 +22,18 @@ public class ArticleEntity {
     private Integer transmitNumber;
     private Integer trampleNumber;
     private String newsResource;
-    private Integer similarDegree;
-    private String websiteId;
-    private ObjectEntity objectId;
+    private Double similarDegree;
+    private WebsiteEntity websiteId;
+    /** 多个文章对应这一个对象 */
+    private ObjectEntity objectEntity;
+
+    public ObjectEntity getObjectEntity() {
+        return objectEntity;
+    }
+
+    public void setObjectEntity(ObjectEntity objectEntity) {
+        this.objectEntity = objectEntity;
+    }
 
     public String getArticleId() {
         return articleId;
@@ -170,51 +179,33 @@ public class ArticleEntity {
         this.newsResource = newsResource;
     }
 
-    public Integer getSimilarDegree() {
+    public Double getSimilarDegree() {
         return similarDegree;
     }
 
-    public void setSimilarDegree(Integer similarDegree) {
+    public void setSimilarDegree(Double similarDegree) {
         this.similarDegree = similarDegree;
     }
 
-    public String getWebsiteId() {
+    public WebsiteEntity getWebsiteId() {
         return websiteId;
     }
 
-    public void setWebsiteId(String websiteId) {
+    public void setWebsiteId(WebsiteEntity websiteId) {
         this.websiteId = websiteId;
-    }
-
-    public ObjectEntity getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(ObjectEntity objectId) {
-        this.objectId = objectId;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()){
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         ArticleEntity that = (ArticleEntity) o;
 
-        if (articleId != null ? !articleId.equals(that.articleId) : that.articleId != null){
+        if (articleId != null ? !articleId.equals(that.articleId) : that.articleId != null) return false;
+        if (sourceArticleId != null ? !sourceArticleId.equals(that.sourceArticleId) : that.sourceArticleId != null)
             return false;
-        }
-        if (sourceArticleId != null ? !sourceArticleId.equals(that.sourceArticleId) : that.sourceArticleId != null){
-            return false;
-        }
-
-        if (authorId != null ? !authorId.equals(that.authorId) : that.authorId != null){
-            return false;
-        }
+        if (authorId != null ? !authorId.equals(that.authorId) : that.authorId != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (keyWords != null ? !keyWords.equals(that.keyWords) : that.keyWords != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
@@ -239,9 +230,8 @@ public class ArticleEntity {
         if (similarDegree != null ? !similarDegree.equals(that.similarDegree) : that.similarDegree != null)
             return false;
         if (websiteId != null ? !websiteId.equals(that.websiteId) : that.websiteId != null) return false;
-        if (objectId != null ? !objectId.equals(that.objectId) : that.objectId != null) return false;
+        return objectEntity != null ? objectEntity.equals(that.objectEntity) : that.objectEntity == null;
 
-        return true;
     }
 
     @Override
@@ -266,7 +256,7 @@ public class ArticleEntity {
         result = 31 * result + (newsResource != null ? newsResource.hashCode() : 0);
         result = 31 * result + (similarDegree != null ? similarDegree.hashCode() : 0);
         result = 31 * result + (websiteId != null ? websiteId.hashCode() : 0);
-        result = 31 * result + (objectId != null ? objectId.hashCode() : 0);
+        result = 31 * result + (objectEntity != null ? objectEntity.hashCode() : 0);
         return result;
     }
 }

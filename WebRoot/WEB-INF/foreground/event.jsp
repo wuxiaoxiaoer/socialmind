@@ -6,18 +6,19 @@
 %>
 <html>
 <head>
+    <base href="<%=basePath%>foreground/"/>
     <title>全网事件分析 - socialmind大平台</title>
     <!-- Bootstrap -->
-    <link href="foreground/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="foreground/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <link href="foreground/assets/styles.css" rel="stylesheet" media="screen">
-    <link href="foreground/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="foreground/vendors/flot/excanvas.min.js"></script><![endif]-->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="assets/styles.css" rel="stylesheet" media="screen">
+    <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <script src="foreground/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
 <!-- 引入头模板 -->
@@ -56,31 +57,27 @@
                         </div>
                     </div>
                     <div class="block-content collapse in">
-                        <table style="table-layout: fixed;font-size: 12px;" width="15%" align="left">
-                        <c:forEach items="${eventList}" var="e" varStatus="sts">
+                        <c:forEach items="${event}" var="e" varStatus="sts">
+                        <table style="font-size: 13px;" width="25%" height="20%" align="left">
                             <tbody>
-
-                            <tr style="height: 40%">
-                                <td width="30%" height="40%"><img src="foreground/images/67be458fjw8exz23yekkwj2050050t8q.jpg" class="img-responsive img-circle"/></td>
-                                <td style="color: grey"><strong>${e.name}</strong></td>
-                            </tr>
-                            <tr style="width: 20%">
-                                <td colspan="2"><div style="width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">摘要:${e.introduction}</div></td>
+                            <tr style="height: 30%">
+                                <td width="25%" height="20%"><img src=" images/logo.jpg" class="img-responsive img-circle" width="70%"/></td>
+                                <td style="color: grey" align="left"><strong><a href="<%=basePath%>event/eventInfo?objectId=${e.object.objectId}">${e.object.name}</a></strong></td>
                             </tr>
                             <tr>
-                                <td style="color: #00b7ee">开始时间:<br>结束时间:</td>
-                                <td>${e.eventBeginTime}<br>${e.eventEndTime}</td>
+                                <%----%>
+                                <td colspan="2"><div style="width:80%;overflow:hidden;line-height: 20px"><strong>摘要：</strong>${e.event.introduction}......</div></td>
                             </tr>
+                            <tr>
+                                <td style="color:#17d0ff">开始时间:<br>结束时间:</td>
+                                <td>${e.event.eventBeginTime}<br>${e.event.eventEndTime}</td>
+                            </tr>
+
                             </tbody>
                         </table>
                         </c:forEach>
                     </div>
 
-                    <div class="block-content collapse in">
-                        <a href=""><img src="foreground/images/event1.png" height="200px" width="300px"></a>
-                        <a href=""><img src="foreground/images/event2.png" height="200px" width="300px"></a>
-                        <a href=""><img src="foreground/images/event3.png" height="200px" width="300px"></a>
-                    </div>
                 </div>
                 <!-- block -->
             </div>
@@ -95,13 +92,13 @@
 
     <!--/.fluid-container-->
 
-    <script src="foreground/vendors/jquery-1.9.1.js"></script>
-    <script src="foreground/bootstrap/js/bootstrap.min.js"></script>
-    <script src="foreground/vendors/datatables/js/jquery.dataTables.min.js"></script>
+    <script src=" vendors/jquery-1.9.1.js"></script>
+    <script src=" bootstrap/js/bootstrap.min.js"></script>
+    <script src=" vendors/datatables/js/jquery.dataTables.min.js"></script>
 
 
-    <script src="foreground/assets/scripts.js"></script>
-    <script src="foreground/assets/DT_bootstrap.js"></script>
+    <script src=" assets/scripts.js"></script>
+    <script src=" assets/DT_bootstrap.js"></script>
     <script>
         $(function() {
 

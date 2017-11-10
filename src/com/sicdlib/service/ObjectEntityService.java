@@ -24,12 +24,18 @@ public class ObjectEntityService extends DefaultEntityManager<ObjectEntity> {
         return objects;
     }
 
-    //前台查找事件列表
-    public List<ObjectEntity> findEvent(){
-        String hql = "select * from EventEntity e,ObjectEntity o where e.objectId = o.objectId";
-        List<ObjectEntity> events = getEntityDao().find(hql);
-        System.out.println(events.size());
-        return null;
+    //前台查找对象
+    public List<ObjectEntity> findObject(){
+        String hql = "from ObjectEntity o";
+        List<ObjectEntity> object = getEntityDao().find(hql);
+        return object;
+    }
+
+    //前台查找对象
+    public List<ObjectEntity> findObjectInfo(String objectId){
+        String hql = "from ObjectEntity o where o.objectId = '" +objectId+"'";
+        List<ObjectEntity> objectInfo = getEntityDao().find(hql);
+        return objectInfo;
     }
 
 }

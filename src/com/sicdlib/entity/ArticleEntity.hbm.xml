@@ -25,6 +25,6 @@
         <property name="newsResource" column="newsResource"/>
         <property name="similarDegree" column="similarDegree"/>
         <property name="websiteId" column="websiteID"/>
-        <property name="objectId" column="objectID"/>
+        <many-to-one name="objectEntity" column="objectID"></many-to-one>
     </class>
 </hibernate-mapping>
