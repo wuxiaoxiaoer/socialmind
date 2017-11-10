@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.PermissionEntity" table="permission" schema="socialmind">
         <id name="permissionId" column="permissionID"/>
-        <property name="nameLogic" column="name_logic"/>
-        <property name="permissionPhysics" column="permission_physics"/>
+        <property name="permissionName" column="permissionName"/>
+        <property name="action" column="action"/>
         <property name="description" column="description"/>
         <property name="resourceId" column="resourceID"/>
         <property name="operateId" column="operateID"/>
