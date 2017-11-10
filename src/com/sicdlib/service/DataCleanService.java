@@ -6,10 +6,12 @@ import com.eharmony.pho.query.builder.QueryBuilder;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 
+
 import com.sicdlib.util.PhoenixUtil.MapToJson;
 import com.sicdlib.util.PhoenixUtil.PhoenixUtil;
 import org.apache.hadoop.hbase.snapshot.CreateSnapshot;
 import org.hibernate.sql.Select;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -21,23 +23,28 @@ import java.util.*;
 public class DataCleanService {
 
     //num是查询的行数
+
     public List<Map<String, Object>> queryResult(String tablename,int num){
         try{
             String name = tablename.replaceAll("\'","");
             PhoenixUtil util =new PhoenixUtil();
+
 //            Class<?> TBTableEntityType =Class.forName("com.sicdlib.dto.phoenixEntity."+name);
 //            List headJson= Lists.newArrayList(dataStoreApi.findAll(QueryBuilder
 //                    .builderFor(TBTableEntityType)
 //                    .setMaxResults(num)
 //                    .select().build()));
 
+
             return util.Select(tablename,num);
+
     } catch (Exception e) {
         e.printStackTrace();
         return null;
     }
     }
     //没用这个函数
+
 //    public List getThead(String tablename){
 //        //直接用getEntity(tablename);
 //        try {
@@ -93,10 +100,12 @@ public class DataCleanService {
 //            for(int i=0;i<bodyMap.size();i++) {
 //                System.out.println("bodyjson:"+bodyMap.get(i));
 //            }
+
             List bodyResult = new ArrayList(500);
             //获得表头
             List headResult=new ArrayList();
             try{
+
                 //其中一行的map转化为json对象
                 org.json.JSONObject jsonHead = new org.json.JSONObject(bodyMap.get(0));
 
@@ -106,13 +115,16 @@ public class DataCleanService {
                 String property = (String) iteratorHead.next();
                 //结果中是键值对，键是属性名，需要用下面的函数来处理成真正的列名。
                 headResult.add(property);
+
     //                sb.append("="+jsonObject.getString(key));
             }
             }catch (Exception e){
                 e.printStackTrace();
         }
             //获得表的内容，也就是json的值
+
             for(int i=0;i<bodyMap.size();i++) {
+
                 //list转json类型字符串
 //                Gson gson = new Gson();
 //                String strBody = gson.toJson(bodyJson.get(i));
@@ -121,8 +133,10 @@ public class DataCleanService {
 
                 //
 //            StringBuilder sb = new StringBuilder();
+
                 //map对象转化为json对象
                 org.json.JSONObject jsonObject = new org.json.JSONObject(bodyMap.get(i));
+
                 Iterator iterator = jsonObject.keys();
                 while (iterator.hasNext()) {
                     String key = (String) iterator.next();
@@ -197,7 +211,9 @@ public class DataCleanService {
             columnName=columnName.replaceAll("'","");
             tableName=tableName.replaceAll("'","");
 //            String sql ="select"+"\""+columnName+"\""+","+"count(*)"+"from "+"\""+tableName+"\""+"GROUP BY"+"\""+columnName+"\""+"ORDER BY "+"count(*)"+"DESC"+"limit 10";
+
             String sql ="select"+"\""+columnName+"\""+",count(1) "+"from "+"\""+tableName+"\""+"GROUP BY "+"\""+columnName+"\""+" ORDER BY count(*) DESC limit 5";
+
 //            String sql="select \"author_id\", count(*) from (\"bbs_china_comment\") group by \"author_id\" order by count(*) desc limit 20";
             PreparedStatement ps =conn.prepareStatement(sql);
             ResultSet rs =ps.executeQuery();

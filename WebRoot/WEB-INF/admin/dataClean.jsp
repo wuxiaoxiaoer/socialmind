@@ -1,21 +1,28 @@
+
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <html>
+
 <head>
   <base href="<%=basePath%>admin/"/>
   <script src="js/etljs/echarts.min.js"></script>
   <script src="js/etljs/html5.js"></script>
   <![endif]-->
   <%--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+
   <!-- core js files -->
   <script>src="js/etljs/jquery.js"</script>
   <script src="js/etljs/jquery-1.11.0.min.js"></script>
   <%--下面这个包有问题--%>
+
   <script src="js/bootstrap.min.js"></script>
+
   <script src="js/etljs/modernizr.custom.js"></script>
   <script src="js/etljs/core.js"></script>
   <script>src="js/etljs/mock.js"</script>
@@ -52,7 +59,9 @@
   <script src="js/etljs/plugins/bootstrap-checkbox.js"></script>
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
   <script src="js/datasources/amazonmenu.js"></script>
+
   <script type="text/javascript">
       var ac_siteURL='';  //PHP Application üzerinde autocomplete verisi işlenmesi için temel adres tanımlaması için
   </script>
@@ -289,7 +298,9 @@
 
 </head>
 <body style="overflow: hidden">
+
 <%--<jsp:include page="/static/admin_header.jsp"></jsp:include>--%>
+
 <div>
   <!--BEGIN BACK TO TOP-->
   <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
@@ -304,7 +315,9 @@
       <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
           <div class="page-title">
+
             <span style="color: #808080; ">数据清洗</span></div>
+
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
           <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -386,6 +399,7 @@
                     <h6><i class="fa fa-cloud"> </i>请选择要操作的数据表</h6>
 
                     <div id="btn_bbs_china">
+
                       <a href="javascript:display('bbs_china_author_copy')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_china_author</a>
                       <a href="javascript:display('bbs_china_comment_copy')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_china_comment</a>
                       <a href="javascript:display('bbs_china_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_china_post</a>
@@ -538,6 +552,7 @@
                               <li><a href="#">删除字符串中的\n</a></li>
                               <li><a href="#">删除字符串中的标签及其中间的值</a></li>
                               <li><a href="#">删除字符串中的标签不删除其中间的值</a></li>
+
                               <li><a href="#">修改某特定字符串</a></li>
                             </ul>
                           </div>
@@ -1075,10 +1090,6 @@
       </div>
       <!--END PAGE WRAPPER-->
 
-
-
-
-
 <script>
     jQuery(function(){
         amazonmenu.init({
@@ -1086,5 +1097,6 @@
         })
     })
 </script>
+
 </body>
 </html>

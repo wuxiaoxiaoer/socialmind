@@ -19,6 +19,7 @@ import java.util.Map;
 //数据清洗
 @Controller
 @RequestMapping("/*")
+
 public class DataCleanAction {
     @Autowired
     @Qualifier("dataCleanService")
@@ -30,6 +31,7 @@ public class DataCleanAction {
     }
 
     @RequestMapping("/admin/TableServlet")
+
     public void tbForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");
@@ -53,6 +55,7 @@ public class DataCleanAction {
     }
 
     @RequestMapping("/admin/ClickTableServlet")
+
     public void clickTable(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");
@@ -60,7 +63,9 @@ public class DataCleanAction {
         String tableName =request.getParameter("tableName");
         String columnName =request.getParameter("column");
         Map<String,Integer> orderResult = dataCleanService.getOrder(tableName,columnName);
+
         System.out.println("controller中的result:"+orderResult);
+
         PrintWriter out=response.getWriter();       //向客户端发送字符数据
 
 //        Gson gson = new Gson();
