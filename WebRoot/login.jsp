@@ -62,6 +62,19 @@
               letter-spacing:1px
           }
       </style>
+      <script src="foreground/vendors/jquery-1.9.1.min.js"></script>
+      <script type="text/javascript">
+          $(document).ready(function(){
+              //通过调用新浪IP地址库接口查询用户当前所在国家、省份、城市、运营商信息
+              $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){
+                  $(".country").html(remote_ip_info.country);
+                  $(".province").html(remote_ip_info.province);
+                  $(".city").html(remote_ip_info.city);
+                  $(".isp").html(remote_ip_info.isp);
+                  $("#id_address").val(remote_ip_info.city);
+              });
+          });
+      </script>
   </head>
   <body id="login" class="bg">
     <div class="container">
@@ -69,24 +82,16 @@
             <h1 style="color: #FFF;">Socialmind大平台</h1>
 
         </div>
-      <form class="form-signin" action="user/login" method="post"  onsubmit="return login()" style="opacity:0.90; margin-top:1.9%;">
+      <form class="form-signin" action="user/login" method="post" style="opacity:0.90; margin-top:1.9%;">
+          <!-- 将地理信息传到后台 -->
+          <input id="id_address" type="hidden" name="address" value=""/>
         <h2 class="form-signin-heading">Login</h2>
         <input type="text"  value="<%=u_name%>" name="username" id="username" class="input-block-level" onblur="usernameIsString();" />
           <label id="lab_username" style="color:red"></label>
         <input type="password" value="<%=u_pwd%>" name="userpwd" id="password"  class="input-block-level" onblur="pwdIsString();"/>
           <label id="lab_pwd" style="color:red"></label>
-		<%--<div class="control-group">
-            <div class="controls">
-                <select id="select01" name="userType" class="input-block-level">
-                    <option value="individual">个人用户</option>
-                    <option value="company">企业用户</option>
-                    <option value="government">政府用户</option>
-                    <option value="institution">事业单位用户</option>
-                </select>
-            </div>
-        </div>--%>
-        <label class="checkbox" style="width:20%">
-          <input type="checkbox" <%=checked%> id="c1" name="cc"> 记住用户
+		  <label class="checkbox" style="width:20%">
+          <input type="checkbox" <%=checked%> id="c1" name="isRemPwd"> 记住用户
         </label>
           <label id="prompt" style="color: red;float:right; margin-top:-10%;"></label>
 
@@ -102,7 +107,6 @@
     </div>
 
     <!-- /container -->
-    <script src="foreground/vendors/jquery-1.9.1.min.js"></script>
     <script src="foreground/bootstrap/js/bootstrap.min.js"></script>
   </body>
   <script type="text/javascript">

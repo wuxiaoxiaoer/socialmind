@@ -8,11 +8,28 @@ public class UserEntity {
     private String userName;
     private String password;
     private String email;
-    private String roleId;
     private String registrantId;
     private String userType;
-    private Byte isAuthenticated;
+    private String isAuthenticated;
     private String address;
+    /** 表之间的映射：多个用户属于一个角色 */
+    private RoleEntity role;
+
+    public String getIsAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public void setIsAuthenticated(String isAuthenticated) {
+        this.isAuthenticated = isAuthenticated;
+    }
+
+    public RoleEntity getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEntity role) {
+        this.role = role;
+    }
 
     public String getUserId() {
         return userId;
@@ -46,13 +63,6 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
 
     public String getRegistrantId() {
         return registrantId;
@@ -70,14 +80,6 @@ public class UserEntity {
         this.userType = userType;
     }
 
-    public Byte getIsAuthenticated() {
-        return isAuthenticated;
-    }
-
-    public void setIsAuthenticated(Byte isAuthenticated) {
-        this.isAuthenticated = isAuthenticated;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -88,23 +90,41 @@ public class UserEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
 
         UserEntity that = (UserEntity) o;
 
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (roleId != null ? !roleId.equals(that.roleId) : that.roleId != null) return false;
-        if (registrantId != null ? !registrantId.equals(that.registrantId) : that.registrantId != null) return false;
-        if (userType != null ? !userType.equals(that.userType) : that.userType != null) return false;
-        if (isAuthenticated != null ? !isAuthenticated.equals(that.isAuthenticated) : that.isAuthenticated != null)
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null){
             return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        }
+        if (userName != null ? !userName.equals(that.userName) : that.userName != null){
+            return false;
+        }
+        if (password != null ? !password.equals(that.password) : that.password != null){
+            return false;
+        }
+        if (email != null ? !email.equals(that.email) : that.email != null){
+            return false;
+        }
+        if (registrantId != null ? !registrantId.equals(that.registrantId) : that.registrantId != null){
+            return false;
+        }
+        if (userType != null ? !userType.equals(that.userType) : that.userType != null){
+            return false;
+        }
+        if (isAuthenticated != null ? !isAuthenticated.equals(that.isAuthenticated) : that.isAuthenticated != null){
+            return false;
+        }
+        if (address != null ? !address.equals(that.address) : that.address != null){
+            return false;
+        }
+        return role != null ? role.equals(that.role) : that.role == null;
 
-        return true;
     }
 
     @Override
@@ -113,11 +133,11 @@ public class UserEntity {
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
         result = 31 * result + (registrantId != null ? registrantId.hashCode() : 0);
         result = 31 * result + (userType != null ? userType.hashCode() : 0);
         result = 31 * result + (isAuthenticated != null ? isAuthenticated.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
 }

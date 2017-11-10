@@ -1,5 +1,7 @@
 package com.sicdlib.entity;
 
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
@@ -16,6 +18,16 @@ public class ObjectEntity {
     private String objectType;
     private String objectFatherId;
     private Integer commentNumber;
+    /**一个舆情对象对应着多个指标值 */
+    private Set<IndicatorValueEntity> indicatorValues;
+
+    public Set<IndicatorValueEntity> getIndicatorValues() {
+        return indicatorValues;
+    }
+
+    public void setIndicatorValues(Set<IndicatorValueEntity> indicatorValues) {
+        this.indicatorValues = indicatorValues;
+    }
 
     public String getObjectId() {
         return objectId;
@@ -115,27 +127,52 @@ public class ObjectEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         ObjectEntity that = (ObjectEntity) o;
 
-        if (objectId != null ? !objectId.equals(that.objectId) : that.objectId != null) return false;
-        if (scanNumber != null ? !scanNumber.equals(that.scanNumber) : that.scanNumber != null) return false;
-        if (collectNumber != null ? !collectNumber.equals(that.collectNumber) : that.collectNumber != null)
+        if (objectId != null ? !objectId.equals(that.objectId) : that.objectId != null) {
             return false;
-        if (likeNumber != null ? !likeNumber.equals(that.likeNumber) : that.likeNumber != null) return false;
-        if (trueNumber != null ? !trueNumber.equals(that.trueNumber) : that.trueNumber != null) return false;
-        if (falseNumber != null ? !falseNumber.equals(that.falseNumber) : that.falseNumber != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (addTime != null ? !addTime.equals(that.addTime) : that.addTime != null) return false;
-        if (place != null ? !place.equals(that.place) : that.place != null) return false;
-        if (objectType != null ? !objectType.equals(that.objectType) : that.objectType != null) return false;
-        if (objectFatherId != null ? !objectFatherId.equals(that.objectFatherId) : that.objectFatherId != null)
+        }
+        if (scanNumber != null ? !scanNumber.equals(that.scanNumber) : that.scanNumber != null) {
             return false;
-        if (commentNumber != null ? !commentNumber.equals(that.commentNumber) : that.commentNumber != null)
+        }
+        if (collectNumber != null ? !collectNumber.equals(that.collectNumber) : that.collectNumber != null){
             return false;
+        }
+        if (likeNumber != null ? !likeNumber.equals(that.likeNumber) : that.likeNumber != null) {
+            return false;
+        }
+        if (trueNumber != null ? !trueNumber.equals(that.trueNumber) : that.trueNumber != null){
+            return false;
+        }
+        if (falseNumber != null ? !falseNumber.equals(that.falseNumber) : that.falseNumber != null){
+            return false;
+        }
+        if (name != null ? !name.equals(that.name) : that.name != null){
+            return false;
+        }
+        if (addTime != null ? !addTime.equals(that.addTime) : that.addTime != null){
+            return false;
+        }
+        if (place != null ? !place.equals(that.place) : that.place != null){
+            return false;
+        }
+        if (objectType != null ? !objectType.equals(that.objectType) : that.objectType != null){
+            return false;
+        }
+        if (objectFatherId != null ? !objectFatherId.equals(that.objectFatherId) : that.objectFatherId != null){
+            return false;
+        }
 
+        if (commentNumber != null ? !commentNumber.equals(that.commentNumber) : that.commentNumber != null){
+            return false;
+        }
         return true;
     }
 

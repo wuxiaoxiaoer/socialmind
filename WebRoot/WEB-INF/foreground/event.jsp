@@ -5,8 +5,20 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <html>
-
-<jsp:include page="/static/fore_headInfo.jsp"/>
+<head>
+    <title>全网事件分析 - socialmind大平台</title>
+    <!-- Bootstrap -->
+    <link href="foreground/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="foreground/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="foreground/assets/styles.css" rel="stylesheet" media="screen">
+    <link href="foreground/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="foreground/vendors/flot/excanvas.min.js"></script><![endif]-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="foreground/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
 <body>
 <!-- 引入头模板 -->
 <jsp:include page="/static/fore_header.jsp"/>
@@ -15,10 +27,10 @@
         <div class="span3" id="sidebar">
             <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
                 <li>
-                    <a href="index.html"><i class="icon-chevron-right"></i> 推荐事件</a>
+                    <a href=""><i class="icon-chevron-right"></i> 推荐事件</a>
                 </li>
                 <li class="active">
-                    <a href="tables.html"><i class="icon-chevron-right"></i>全网事件分析</a>
+                    <a href=""><i class="icon-chevron-right"></i>全网事件分析</a>
                 </li>
 
             </ul>
@@ -31,111 +43,48 @@
             <!--title-->
             <h3 align="center">全网事件分析</h3>
             <div align="center"><input type="text" name="name" data-required="1" class="span5 m-wrap" placeholder="实体、事件关键词">
-                <a href="eventInfo.html" style="padding-top:-4px;"><button class="btn btn-success" style="margin:-11px 0 0 20px;">搜索</button></a>
+                <a href="" style="padding-top:-4px;"><button class="btn btn-success" style="margin:-11px 0 0 20px;">搜索</button></a>
             </div>
-
-            <!--推荐事件-->
-            <div class="control-group">
-                <label class="control-label">推荐事件<span class="required">*</span></label>
-
-            </div>
+            
             <!--map-->
             <div class="row-fluid">
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left">政府：热点事件</div>
+                        <div class="muted pull-left">热点关注事件</div>
                         <div class="pull-right"><span class="badge badge-warning">刷新</span>
                         </div>
                     </div>
                     <div class="block-content collapse in">
-                        <a href="eventInfo.html"><img src="./images/event1.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event1.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event1.png" height="200px" width="300px"></a>
+                        <table style="table-layout: fixed;font-size: 12px;" width="15%" align="left">
+                        <c:forEach items="${eventList}" var="e" varStatus="sts">
+                            <tbody>
+
+                            <tr style="height: 40%">
+                                <td width="30%" height="40%"><img src="foreground/images/67be458fjw8exz23yekkwj2050050t8q.jpg" class="img-responsive img-circle"/></td>
+                                <td style="color: grey"><strong>${e.name}</strong></td>
+                            </tr>
+                            <tr style="width: 20%">
+                                <td colspan="2"><div style="width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">摘要:${e.introduction}</div></td>
+                            </tr>
+                            <tr>
+                                <td style="color: #00b7ee">开始时间:<br>结束时间:</td>
+                                <td>${e.eventBeginTime}<br>${e.eventEndTime}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </c:forEach>
                     </div>
 
-                </div>
-                <div class="block">
-                    <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left">事业单位：相关热点事件</div>
-                        <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                        </div>
-                    </div>
-                    <div class="block-content collapse in" >
-                        <a href="eventInfo.html"><img src="./images/event2.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event2.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event2.png" height="200px" width="300px"></a>
-                    </div>
-
-                </div>
-                <div class="block">
-                    <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left">企业：所属领域热点事件</div>
-                        <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                        </div>
-                    </div>
-                    <div class="block-content collapse in" >
-                        <a href="eventInfo.html"><img src="./images/event3.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event3.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event3.png" height="200px" width="300px"></a>
-                    </div>
-
-                </div>
-                <div class="block">
-                    <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left">个人：热点关注事件</div>
-                        <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                        </div>
-                    </div>
                     <div class="block-content collapse in">
-                        <a href="eventInfo.html"><img src="./images/event1.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event2.png" height="200px" width="300px"></a>
-                        <a href="eventInfo.html"><img src="./images/event3.png" height="200px" width="300px"></a>
+                        <a href=""><img src="foreground/images/event1.png" height="200px" width="300px"></a>
+                        <a href=""><img src="foreground/images/event2.png" height="200px" width="300px"></a>
+                        <a href=""><img src="foreground/images/event3.png" height="200px" width="300px"></a>
                     </div>
-
                 </div>
-
+                <!-- block -->
             </div>
 
-            <div class="row-fluid">
-                <!-- block -->
-                <div class="block">
-                    <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left">全部事件</div>
-                        <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                        </div>
-                    </div>
-                    <div class="block-content collapse in">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                    </div>
-                    <div class="block-content collapse in" >
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                    </div><div class="block-content collapse in">
-                    <img src="./images/event1.png" height="200px" width="300px">
-                    <img src="./images/event1.png" height="200px" width="300px">
-                    <img src="./images/event1.png" height="200px" width="300px">
-                </div>
-                    <div class="block-content collapse in">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                    </div>
-                    <div class="block-content collapse in">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                    </div>
-                    <div class="block-content collapse in" id="map">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                        <img src="./images/event1.png" height="200px" width="300px">
-                    </div>
-
-                </div>
 
             </div>
         </div>
@@ -143,7 +92,7 @@
         <!-- 引入尾部模板 -->
         <jsp:include page="/static/fore_footer.jsp"></jsp:include>
     </div>
-</div>
+
     <!--/.fluid-container-->
 
     <script src="foreground/vendors/jquery-1.9.1.js"></script>

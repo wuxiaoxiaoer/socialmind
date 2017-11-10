@@ -1,16 +1,24 @@
-<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+//UserEntity user = (UserEntity) session.getAttribute("user");
+%>
+
+<html>
     <head>
-        <title>Admin Home Page</title>
+        <title>全文检索 - socialmind大平台</title>
         <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
+        <link href="../../foreground/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="../../foreground/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <link href="../../foreground/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
+        <link href="../../foreground/assets/styles.css" rel="stylesheet" media="screen">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="../../foreground/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     
     <body>
@@ -30,38 +38,38 @@
                                 </a>
                                 <ul class="dropdown-menu">
 								    <li>
-                                        <a tabindex="-1" href="person_info.html">个人中心</a>
+                                        <a tabindex="-1" href="../../foreground/person_info.html">个人中心</a>
                                     </li>
 									<li>
-                                        <a tabindex="-1" href="notification.html">通知  <font color="blue">1</font></a>
+                                        <a tabindex="-1" href="../../foreground/notification.html">通知  <font color="blue">1</font></a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="login.html">Logout</a>
+                                        <a tabindex="-1" href="../../foreground/login.html">Logout</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
                         <ul class="nav">
 							<li class="">
-                                <a href="index_gov.html">主页</a>
+                                <a href="../../foreground/index_gov.html">主页</a>
                             </li>
                             <li class="">
-                                <a href="heatIndex.html">热度指标</a>
+                                <a href="../../foreground/heatIndex.html">热度指标</a>
                             </li>
                             <li class="">
-                                <a href="emotionMap.html">情绪地图</a>
+                                <a href="../../foreground/emotionMap.html">情绪地图</a>
                             </li>
                             <li class="">
-                                <a href="info_dectection.html">信息监测</a>
+                                <a href="../../foreground/info_dectection.html">信息监测</a>
                             </li>
 							<li class="">
                                 <a href="fullRetrival.html">全文检索</a>
                             </li>
 							<li class="">
-                                <a href="event.html">全网事件分析</a>
+                                <a href="../../foreground/event.html">全网事件分析</a>
                             </li>
 							<li class="">
-                                <a href="makeReporter_1.html">简报制作</a>
+                                <a href="../../foreground/makeReporter_1.html">简报制作</a>
                             </li>
                         </ul>
                     </div>
@@ -99,7 +107,7 @@
                             </div>
                             <div class="block-content collapse in">
                             <div align="center"><input type="text" name="name" data-required="1" class="span5 m-wrap" placeholder="实体、事件关键词全文检索"> 
-								<a href="fullRetrivalResults.html"><button class="btn btn-success" style="margin: -10px 0 0 10px;">搜索</button></a>
+								<a href="../../foreground/fullRetrivalResults.html"><button class="btn btn-success" style="margin: -10px 0 0 10px;">搜索</button></a>
 							</div>
 							</div>
                         </div>
@@ -472,10 +480,10 @@
             </footer>
         </div>
         <!--/.fluid-container-->
-        <script src="vendors/jquery-1.9.1.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
-        <script src="assets/scripts.js"></script>
+        <script src="../../foreground/vendors/jquery-1.9.1.min.js"></script>
+        <script src="../../foreground/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../foreground/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+        <script src="../../foreground/assets/scripts.js"></script>
         <script>
         $(function() {
             // Easy pie charts
@@ -484,5 +492,4 @@
         </script>
     
 
-</body>
-</html>
+</body></html>

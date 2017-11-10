@@ -24,7 +24,7 @@ public class ArticleEntity {
     private String newsResource;
     private Integer similarDegree;
     private String websiteId;
-    private String objectId;
+    private ObjectEntity objectId;
 
     public String getArticleId() {
         return articleId;
@@ -186,25 +186,35 @@ public class ArticleEntity {
         this.websiteId = websiteId;
     }
 
-    public String getObjectId() {
+    public ObjectEntity getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(ObjectEntity objectId) {
         this.objectId = objectId;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
 
         ArticleEntity that = (ArticleEntity) o;
 
-        if (articleId != null ? !articleId.equals(that.articleId) : that.articleId != null) return false;
-        if (sourceArticleId != null ? !sourceArticleId.equals(that.sourceArticleId) : that.sourceArticleId != null)
+        if (articleId != null ? !articleId.equals(that.articleId) : that.articleId != null){
             return false;
-        if (authorId != null ? !authorId.equals(that.authorId) : that.authorId != null) return false;
+        }
+        if (sourceArticleId != null ? !sourceArticleId.equals(that.sourceArticleId) : that.sourceArticleId != null){
+            return false;
+        }
+
+        if (authorId != null ? !authorId.equals(that.authorId) : that.authorId != null){
+            return false;
+        }
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (keyWords != null ? !keyWords.equals(that.keyWords) : that.keyWords != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
