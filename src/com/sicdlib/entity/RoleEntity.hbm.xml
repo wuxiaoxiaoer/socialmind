@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.RoleEntity" table="role" schema="socialmind">
         <id name="roleId" column="roleID"/>
         <property name="roleName" column="roleName"/>
         <property name="description" column="description"/>
+        <!-- 表之间的映射：多个用户属于一个角色 -->
+        <set name="users" cascade="save-update" inverse="true">
+            <key column="roleID"></key>
+            <one-to-many class="com.sicdlib.entity.UserEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

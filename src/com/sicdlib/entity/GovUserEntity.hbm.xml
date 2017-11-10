@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.GovUserEntity" table="gov_user" schema="socialmind">
@@ -10,8 +10,8 @@
         <property name="govName" column="govName"/>
         <property name="type" column="type"/>
         <property name="govCode" column="govCode"/>
-        <property name="idFront" column="IDFront"/>
-        <property name="idBack" column="IDBack"/>
-        <property name="provePicture" column="provePicture"/>
+        <property name="idFrontUrl" column="IDFrontUrl"/>
+        <property name="idBackUrl" column="IDBackUrl"/>
+        <property name="govCodeUrl" column="govCodeUrl"/>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,8 @@
 package com.sicdlib.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
@@ -16,6 +19,26 @@ public class ObjectEntity {
     private String objectType;
     private String objectFatherId;
     private Integer commentNumber;
+    /** 一个舆情对象对应着多个指标值 */
+    private Set<IndicatorValueEntity> indicatorValues = new HashSet<>();
+    /** 一个对象对应着多个文章 */
+    private Set<ArticleEntity> articles = new HashSet<>();
+
+    public Set<ArticleEntity> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<ArticleEntity> articles) {
+        this.articles = articles;
+    }
+
+    public Set<IndicatorValueEntity> getIndicatorValues() {
+        return indicatorValues;
+    }
+
+    public void setIndicatorValues(Set<IndicatorValueEntity> indicatorValues) {
+        this.indicatorValues = indicatorValues;
+    }
 
     public String getObjectId() {
         return objectId;

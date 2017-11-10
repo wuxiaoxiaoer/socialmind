@@ -5,11 +5,21 @@ package com.sicdlib.entity;
  */
 public class IndicatorValueEntity {
     private String indicatorValueId;
-    private String objectId;
     private String indicatorValue;
     private String indexName;
     private String dimensionName;
-    private String timeSolt;
+    private String startTime;
+    private String endTime;
+    /** 多个指标对应一个舆情对象 */
+    private ObjectEntity objectEntity;
+
+    public ObjectEntity getObjectEntity() {
+        return objectEntity;
+    }
+
+    public void setObjectEntity(ObjectEntity objectEntity) {
+        this.objectEntity = objectEntity;
+    }
 
     public String getIndicatorValueId() {
         return indicatorValueId;
@@ -17,14 +27,6 @@ public class IndicatorValueEntity {
 
     public void setIndicatorValueId(String indicatorValueId) {
         this.indicatorValueId = indicatorValueId;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
     }
 
     public String getIndicatorValue() {
@@ -51,42 +53,19 @@ public class IndicatorValueEntity {
         this.dimensionName = dimensionName;
     }
 
-    public String getTimeSolt() {
-        return timeSolt;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setTimeSolt(String timeSolt) {
-        this.timeSolt = timeSolt;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        IndicatorValueEntity that = (IndicatorValueEntity) o;
-
-        if (indicatorValueId != null ? !indicatorValueId.equals(that.indicatorValueId) : that.indicatorValueId != null)
-            return false;
-        if (objectId != null ? !objectId.equals(that.objectId) : that.objectId != null) return false;
-        if (indicatorValue != null ? !indicatorValue.equals(that.indicatorValue) : that.indicatorValue != null)
-            return false;
-        if (indexName != null ? !indexName.equals(that.indexName) : that.indexName != null) return false;
-        if (dimensionName != null ? !dimensionName.equals(that.dimensionName) : that.dimensionName != null)
-            return false;
-        if (timeSolt != null ? !timeSolt.equals(that.timeSolt) : that.timeSolt != null) return false;
-
-        return true;
+    public String getEndTime() {
+        return endTime;
     }
 
-    @Override
-    public int hashCode() {
-        int result = indicatorValueId != null ? indicatorValueId.hashCode() : 0;
-        result = 31 * result + (objectId != null ? objectId.hashCode() : 0);
-        result = 31 * result + (indicatorValue != null ? indicatorValue.hashCode() : 0);
-        result = 31 * result + (indexName != null ? indexName.hashCode() : 0);
-        result = 31 * result + (dimensionName != null ? dimensionName.hashCode() : 0);
-        result = 31 * result + (timeSolt != null ? timeSolt.hashCode() : 0);
-        return result;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.UserEntity" table="user" schema="socialmind">
@@ -9,10 +9,11 @@
         <property name="userName" column="userName"/>
         <property name="password" column="password"/>
         <property name="email" column="email"/>
-        <property name="roleId" column="roleID"/>
         <property name="registrantId" column="registrantID"/>
         <property name="userType" column="userType"/>
         <property name="isAuthenticated" column="isAuthenticated"/>
         <property name="address" column="address"/>
+        <!-- 表之间的映射：多个用户属于一个角色 -->
+        <many-to-one name="role" column="roleID"></many-to-one>
     </class>
 </hibernate-mapping>

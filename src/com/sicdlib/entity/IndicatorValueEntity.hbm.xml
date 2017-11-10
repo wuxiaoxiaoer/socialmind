@@ -1,15 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.IndicatorValueEntity" table="indicator_value" schema="socialmind">
         <id name="indicatorValueId" column="indicatorValueID"/>
-        <property name="objectId" column="objectID"/>
         <property name="indicatorValue" column="indicatorValue"/>
         <property name="indexName" column="indexName"/>
         <property name="dimensionName" column="dimensionName"/>
-        <property name="timeSolt" column="timeSolt"/>
+        <property name="startTime" column="startTime"/>
+        <property name="endTime" column="endTime"/>
+        <!-- 多对一 -->
+        <many-to-one name="objectEntity" column="objectID"></many-to-one>
     </class>
 </hibernate-mapping>
