@@ -1,5 +1,6 @@
 package com.sicdlib.web;
 
+import com.sicdlib.entity.ArticleEntity;
 import com.sicdlib.entity.DynamicObject;
 import com.sicdlib.entity.EventEntity;
 import com.sicdlib.entity.ObjectEntity;
@@ -58,6 +59,7 @@ public class EventAction {
         String objectId = req.getParameter("objectId");
         List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
         List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
+//        List<ArticleEntity> artileList
 
         List event = new ArrayList();
         for(int i = 0 ; i < objectInfo.size() ; i++) {
@@ -76,5 +78,6 @@ public class EventAction {
         mode.addAttribute("event", event);
         return "/WEB-INF/foreground/eventInfo";
     }
+
 
 }

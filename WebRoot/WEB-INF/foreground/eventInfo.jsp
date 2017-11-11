@@ -121,7 +121,35 @@
                     <div class="block-content collapse in">
                         <div class="block-content collapse in">
                             <div class="span12">
-                                <img src="./images/event_trend.png"></img>
+                                <div class="timeline-centered timeline-sm">
+                                    <%--<c:forEach items="${tableHotValues}" var="h" varStatus="st">
+                                        <c:if test="${h.doubanGroupPost != null}">--%>
+                                            <article class="timeline-entry">
+                                                <div class="timeline-entry-inner">
+                                                    <time datetime="" class="timeline-time"><span>豆瓣小组</span>
+                                                        <span><%--${h.bbsPeoplePost.dateTime} 热度：${h.hotValue}--%></span></time>
+                                                    <div class="timeline-icon bg-violet"></div>
+                                                    <div class="timeline-label"><h4 class="timeline-title"><%--${h.doubanGroupPost.title}--%></h4>
+
+                                                        <p>内容：<%--${h.doubanGroupPost.content}--%></p></div>
+                                                </div>
+                                            </article>
+                                        <%--</c:if>
+                                        <c:if test="${h.bbsPeoplePost != null}">--%>
+                                            <article class="timeline-entry">
+                                                <div class="timeline-entry-inner">
+                                                    <time datetime="" class="timeline-time"><span>人民网</span>
+                                                        <span>热度：<%--${h.hotValue}--%></span></time>
+                                                    <div class="timeline-icon bg-violet"></div>
+                                                    <div class="timeline-label"><h4 class="timeline-title"><%--${h.bbsPeoplePost.title}--%></h4>
+
+                                                        <p>内容：<%--${h.bbsPeoplePost.content}--%></p></div>
+                                                </div>
+                                            </article>
+                                       <%-- </c:if>
+
+                                    </c:forEach>--%>
+                                </div>
                             </div>
                         </div>
                     </div>
