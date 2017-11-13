@@ -98,7 +98,8 @@
             </ul>
         </div>
         <!--/span-->
-<c:forEach items="${event}" var="e" varStatus="sts">
+        <c:forEach items="${event}" var="e" varStatus="sts">
+    <input type="hidden" value="${e.object.objectId}">
         <div class="span9" id="content">
             <!-- morris stacked chart -->
             <div class="row-fluid">
@@ -114,57 +115,43 @@
                 <div class="block" >
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="002">事件走势</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
-
+                        <div class="pull-right">
+                            <span class="badge badge-warning">
+                                view more
+                            </span>
                         </div>
                     </div>
+
                     <div class="block-content collapse in">
                         <div class="block-content collapse in">
-                            <div class="span12">
-                                <div class="timeline-centered timeline-sm">
-                                    <%--<c:forEach items="${tableHotValues}" var="h" varStatus="st">
-                                        <c:if test="${h.doubanGroupPost != null}">--%>
-                                            <article class="timeline-entry">
-                                                <div class="timeline-entry-inner">
-                                                    <time datetime="" class="timeline-time"><span>豆瓣小组</span>
-                                                        <span><%--${h.bbsPeoplePost.dateTime} 热度：${h.hotValue}--%></span></time>
-                                                    <div class="timeline-icon bg-violet"></div>
-                                                    <div class="timeline-label"><h4 class="timeline-title"><%--${h.doubanGroupPost.title}--%></h4>
+                            <div>
 
-                                                        <p>内容：<%--${h.doubanGroupPost.content}--%></p></div>
-                                                </div>
-                                            </article>
-                                        <%--</c:if>
-                                        <c:if test="${h.bbsPeoplePost != null}">--%>
-                                            <article class="timeline-entry">
-                                                <div class="timeline-entry-inner">
-                                                    <time datetime="" class="timeline-time"><span>人民网</span>
-                                                        <span>热度：<%--${h.hotValue}--%></span></time>
-                                                    <div class="timeline-icon bg-violet"></div>
-                                                    <div class="timeline-label"><h4 class="timeline-title"><%--${h.bbsPeoplePost.title}--%></h4>
+                                <strong>开始</strong>
+                                    </c:forEach><br/>
+                                <c:forEach items="${artileList}" var="al" varStatus="sts">
 
-                                                        <p>内容：<%--${h.bbsPeoplePost.content}--%></p></div>
-                                                </div>
-                                            </article>
-                                       <%-- </c:if>
+                                    <img src="./images/11.png"  width="20px"></img>[${al.postTime}] ${al.title}
+                                    【 ${al.newsResource}】
+                                    <br/>
 
-                                    </c:forEach>--%>
-                                </div>
+                                </c:forEach>
+                                <strong>待续</strong>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="003">网站统计</div>
+                        <div class="muted pull-left">网站统计</div>
                         <div class="pull-right"><span class="badge badge-warning">View More</span>
 
                         </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <img src="./images/website.png"></img>
+                            <div id="hero-graph" style="height: 230px;"></div>
                         </div>
                     </div>
                 </div>
@@ -217,7 +204,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <img src="./images/keywords_cloud.png"></img>
+                            <div id="main" style="width: 1000px;height: 400px;margin-top: 10% ;margin-left: 30%" ></div>
                         </div>
                     </div>
                 </div>
@@ -420,6 +407,7 @@
             </div>
 
             <div class="alert alert-block">
+                <c:forEach items="${event}" var="e" varStatus="sts">
                 <h4 class="alert-heading" id="011">舆情总结</h4>
                     ${e.event.eventSummary}
 
@@ -429,12 +417,11 @@
             </div>
 
         </div>
-</c:forEach>
+                </c:forEach>
     </div>
     <hr>
-    <footer>
-        <p>&copy; Vincent Gabriel 2013</p>
-    </footer>
+    <!-- 引入尾部模板 -->
+    <jsp:include page="/static/fore_footer.jsp"></jsp:include>
 </div>
 <!--/.fluid-container-->
 <link rel="stylesheet" href="vendors/morris/morris.css">
@@ -455,6 +442,84 @@
 <script src="vendors/flot/jquery.flot.resize.js"></script>
 
 <script src="assets/scripts.js"></script>
+
+<script src="vendors/echarts-wordcloud.min.js"></script>
+<script  type="text/javascript">
+    $(function() {
+    var keyWords = JSON.parse('${keywords}');
+
+    //基于准备好的dom,初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    //指定图表的配置项和数据
+    var  option = {
+        title: {
+            text: '关键词云',
+            link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
+            x: 'center',
+            textStyle: {
+                fontSize: 23
+            }
+
+        },
+        backgroundColor: '#F7F7F7',
+        tooltip: {
+            show: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {
+                    iconStyle: {
+                        normal: {
+                            color: '#FFFFFF'
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: '热点分析',
+            type: 'wordCloud',
+            //size: ['9%', '99%'],
+            sizeRange: [6, 66],
+            //textRotation: [0, 45, 90, -45],
+            rotationRange: [-45, 90],
+            //shape: 'circle',
+            textPadding: 0,
+            autoSize: {
+                enable: true,
+                minSize: 6
+            },
+            textStyle: {
+                normal: {
+                    color: function() {
+                        return 'rgb(' + [
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160)
+                        ].join(',') + ')';
+                    }
+                },
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            data: []
+        }]
+    };
+
+
+    option.series[0].data = keyWords;
+
+    myChart.setOption(option);
+    myChart.on('click', function (params) {
+        alert((params.name));
+        window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+
+    });
+    })
+
+</script>
 <script>
     $(function() {
         var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
@@ -562,12 +627,12 @@
     Morris.Bar({
         element: 'hero-bar',
         data: [
-            {device: '新浪微博', sells: 25452},
-            {device: '强国论坛', sells: 3549},
-            {device: '教育部', sells: 938},
-            {device: '中华网', sells: 768},
-            {device: '搜狐BBS', sells: 255},
-            {device: '博客中国', sells: 428}
+            {device: '政府', sells: 25452},
+            {device: '新闻', sells: 3549},
+            {device: '博客', sells: 938},
+            {device: '论坛', sells: 768},
+            {device: '社交媒体', sells: 255},
+
         ],
         xkey: 'device',
         ykeys: ['sells'],
@@ -605,23 +670,24 @@
 
 
     // Morris Line Chart
-    var tax_data = [
-        {"period": "2013-04", "visits": 2407, "signups": 660},
+    /*var tax_data = [
+       /!* {"period": "2013-04", "visits": 2407, "signups": 660},
         {"period": "2013-03", "visits": 3351, "signups": 729},
         {"period": "2013-02", "visits": 2469, "signups": 1318},
         {"period": "2013-01", "visits": 2246, "signups": 461},
         {"period": "2012-12", "visits": 3171, "signups": 1676},
         {"period": "2012-11", "visits": 2155, "signups": 681},
         {"period": "2012-10", "visits": 1226, "signups": 620},
-        {"period": "2012-09", "visits": 2245, "signups": 500}
-    ];
+        {"period": "2012-09", "visits": 2245, "signups": 500}*!/
+    ];*/
+    var tax_data = JSON.parse('${mediaList}');
     Morris.Line({
         element: 'hero-graph',
         data: tax_data,
         xkey: 'period',
-        xLabels: "month",
+        xLabels: "时间",
         ykeys: ['visits', 'signups'],
-        labels: ['Visits', 'User signups']
+        labels: ['网站类型', '数量']
     });
 
 

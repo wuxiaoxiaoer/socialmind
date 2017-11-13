@@ -23,7 +23,7 @@ public class ArticleEntity {
     private Integer trampleNumber;
     private String newsResource;
     private Double similarDegree;
-    private WebsiteEntity websiteId;
+    private String websiteId;
     /** 多个文章对应这一个对象 */
     private ObjectEntity objectEntity;
 
@@ -187,11 +187,11 @@ public class ArticleEntity {
         this.similarDegree = similarDegree;
     }
 
-    public WebsiteEntity getWebsiteId() {
+    public String getWebsiteId() {
         return websiteId;
     }
 
-    public void setWebsiteId(WebsiteEntity websiteId) {
+    public void setWebsiteId(String websiteId) {
         this.websiteId = websiteId;
     }
 
