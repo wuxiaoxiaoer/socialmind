@@ -2,6 +2,8 @@ package com.sicdlib.web;
 
 
 import com.google.gson.Gson;
+import com.sicdlib.entity.CleanStrategyEntity;
+import com.sicdlib.service.CleanStrategyService;
 import com.sicdlib.service.DataCleanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,16 +24,22 @@ import java.util.Map;
 
 public class DataCleanAction {
     @Autowired
-    @Qualifier("dataCleanService")
     private DataCleanService dataCleanService;
-
+    @Autowired
+    private CleanStrategyService cleanStrategyService;
     @RequestMapping("dataClean")
-    public String dataClean(HttpServletRequest req){
+    public String dataClean(HttpServletRequest req, HttpServletResponse response, Model model){
+        List<List<CleanStrategyEntity>> strategyList =cleanStrategyService.getStrategies();
+        model.addAttribute("loseDataList",strategyList.get(0));
+        model.addAttribute("errorString",strategyList.get(1));
+        model.addAttribute("recordOperating",strategyList.get(2));
+        model.addAttribute("dateOperating",strategyList.get(3));
+        model.addAttribute("addressOperating",strategyList.get(4));
+
         return "/WEB-INF/admin/dataClean";
     }
 
     @RequestMapping("/admin/TableServlet")
-
     public void tbForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");
@@ -55,7 +63,6 @@ public class DataCleanAction {
     }
 
     @RequestMapping("/admin/ClickTableServlet")
-
     public void clickTable(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");
@@ -77,4 +84,14 @@ public class DataCleanAction {
         String result = jsonObject.toString();
         out.write(result);
     }
+
+//    @RequestMapping("/admin/CleanStrategyService")
+//    public void getStrategies(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+//        request.setCharacterEncoding("UTF-8");//传值编码
+//        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("text/text");          //设置请求以及响应的内容类型以及编码方式
+//        List<CleanStrategyEntity> strategyList= cleanStrategyService.getStrategies();
+//
+//
+//    }
 }

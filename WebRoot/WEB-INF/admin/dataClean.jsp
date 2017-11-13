@@ -294,6 +294,20 @@
       ////            };
       //    }
     //选择数据清洗策略的下拉框展示
+
+////    当页面加载成功时显示当时可用的清洗策略
+//    window.onload=function () {
+//        $.post("stategiesServlet",
+//            function (data, status) {
+//
+//
+//
+//
+//        })
+//    }
+    function cleanProcess(strategyID){
+          alert(strategyID);
+    }
   </script>
 
 </head>
@@ -517,29 +531,24 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>选择脏数据类型:</td>
+                      <td>选择清洗策略:</td>
                       <td>
-                        <%--<select class="select form-control" name="dirtyType" id="dirtyType" onchange="dirtyTypeChange()">--%>
-                          <%--<option value="miss">缺失值</option>--%>
-                          <%--<option value="stringFalse">字符串错误</option>--%>
-                          <%--<option value="address">地址格式化</option>--%>
-                          <%--<option value="data">时间格式化</option>--%>
-                          <%--<option value="split">拆分为多列</option>--%>
-                          <%--<option value="combine">合并两列</option>--%>
-                        <%--</select>--%>
                           <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle"
                                     data-toggle="dropdown">
                               缺失值 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                              <li><a href="#" onclick="loseData(1)">填充为NULL</a></li>
-                              <li><a href="#" onclick="loseData(2)">填充均值</a></li>
-                              <li><a href="#" onclick="loseData(3)">填充频繁值</a></li>
-                              <li><a href="#" onclick="loseData(3)">填充最大值</a></li>
-                              <li><a href="#" onclick="loseData(3)">填充最小值</a></li>
-                              <li class="divider"></li>
-                              <li><a href="#" onclick="loseData(4)">填充特定的值</a></li>
+                              <c:forEach  items="${loseDataList}" var="v">
+                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                              </c:forEach>
+                              <%--<li><a href="#" onclick="loseData(1)">填充为NULL</a></li>--%>
+                              <%--<li><a href="#" onclick="loseData(2)">填充均值</a></li>--%>
+                              <%--<li><a href="#" onclick="loseData(3)">填充频繁值</a></li>--%>
+                              <%--<li><a href="#" onclick="loseData(3)">填充最大值</a></li>--%>
+                              <%--<li><a href="#" onclick="loseData(3)">填充最小值</a></li>--%>
+                              <%--<li class="divider"></li>--%>
+                              <%--<li><a href="#" onclick="loseData(4)">填充特定的值</a></li>--%>
                             </ul>
                           </div>
                           <div class="btn-group">
@@ -547,13 +556,16 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">删除该列</a></li>
-                              <li><a href="#">删除字符串中多余空格</a></li>
-                              <li><a href="#">删除字符串中的\n</a></li>
-                              <li><a href="#">删除字符串中的标签及其中间的值</a></li>
-                              <li><a href="#">删除字符串中的标签不删除其中间的值</a></li>
+                              <c:forEach  items="${errorString}" var="v">
+                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                              </c:forEach>
+                              <%--<li><a href="#">删除该列</a></li>--%>
+                              <%--<li><a href="#">删除字符串中多余空格</a></li>--%>
+                              <%--<li><a href="#">删除字符串中的\n</a></li>--%>
+                              <%--<li><a href="#">删除字符串中的标签及其中间的值</a></li>--%>
+                              <%--<li><a href="#">删除字符串中的标签不删除其中间的值</a></li>--%>
 
-                              <li><a href="#">修改某特定字符串</a></li>
+                              <%--<li><a href="#">修改某特定字符串</a></li>--%>
                             </ul>
                           </div>
                           <div class="btn-group">
@@ -561,8 +573,23 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">删除某字段包含特定字符串的所有行</a></li>
-                              <li><a href="#">删除重复的行</a></li>
+                              <c:forEach  items="${recordOperating}" var="v">
+                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                              </c:forEach>
+                              <%--<li><a href="#">删除某字段包含特定字符串的所有行</a></li>--%>
+                              <%--<li><a href="#">删除重复的行</a></li>--%>
+                            </ul>
+                          </div>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">时间格式
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <c:forEach  items="${dateOperating}" var="v">
+                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                              </c:forEach>
+                              <%--<li><a href="#">xxxx-xx-xx xx:xx:xx</a></li>--%>
+                              <%--<li><a href="#">xxxx年xx月xx日 xx时xx分xx秒</a></li>--%>
                             </ul>
                           </div>
                           <div class="btn-group">
@@ -570,17 +597,11 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">xxxx-xx-xx xx:xx:xx</a></li>
-                              <li><a href="#">xxxx年xx月xx日 xx时xx分xx秒</a></li>
-                            </ul>
-                          </div>
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">列的合并与拆分
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">合并两列</a></li>
-                              <li><a href="#">拆分为两列</a></li>
+                              <c:forEach  items="${addressOperating}" var="v">
+                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                              </c:forEach>
+                              <%--<li><a href="#">合并两列</a></li>--%>
+                              <%--<li><a href="#">拆分为两列</a></li>--%>
                             </ul>
                           </div>
                       </td>
@@ -588,7 +609,8 @@
                       <%--<td><input type="text" class="form-control"/></td>--%>
                     </tr>
 
-
+                    <%--下面这两组原来不可见，动态生成，当点击替换制定字符串时显示前两个并要求填入，如果选择正则则显示后两个--%>
+                    <%--
                     <tr>
                       <td>字段中要替换的子字符串</td>
                       <td><input type="text" class="form-control autocomplete"/></td>
@@ -597,6 +619,15 @@
                       <td>替换为</td>
                       <td><input type="text"  class="form-control autocomplete" data-source="etldemodata/autocomplete.json"/></td>
                     </tr>
+                    <tr>
+                      <td>正则匹配</td>
+                      <td><input type="text" class="form-control autocomplete"/></td>
+                    </tr>
+                    <tr>
+                      <td>替换为</td>
+                      <td><input type="text"  class="form-control autocomplete" data-source="etldemodata/autocomplete.json"/></td>
+                    </tr>
+                    --%>
                     <%--<tr>--%>
                       <%--<td>Chechbox</td>--%>
                       <%--<td>--%>
