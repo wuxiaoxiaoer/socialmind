@@ -151,7 +151,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="hero-graph" style="height: 230px;"></div>
+                            <div id="website_statistic" style="width:1000px;height: 300px;"></div>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                         </div>
                         <div class="span5 chart">
                             <h5>媒体来源比</h5>
-                            <div id="piechart1" style="height:200px"></div>
+                            <div id="media" style="height:200px"></div>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="main" style="width: 1000px;height: 400px;margin-top: 10% ;margin-left: 30%" ></div>
+                            <div id="keywords" style="width:1000px;height: 400px;" ></div>
                         </div>
                     </div>
                 </div>
@@ -339,7 +339,25 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <img src="./images/route.png"></img>
+                            <div id="transmission" style="width:1000px;height: 400px"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left" >传播路径</div>
+                        <div class="pull-right"><span class="badge badge-warning">View More</span>
+
+                        </div>
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="transfer" style="width:1000px;height: 400px"></div>
                         </div>
                     </div>
                 </div>
@@ -357,7 +375,8 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <img src="./images/connection_words.png"></img>
+                            <div id="connection" style="width:1000px;height: 400px"></div>
+
                         </div>
                     </div>
                 </div>
@@ -372,7 +391,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <img src="./images/viewpoint.jpeg"></img>
+
                         </div>
                     </div>
                     <div class="block-content collapse in">
@@ -427,7 +446,9 @@
 <link rel="stylesheet" href="vendors/morris/morris.css">
 
 
-<script src="vendors/echarts.min.js"></script>
+<%--<script src="vendors/echarts.min.js"></script>--%>
+<script src="js/echarts.js"></script>
+<script src="vendors/echarts-wordcloud.min.js"></script>
 <script src="vendors/jquery-1.9.1.min.js"></script>
 <script src="vendors/jquery.knob.js"></script>
 <script src="vendors/raphael-min.js"></script>
@@ -442,83 +463,149 @@
 <script src="vendors/flot/jquery.flot.resize.js"></script>
 
 <script src="assets/scripts.js"></script>
-
-<script src="vendors/echarts-wordcloud.min.js"></script>
-<script  type="text/javascript">
-    $(function() {
-    var keyWords = JSON.parse('${keywords}');
-
-    //基于准备好的dom,初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-    //指定图表的配置项和数据
-    var  option = {
-        title: {
-            text: '关键词云',
-            link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
-            x: 'center',
-            textStyle: {
-                fontSize: 23
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('keywords'));
+    function createRandomItemStyle() {
+        return {
+            normal: {
+                color: 'rgb(' + [
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160)
+                ].join(',') + ')'
             }
+        };
+    }
 
+    var option = {
+        title: {
+            text: 'Google Trends',
+            link: 'http://www.google.com/trends/hottrends'
         },
-        backgroundColor: '#F7F7F7',
         tooltip: {
             show: true
         },
-        toolbox: {
-            feature: {
-                saveAsImage: {
-                    iconStyle: {
-                        normal: {
-                            color: '#FFFFFF'
-                        }
-                    }
-                }
-            }
-        },
         series: [{
-            name: '热点分析',
+            name: 'Google Trends',
             type: 'wordCloud',
-            //size: ['9%', '99%'],
-            sizeRange: [6, 66],
-            //textRotation: [0, 45, 90, -45],
-            rotationRange: [-45, 90],
-            //shape: 'circle',
+            size: ['80%', '80%'],
+            textRotation : [0, 45, 90, -45],
             textPadding: 0,
             autoSize: {
                 enable: true,
-                minSize: 6
+                minSize: 14
             },
-            textStyle: {
-                normal: {
-                    color: function() {
-                        return 'rgb(' + [
-                            Math.round(Math.random() * 160),
-                            Math.round(Math.random() * 160),
-                            Math.round(Math.random() * 160)
-                        ].join(',') + ')';
+            data: [
+                {
+                    name: "Sam S Club",
+                    value: 10000,
+                    itemStyle: {
+                        normal: {
+                            color: 'black'
+                        }
                     }
                 },
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowColor: '#333'
+                {
+                    name: "Macys",
+                    value: 6181,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Amy Schumer",
+                    value: 4386,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Jurassic World",
+                    value: 4055,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Charter Communications",
+                    value: 2467,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Chick Fil A",
+                    value: 2244,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Planet Fitness",
+                    value: 1898,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Pitch Perfect",
+                    value: 1484,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Express",
+                    value: 1112,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Home",
+                    value: 965,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Johnny Depp",
+                    value: 847,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Lena Dunham",
+                    value: 582,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Lewis Hamilton",
+                    value: 555,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "KXAN",
+                    value: 550,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Mary Ellen Mark",
+                    value: 462,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Farrah Abraham",
+                    value: 366,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Rita Ora",
+                    value: 360,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Serena Williams",
+                    value: 282,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "NCAA baseball tournament",
+                    value: 273,
+                    itemStyle: createRandomItemStyle()
+                },
+                {
+                    name: "Point Break",
+                    value: 265,
+                    itemStyle: createRandomItemStyle()
                 }
-            },
-            data: []
+            ]
         }]
     };
-
-
-    option.series[0].data = keyWords;
-
+    // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
-    myChart.on('click', function (params) {
-        alert((params.name));
-        window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
-
-    });
-    })
-
 </script>
 <script>
     $(function() {
@@ -659,8 +746,8 @@
     Morris.Donut({
         element: 'in-out',
         data: [
-            {label: '境内', value: 99 },
-            {label: '境外', value: 1 },
+            {label: '境内', value: 99.9 },
+            {label: '境外', value: 0.1 },
             {label: 'Search engines', value: 0 },
             {label: 'Unique visitors', value: 0 }
         ],
@@ -670,17 +757,17 @@
 
 
     // Morris Line Chart
-    /*var tax_data = [
-       /!* {"period": "2013-04", "visits": 2407, "signups": 660},
-        {"period": "2013-03", "visits": 3351, "signups": 729},
-        {"period": "2013-02", "visits": 2469, "signups": 1318},
-        {"period": "2013-01", "visits": 2246, "signups": 461},
-        {"period": "2012-12", "visits": 3171, "signups": 1676},
-        {"period": "2012-11", "visits": 2155, "signups": 681},
-        {"period": "2012-10", "visits": 1226, "signups": 620},
-        {"period": "2012-09", "visits": 2245, "signups": 500}*!/
-    ];*/
-    var tax_data = JSON.parse('${mediaList}');
+//   var tax_data = [
+//        {"period": "2013-04", "visits": 2407, "signups": 660}
+//    ];
+    var tax_data =[
+        {"period":"2017-11-09","visits":6,"signups":1},
+        {"period":"2017-11-08","visits":10,"signups":1},
+        {"period":"2017-11-07","visits":100,"signups":1},
+        {"period":"2017-10-09","visits":6,"signups":1}];
+    /*var tax_data = JSON.stringify(${mediaJson});
+    alert(tax_data);*/
+
     Morris.Line({
         element: 'hero-graph',
         data: tax_data,

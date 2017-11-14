@@ -1,6 +1,8 @@
 package com.sicdlib.web;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.sicdlib.entity.ArticleEntity;
 import com.sicdlib.entity.DynamicObject;
 import com.sicdlib.entity.EventEntity;
@@ -17,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/event/")
@@ -66,8 +70,25 @@ public class EventAction {
         List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
         List<ArticleEntity> keywords = articleEntityService.findKeywords(objectId);
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
-        List mediaList = articleEntityService.findMedias(objectId);
-        System.out.println("json==="+JSON.toJSON(mediaList).toString());;
+        List<Object> mediaList = articleEntityService.findMedias(objectId);
+
+        List<Map> mapList = new ArrayList<>();
+        JSONArray mediaJson = new JSONArray();
+        for(int i=0;i<mediaList.size();i++){
+
+            Map map = new HashMap();
+            Object[] o = (Object[])mediaList.get(i);
+            map.put("period",o[0]);
+            map.put("visits",o[1]);
+            map.put("signups",o[2]);
+            mapList.add(map);
+
+        }
+        mode.addAttribute("mediaJson", JSON.toJSON(mapList));
+        System.out.println("json map:"+JSON.toJSON(mapList).toString());
+
+        List<Map> mediaMap = new ArrayList<>();
+
         List event = new ArrayList();
         for(int i = 0 ; i < objectInfo.size() ; i++) {
             for(int j = 0 ; j < eventInfo.size() ; j++) {
@@ -80,39 +101,11 @@ public class EventAction {
             }
         }
 
-        mode.addAttribute("mediaList", JSON.toJSON(mediaList));
+        System.out.println("json.tojson keywords:"+JSON.toJSON(keywords));
         mode.addAttribute("artileList", artileList);
-        mode.addAttribute("keywords", keywords);
+        mode.addAttribute("keywords", JSON.toJSON(keywords));
         mode.addAttribute("event", event);
         return "/WEB-INF/foreground/eventInfo";
     }
-
-    //分析事件趋势
-    @RequestMapping("eventTrend")
-    public String findEventTrend(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
-        String objectId = req.getParameter("objectId");
-        List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
-        List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
-        List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
-        String year = " ";
-        List event = new ArrayList();
-        for(int i = 0 ; i < objectInfo.size() ; i++) {
-            for(int j = 0 ; j < eventInfo.size() ; j++) {
-                if (objectInfo.get(i).getObjectId().equals(eventInfo.get(j).getObjectId())){
-                    year = eventInfo.get(i).getEventBeginTime().substring(0,3);
-                    DynamicObject dy = new DynamicObject();
-                    dy.setObject(objectInfo.get(i));
-                    dy.setEvent(eventInfo.get(j));
-                    event.add(dy);
-                }
-            }
-        }
-
-        mode.addAttribute("year", year);
-        mode.addAttribute("event", event);
-        mode.addAttribute("artileList", artileList);
-        return "/WEB-INF/foreground/eventTrend";
-    }
-
 
 }
