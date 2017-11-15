@@ -35,12 +35,11 @@ public class DataCleanAction {
         model.addAttribute("recordOperating",strategyList.get(2));
         model.addAttribute("dateOperating",strategyList.get(3));
         model.addAttribute("addressOperating",strategyList.get(4));
-
         return "/WEB-INF/admin/dataClean";
     }
-
+// tbForm函数中的第四个参数currentTable是自己加的，用于PhoenixUtil调用本函数
     @RequestMapping("/admin/TableServlet")
-    public void tbForm(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    public void tbForm(HttpServletRequest request, HttpServletResponse response, Model model, String currentTable) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");
 //        获取到表的名字
@@ -85,13 +84,17 @@ public class DataCleanAction {
         out.write(result);
     }
 
-//    @RequestMapping("/admin/CleanStrategyService")
-//    public void getStrategies(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-//        request.setCharacterEncoding("UTF-8");//传值编码
-//        response.setCharacterEncoding("UTF-8");
-//        response.setContentType("text/text");          //设置请求以及响应的内容类型以及编码方式
-//        List<CleanStrategyEntity> strategyList= cleanStrategyService.getStrategies();
-//
-//
-//    }
+    @RequestMapping("/admin/cleanProcessAction")
+    public void cleanProcess(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+        request.setCharacterEncoding("UTF-8");//传值编码
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/text");          //设置请求以及响应的内容类型以及编码方式
+        String currentTable =request.getParameter("currentTable");
+        String currentColumn =request.getParameter("currentColumn");
+        String strategyID =request.getParameter("strategyID");
+//        System.out.println("currentTable:"+currentTable+"\n"+"currentColumn:"+currentColumn+"\n"+"strategyID"+strategyID);
+        Boolean cleanResult =dataCleanService.doClean(currentTable,currentColumn,strategyID);
+
+
+    }
 }

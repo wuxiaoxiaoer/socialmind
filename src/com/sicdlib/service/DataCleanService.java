@@ -21,13 +21,13 @@ import java.util.*;
 
 @Repository("dataCleanService")
 public class DataCleanService {
-
+    PhoenixUtil util =new PhoenixUtil();
     //num是查询的行数
 
     public List<Map<String, Object>> queryResult(String tablename,int num){
         try{
             String name = tablename.replaceAll("\'","");
-            PhoenixUtil util =new PhoenixUtil();
+
 
 //            Class<?> TBTableEntityType =Class.forName("com.sicdlib.dto.phoenixEntity."+name);
 //            List headJson= Lists.newArrayList(dataStoreApi.findAll(QueryBuilder
@@ -234,5 +234,21 @@ public class DataCleanService {
 
     }
 
+    //清洗方法执行
+    public Boolean doClean(String currentTable, String  currentColumn, String strategyID){
+        switch (strategyID)
+        {
+            case "11":
+            {
+                util.upsertColumn(currentTable,currentColumn,"","0");
+                break;
+            }
+            case "12":
+            {
+                util.upsertColumn(currentTable,currentColumn,"","0");
+            }
+        }
+        return true;
+    }
 }
 

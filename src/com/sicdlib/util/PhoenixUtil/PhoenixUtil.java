@@ -1,5 +1,7 @@
 package com.sicdlib.util.PhoenixUtil;
 
+import com.sicdlib.web.DataCleanAction;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.Map;
 
 
 public class PhoenixUtil{
+
     //连接phoniex
     public Connection GetConnection(){
         Connection cc = null;
@@ -71,27 +74,30 @@ public class PhoenixUtil{
         return result;
     }
     //删除一行,列名columnName的值为value的一行.
-    public void deleteRow(String tableName,String columnName,String value){
+    public Boolean deleteRow(String tableName,String columnName,String value){
         PhoenixUtil util =new PhoenixUtil();
         try{
             Connection conn =util.GetConnection();
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
-                return;
+                return false;
             }
             String sql = "DELETE FROM \""+tableName+"\" WHERE \"info\".\""+columnName+"\"=\'"+value+"\'";
             PreparedStatement stmt =conn.prepareStatement(sql);
-            stmt.executeUpdate();
+            //如何判断删除成功或失败?
+            int msg =stmt.executeUpdate();
             conn.commit();
             stmt.close();
             conn.close();
+
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        return true;
     }
     //删除一列
-    public static void deleteColumn(String tableName,String columnName) {
+    public Boolean deleteColumn(String tableName,String columnName) {
         PhoenixUtil util =new PhoenixUtil();
         Connection conn = null;
         try {
@@ -101,7 +107,7 @@ public class PhoenixUtil{
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
-                return;
+                return false;
             }
 
             // 默认所有列族都是info
@@ -112,7 +118,9 @@ public class PhoenixUtil{
             // execute upsert
             String msg = ps.executeUpdate() > 0 ? "delete success..."
                     : "delete fail...";
-
+            if(msg =="insert fail..."){
+                return false;
+            }
             // you must commit
             conn.commit();
             System.out.println(msg);
@@ -127,11 +135,13 @@ public class PhoenixUtil{
                     e.printStackTrace();
                 }
             }
+
         }
+        return true;
     }
 
     //替换一列,可选择某个值来填充所有空
-    public static void upsertColumn(String tableName,String columnName,String oldValue,String newValue) {
+    public Boolean upsertColumn(String tableName,String columnName,String oldValue,String newValue) {
         PhoenixUtil util =new PhoenixUtil();
         Connection conn = null;
         try {
@@ -141,21 +151,34 @@ public class PhoenixUtil{
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
-                return;
+                return false;
             }
-
-            // create sql
-            String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",\'"+newValue+"\' FROM \""+tableName+"\" WHERE \"info\".\""+columnName+"\" =\'"+oldValue+"\' ";
-
-            PreparedStatement ps = conn.prepareStatement(sql);
-
-            // execute upsert
-            String msg = ps.executeUpdate() > 0 ? "insert success..."
-                    : "insert fail...";
-
-            // you must commit
+            String count="SELECT COUNT(*) FROM \""+tableName+"\"";
+            PreparedStatement ps = conn.prepareStatement(count);
+            ResultSet result=ps.executeQuery();
             conn.commit();
-            System.out.println(msg);
+            int totleRow=0;
+            while(result.next()){
+                totleRow=result.getInt(1);
+            }
+            //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
+
+                for (int i=0;i<totleRow;i+=400000){
+//                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
+//                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
+                    String sql ="upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",\'"+newValue+"\' FROM \""+tableName+"\" WHERE \"info\".\""+columnName+"\" =\'"+oldValue+"\' LIMIT 400000 OFFSET "+i;
+                    PreparedStatement ps2 = conn.prepareStatement(sql);
+
+                    // execute upsert
+                    String msg = ps2.executeUpdate() > 0 ? "insert success..."
+                            : "insert fail...";
+                    if(msg =="insert fail..."){
+                        return false;
+                    }
+                    // you must commit
+                    conn.commit();
+                    System.out.println(msg);
+                }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,11 +189,13 @@ public class PhoenixUtil{
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+
             }
         }
+        return true;
     }
     //正则修改一列,暂时没写where子句
-    public static void upsertColumnWithRegex(String tableName,String columnName,String replaceRegex,String replaceTo) {
+    public Boolean upsertColumnWithRegex(String tableName,String columnName,String replaceRegex,String replaceTo) {
         PhoenixUtil util =new PhoenixUtil();
         Connection conn = null;
         try {
@@ -180,9 +205,9 @@ public class PhoenixUtil{
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
-                return;
+                return false;
             }
-            String count="SELECT COUNT(*) FROM \"test2\"";
+            String count="SELECT COUNT(*) FROM \""+tableName+"\"";
             PreparedStatement ps = conn.prepareStatement(count);
             ResultSet result=ps.executeQuery();
             conn.commit();
@@ -205,11 +230,13 @@ public class PhoenixUtil{
                     // you must commit
                     conn.commit();
                     System.out.println(msg);
+                    if(msg =="insert fail..."){
+                        return false;
+                    }
                 }
             }
-
-
         } catch (SQLException e) {
+            //报错未必不执行，如socket超时，因此不在这里retrun false
             e.printStackTrace();
         } finally {
             if (conn != null) {
@@ -220,6 +247,6 @@ public class PhoenixUtil{
                 }
             }
         }
+        return true;
     }
-
 }
