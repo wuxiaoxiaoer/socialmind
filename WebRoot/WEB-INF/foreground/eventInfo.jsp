@@ -99,7 +99,7 @@
         </div>
         <!--/span-->
         <c:forEach items="${event}" var="e" varStatus="sts">
-    <input type="hidden" value="${e.object.objectId}">
+        <input type="hidden" value="${e.object.objectId}">
         <div class="span9" id="content">
             <!-- morris stacked chart -->
             <div class="row-fluid">
@@ -127,7 +127,7 @@
                             <div>
 
                                 <strong>开始</strong>
-                                    </c:forEach><br/>
+                                </c:forEach><br/>
                                 <c:forEach items="${artileList}" var="al" varStatus="sts">
 
                                     <img src="./images/11.png"  width="20px"></img>[${al.postTime}] ${al.title}
@@ -151,7 +151,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="hero-graph" style="height: 230px;"></div>
+                            <div id="website_statistic" style="width:1000px;height: 400px;"></div>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                         </div>
                         <div class="span5 chart">
                             <h5>媒体来源比</h5>
-                            <div id="piechart1" style="height:200px"></div>
+                            <div id="media" style="height:200px"></div>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="main" style="width: 1000px;height: 400px;margin-top: 10% ;margin-left: 30%" ></div>
+                            <div id="keywords" style="width: 1000px;height: 400px;" ></div>
                         </div>
                     </div>
                 </div>
@@ -372,7 +372,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <img src="./images/viewpoint.jpeg"></img>
+
                         </div>
                     </div>
                     <div class="block-content collapse in">
@@ -417,7 +417,7 @@
             </div>
 
         </div>
-                </c:forEach>
+        </c:forEach>
     </div>
     <hr>
     <!-- 引入尾部模板 -->
@@ -425,9 +425,7 @@
 </div>
 <!--/.fluid-container-->
 <link rel="stylesheet" href="vendors/morris/morris.css">
-
-
-<script src="vendors/echarts.min.js"></script>
+<script src="vendors/flot/echarts-all.js"></script>
 <script src="vendors/jquery-1.9.1.min.js"></script>
 <script src="vendors/jquery.knob.js"></script>
 <script src="vendors/raphael-min.js"></script>
@@ -443,82 +441,284 @@
 
 <script src="assets/scripts.js"></script>
 
+
 <script src="vendors/echarts-wordcloud.min.js"></script>
+
+<input type="hidden" value="${keywords}" id="key">
 <script  type="text/javascript">
-    $(function() {
-    var keyWords = JSON.parse('${keywords}');
+    var key = document.getElementById('key').value;
+    alert("keywords"+JSON.stringify(${keywords}));
+
 
     //基于准备好的dom,初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-    //指定图表的配置项和数据
-    var  option = {
-        title: {
-            text: '关键词云',
-            link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
-            x: 'center',
-            textStyle: {
-                fontSize: 23
+    var myChart = echarts.init(document.getElementById('keywords'));
+    function createRandomItemStyle() {
+        return {
+            normal: {
+                color: 'rgb(' + [
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160)
+                ].join(',') + ')'
             }
+        };
+    }
 
+    var option = {
+        title: {
+            text: 'Google Trends',
+            link: 'http://www.google.com/trends/hottrends'
         },
-        backgroundColor: '#F7F7F7',
         tooltip: {
             show: true
         },
-        toolbox: {
-            feature: {
-                saveAsImage: {
-                    iconStyle: {
-                        normal: {
-                            color: '#FFFFFF'
-                        }
-                    }
-                }
-            }
-        },
         series: [{
-            name: '热点分析',
+            name: 'Google Trends',
             type: 'wordCloud',
-            //size: ['9%', '99%'],
-            sizeRange: [6, 66],
-            //textRotation: [0, 45, 90, -45],
-            rotationRange: [-45, 90],
-            //shape: 'circle',
+            size: ['80%', '80%'],
+            textRotation : [0, 45, 90, -45],
             textPadding: 0,
             autoSize: {
                 enable: true,
-                minSize: 6
+                minSize: 14
             },
-            textStyle: {
-                normal: {
-                    color: function() {
-                        return 'rgb(' + [
-                            Math.round(Math.random() * 160),
-                            Math.round(Math.random() * 160),
-                            Math.round(Math.random() * 160)
-                        ].join(',') + ')';
-                    }
-                },
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowColor: '#333'
-                }
-            },
-            data: []
+            data:key
         }]
     };
-
-
-    option.series[0].data = keyWords;
-
+    // 为echarts对象加载数据
     myChart.setOption(option);
     myChart.on('click', function (params) {
         alert((params.name));
         window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
 
     });
-    })
+</script>
+<script>
 
+    var websdata = JSON.stringify(${webs}).replace(/\"/g,"'");
+    var webstimedata = JSON.stringify(${periodList}).replace(/\-/g,".").replace(/\"/g,"'");
+ /*   alert(websdata);
+    alert(webstimedata);*/
+    //基于准备好的dom,初始化echarts实例
+    var myChart1 = echarts.init(document.getElementById('website_statistic'));
+
+    var option1 = {
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:websdata
+
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : ['2017.11.07','2017.11.08','2017.11.09']
+
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'网易博客',
+                type:'line',
+                stack: '总量',
+                data:[120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name:'天涯BBS',
+                type:'line',
+                stack: '总量',
+                data:[220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name:'人民网BBS',
+                type:'line',
+                stack: '总量',
+                data:[150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name:'新华网BBS',
+                type:'line',
+                stack: '总量',
+                data:[320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                name:'三秦网',
+                type:'line',
+                stack: '总量',
+                data:[820, 932, 901, 934, 1290, 1330, 1320]
+            },
+            {
+                name:'豆瓣小组',
+                type:'line',
+                stack: '总量',
+                data:[120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name:'搜狐BBS',
+                type:'line',
+                stack: '总量',
+                data:[220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name:'中国社会新闻网',
+                type:'line',
+                stack: '总量',
+                data:[150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name:'新浪新闻',
+                type:'line',
+                stack: '总量',
+                data:[320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                name:'网易新闻',
+                type:'line',
+                stack: '总量',
+                data:[820, 932, 901, 934, 1290, 1330, 1320]
+            },
+            {
+                name:'博客中国',
+                type:'line',
+                stack: '总量',
+                data:[120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name:'教育部',
+                type:'line',
+                stack: '总量',
+                data:[220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name:'中华网社区',
+                type:'line',
+                stack: '总量',
+                data:[150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name:'猫扑社区',
+                type:'line',
+                stack: '总量',
+                data:[320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                name:'新华网',
+                type:'line',
+                stack: '总量',
+                data:[820, 932, 901, 934, 1290, 1330, 1320]
+            }
+            ,
+            {
+                name:'凯迪社区',
+                type:'line',
+                stack: '总量',
+                data:[150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name:'西祠社区',
+                type:'line',
+                stack: '总量',
+                data:[320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                name:'人民网',
+                type:'line',
+                stack: '总量',
+                data:[820, 932, 901, 934, 1290, 1330, 1320]
+            }
+        ]
+    };
+    // 为echarts对象加载数据
+    myChart1.setOption(option1);
+
+</script>
+<script>
+    //基于准备好的dom,初始化echarts实例
+    var myChart2 = echarts.init(document.getElementById('media'));
+    alert("mediaresource:"+${mediaSource});
+    var option2 = {
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data:['政府','新闻','社交媒体','博客','论坛']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {
+                    show: true,
+                    type: ['pie', 'funnel'],
+                    option: {
+                        funnel: {
+                            x: '25%',
+                            width: '50%',
+                            funnelAlign: 'center',
+                            max: 1548
+                        }
+                    }
+                },
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : ['50%', '70%'],
+                itemStyle : {
+                    normal : {
+                        label : {
+                            show : false
+                        },
+                        labelLine : {
+                            show : false
+                        }
+                    },
+                    emphasis : {
+                        label : {
+                            show : true,
+                            position : 'center',
+                            textStyle : {
+                                fontSize : '30',
+                                fontWeight : 'bold'
+                            }
+                        }
+                    }
+                },
+                data:${mediaSource}
+
+            }
+        ]
+    };
+
+    // 为echarts对象加载数据
+    myChart2.setOption(option2);
 </script>
 <script>
     $(function() {
@@ -670,17 +870,17 @@
 
 
     // Morris Line Chart
-    /*var tax_data = [
-       /!* {"period": "2013-04", "visits": 2407, "signups": 660},
+    var tax_data = [
+        {"period": "2013-04", "visits": 2407, "signups": 660},
         {"period": "2013-03", "visits": 3351, "signups": 729},
         {"period": "2013-02", "visits": 2469, "signups": 1318},
         {"period": "2013-01", "visits": 2246, "signups": 461},
         {"period": "2012-12", "visits": 3171, "signups": 1676},
         {"period": "2012-11", "visits": 2155, "signups": 681},
         {"period": "2012-10", "visits": 1226, "signups": 620},
-        {"period": "2012-09", "visits": 2245, "signups": 500}*!/
-    ];*/
-    var tax_data = JSON.parse('${mediaList}');
+        {"period": "2012-09", "visits": 2245, "signups": 500}
+    ];
+    /*var tax_data = JSON.stringify('');*/
     Morris.Line({
         element: 'hero-graph',
         data: tax_data,

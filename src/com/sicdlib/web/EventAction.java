@@ -1,23 +1,23 @@
 package com.sicdlib.web;
 
 import com.alibaba.fastjson.JSON;
-import com.sicdlib.entity.ArticleEntity;
-import com.sicdlib.entity.DynamicObject;
-import com.sicdlib.entity.EventEntity;
-import com.sicdlib.entity.ObjectEntity;
+import com.sicdlib.entity.*;
 import com.sicdlib.service.ArticleEntityService;
 import com.sicdlib.service.EventEntityService;
 import com.sicdlib.service.ObjectEntityService;
+import com.sicdlib.service.WebsiteEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/event/")
@@ -29,12 +29,14 @@ public class EventAction {
     private EventEntityService eventEntityService;
     @Autowired
     private ArticleEntityService articleEntityService;
+    @Autowired
+    private WebsiteEntityService websiteEntityService;
 
     //查找事件列表
     @RequestMapping("all")
     public String findAll(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
         List<ObjectEntity> objectList = new ArrayList<>();
-        objectList =    objectEntityService.findObject();
+        objectList = objectEntityService.findObject();
         List<EventEntity> eventList = eventEntityService.findEvent();
         List event = new ArrayList();
         int end = 30;
@@ -58,16 +60,37 @@ public class EventAction {
         return "/WEB-INF/foreground/event";
     }
 
+    /*@RequestMapping(value="test",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String test(HttpServletRequest req, HttpServletResponse resp, Model mode){
+
+        return "";
+    }*/
+
     //查找事件信息
     @RequestMapping("eventInfo")
     public String findEventInfo(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
         String objectId = req.getParameter("objectId");
+        String time = "";
         List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
         List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
-        List<ArticleEntity> keywords = articleEntityService.findKeywords(objectId);
+        List<Map> keywords = articleEntityService.findKeywords(objectId);
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
-        List mediaList = articleEntityService.findMedias(objectId);
-        System.out.println("json==="+JSON.toJSON(mediaList).toString());;
+        List periodList = articleEntityService.findPeriod(objectId);
+        List<WebsiteEntity> webs = websiteEntityService.findWebsite();
+        System.out.println("webs:"+webs.toString());
+        System.out.println("webs to json"+JSON.toJSON(webs));
+        List websiteStatistic = new ArrayList();
+        for(int i = 0 ; i < periodList.size() ; i++) {
+            time = periodList.get(i).toString();
+            List websiteList = articleEntityService.findWebsites(objectId,time);
+            System.out.println("websiteList :"+websiteList.toString());
+            System.out.println("json.tojson:"+JSON.toJSON(websiteList));
+        }
+
+
+        /*String[] strings = new String[periodList.size()];
+        System.out.println("periodList.toArray(strings):"+JSON.toJSON(strings));*/
         List event = new ArrayList();
         for(int i = 0 ; i < objectInfo.size() ; i++) {
             for(int j = 0 ; j < eventInfo.size() ; j++) {
@@ -80,39 +103,14 @@ public class EventAction {
             }
         }
 
-        mode.addAttribute("mediaList", JSON.toJSON(mediaList));
+        List mediaSource = websiteEntityService.findMediaSource(objectId);
+        System.out.println("json de keywords:"+JSON.toJSON(keywords));
+        mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
+        mode.addAttribute("periodList", JSON.toJSON(periodList));
+        mode.addAttribute("webs",JSON.toJSON(webs));
         mode.addAttribute("artileList", artileList);
-        mode.addAttribute("keywords", keywords);
+        mode.addAttribute("keywords", JSON.toJSON(keywords).toString());
         mode.addAttribute("event", event);
         return "/WEB-INF/foreground/eventInfo";
     }
-
-    //分析事件趋势
-    @RequestMapping("eventTrend")
-    public String findEventTrend(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
-        String objectId = req.getParameter("objectId");
-        List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
-        List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
-        List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
-        String year = " ";
-        List event = new ArrayList();
-        for(int i = 0 ; i < objectInfo.size() ; i++) {
-            for(int j = 0 ; j < eventInfo.size() ; j++) {
-                if (objectInfo.get(i).getObjectId().equals(eventInfo.get(j).getObjectId())){
-                    year = eventInfo.get(i).getEventBeginTime().substring(0,3);
-                    DynamicObject dy = new DynamicObject();
-                    dy.setObject(objectInfo.get(i));
-                    dy.setEvent(eventInfo.get(j));
-                    event.add(dy);
-                }
-            }
-        }
-
-        mode.addAttribute("year", year);
-        mode.addAttribute("event", event);
-        mode.addAttribute("artileList", artileList);
-        return "/WEB-INF/foreground/eventTrend";
-    }
-
-
 }
