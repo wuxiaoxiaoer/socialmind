@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import com.sicdlib.util.PhoenixUtil.MapToJson;
 import com.sicdlib.util.PhoenixUtil.PhoenixUtil;
+import com.sicdlib.util.PhoenixUtil.SpecialPhoenixUtil;
 import org.apache.hadoop.hbase.snapshot.CreateSnapshot;
 import org.hibernate.sql.Select;
 
@@ -22,6 +23,7 @@ import java.util.*;
 @Repository("dataCleanService")
 public class DataCleanService {
     PhoenixUtil util =new PhoenixUtil();
+    SpecialPhoenixUtil specialPhoenixUtil=new SpecialPhoenixUtil();
     //num是查询的行数
 
     public List<Map<String, Object>> queryResult(String tablename,int num){
@@ -200,7 +202,7 @@ public class DataCleanService {
         }
     }
     //根据表名、列名，查那一列里数目最多的5个数返回给前台,封装成的list格式为都是单个的项，奇数为项的名，偶数为对应的数目
-    public Map<String,Integer> getOrder(String tableName,String columnName){
+    public LinkedHashMap<String,Integer> getOrder(String tableName,String columnName){
 
         try {
 //            System.out.println("列名"+columnName);
@@ -218,7 +220,7 @@ public class DataCleanService {
             PreparedStatement ps =conn.prepareStatement(sql);
             ResultSet rs =ps.executeQuery();
 //            int col = rs.getMetaData().getColumnCount();
-            Map<String, Integer> result = new LinkedHashMap<>();
+            LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
             while (rs.next()){
                 result.put(rs.getString(1), rs.getInt(2));
             }
@@ -234,18 +236,69 @@ public class DataCleanService {
 
     }
 
-    //清洗方法执行
-    public Boolean doClean(String currentTable, String  currentColumn, String strategyID){
+    //清洗方法执行,12,14,15这三个方法仅仅sql不同，可考虑抽象出一个公共函数
+    public Boolean doClean(String currentTable, String  currentColumn, String strategyID, String oldValue, String newValue){
+        String sourceTable=currentColumn+"_reset";
         switch (strategyID)
         {
+            /*空值的处理*/
+            //填充空字符串为o
             case "11":
             {
                 util.upsertColumn(currentTable,currentColumn,"","0");
                 break;
             }
+            //填充空字符串为均值
             case "12":
             {
-                util.upsertColumn(currentTable,currentColumn,"","0");
+                String avg=specialPhoenixUtil.getAverage(currentTable,currentColumn);
+                System.out.println("平均值是:"+avg);
+                util.upsertColumn(currentTable,currentColumn,"",avg);
+                break;
+            }
+            //填充空字符串为最频繁值
+            case "13":
+            {
+                //用到上面查最频繁5项的函数
+                LinkedHashMap<String,Integer> frequentValue =getOrder(currentTable,currentColumn);
+                String value =frequentValue.entrySet().iterator().next().getKey().toString();
+//                System.out.println("最频繁值是:"+value);
+                util.upsertColumn(currentTable,currentColumn,"",value);
+                break;
+            }
+            //取最大值
+            case "14":{
+                String maxNum =specialPhoenixUtil.getMaxNum(currentTable,currentColumn);
+//                System.out.println("最大值是:"+maxNum);
+                util.upsertColumn(currentTable,currentColumn,"",maxNum);
+                break;
+            }
+            //取最小值
+            case "15":{
+                String minNum =specialPhoenixUtil.getMinNum(currentTable,currentColumn);
+//                System.out.println("最小值是:"+minNum);
+                util.upsertColumn(currentTable,currentColumn,"",minNum);
+                break;
+            }
+            case "16":{
+                util.upsertColumn(currentTable,currentColumn,"",newValue);
+                break;
+            }
+            /*错误字符串的处理*/
+            case "17":{
+                break;
+            }
+
+            //该列重置
+            case "resetColumn":
+            {
+                specialPhoenixUtil.resetColumn(currentTable, sourceTable,currentColumn);
+                break;
+            }
+            //重置整个表,可能不能用……
+            case "resetTable":
+            {
+                specialPhoenixUtil.resetTable(currentTable,sourceTable);
             }
         }
         return true;

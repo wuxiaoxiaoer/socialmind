@@ -92,8 +92,10 @@ public class DataCleanAction {
         String currentTable =request.getParameter("currentTable");
         String currentColumn =request.getParameter("currentColumn");
         String strategyID =request.getParameter("strategyID");
+        String oldValue =request.getParameter("oldValue");
+        String newValue =request.getParameter("newValue");
 //        System.out.println("currentTable:"+currentTable+"\n"+"currentColumn:"+currentColumn+"\n"+"strategyID"+strategyID);
-        Boolean cleanResult =dataCleanService.doClean(currentTable,currentColumn,strategyID);
+        Boolean cleanResult =dataCleanService.doClean(currentTable,currentColumn,strategyID,oldValue,newValue);
 
 
     }
