@@ -1,5 +1,8 @@
 package com.sicdlib.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
@@ -14,6 +17,26 @@ public class UserEntity {
     private String address;
     /** 表之间的映射：多个用户属于一个角色 */
     private RoleEntity role;
+    /** 一个用户包含多个操作*/
+    private Set<UserOperaEntity> userOperas = new HashSet<>();
+    /** 一个用户包含对个系统评论 */
+    private Set<CommentEntity> comments = new HashSet<>();
+
+    public Set<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentEntity> comments) {
+        this.comments = comments;
+    }
+
+    public Set<UserOperaEntity> getUserOperas() {
+        return userOperas;
+    }
+
+    public void setUserOperas(Set<UserOperaEntity> userOperas) {
+        this.userOperas = userOperas;
+    }
 
     public String getIsAuthenticated() {
         return isAuthenticated;

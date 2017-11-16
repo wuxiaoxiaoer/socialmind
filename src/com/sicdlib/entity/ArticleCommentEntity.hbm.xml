@@ -16,5 +16,7 @@
         <property name="graphUrl" column="graphURL"/>
         <property name="articleId" column="articleID"/>
         <property name="fatherCommentId" column="fatherCommentID"/>
+        <many-to-one name="articleEntity" column="articleId"></many-to-one>
+        <many-to-one name="authorEntity" column="authorId"></many-to-one>
     </class>
 </hibernate-mapping>

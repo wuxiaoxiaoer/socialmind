@@ -10,142 +10,273 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html class="no-js">
     
     <head>
-        <title>Admin Home Page</title>
+        <title>全文检索 - socialmind大平台</title>
+        <base href="<%=basePath%>foreground/"/>
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
-		<script src="bootstrap/js/jquery-1.11.2.min.js"></script>
+		<%--<script src="bootstrap/js/jquery-1.11.2.min.js"></script>--%>
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-		
+
+        <link rel="stylesheet" type="text/css" href="css/style/list.css"/>
+        <link rel="stylesheet" type="text/css" href="css/dialog.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style/manhuaDate.1.0.css"/>
+        <script type="text/javascript" src="js/jquery-1.5.1.js"></script><!--日期控件，JS库版本不能过高否则tab会失效-->
+        <script type="text/javascript" src="js/datejs.js"></script>
+        <script type="text/javascript" src="js/ui.tab.js"></script>
+        <script type="text/javascript" src="js/dialog.js"></script>
+
+
+        <script type="text/javascript" src="<%=basePath%>foreground/js/common.js"></script>
+        <script type="text/javascript" src="<%=basePath%>foreground/js/quick_links.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var tab = new $.fn.tab({
+                    tabList:"#demo1 .ui-tab-container .ui-tab-list li",
+                    contentList:"#demo1 .ui-tab-container .ui-tab-content"
+                });
+                var tab = new $.fn.tab({
+                    tabList:"#demo1 .ui-tab-container .ui-tab-list2 li",
+                    contentList:"#demo1 .ui-tab-container .ui-tab-content2"
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function (){
+                $("input.mh_date").datejs({
+                    Event : "click",//可选
+                    Left : 0,//弹出时间停靠的左边位置
+                    Top : -16,//弹出时间停靠的顶部边位置
+                    fuhao : "-",//日期连接符默认为-
+                    isTime : false,//是否开启时间值默认为false
+                    beginY : 2010,//年份的开始默认为1949
+                    endY :2015//年份的结束默认为2049
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(e) {
+                $("#selectList").find(".more").toggle(function(){
+                    $(this).addClass("more_bg");
+                    $(".more-none").show()
+                },function(){
+                    $(this).removeClass("more_bg");
+                    $(".more-none").hide()
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var taboy_box=$(".lefttable-list");
+                taboy_box.children("tbody").find("tr:gt(2)").hide();
+                $(".leftbox-morea").toggle(function(){
+                            $(this).parent().prev().find("tr").show();
+                            $(this).addClass("more-i")
+                        },function(){
+                            $(this).removeClass("more-i");
+                            $(this).parent().prev().children("tbody").find("tr:gt(2)").hide();
+                        }
+                );
+            });
+        </script>
+        <style>
+            html,body,div,h2,p{margin: 0;padding: 0;}
+            html{font: 1em Arial, Helvetica, sans-serif;color: #444;}
+            p{margin-bottom: 5px;}
+            #container{margin: 0 auto;width: 600px;}
+            #container h2{font-size: 20px;color: #0087f1;}
+            #wrap{position: relative;padding: 10px;overflow: hidden;}
+            #gradient{width: 100%;height: 35px;background: url() repeat-x;position: absolute;bottom: 0;left: 0;}
+            #read-more{padding: 5px; border-top: 1px double #ddd; background: #fff;color: #333;}
+            #read-more a{padding-right: 22px;background: url() no-repeat 100% 50%;font-weight: bold;text-decoration: none;}
+            #read-more a: hover{color: #000;}
+
+            .text{
+                display: -webkit-box;  /*将对象作为弹性盒子模型显示*/
+                overflow: hidden; /**/
+                text-overflow:ellipsis;
+                word-break:break-all;
+                -webkit-box-orient:vertical;/*伸缩盒对象的子元素的排列方式-垂直*/
+                -webkit-line-clamp:10; /*限制在一个块级元素显示的文本的行数*/
+            }
+        </style>
     </head>
-    
     <body>
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="#">social mind舆情分析平台</a>
-                    <div class="nav-collapse collapse">
-					    <ul class="nav pull-right">
-                            <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 吴连伟 <i class="caret"></i>
 
-                                </a>
-                                <ul class="dropdown-menu">
-								    <li>
-                                        <a tabindex="-1" href="person_info.html">个人中心</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="notification.html">通知  <font color="blue">1</font></a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="login.html">Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav">
-							<li class="">
-                                <a href="index_gov.html">主页</a>
-                            </li>
-                            <li class="">
-                                <a href="heatIndex.html">热度指标</a>
-                            </li>
-                            <li class="">
-                                <a href="emotionMap.html">情绪地图</a>
-                            </li>
-                            <li class="">
-                                <a href="info_dectection.html">信息监测</a>
-                            </li>
-							<li class="">
-                                <a href="../WEB-INF/foreground/fullRetrival.html">全文检索</a>
-                            </li>
-							<li class="">
-                                <a href="event.html">全网事件分析</a>
-                            </li>
-							<li class="">
-                                <a href="makeReporter_1.html">简报制作</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
+    <!-- 引入头模板 -->
+    <!-- 引入头模板 -->
+    <jsp:include page="/static/fore_header.jsp" flush="true"></jsp:include>
 
-                <div class="span3" id="sidebar">
-                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <li>
-                            <a href="index.html"><i class="icon-chevron-right"></i> 全文检索</a>
-                        </li>
-                        <li>
-                            <a href="calendar.html"><i class="icon-chevron-right"></i> 热门事件</a>
-                        </li>
-                        <li>
-                            <a href="stats.html"><i class="icon-chevron-right"></i> 本单位/企业/个人/政府相关事件</a>
-                        </li>
-
-                    </ul>
-                </div>
+    <div class="span3" id="sidebar" style="margin:4em 0em">
+        <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+            <li>
+                <a href="index.html"><i class="icon-chevron-right"></i> 全文检索</a>
+            </li>
+            <li>
+                <a href="calendar.html"><i class="icon-chevron-right"></i> 热门事件</a>
+            </li>
+            <li>
+                <a href="stats.html"><i class="icon-chevron-right"></i> 本单位/企业/个人/政府相关事件</a>
+            </li>
+        </ul>
+    </div>
         <div class="container-fluid">
             <div class="row-fluid">
-                
                 <!--/span-->
                 <div class="span9" id="content">
                     <div class="row-fluid">
-                        
-                    <div class="row-fluid">
                         <!-- block -->
-                        <div class="block">
+                        <div class="block" style="margin: 4em 0em;">
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left">全文检索</div>
                             </div>
-                            <div class="block-content collapse in">
-                            <div align="center"><input type="text" name="name" data-required="1" class="span5 m-wrap" value="十九大召开" placeholder="实体、事件关键词全文检索"/> 
-								<a href="#"><button class="btn btn-success" style="margin: -10px 0 0 10px;">搜索</i></button></a>
-							</div>
-							</div>
-							<div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">系统互动</div>
-								<div class="muted pull-left" style="float:right;"><i class="icon-heart" style="color:red"></i>加入收藏
-								 &nbsp&nbsp&nbsp可信度判断：<button class="btn btn-success btn-mini">真</button>
-								 <button class="btn btn-danger btn-mini">假</button>
-								 &nbsp&nbsp<button class="btn btn-success btn-mini">点赞</button></div>
-                            </div>
-							<div class="btn-group" style="margin-left:2%;">
-							<button class="btn" style="margin-right: 140px;border:0">选择网站:</button>
-								<button class="btn">全部</button>
-								<button class="btn">微博</button>
-								<button class="btn">天涯</button>
-								<button class="btn">猫扑</button>
-								<button class="btn">豆瓣</button>
-								<button class="btn">搜狐新闻</button>
-							</div>
-							
+                            <form action="<%=basePath%>retrivalResults">
+                                <!-- 判别全文检索 -->
+                                <input type="hidden" name="flag" value="all"/>
+                                <div class="block-content collapse in">
+                                    <div align="center"><input type="text" name="name" data-required="1" class="span5 m-wrap" value="${object.name}">
+                                        <button type="submit" class="btn btn-success" style="margin: -10px 0 0 10px;">搜索</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- /block -->
                     </div>
+                        <form action="<%=basePath%>retrivalResults" method="post">
+                            <!-- 判别条件检索 -->
+                            <input type="hidden" name="flag" value="condition"/>
+                            <input type="hidden" name="objectId" value="${object.objectId}" id="objId"/>
+                            <input type="hidden" name="name" value="${object.name}" id="objName"/>
+                            <input type="hidden" value="<%=basePath%>" id="basePath"/>
+                            <input type="hidden" value="" id="support"/>
+                            <input type="hidden" value="" id="collect"/>
+                            <input type="hidden" value="" id="isTrue"/>
+                            <div class="w1200">
+                            <div class="list-screen">
+                                <div class="screen-top" style="position:relative;">
+                                    <input type="submit" value="搜索" id="submit-btn" style="border: 0;"/>
+                                </div>
+                                <div style="padding:10px 30px 10px 10px;"><div class="screen-address">
+                                    <div class="list-tab">
+                                        <div id="demo1" class="clearfix">
+                                            <div class="jiud-name">网站类型</div>
+                                            <div class="ui-tab-container">
+                                                <ul class="clearfix ui-tab-list">
+                                                    <c:forEach items="${dataDictionarys}" var="d">
+                                                        <li class="">${d.attributeValue}</li>
+                                                    </c:forEach>
+                                                </ul>
+                                                <div class="ui-tab-bd">
+                                                    <c:forEach items="${dataDictionarys}" var="d">
+                                                        <div class="ui-tab-content clearfix" style="display: none;">
+                                                            <c:forEach items="${websites}" var="web">
+                                                                <c:if test="${web.websiteTypeId == d.dataDictionaryId}">
+                                                                    <p>
+                                                                        <label>
+                                                                            <input name="websiteId" type="checkbox" value="${web.websiteId}" />
+                                                                            ${web.websiteName}</label>
+                                                                    </p>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="screen-term">
+                                        <div class="selectNumberScreen">
+                                            <div id="selectList" class="screenBox screenBackground">
+                                                <dl class="listIndex" attr="时间">
+                                                    <dt>时间</dt>
+                                                    <dd>
+                                                        <label><a href="javascript:;" values2="" values1="" attrval="不限">不限</a></label>
+                                                        <label>
+                                                            <input name="time" type="radio" value="day1" />
+                                                            <a href="javascript:;" values2="99" values1="1" attrval="1-99">最近一天</a></label>
+                                                        <label>
+                                                            <input name="time" type="radio" value="week1" />
+                                                            <a href="javascript:;" values2="300" values1="100" attrval="100-300">最近一周 </a></label>
+                                                        <label>
+                                                            <input name="time" type="radio" value="month1" />
+                                                            <a href="javascript:;" values2="600" values1="300" attrval="300-600">最近一月</a></label>
+                                                        <label>
+                                                            <input name="time" type="radio" value="year1" />
+                                                            <a href="javascript:;" values2="1500" values1="600" attrval="5000以上">最近一年</a></label>
+
+                                                    </dd>
+                                                </dl>
+                                                <dl class=" listIndex" attr="terminal_os_s">
+                                                    <dt>相似度</dt>
+                                                    <dd>
+                                                        <label><a href="javascript:;" values2="" values1="" attrval="不限">不限</a></label>
+                                                        <label>
+                                                            <input name="similarDegree" type="radio" value="40" />
+                                                            <a href="javascript:;" values2="99" values1="" attrval="1-99">大于0.4</a></label>
+                                                        <label>
+                                                            <input name="similarDegree" type="radio" value="60" />
+                                                            <a href="javascript:;" values2="300" values1="" attrval="100-300">大于0.6</a></label>
+                                                        <label>
+                                                            <input name="similarDegree" type="radio" value="70" />
+                                                            <a href="javascript:;" values2="600" values1="" attrval="300-600">大于0.7</a></label>
+                                                        <label>
+                                                            <input name="similarDegree" type="radio" value="80" />
+                                                            <a href="javascript:;" values2="1500" values1="" attrval="5000以上">大于0.8</a></label>
+                                                    </dd>
+                                                </dl>
+                                                <dl class=" listIndex" attr="terminal_os_s">
+                                                    <dt>参与度>50</dt>
+                                                    <dd data-more=true>
+                                                        <label><a href="javascript:;" values2="" values1="" attrval="不限">不限</a></label>
+                                                        <label>
+                                                            <input name="partQltyCbx" type="checkbox" value="scanNumber" autocomplete="off"/>
+                                                            <a href="javascript:;" values2="" values1="" attrval="小米">浏览量</a></label>
+                                                        <label>
+                                                            <input name="partQltyCbx" type="checkbox" value="likeNumber" autocomplete="off"/>
+                                                            <a href="javascript:;" values2="" values1="" attrval="华为">点赞量</a> </label>
+                                                        <label>
+                                                            <input name="partQltyCbx" type="checkbox" value="commentNumber" autocomplete="off"/>
+                                                            <a href="javascript:;" values2="" values1="" attrval="华为">评论量</a> </label>
+                                                        <label>
+                                                            <input name="partQltyCbx" type="checkbox" value="collectNumber" autocomplete="off"/>
+                                                            <a href="javascript:;" values2="" values1="" attrval="华为">收藏量</a> </label>
+                                                    </dd>
+                                                </dl>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="hasBeenSelected clearfix">
+                                    <div style="float:right;" class="eliminateCriteria">【清空全部】 </div>
+                                    <dl>
+                                        <dt>已选条件：</dt>
+                                        <dd style="DISPLAY: none" class=clearDd>
+                                            <div class=clearList style="height: 50px; font-size: 12px;"></div>
+                                    </dl>
+                                </div>
+                                <script type="text/javascript" src="js/shaixuan.js"></script>
+                            </div>
+                        </div>
+                        </form>
 					<div class="row-fluid">
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left">检索结果</div>
-								<div class="pull-right"><span class="badge badge-info">1,462</span>
-
-                                </div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                    
   									<div id="example_wrapper" class="dataTables_wrapper form-inline" role="grid">
 									<div class="row"><div class="span6"><div id="example_length" class="dataTables_length">
 									<label>
@@ -165,231 +296,89 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="example" aria-describedby="example_info">
 										<thead>
 											<tr role="row">
-											<th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 206px;">
-											内容</th>
-											<th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 300px;">
-											来源</th>
-											<th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 278px;">
-											相似文章</th>
-											<th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 177px;">
-											时间</th></tr>
+                                                <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 206px;">
+                                                标题</th>
+                                            </tr>
 										</thead>
 										
-									<tbody role="alert" aria-live="polite" aria-relevant="all">
-										<tr class="gradeA odd">
-													<td class="  sorting_1">
-													<div class="zhaiyao">
-									<img src="http://cdn.files.51wyq.cn/web/images/userlogo/app-more-icon-weibo.jpg" class="tx">
-							<div class="tit">
-									<a href="javascript:goView('原文','615087722242420123740026','wb3941998853867431','北京','4','1')">
-											嘉欣5590
-									</a>
-							</div>
-								<div class="summaryDiv">
-								</div>
-									<div class="zfCon">
-										本来我也只是对这个组合保持中立态度，井水不犯河水，各过各的就好了，但是，<font color="red">sunshine组合</font>全国后援会，所说的，真的是伤了四叶草得心，应援色还和三只的一样都是橙色，你们是想干吗？？？@<font color="red">Sunshine组合</font>全国后援会 http://t.cn/R2dyEu9 
-									</div>
-							<div class="tdBottom rel">
-								
-								<div class="handle handle-icon-group float_r">
-									<ul class="">
-										<li class="dropdown dropdown-sm dropdownArrow dropdownArrow-center dropdown_li_line dis-i" data-toggle="tooltip" data-placement="top" title="" data-original-title="分享">
-											<a class="dropdown-toggle js-activated" href="javascript:void(0);" onclick="shareTo(1,'615087722242420123740026',this);" data-toggle="dropdown" aria-expanded="false">
-												<i class="icon-fenxiang-o"></i>
-											</a>
-											<div class="dropdown-menu" style="margin-left: -35px;">
-												<div class="fenxiang clearfix" style="width: 92px;">
-													<a href="javascript:void(0)" class="icon icon_wb" title="微博"></a>
-													<a href="javascript:void(0)" onclick="shareToWeixi(this)" class="icon icon_wx" title="微信"></a>
-													<input type="hidden" value="" style="display: none">
-												</div>
-											</div>
-										</li>
-
-										<li id="icltok_615087722242420123740026" style="display:none;">
-											<a href="javascript:goDeleteSingle('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="已收藏">
-												<i class="icon-heart"></i>
-											</a>
-										</li>
-
-										<li id="ic_615087722242420123740026" style="display:none;">
-											<a href="javascript:goDeleteSingle('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="已收藏">
-												<i class="icon-heart"></i>
-											</a>
-										</li>
-										<li id="iclt_615087722242420123740026">
-											<a class="addCollect orange" href="javascript:void(0);" onmouseover="setSelectIdVal('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="加入收藏">
-												<i class="icon-heart-o"></i>
-											</a>
-										</li>
-
-										<li>
-											<a href="javascript:showMailFrame()" onmouseover="setSelectIdVal('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="邮件">
-												<i class="icon-email-o"></i>
-											</a>
-										</li>
-
-
-									</ul>
-								</div>
-
-							</div>
-						</div>
-						</td>
-						<td class=" ">微博</td>
-						<td class=" ">100+</td>
-						<td class="center ">2017-10-10 11:11:11</td>
-					</tr>
-					<tr class="gradeA odd">
-												<td class="  sorting_1">
-												<div class="zhaiyao">
-                                <img src="http://cdn.files.51wyq.cn/web/images/userlogo/app-more-icon-weibo.jpg" class="tx">
-                        <div class="tit">
-                                <a href="javascript:goView('原文','615087722242420123740026','wb3941998853867431','北京','4','1')">
-                                        嘉欣5590
-                                </a>
-                        </div>
-                            <div class="summaryDiv">
-                            </div>
-                                <div class="zfCon">
-                                    本来我也只是对这个组合保持中立态度，井水不犯河水，各过各的就好了，但是，<font color="red">sunshine组合</font>全国后援会，所说的，真的是伤了四叶草得心，应援色还和三只的一样都是橙色，你们是想干吗？？？@<font color="red">Sunshine组合</font>全国后援会 http://t.cn/R2dyEu9 
-                                </div>
-                        <div class="tdBottom rel">
-                            
-                            <div class="handle handle-icon-group float_r">
-                                <ul class="">
-                                    <li class="dropdown dropdown-sm dropdownArrow dropdownArrow-center dropdown_li_line dis-i" data-toggle="tooltip" data-placement="top" title="" data-original-title="分享">
-                                        <a class="dropdown-toggle js-activated" href="javascript:void(0);" onclick="shareTo(1,'615087722242420123740026',this);" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="icon-fenxiang-o"></i>
-                                        </a>
-                                        <div class="dropdown-menu" style="margin-left: -35px;">
-                                            <div class="fenxiang clearfix" style="width: 92px;">
-                                                <a href="javascript:void(0)" class="icon icon_wb" title="微博"></a>
-                                                <a href="javascript:void(0)" onclick="shareToWeixi(this)" class="icon icon_wx" title="微信"></a>
-                                                <input type="hidden" value="" style="display: none">
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li id="icltok_615087722242420123740026" style="display:none;">
-                                        <a href="javascript:goDeleteSingle('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="已收藏">
-                                            <i class="icon-heart"></i>
-                                        </a>
-                                    </li>
-
-                                    <li id="ic_615087722242420123740026" style="display:none;">
-                                        <a href="javascript:goDeleteSingle('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="已收藏">
-                                            <i class="icon-heart"></i>
-                                        </a>
-                                    </li>
-                                    <li id="iclt_615087722242420123740026">
-                                        <a class="addCollect orange" href="javascript:void(0);" onmouseover="setSelectIdVal('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="加入收藏">
-                                            <i class="icon-heart-o"></i>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="javascript:showMailFrame()" onmouseover="setSelectIdVal('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="邮件">
-                                            <i class="icon-email-o"></i>
-                                        </a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-					</td>
-					<td class=" ">微博</td>
-					<td class=" ">100+</td>
-					<td class="center ">2017-10-10 11:11:11</td>
-				</tr>
-				<tr class="gradeA odd">
-												<td class="  sorting_1">
-												<div class="zhaiyao">
-                                <img src="http://cdn.files.51wyq.cn/web/images/userlogo/app-more-icon-weibo.jpg" class="tx">
-                        <div class="tit">
-                                <a href="javascript:goView('原文','615087722242420123740026','wb3941998853867431','北京','4','1')">
-                                        嘉欣5590
-                                </a>
-                        </div>
-                            <div class="summaryDiv">
-                            </div>
-                                <div class="zfCon">
-                                    本来我也只是对这个组合保持中立态度，井水不犯河水，各过各的就好了，但是，<font color="red">sunshine组合</font>全国后援会，所说的，真的是伤了四叶草得心，应援色还和三只的一样都是橙色，你们是想干吗？？？@<font color="red">Sunshine组合</font>全国后援会 http://t.cn/R2dyEu9 
-                                </div>
-                        <div class="tdBottom rel">
-                            
-                            <div class="handle handle-icon-group float_r">
-                                <ul class="">
-                                    <li class="dropdown dropdown-sm dropdownArrow dropdownArrow-center dropdown_li_line dis-i" data-toggle="tooltip" data-placement="top" title="" data-original-title="分享">
-                                        <a class="dropdown-toggle js-activated" href="javascript:void(0);" onclick="shareTo(1,'615087722242420123740026',this);" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="icon-fenxiang-o"></i>
-                                        </a>
-                                        <div class="dropdown-menu" style="margin-left: -35px;">
-                                            <div class="fenxiang clearfix" style="width: 92px;">
-                                                <a href="javascript:void(0)" class="icon icon_wb" title="微博"></a>
-                                                <a href="javascript:void(0)" onclick="shareToWeixi(this)" class="icon icon_wx" title="微信"></a>
-                                                <input type="hidden" value="" style="display: none">
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li id="icltok_615087722242420123740026" style="display:none;">
-                                        <a href="javascript:goDeleteSingle('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="已收藏">
-                                            <i class="icon-heart"></i>
-                                        </a>
-                                    </li>
-
-                                    <li id="ic_615087722242420123740026" style="display:none;">
-                                        <a href="javascript:goDeleteSingle('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="已收藏">
-                                            <i class="icon-heart"></i>
-                                        </a>
-                                    </li>
-                                    <li id="iclt_615087722242420123740026">
-                                        <a class="addCollect orange" href="javascript:void(0);" onmouseover="setSelectIdVal('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="加入收藏">
-                                            <i class="icon-heart-o"></i>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="javascript:showMailFrame()" onmouseover="setSelectIdVal('615087722242420123740026');" data-toggle="tooltip" data-placement="top" title="" data-original-title="邮件">
-                                            <i class="icon-email-o"></i>
-                                        </a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-					</td>
-					<td class=" ">微博</td>
-					<td class=" ">100+</td>
-					<td class="center ">2017-10-10 11:11:11</td>
-				</tr>
-											
-											</tbody></table><div class="row"><div class="span6"></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="#">← Previous</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a></li><li class="next"><a href="#">Next → </a></li></ul></div></div></div></div>
+									    <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                            <c:forEach items="${articles}" var="a" varStatus="sts">
+                                                <tr class="gradeA odd">
+                                                    <td class="">
+                                                        <a href="<%=basePath%>authorInfo?authorId=${a.authorEntity.authorId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${a.authorEntity.name}</span></a><br>
+                                                        <b><a href="${a.newsResource}" target="_blank">${a.title}</a></b>
+                                                        <div class="pull-right">
+                                                            <span class="badge badge-info" style="background-color: #f89406">${a.similarDegree}</span>
+                                                        </div>
+                                                        <div id="content${sts.index}" class="text" style="">${a.content}</div>
+                                                        <br/>
+                                                            ${a.postTime}
+                                                        <div style="float: right">
+                                                            来自于:${a.websiteEntity.websiteName}
+                                                        </div>
+                                                        <br/>
+                                                        <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${a.commentNumber}</span>
+                                                        浏览量:${a.scanNumber}
+                                                        参与量:${a.participationNumber}
+                                                        喜欢量:${a.likeNumber}
+                                                        推荐量:${a.recommendNumber}
+                                                        收藏量:${a.collectNumber}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div id="comment${sts.index}" style="display: none">
+                                                            <c:forEach items="${a.articleComments}" var="c">
+                                                                <c:if test="${c.fatherCommentId == null}">
+                                                                    <b>${c.authorEntity.name}</b>  <br/>
+                                                                    ${c.content} <br/>
+                                                                    ${c.commentTime}<br/>
+                                                                </c:if>
+                                                                <c:forEach items="${a.articleComments}" var="c2">
+                                                                    <c:if test="${c2.fatherCommentId == c.articleCommentId}">
+                                                                        <div style="margin-left: 3%">
+                                                                                <b>${c2.authorEntity.name}</b> <br/>
+                                                                                    <span style="color: #1a1aa4;;">@${c.authorEntity.name}</span>
+                                                                                ${c2.content} <br/>
+                                                                                ${c2.commentTime}<br/>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:forEach>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+				                        </tbody>
+                                    </table>
+                                        <div class="row"><div class="span6"></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="#">← Previous</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a></li><li class="next"><a href="#">Next → </a></li></ul></div></div></div></div>
                                 </div>
                             </div>
                         </div>
                         <!-- /block -->
                     </div>
-					
+
+                    <script>
+                        function commentShow(index) {
+                            var css = $("#comment"+index).css("display");
+                            if (css == 'none'){
+                                $("#comment"+index).css("display", "");
+                            }else{
+                                $("#comment"+index).css("display", "none");
+                            }
+                        }
+                    </script>
+
                     <div class="row-fluid">
                     </div>
                 </div>
             </div>
-            <hr>
-            <footer>
-                <p>&copy; Vincent Gabriel 2013</p>
-            </footer>
         </div>
-        <!--/.fluid-container-->
-        <script src="vendors/jquery-1.9.1.min.js"></script>
+            <!-- 引入尾部模板 -->
+            <jsp:include page="/static/fore_footer.jsp"></jsp:include>
+
+            <!--/.fluid-container-->
+        <%--<script src="vendors/jquery-1.9.1.min.js"></script>--%>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="assets/scripts.js"></script>
@@ -399,6 +388,86 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $('.chart').easyPieChart({animate: 1000});
         });
         </script>
-    </body>
 
+
+
+    <!--右侧贴边导航quick_links.js控制-->
+    <div class="mui-mbar-tabs">
+        <div class="quick_link_mian">
+            <div class="quick_links_panel">
+                <div id="quick_links" class="quick_links">
+                    <li id="shopCart">
+                        <a href="javascript:void(0);" onclick="" class="message_list" ><i class="message"></i><div class="span">舆情对象操作</div></a>
+                    </li>
+                </div>
+                <div class="quick_toggle">
+
+                    <li><a href="#top" class="return_top"><i class="top"></i></a></li>
+                </div>
+            </div>
+            <div id="quick_links_pop" class="quick_links_pop hide"></div>
+        </div>
+    </div>
+
+    <!--[if lte IE 8]>
+    <script src="js/ieBetter.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="<%=basePath%>foreground/js/parabola.js"></script>
+    <script type="text/javascript">
+        $(".quick_links_panel li").mouseenter(function(){
+            $(this).children(".mp_tooltip").animate({left:-92,queue:true});
+            $(this).children(".mp_tooltip").css("visibility","visible");
+            $(this).children(".ibar_login_box").css("display","block");
+        });
+        $(".quick_links_panel li").mouseleave(function(){
+            $(this).children(".mp_tooltip").css("visibility","hidden");
+            $(this).children(".mp_tooltip").animate({left:-121,queue:true});
+            $(this).children(".ibar_login_box").css("display","none");
+        });
+        $(".quick_toggle li").mouseover(function(){
+            $(this).children(".mp_qrcode").show();
+        });
+        $(".quick_toggle li").mouseleave(function(){
+            $(this).children(".mp_qrcode").hide();
+        });
+
+        // 元素以及其他一些变量
+        var eleFlyElement = document.querySelector("#flyItem"), eleShopCart = document.querySelector("#shopCart");
+        var numberItem = 0;
+        // 抛物线运动
+        var myParabola = funParabola(eleFlyElement, eleShopCart, {
+            speed: 400, //抛物线速度
+            curvature: 0.0008, //控制抛物线弧度
+            complete: function() {
+                eleFlyElement.style.visibility = "hidden";
+                eleShopCart.querySelector("span").innerHTML = ++numberItem;
+            }
+        });
+        // 绑定点击事件
+        if (eleFlyElement && eleShopCart) {
+
+            [].slice.call(document.getElementsByClassName("btnCart")).forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    // 滚动大小
+                    var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+                            scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                    eleFlyElement.style.left = event.clientX + scrollLeft + "px";
+                    eleFlyElement.style.top = event.clientY + scrollTop + "px";
+                    eleFlyElement.style.visibility = "visible";
+                    // 需要重定位
+                    myParabola.position().move();
+                });
+            });
+        }
+    </script>
+
+    <script>
+        var arrObj = [1];
+        $(document).ready(function () {
+            sideInfo(arrObj);
+        });
+    </script>
+
+    </body>
 </html>

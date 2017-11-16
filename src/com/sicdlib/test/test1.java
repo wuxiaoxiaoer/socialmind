@@ -1,9 +1,6 @@
 package com.sicdlib.test;
 
-import com.sicdlib.entity.EntityEntity;
-import com.sicdlib.entity.EventEntity;
-import com.sicdlib.entity.ObjectEntity;
-import com.sicdlib.entity.UserEntity;
+import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
 import edu.xjtsoft.base.orm.support.Page;
 import edu.xjtsoft.base.orm.support.PropertyFilter;
@@ -24,6 +21,7 @@ public class test1 {
     ObjectEntityService objectEntityService = (ObjectEntityService) atx.getBean("objectEntityService");
     EventEntityService eventEntityService = (EventEntityService) atx.getBean("eventEntityService");
     EntityEntityService entityEntityService = (EntityEntityService) atx.getBean("entityEntityService");
+    UserOperaEntityService userOperaEntityService = (UserOperaEntityService) atx.getBean("userOperaEntityService");
     @Test
     public void test(){
         Page<UserEntity> page = new Page<>(10);
@@ -72,5 +70,20 @@ public class test1 {
     @Test
     public void test04(){
         objectEntityService.getObjectIndicators("事件","北京","2016-10-10 12:00:00");
+    }
+
+    @Test
+    public void test05(){
+        PropertyFilter objFilter = new PropertyFilter("name", "十九大召开");
+        Page<ObjectEntity> page = new Page<>(10);
+        page.setPageNo(1);
+        Page<ObjectEntity> objectsPage = objectEntityService.search(page, objFilter);
+        System.out.println(objectsPage.getResult().size());
+    }
+
+    @Test
+    public void test06(){
+        UserOperaEntity userOperaEntity = userOperaEntityService.getUserOpera("7699aee0-c48d-4a92-931c-b44e83d60bc1", "1", "5");
+        System.out.println(userOperaEntity == null);
     }
 }
