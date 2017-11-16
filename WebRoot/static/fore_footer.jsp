@@ -11,6 +11,8 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
+<hr>
 <footer style="text-align: center">
     <p>&copy; sicdpLab 2017 社会智能与复杂数据处理实验室 </p>
 </footer>

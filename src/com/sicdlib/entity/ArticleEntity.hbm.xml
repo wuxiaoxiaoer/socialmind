@@ -1,13 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.ArticleEntity" table="article" schema="socialmind">
         <id name="articleId" column="articleID"/>
         <property name="sourceArticleId" column="sourceArticleID"/>
-        <property name="authorId" column="authorID"/>
         <property name="title" column="title"/>
         <property name="keyWords" column="keyWords"/>
         <property name="content" column="content"/>
@@ -24,7 +22,12 @@
         <property name="trampleNumber" column="trampleNumber"/>
         <property name="newsResource" column="newsResource"/>
         <property name="similarDegree" column="similarDegree"/>
-        <property name="websiteId" column="websiteID"/>
         <many-to-one name="objectEntity" column="objectID"></many-to-one>
+        <many-to-one name="websiteEntity" column="websiteID"></many-to-one>
+        <set name="articleComments">
+            <key column="articleId"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleCommentEntity"></one-to-many>
+        </set>
+        <many-to-one name="authorEntity" column="authorID"></many-to-one>
     </class>
 </hibernate-mapping>
