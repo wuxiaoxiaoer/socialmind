@@ -3,8 +3,3 @@ out/*
 .idea/*
 *.class
 *.iml
-*.log
-*.log.1
-*.log.2
-*.log.3
-*.log.*
