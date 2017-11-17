@@ -21,11 +21,7 @@
 
 <!-- 引入后台头模板-->
 <jsp:include page="/static/admin_header.jsp"></jsp:include>
-
 <!--close-top-Header-menu-->
-
-
-		
 		<div id="content" style="width:100%;height:100%;">
 			<div id="content-header">
 			<div id="breadcrumb">

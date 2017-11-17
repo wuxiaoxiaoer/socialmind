@@ -25,7 +25,7 @@ public class AdminRoleManageController {
 	@Autowired(required=true)
 	private RoleService roleService;
 
-	//后台主页
+	//
 	@RequestMapping("roleManagement")
 	public String roleManage(Model model){
 

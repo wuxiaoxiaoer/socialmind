@@ -1,15 +1,54 @@
 package com.sicdlib.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
 public class SpiderConfigEntity {
     private String spiderConfigId;
+    private String configName;
     private String configTime;
     private String spiderRunTime;
     private String logPath;
     private String filePath;
     private Integer spiderFrequency;
+
+    /** 表之间的映射：一个配置对应多个配置——配置项 */
+    private Set<ConfigConfigitemEntity> configItems = new HashSet<ConfigConfigitemEntity>();
+
+    /** 表之间的映射：一个配置对应多个爬虫 */
+    private Set<SpiderInfoEntity> spiders = new HashSet<SpiderInfoEntity>();
+
+
+
+
+    public Set<SpiderInfoEntity> getSpiders() {
+        return spiders;
+    }
+
+    public void setSpiders(Set<SpiderInfoEntity> spiders) {
+        this.spiders = spiders;
+    }
+
+    public String getConfigName() {
+        return configName;
+    }
+
+    public Set<ConfigConfigitemEntity> getConfigItems() {
+        return configItems;
+    }
+
+    public void setConfigItems(Set<ConfigConfigitemEntity> configItems) {
+        this.configItems = configItems;
+    }
+
+    public void setConfigName(String configName) {
+        this.configName = configName;
+    }
+
+
 
     public String getSpiderConfigId() {
         return spiderConfigId;

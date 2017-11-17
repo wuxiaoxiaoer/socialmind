@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Maruti Admin</title>
+<title>权限管理</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="admin/css/bootstrap.min.css" />
@@ -39,15 +39,33 @@
         <h1>权限管理</h1>
     </div>
 
-    <div class="widget-box" style="width:50%; align: center;">
-        <div class="widget-title">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8">
+
+                <div class="widget-box" >
+                    <div class="widget-title">
+								<span class="icon">
+									<i class="icon-arrow-right"></i>
+								</span>
+                        <h5>增加权限</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        权限逻辑名：<input type="text" id="permissionName">
+                        权限物理名：<input type="text" id="action">
+                        <button class="btn btn-primary"  onclick="addPermission()">新增权限</button>
+                    </div>
+                </div>
+
+            <div class="widget-box" >
+                    <div class="widget-title">
 								<span class="icon">
 									<i class="icon-eye-open"></i>
 								</span>
-            <h5>权限列表</h5>
-        </div>
+                    <h5>权限列表</h5>
+                </div>
         <div class="widget-content nopadding">
-            <table class="table table-bordered">
+            <table class="table table-bordered data-table">
                 <thead>
                 <tr>
                     <th style="display: none;">权限ID</th>
@@ -76,20 +94,10 @@
         </div>
     </div>
 
-    <div class="widget-box" style="width:50%; align: center;">
-        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-arrow-right"></i>
-								</span>
-            <h5>增加权限</h5>
-        </div>
-        <div class="widget-content nopadding">
-            权限逻辑名：<input type="text" id="permissionName">
-            权限物理名：<input type="text" id="action">
-            <button class="btn btn-primary"  onclick="addPermission()">新增权限</button>
+
+            </div>
         </div>
     </div>
-
 
 </div>
 
@@ -157,7 +165,7 @@
         $('#myModal').modal('show');
     }
 
-    /*弹出修改角色*/
+    /*修改角色*/
     function updatePermission(){
         var id = $("#id").val();
         var permissionNewName = $("#permissionNewName").val();

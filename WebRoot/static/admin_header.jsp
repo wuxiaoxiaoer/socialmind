@@ -49,9 +49,9 @@
         <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>首页</span></a></li>
         <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>爬虫</span><span class="label">3</span></a>
             <ul>
-                <li><a href="spiderMonitor.html">爬虫监控</a></li>
-                <li><a href="spiderList.html">爬虫管理</a></li>
-                <li><a href="configList.html">爬虫配置</a></li>
+                <li><a href="<%=basePath%>spiderMonitor">爬虫监控</a></li>
+                <li><a href="<%=basePath%>spiderList">爬虫管理</a></li>
+                <li><a href="<%=basePath%>spiderConfigList">爬虫配置</a></li>
             </ul>
         </li>
         <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>数据清洗</span><span class="label">4</span></a>

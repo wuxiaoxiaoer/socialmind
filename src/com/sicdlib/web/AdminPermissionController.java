@@ -221,39 +221,21 @@ public class AdminPermissionController {
 	 */
 	@RequestMapping("permissionAllot")
 	public String permissionAllot( HttpServletRequest req, HttpServletResponse res) throws IOException{
-
-		System.out.println("permissionAllot###############################  ");
-
 		//获得角色
 		String roleId=req.getParameter("roleId");
-
-		System.out.println("roleID "+roleId);
-
-
 		//获得分配页面所有的分配的权限，包括之前已经分配了的权限，所以要找出来数据库中该角色的权限，先进行删除所有
 		String[] permissionIDList=req.getParameterValues("permissionId");
 		//getParameterValues后面有空格
 
-		System.out.println("permissionIDList  "+permissionIDList.length);
-		System.out.println("permissionAllot###################permissionIDList[0]  "+permissionIDList[0]+"#");
-		System.out.println("permissionAllot###################permissionIDList[0]  "+permissionIDList[0].trim()+"#");
-
-
-
 		//删除该角色下的所有权限
-
 		PropertyFilter filter = new PropertyFilter("roleId",roleId);
 		List<RolePermissionEntity> rolepermissionList = rolePermissionService.search(filter);
-		System.out.println("@@@@@rolepermissionList  "+rolepermissionList.size());
 		for(int i=0;i<rolepermissionList.size();i++) {
-
-			System.out.println("@@@@@@rolepermissionList.get(i).getRolePermissionId()  "+rolepermissionList.get(i).getRolePermissionId());
-			rolePermissionService.remove(rolepermissionList.get(i).getRolePermissionId());
+		rolePermissionService.remove(rolepermissionList.get(i).getRolePermissionId());
 		}
 
 
 		//为该角色重新添加权限
-
 		for(int i=0;i<permissionIDList.length;i++) {
 			RolePermissionEntity rolePermission =new RolePermissionEntity();
 			rolePermission.setRolePermissionId(UUID.randomUUID().toString());
@@ -261,11 +243,6 @@ public class AdminPermissionController {
 			rolePermission.setRoleId(roleId);
 			rolePermissionService.saveOrUpdate(rolePermission);
 		}
-
-		PrintWriter out = res.getWriter();
-
-		out.print("success");
-
 
 		return "redirect:/toPermissionAllot";
 	}
