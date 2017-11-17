@@ -329,13 +329,13 @@ public class DataCleanService {
             case "25":{
                 util.deleteRowWithRegex(currentTable,currentColumn,oldValue);
             }
-            //删除重复的行
+            //针对一列删除重复的行
             case "26":{
-
+                util.deleteRepeatRow(currentTable,currentColumn);
             }
             //统一为xxxx-xx-xx xx:xx:xx
             case "27":{
-                util.
+
             }
 
         //该列重置
