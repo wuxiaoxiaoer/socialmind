@@ -120,6 +120,30 @@ public class PhoenixUtil{
         return true;
     }
 
+    //根据某列的值去掉重复的行
+    public Boolean deleteRepeatRow(String tableName,String columnName){
+        PhoenixUtil util =new PhoenixUtil();
+        try{
+            Connection conn =util.GetConnection();
+            // check connection
+            if (conn == null) {
+                System.out.println("conn is null...");
+                return false;
+            }
+            String sql = "DELETE FROM \""+tableName+"\" WHERE \""+columnName+"\" in (SELECT \""+columnName+"\" FROM \""+tableName+"\" GROUP BY \""+columnName+"\" HAVING COUNT(\""+columnName+"\" >1) AND \"PK\" not in (SELECT MIN(\"PK\") FROM \""+tableName+"\" GROUP BY \""+columnName+"\" HAVING COUNT(*)>1)";
+            PreparedStatement stmt =conn.prepareStatement(sql);
+            //如何判断删除成功或失败?
+            int msg =stmt.executeUpdate();
+            conn.commit();
+            stmt.close();
+            conn.close();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 
     //删除一列
     public Boolean deleteColumn(String tableName,String columnName) {

@@ -10,12 +10,13 @@ import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 反射的Utils函数集合.
- * 
+ *
  * 提供访问私有变量,获取范型类型Class,提取集合中元素的属性等Utils函数.
  */
 public class ReflectionUtil {
@@ -139,7 +140,7 @@ public class ReflectionUtil {
 
 	/**
 	 * 提取集合中的对象的属性,组合成List.
-	 * 
+	 *
 	 * @param collection 来源集合.
 	 * @param propertityName 要提取的属性名.
 	 */
@@ -158,7 +159,7 @@ public class ReflectionUtil {
 
 	/**
 	 * 提取集合中的对象的属性,组合成由分割符分隔的字符串.
-	 * 
+	 *
 	 * @param collection 来源集合.
 	 * @param propertityName 要提取的属性名.
 	 * @param separator 分隔符.

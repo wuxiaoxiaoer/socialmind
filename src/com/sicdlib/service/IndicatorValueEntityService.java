@@ -2,11 +2,19 @@ package com.sicdlib.service;
 
 import com.sicdlib.entity.IndicatorValueEntity;
 import com.sicdlib.entity.UserEntity;
+import com.sicdlib.util.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -37,6 +45,29 @@ public class IndicatorValueEntityService extends DefaultEntityManager<IndicatorV
                 + "and startTime > '"+startTime+"' and endTime < '" + endTime + "'";
         List<IndicatorValueEntity> indicators = getEntityDao().find(hql);
         return indicators;
+    }
+
+    public List getObjectArea(String objectId){
+
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            Statement statement = conn.createStatement();
+            String sql = "select i.dimensionValue,SUM(i.indicatorValue) from indicator_value i where i.objectID ='" +objectId+"' AND i.indexName=\"地域\" GROUP BY i.dimensionValue";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("name",rs.getString(1));
+                map.put("value",rs.getInt(2));
+                list.add(map);
+            }
+
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

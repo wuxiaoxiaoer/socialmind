@@ -113,20 +113,39 @@ public class UserEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
 
         UserEntity that = (UserEntity) o;
 
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (registrantId != null ? !registrantId.equals(that.registrantId) : that.registrantId != null) return false;
-        if (userType != null ? !userType.equals(that.userType) : that.userType != null) return false;
-        if (isAuthenticated != null ? !isAuthenticated.equals(that.isAuthenticated) : that.isAuthenticated != null)
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null){
             return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        }
+        if (userName != null ? !userName.equals(that.userName) : that.userName != null){
+            return false;
+        }
+        if (password != null ? !password.equals(that.password) : that.password != null){
+            return false;
+        }
+        if (email != null ? !email.equals(that.email) : that.email != null){
+            return false;
+        }
+        if (registrantId != null ? !registrantId.equals(that.registrantId) : that.registrantId != null){
+            return false;
+        }
+        if (userType != null ? !userType.equals(that.userType) : that.userType != null){
+            return false;
+        }
+        if (isAuthenticated != null ? !isAuthenticated.equals(that.isAuthenticated) : that.isAuthenticated != null){
+            return false;
+        }
+        if (address != null ? !address.equals(that.address) : that.address != null){
+            return false;
+        }
         return role != null ? role.equals(that.role) : that.role == null;
 
     }

@@ -1,5 +1,6 @@
 package com.sicdlib.service;
 
+import com.sicdlib.entity.EventEntity;
 import com.sicdlib.entity.ObjectEntity;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,20 @@ public class ObjectEntityService extends DefaultEntityManager<ObjectEntity> {
         String hql = "from ObjectEntity o where o.objectType = '"+ objectType +  "' and place like '%"+ place +"' and o.addTime > '"+ addTime +"'";
         List<ObjectEntity> objects = getEntityDao().find(hql);
         return objects;
+    }
+
+    //前台查找对象
+    public List<ObjectEntity> findObject(){
+        String hql = "from ObjectEntity o";
+        List<ObjectEntity> object = getEntityDao().find(hql);
+        return object;
+    }
+
+    //前台查找对象
+    public List<ObjectEntity> findObjectInfo(String objectId){
+        String hql = "from ObjectEntity o where o.objectId = '" +objectId+"'";
+        List<ObjectEntity> objectInfo = getEntityDao().find(hql);
+        return objectInfo;
     }
 
 }

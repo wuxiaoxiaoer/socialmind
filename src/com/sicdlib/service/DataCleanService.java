@@ -1,9 +1,20 @@
 package com.sicdlib.service;
 
 
+import com.eharmony.pho.api.DataStoreApi;
+import com.eharmony.pho.query.builder.QueryBuilder;
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+
+
+import com.sicdlib.util.PhoenixUtil.MapToJson;
 import com.sicdlib.util.PhoenixUtil.PhoenixUtil;
 import com.sicdlib.util.PhoenixUtil.SpecialPhoenixUtil;
 import org.apache.hadoop.hbase.snapshot.CreateSnapshot;
+import org.hibernate.sql.Select;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -318,13 +329,13 @@ public class DataCleanService {
             case "25":{
                 util.deleteRowWithRegex(currentTable,currentColumn,oldValue);
             }
-            //删除重复的行
+            //针对一列删除重复的行
             case "26":{
-
+                util.deleteRepeatRow(currentTable,currentColumn);
             }
             //统一为xxxx-xx-xx xx:xx:xx
             case "27":{
-//                util.
+
             }
 
         //该列重置
