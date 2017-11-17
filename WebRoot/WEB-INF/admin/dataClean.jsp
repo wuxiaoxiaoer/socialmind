@@ -311,27 +311,36 @@
 //
 //        })
 //    }
+    //清洗过程函数，参数为不同清洗方法的id，要清洗的值或正则表达式，要替换为的新值
     function cleanProcess(strategyID){
           //获取当前的表明和列名
           var currentTable =$("#currentTable").text();
           var currentColumn =$("#currentHead").text();
+          var oldValue =document.getElementById("oldValue").value;
+          var newValue =document.getElementById("newValue").value;
           if (currentTable=="当前表名" ){
               alert("请先选择您要清洗的表");
           }else if (currentColumn=="点击表格上的字段开始操作"){
               alert("清选择您要清洗的列（直接在表格上点击列的任一项");
-          }else {
+          }else if(strategyID=="16"&&newValue==""){
+              alert("请先输入自定义的填充值");
+          }else if(strategyID=="22"&&(newValue==""||oldValue=="")){
+              alert("请先输入自定义的值");
+          }else if(strategyID=="23"&&(newValue==""||oldValue=="")){
+              alert("请先输入自定义的值");
+          }else{
               $.post("cleanProcessAction",
                   {
                       currentTable: currentTable,
                       currentColumn: currentColumn,
-                      strategyID: strategyID
+                      strategyID: strategyID,
+                      oldValue:oldValue,
+                      newValue:newValue
                   },
                   function (data, status) {
-                    alert(status);
+                  //修改内容后重新展示
                       display(currentTable);
-                      alert(1);
                       editData("",currentTable,currentColumn);
-                      alert(2);
                   });
           }
     }
@@ -547,9 +556,9 @@
                 <div class="whead">
                   <h6><i class="fa fa-cloud"></i> 数据清洗策略的选择</h6>
                   <div class="btn-group">
-                    <a href="" class="btn btn-primary" class="btn btn-default" data-message=""><i class="fa fa-share"></i> 撤销</a>
-                    <a href="" class="btn btn-info" data-message=""><i class="fa fa-plus"></i> 保存</a>
-                    <a href="" class="btn btn-default" data-message=""><i class="fa fa-home"></i> 生成版本</a>
+                    <a onclick='cleanProcess("resetColumn")' class="btn btn-primary" class="btn btn-default" data-message="">重置此列</a>
+                    <%--<a onclick='cleanProcess("resetTable")' class="btn btn-info" data-message="">重置此表</a>--%>
+                    <%--<a href="" class="btn btn-default" data-message=""><i class="fa fa-home"></i> 生成版本</a>--%>
                   </div>
                 </div>
                 <div class="wbody">
@@ -641,10 +650,18 @@
                             </ul>
                           </div>
                       </td>
-
-                      <%--<td><input type="text" class="form-control"/></td>--%>
                     </tr>
-
+                    <tr>
+                      <td colspan="2"><div class="whead"><h6>如果要替换自定义值，请先在下面填入，再点击清洗策略进行对应清洗操作</h6></div></td>
+                    </tr>
+                    <tr>
+                      <td>要替换的子字符串（字符串错误\行操作）</td>
+                      <td><input id="oldValue" type="text" class="form-control autocomplete" placeholder="要替换掉的子字符串\正则表达式"/></td>
+                    </tr>
+                    <tr>
+                      <td>替换为（缺失值\字符串错误）</td>
+                      <td><input id="newValue" type="text"  class="form-control autocomplete" data-source="etldemodata/autocomplete.json" placeholder="填充指定值\要替换成的新值"/></td>
+                    </tr>
                     <%--下面这两组原来不可见，动态生成，当点击替换制定字符串时显示前两个并要求填入，如果选择正则则显示后两个--%>
                     <%--
                     <tr>
