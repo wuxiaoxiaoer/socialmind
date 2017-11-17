@@ -1,5 +1,7 @@
 package com.sicdlib.entity;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ public class SpiderConfigEntity {
     private Integer spiderFrequency;
 
     /** 表之间的映射：一个配置对应多个配置——配置项 */
+    @JsonIgnore
     private Set<ConfigConfigitemEntity> configItems = new HashSet<ConfigConfigitemEntity>();
 
     /** 表之间的映射：一个配置对应多个爬虫 */
