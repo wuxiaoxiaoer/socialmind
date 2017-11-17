@@ -557,7 +557,7 @@
                   <h6><i class="fa fa-cloud"></i> 数据清洗策略的选择</h6>
                   <div class="btn-group">
                     <a onclick='cleanProcess("resetColumn")' class="btn btn-primary" class="btn btn-default" data-message="">重置此列</a>
-                    <a href='cleanProcess("resetTable")' class="btn btn-info" data-message="">重置此表</a>
+                    <%--<a onclick='cleanProcess("resetTable")' class="btn btn-info" data-message="">重置此表</a>--%>
                     <%--<a href="" class="btn btn-default" data-message=""><i class="fa fa-home"></i> 生成版本</a>--%>
                   </div>
                 </div>
@@ -655,7 +655,7 @@
                       <td colspan="2"><div class="whead"><h6>如果要替换自定义值，请先在下面填入，再点击清洗策略进行对应清洗操作</h6></div></td>
                     </tr>
                     <tr>
-                      <td>要替换的子字符串（字符串错误）</td>
+                      <td>要替换的子字符串（字符串错误\行操作）</td>
                       <td><input id="oldValue" type="text" class="form-control autocomplete" placeholder="要替换掉的子字符串\正则表达式"/></td>
                     </tr>
                     <tr>

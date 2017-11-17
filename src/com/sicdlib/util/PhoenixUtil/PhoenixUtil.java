@@ -216,11 +216,11 @@ public class PhoenixUtil{
                 totleRow=result.getInt(1);
             }
             //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
-            if (totleRow >400000){
+
                 for (int i=0;i<totleRow;i+=400000){
 //                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
 //                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
-                    String sql ="UPSERT INTO \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '"+replaceRegex+"', '"+replaceTo+"') FROM \""+tableName+"\" LIMIT 400000 OFFSET "+i;
+                    String sql ="UPSERT INTO \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\""+columnName+"\", '"+replaceRegex+"', '"+replaceTo+"') FROM \""+tableName+"\" LIMIT 400000 OFFSET "+i;
                     PreparedStatement ps2 = conn.prepareStatement(sql);
 
                     // execute upsert
@@ -234,7 +234,7 @@ public class PhoenixUtil{
                         return false;
                     }
                 }
-            }
+
         } catch (SQLException e) {
             //报错未必不执行，如socket超时，因此不在这里retrun false
             e.printStackTrace();

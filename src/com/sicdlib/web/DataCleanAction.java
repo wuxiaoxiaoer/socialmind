@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,20 +69,28 @@ public class DataCleanAction {
         response.setContentType("text/text");          //设置请求以及响应的内容类型以及编码方式
         String tableName =request.getParameter("tableName");
         String columnName =request.getParameter("column");
-        Map<String,Integer> orderResult = dataCleanService.getOrder(tableName,columnName);
+        LinkedHashMap<String,Integer> orderResult = dataCleanService.getOrder(tableName,columnName);
 
         System.out.println("controller中的result:"+orderResult);
+        PrintWriter out = response.getWriter();       //向客户端发送字符数据
+        try{
 
-        PrintWriter out=response.getWriter();       //向客户端发送字符数据
 
 //        Gson gson = new Gson();
 ////        String strHead = gson.toJson(tHeadValue);
 //        String strBody = gson.toJson(result.get(0));
-        JSONObject jsonObject = JSONObject.fromObject(orderResult);
-        System.out.println("输出的结果是：" + jsonObject);
-        //3、将json对象转化为json字符串
-        String result = jsonObject.toString();
-        out.write(result);
+
+            JSONObject jsonObject = JSONObject.fromObject(orderResult);
+            System.out.println("输出的结果是：" + jsonObject);
+            //3、将json对象转化为json字符串
+            String result = jsonObject.toString();
+            out.write(result);
+        }catch(Exception e){
+            System.out.println(e);
+            System.out.println("函数getOrder得到的map键有空值");
+        }finally {
+            return;
+        }
     }
 
     @RequestMapping("/admin/cleanProcessAction")

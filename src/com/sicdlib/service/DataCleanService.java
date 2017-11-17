@@ -238,7 +238,7 @@ public class DataCleanService {
 
     //清洗方法执行,12,14,15这三个方法仅仅sql不同，可考虑抽象出一个公共函数
     public Boolean doClean(String currentTable, String  currentColumn, String strategyID, String oldValue, String newValue){
-        String sourceTable=currentColumn+"_reset";
+        String sourceTable=currentTable+"_reset";
         switch (strategyID)
         {
             /*空值的处理*/
@@ -285,11 +285,51 @@ public class DataCleanService {
                 break;
             }
             /*错误字符串的处理*/
+            //删除该列
             case "17":{
+                util.deleteColumn(currentTable,currentColumn);
                 break;
             }
+            //删除字符串中的空格
+            case "18":{
+                util.upsertColumnWithRegex(currentTable,currentColumn," ","");
+                util.upsertColumnWithRegex(currentTable,currentColumn,"\t","");
+                util.upsertColumnWithRegex(currentTable,currentColumn,"\r","");
+                break;
+            }
+            //删除字符串中的\n
+            case "19":{
+                util.upsertColumnWithRegex(currentTable,currentColumn,"\n","");
+                break;
+            }
+            //删除字符串中的双标签以及其中的值
+            case "20":{
+                util.upsertColumnWithRegex(currentTable,currentColumn,"<.*?>.*?<.*?>","");
+                break;
+            }
+            //删除字符串中的单标签及其中的值
+            case "21":{
+                util.upsertColumnWithRegex(currentTable,currentColumn,"<.*?>","");
+                break;
+            }
+            //修改某特定字符串
+            case "22":{
+                util.upsertColumn(currentTable,currentColumn,oldValue,newValue);
+            }
+            //正则修改某字符串
+            case "23":{
+                util.upsertColumnWithRegex(currentTable,currentColumn,oldValue,newValue);
+            }
+            /*行操作*/
+            //删除某字段包含特定字符串的所有行
+            case "24":{
+                util.deleteRow(currentTable,currentColumn,oldValue);
+            }
+            //
+            case "25":{
 
-            //该列重置
+            }
+        //该列重置
             case "resetColumn":
             {
                 specialPhoenixUtil.resetColumn(currentTable, sourceTable,currentColumn);
@@ -299,6 +339,7 @@ public class DataCleanService {
             case "resetTable":
             {
                 specialPhoenixUtil.resetTable(currentTable,sourceTable);
+                break;
             }
         }
         return true;
