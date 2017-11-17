@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <head>
 		<base href="<%=basePath%>foreground/"/>
-        <title>Interface</title>
+        <title>文章作者个人中心</title>
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -42,7 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <!--/span-->
                 <div class="span9" id="content">
-
                     <div class="row-fluid">
                         <div class="span12">
                             <!-- block -->
@@ -50,6 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">个人中心</div>
                                 </div>
+
                                 <div class="block-content collapse in">
                                     <div class="span12">
 										<h4>基本信息</h4>
@@ -70,7 +70,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												  <span class="label">姓名</span>
 												</td>
 												<td>
-												  <code>${authorEntity.name}</code>
+												  <code style="font-size: 18px;">
+													  <b>${authorEntity.name} </b>
+													  <c:forEach items="${authorEntity.articles}" var="a" varStatus="sts">
+														<c:if test="${sts.index == 0}">(${a.websiteEntity.websiteName})</c:if>
+													  </c:forEach>
+												  </code>
 												</td>
 
 												  <td>
@@ -274,21 +279,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 																			收藏量:${a.collectNumber}
 																		</td>
 																	</tr>
-																	<tr>
+																	<tr style="background-color: #bce8f1">
 																		<td>
 																			<div id="comment${sts.index}" style="display: none">
-																				<c:forEach items="${a.comments}" var="c">
-																					<c:if test="${c.fathercommentId == null}">
-																						<b>${c.authorEntity.name}</b>  <br/>
-																						${c.commentContent} <br/>
+																				<c:forEach items="${a.articleComments}" var="c">
+																					<c:if test="${c.fatherCommentId == null}">
+																						<a href="<%=basePath%>authorInfo?authorId=${c.authorEntity.authorId}" class="badge badge-info"><b>${c.authorEntity.name}</b></a>  <br/>
+																						${c.content} <br/>
 																						${c.commentTime}<br/>
 																					</c:if>
-																					<c:forEach items="${a.comments}" var="c2">
-																						<c:if test="${c2.fathercommentId == c.commentId}">
+																					<c:forEach items="${a.articleComments}" var="c2">
+																						<c:if test="${c2.fatherCommentId == c.articleCommentId}">
 																							<div style="margin-left: 3%">
-																								<b>${c2.authorEntity.name}</b> <br/>
+																								<a href="<%=basePath%>authorInfo?authorId=${c2.authorEntity.authorId}" class="badge badge-info"><b>${c2.authorEntity.name}</b></a> <br/>
 																								<span style="color: #1a1aa4;;">@${c.authorEntity.name}</span>
-																									${c2.commentContent} <br/>
+																									${c2.content} <br/>
 																									${c2.commentTime}<br/>
 																							</div>
 																						</c:if>
@@ -341,7 +346,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 																</thead>
 
 																<tbody role="alert" aria-live="polite" aria-relevant="all">
-																<c:forEach items="${authorEntity.comments}" var="c" varStatus="sts">
+																<c:forEach items="${authorEntity.articleComments}" var="c" varStatus="sts">
 																	<tr class="gradeA odd">
 																		<td class="">
 																			<b><a href="<%=basePath%>authorInfo?authorId=${c.authorEntity.authorId}" target="_blank">${c.authorEntity.name}</a></b><br>
@@ -364,8 +369,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 																		<td>
 																			<div id="comment${sts.index}"style="margin-left:40px;">
 																				<b>${c.authorEntity.name}</b>  <br/>
-																				${c.commentContent} <br/>
-																				${c.commentTime}<br/>
+																				${c.content} <br/>
+																				<span>点赞量：${c.likeNumber}</span>
+																				<span style="margin-left: 10px;">回复量：${c.likeNumber}</span>
+																				<span style="margin-left: 10px;">${c.commentTime}</span><br/>
 																			</div>
 																		</td>
 																	</tr>
