@@ -325,10 +325,19 @@ public class DataCleanService {
             case "24":{
                 util.deleteRow(currentTable,currentColumn,oldValue);
             }
-            //
+            //正则匹配一列修改符合条件的行
             case "25":{
+                util.deleteRowWithRegex(currentTable,currentColumn,oldValue);
+            }
+            //删除重复的行
+            case "26":{
 
             }
+            //统一为xxxx-xx-xx xx:xx:xx
+            case "27":{
+                util.
+            }
+
         //该列重置
             case "resetColumn":
             {
