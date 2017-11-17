@@ -2,10 +2,7 @@ package com.sicdlib.web;
 
 import com.alibaba.fastjson.JSON;
 import com.sicdlib.entity.*;
-import com.sicdlib.service.ArticleEntityService;
-import com.sicdlib.service.EventEntityService;
-import com.sicdlib.service.ObjectEntityService;
-import com.sicdlib.service.WebsiteEntityService;
+import com.sicdlib.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +27,11 @@ public class EventAction {
     @Autowired
     private ArticleEntityService articleEntityService;
     @Autowired
+    private AuthorEntityService authorEntityService;
+    @Autowired
     private WebsiteEntityService websiteEntityService;
+    @Autowired
+    private IndicatorValueEntityService indicatorValueEntityService;
 
     //查找事件列表
     @RequestMapping("all")
@@ -76,7 +77,10 @@ public class EventAction {
         List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
         List<Map> keywords = articleEntityService.findKeywords(objectId);
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
+        List<AuthorEntity> hotAuthor = authorEntityService.findHotAuthor(objectId);
         List periodList = articleEntityService.findPeriod(objectId);
+
+        List hotInformation = articleEntityService.findHotInformation(objectId);
         List<WebsiteEntity> webs = websiteEntityService.findWebsite();
         System.out.println("webs:"+webs.toString());
         System.out.println("webs to json"+JSON.toJSON(webs));
@@ -104,11 +108,15 @@ public class EventAction {
         }
 
         List mediaSource = websiteEntityService.findMediaSource(objectId);
+        List areaSource = indicatorValueEntityService.getObjectArea(objectId);
         System.out.println("json de keywords:"+JSON.toJSON(keywords));
         mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
+        mode.addAttribute("areaSource", JSON.toJSON(areaSource));
         mode.addAttribute("periodList", JSON.toJSON(periodList));
         mode.addAttribute("webs",JSON.toJSON(webs));
         mode.addAttribute("artileList", artileList);
+        mode.addAttribute("hotInformation", hotInformation);
+        mode.addAttribute("hotAuthor", hotAuthor);
         mode.addAttribute("keywords", JSON.toJSON(keywords).toString());
         mode.addAttribute("event", event);
         return "/WEB-INF/foreground/eventInfo";
