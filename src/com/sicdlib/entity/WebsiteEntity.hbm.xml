@@ -10,5 +10,10 @@
         <property name="websiteUrl" column="websiteURL"/>
         <property name="containTableId" column="containTableID"/>
         <property name="websiteTypeId" column="websiteTypeID"/>
+        <!-- 一个网站对应多个文章 -->
+        <set name="articles">
+            <key column="websiteID"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

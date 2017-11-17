@@ -23,6 +23,26 @@ public class ObjectEntity {
     private Set<IndicatorValueEntity> indicatorValues = new HashSet<>();
     /** 一个对象对应着多个文章 */
     private Set<ArticleEntity> articles = new HashSet<>();
+    /** 一个对象包含对个用户操作*/
+    private Set<UserOperaEntity> userOperas = new HashSet<>();
+    /** 一个对象包含多个评论 */
+    private Set<CommentEntity> comments = new HashSet<>();
+
+    public Set<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentEntity> comments) {
+        this.comments = comments;
+    }
+
+    public Set<UserOperaEntity> getUserOperas() {
+        return userOperas;
+    }
+
+    public void setUserOperas(Set<UserOperaEntity> userOperas) {
+        this.userOperas = userOperas;
+    }
 
     public Set<ArticleEntity> getArticles() {
         return articles;

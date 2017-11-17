@@ -115,7 +115,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                 </div>
             </div>
-            <hr>
 
             <!-- 引入尾部模板 -->
             <jsp:include page="/static/fore_footer.jsp"></jsp:include>

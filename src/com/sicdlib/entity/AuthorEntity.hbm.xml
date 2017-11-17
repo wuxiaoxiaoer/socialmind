@@ -40,5 +40,13 @@
         <property name="qq" column="QQ"/>
         <property name="bloodType" column="bloodType"/>
         <property name="isBigV" column="isBigV"/>
+        <set name="articles">
+            <key column="authorId"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleEntity"></one-to-many>
+        </set>
+        <set name="articleComments">
+            <key column="authorId"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleCommentEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

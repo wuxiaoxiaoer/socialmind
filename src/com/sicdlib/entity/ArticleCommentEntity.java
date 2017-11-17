@@ -15,6 +15,27 @@ public class ArticleCommentEntity {
     private String articleId;
     private String fatherCommentId;
 
+    /** 多个评论对应一个文章 */
+    private ArticleEntity articleEntity;
+    /** 多个评论对应一个作者*/
+    private AuthorEntity authorEntity;
+
+    public ArticleEntity getArticleEntity() {
+        return articleEntity;
+    }
+
+    public void setArticleEntity(ArticleEntity articleEntity) {
+        this.articleEntity = articleEntity;
+    }
+
+    public AuthorEntity getAuthorEntity() {
+        return authorEntity;
+    }
+
+    public void setAuthorEntity(AuthorEntity authorEntity) {
+        this.authorEntity = authorEntity;
+    }
+
     public String getArticleCommentId() {
         return articleCommentId;
     }

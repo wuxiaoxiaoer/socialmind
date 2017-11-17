@@ -1,5 +1,8 @@
 package com.sicdlib.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
@@ -39,6 +42,26 @@ public class AuthorEntity {
     private String qq;
     private String bloodType;
     private Byte isBigV;
+    /** 一个作者对应多个文章 */
+    private Set<ArticleEntity> articles = new HashSet<>();
+    /** 一个作者包含多个评论*/
+    private Set<ArticleCommentEntity> articleComments = new HashSet<>();
+
+    public Set<ArticleCommentEntity> getArticleComments() {
+        return articleComments;
+    }
+
+    public void setArticleComments(Set<ArticleCommentEntity> articleComments) {
+        this.articleComments = articleComments;
+    }
+
+    public Set<ArticleEntity> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<ArticleEntity> articles) {
+        this.articles = articles;
+    }
 
     public String getAuthorId() {
         return authorId;
@@ -320,96 +343,4 @@ public class AuthorEntity {
         this.isBigV = isBigV;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AuthorEntity that = (AuthorEntity) o;
-
-        if (authorId != null ? !authorId.equals(that.authorId) : that.authorId != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (sex != null ? !sex.equals(that.sex) : that.sex != null) return false;
-        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (focusNumber != null ? !focusNumber.equals(that.focusNumber) : that.focusNumber != null) return false;
-        if (fansNumber != null ? !fansNumber.equals(that.fansNumber) : that.fansNumber != null) return false;
-        if (age != null ? !age.equals(that.age) : that.age != null) return false;
-        if (friendNumber != null ? !friendNumber.equals(that.friendNumber) : that.friendNumber != null) return false;
-        if (replayNumber != null ? !replayNumber.equals(that.replayNumber) : that.replayNumber != null) return false;
-        if (clickNumber != null ? !clickNumber.equals(that.clickNumber) : that.clickNumber != null) return false;
-        if (loginNumber != null ? !loginNumber.equals(that.loginNumber) : that.loginNumber != null) return false;
-        if (introduction != null ? !introduction.equals(that.introduction) : that.introduction != null) return false;
-        if (registrationTime != null ? !registrationTime.equals(that.registrationTime) : that.registrationTime != null)
-            return false;
-        if (educationBackground != null ? !educationBackground.equals(that.educationBackground) : that.educationBackground != null)
-            return false;
-        if (career != null ? !career.equals(that.career) : that.career != null) return false;
-        if (elitePostNumber != null ? !elitePostNumber.equals(that.elitePostNumber) : that.elitePostNumber != null)
-            return false;
-        if (score != null ? !score.equals(that.score) : that.score != null) return false;
-        if (onlineTime != null ? !onlineTime.equals(that.onlineTime) : that.onlineTime != null) return false;
-        if (fameDegree != null ? !fameDegree.equals(that.fameDegree) : that.fameDegree != null) return false;
-        if (lastLoginTime != null ? !lastLoginTime.equals(that.lastLoginTime) : that.lastLoginTime != null)
-            return false;
-        if (workUnit != null ? !workUnit.equals(that.workUnit) : that.workUnit != null) return false;
-        if (updateArticalTime != null ? !updateArticalTime.equals(that.updateArticalTime) : that.updateArticalTime != null)
-            return false;
-        if (phoneNumber != null ? !phoneNumber.equals(that.phoneNumber) : that.phoneNumber != null) return false;
-        if (reputation != null ? !reputation.equals(that.reputation) : that.reputation != null) return false;
-        if (getReward != null ? !getReward.equals(that.getReward) : that.getReward != null) return false;
-        if (giveReward != null ? !giveReward.equals(that.giveReward) : that.giveReward != null) return false;
-        if (isCertification != null ? !isCertification.equals(that.isCertification) : that.isCertification != null)
-            return false;
-        if (portraitUrl != null ? !portraitUrl.equals(that.portraitUrl) : that.portraitUrl != null) return false;
-        if (realName != null ? !realName.equals(that.realName) : that.realName != null) return false;
-        if (sexualOrientation != null ? !sexualOrientation.equals(that.sexualOrientation) : that.sexualOrientation != null)
-            return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (qq != null ? !qq.equals(that.qq) : that.qq != null) return false;
-        if (bloodType != null ? !bloodType.equals(that.bloodType) : that.bloodType != null) return false;
-        if (isBigV != null ? !isBigV.equals(that.isBigV) : that.isBigV != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = authorId != null ? authorId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (sex != null ? sex.hashCode() : 0);
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (focusNumber != null ? focusNumber.hashCode() : 0);
-        result = 31 * result + (fansNumber != null ? fansNumber.hashCode() : 0);
-        result = 31 * result + (age != null ? age.hashCode() : 0);
-        result = 31 * result + (friendNumber != null ? friendNumber.hashCode() : 0);
-        result = 31 * result + (replayNumber != null ? replayNumber.hashCode() : 0);
-        result = 31 * result + (clickNumber != null ? clickNumber.hashCode() : 0);
-        result = 31 * result + (loginNumber != null ? loginNumber.hashCode() : 0);
-        result = 31 * result + (introduction != null ? introduction.hashCode() : 0);
-        result = 31 * result + (registrationTime != null ? registrationTime.hashCode() : 0);
-        result = 31 * result + (educationBackground != null ? educationBackground.hashCode() : 0);
-        result = 31 * result + (career != null ? career.hashCode() : 0);
-        result = 31 * result + (elitePostNumber != null ? elitePostNumber.hashCode() : 0);
-        result = 31 * result + (score != null ? score.hashCode() : 0);
-        result = 31 * result + (onlineTime != null ? onlineTime.hashCode() : 0);
-        result = 31 * result + (fameDegree != null ? fameDegree.hashCode() : 0);
-        result = 31 * result + (lastLoginTime != null ? lastLoginTime.hashCode() : 0);
-        result = 31 * result + (workUnit != null ? workUnit.hashCode() : 0);
-        result = 31 * result + (updateArticalTime != null ? updateArticalTime.hashCode() : 0);
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (reputation != null ? reputation.hashCode() : 0);
-        result = 31 * result + (getReward != null ? getReward.hashCode() : 0);
-        result = 31 * result + (giveReward != null ? giveReward.hashCode() : 0);
-        result = 31 * result + (isCertification != null ? isCertification.hashCode() : 0);
-        result = 31 * result + (portraitUrl != null ? portraitUrl.hashCode() : 0);
-        result = 31 * result + (realName != null ? realName.hashCode() : 0);
-        result = 31 * result + (sexualOrientation != null ? sexualOrientation.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (qq != null ? qq.hashCode() : 0);
-        result = 31 * result + (bloodType != null ? bloodType.hashCode() : 0);
-        result = 31 * result + (isBigV != null ? isBigV.hashCode() : 0);
-        return result;
-    }
 }
