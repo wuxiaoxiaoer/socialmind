@@ -31,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <jsp:include page="/static/fore_header.jsp"/>
 
     <div class="container-fluid" style="padding-top:100px">
-
         <h1>
             <center>
                 <a href="<%=basePath%>retrivalResults?flag=all&name=十九大召开" style="font-size: 20px;">${objectEntity.name}</a>
