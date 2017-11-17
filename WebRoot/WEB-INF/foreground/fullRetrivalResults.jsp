@@ -305,7 +305,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <c:forEach items="${articles}" var="a" varStatus="sts">
                                                 <tr class="gradeA odd">
                                                     <td class="">
-                                                        <a href="<%=basePath%>authorInfo?authorId=${a.authorEntity.authorId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${a.authorEntity.name}</span></a><br>
+                                                        <a href="<%=basePath%>authorInfo?authorId=${a.authorEntity.authorId}" target="_blank"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${a.authorEntity.name}</span></a><br>
                                                         <b><a href="${a.newsResource}" target="_blank">${a.title}</a></b>
                                                         <div class="pull-right">
                                                             <span class="badge badge-info" style="background-color: #f89406">${a.similarDegree}</span>
@@ -325,22 +325,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         收藏量:${a.collectNumber}
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr class="alert alert-info alert-block" style="color: #3a87ad;">
                                                     <td>
                                                         <div id="comment${sts.index}" style="display: none">
                                                             <c:forEach items="${a.articleComments}" var="c">
                                                                 <c:if test="${c.fatherCommentId == null}">
-                                                                    <b>${c.authorEntity.name}</b>  <br/>
+                                                                    <a href="<%=basePath%>authorInfo?authorId=${c.authorEntity.authorId}" target="_blank"><b class="badge badge-info">${c.authorEntity.name}</b></a>  <br/>
                                                                     ${c.content} <br/>
                                                                     ${c.commentTime}<br/>
                                                                 </c:if>
                                                                 <c:forEach items="${a.articleComments}" var="c2">
                                                                     <c:if test="${c2.fatherCommentId == c.articleCommentId}">
                                                                         <div style="margin-left: 3%">
-                                                                                <b>${c2.authorEntity.name}</b> <br/>
-                                                                                    <span style="color: #1a1aa4;;">@${c.authorEntity.name}</span>
+                                                                            <a href="<%=basePath%>authorInfo?authorId=${c2.authorEntity.authorId}" target="_blank"><b class="badge badge-info">${c2.authorEntity.name}</b></a> <br/>
+                                                                                    <span style="color: #7b14ed;;">@${c.authorEntity.name}</span>
                                                                                 ${c2.content} <br/>
-                                                                                ${c2.commentTime}<br/>
+                                                                                点赞量: ${c2.likeNumber}
+                                                                                回复量: ${c2.replayNumber}
+                                                                                <span style="margin-left: 10px;">${c2.commentTime}</span><br/>
                                                                         </div>
                                                                     </c:if>
                                                                 </c:forEach>

@@ -31,13 +31,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <jsp:include page="/static/fore_header.jsp"/>
 
     <div class="container-fluid" style="padding-top:100px">
-        <h2>
+
+        <h1>
             <center>
-                <a herf="#">${objectEntity.name}</a>
+                <a href="<%=basePath%>retrivalResults?flag=all&name=十九大召开" style="font-size: 20px;">${objectEntity.name}</a>
             </center>
             <input type="hidden" id="objId" value="${objectEntity.objectId}"/>
             <input type="hidden" value="<%=basePath%>" id="basePath"/>
-        </h2><br/><br/>
+        </h1><br/><br/>
                         <li class="" style="padding-left:370px">							
 							<a>浏览量: ${objectEntity.scanNumber} </a>&nbsp;&nbsp;
 							<a>点赞量: ${objectEntity.likeNumber} </a>&nbsp;&nbsp;
