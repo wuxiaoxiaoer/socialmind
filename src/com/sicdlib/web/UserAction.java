@@ -128,7 +128,7 @@ public class UserAction {
                             session.setAttribute("user", personUser);
                         }
                         //获得不同角色用户与该对象相关的事件(包括热度)
-                        session.setAttribute("commomUser", user);
+                        session.setAttribute("commonUser", user);
                         Page<ObjectEntity> page = new Page<>(5);
                         page.setPageNo(1);
                         objectEntityService.loadAll(page);

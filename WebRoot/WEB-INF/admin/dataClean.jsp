@@ -99,12 +99,13 @@
       {
           return sHtml.replace(/[<>&"]/g,function(c){return{'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
       }
-      //点击表格时的处理，第一个参数是点击单元格的id，第二个是当前表的名字，第二个是当前列名字
+      //点击表格时的处理，第一个参数是点击单元格的id，第二个是当前表的名字，第三个是当前列名字
       function editData(pId,tbName,columnName){
           //点击任意一个单元格时获取当前列
           getHeadTag(columnName);
           /*表内数据可编辑*/
           //获取p标签
+          if(pId!=""){
           var pTag =document.getElementById(pId);
           //获取input标签
           var inputTag =document.getElementById(pId+"Input");
@@ -113,8 +114,10 @@
           inputTag.style.display="inline";
           //文本框获得焦点，使不编辑使也可执行失去焦点的函数
           inputTag.focus();
+          }
           /*提交当前点击的列名字来改变统计值*/
           var myChart = echarts.init(document.getElementById("stats"));
+
           $.post("ClickTableServlet",
               {
                   tableName: tbName,
@@ -190,6 +193,9 @@
       //用户点击某表btn时，将该表名存入input引发其改变，从而触发ajax的onchange函数，清空
 
       function display(value) {
+//          在页面上显示当前表名字
+          $("#currentTable").text(value);
+
           $.post("TableServlet",
               {
                   tablename: value
@@ -305,8 +311,38 @@
 //
 //        })
 //    }
+    //清洗过程函数，参数为不同清洗方法的id，要清洗的值或正则表达式，要替换为的新值
     function cleanProcess(strategyID){
-          alert(strategyID);
+          //获取当前的表明和列名
+          var currentTable =$("#currentTable").text();
+          var currentColumn =$("#currentHead").text();
+          var oldValue =document.getElementById("oldValue").value;
+          var newValue =document.getElementById("newValue").value;
+          if (currentTable=="当前表名" ){
+              alert("请先选择您要清洗的表");
+          }else if (currentColumn=="点击表格上的字段开始操作"){
+              alert("清选择您要清洗的列（直接在表格上点击列的任一项");
+          }else if(strategyID=="16"&&newValue==""){
+              alert("请先输入自定义的填充值");
+          }else if(strategyID=="22"&&(newValue==""||oldValue=="")){
+              alert("请先输入自定义的值");
+          }else if(strategyID=="23"&&(newValue==""||oldValue=="")){
+              alert("请先输入自定义的值");
+          }else{
+              $.post("cleanProcessAction",
+                  {
+                      currentTable: currentTable,
+                      currentColumn: currentColumn,
+                      strategyID: strategyID,
+                      oldValue:oldValue,
+                      newValue:newValue
+                  },
+                  function (data, status) {
+                  //修改内容后重新展示
+                      display(currentTable);
+                      editData("",currentTable,currentColumn);
+                  });
+          }
     }
   </script>
 
@@ -348,7 +384,7 @@
         <div class="content">
           <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="widget">
                 <div class="whead">
                   <h6><i class="fa fa-cloud"></i> 请选择要操作的网站</h6>
@@ -481,6 +517,11 @@
                       <a href="javascript:display('moe_declaration')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">moe_declaration</a>
                       <a href="javascript:display('moe_news')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">moe_news</a>
                     </div>
+                    <%--测试用表--%>
+                    <div id="test">
+                      <a href="javascript:display('test2')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test2</a>
+
+                    </div>
                     <%--<div id="btn_sanqin">--%>
                     <%--<a href="javascript:display('news_sanqin')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">news_sanqin</a>--%>
                     <%--</div>--%>
@@ -510,22 +551,26 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
               <div class="widget">
                 <div class="whead">
                   <h6><i class="fa fa-cloud"></i> 数据清洗策略的选择</h6>
                   <div class="btn-group">
-                    <a href="" class="btn btn-primary" class="btn btn-default" data-message=""><i class="fa fa-share"></i> 撤销</a>
-                    <a href="" class="btn btn-info" data-message=""><i class="fa fa-plus"></i> 保存</a>
-                    <a href="" class="btn btn-default" data-message=""><i class="fa fa-home"></i> 生成版本</a>
+                    <a onclick='cleanProcess("resetColumn")' class="btn btn-primary" class="btn btn-default" data-message="">重置此列</a>
+                    <%--<a onclick='cleanProcess("resetTable")' class="btn btn-info" data-message="">重置此表</a>--%>
+                    <%--<a href="" class="btn btn-default" data-message=""><i class="fa fa-home"></i> 生成版本</a>--%>
                   </div>
                 </div>
                 <div class="wbody">
                   <table class="table">
                     <tr>
-                      <td>当前操作的字段:</td>
-                      <td >
-                        <button type="button" class="btn btn-primary dropdown-toggle" id="currentHead">
+                      <td width="30%">当前表:
+                        <button type="button" class="btn btn-primary" id="currentTable">
+                          当前表名
+                        </button>
+                      </td>
+                      <td>当前字段:
+                        <button type="button" class="btn btn-primary" id="currentHead">
                           点击表格上的字段名开始操作
                         </button>
                       </td>
@@ -540,7 +585,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <c:forEach  items="${loseDataList}" var="v">
-                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                                <li><a onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
                               </c:forEach>
                               <%--<li><a href="#" onclick="loseData(1)">填充为NULL</a></li>--%>
                               <%--<li><a href="#" onclick="loseData(2)">填充均值</a></li>--%>
@@ -557,7 +602,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <c:forEach  items="${errorString}" var="v">
-                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                                <li><a onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
                               </c:forEach>
                               <%--<li><a href="#">删除该列</a></li>--%>
                               <%--<li><a href="#">删除字符串中多余空格</a></li>--%>
@@ -574,7 +619,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <c:forEach  items="${recordOperating}" var="v">
-                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                                <li><a onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
                               </c:forEach>
                               <%--<li><a href="#">删除某字段包含特定字符串的所有行</a></li>--%>
                               <%--<li><a href="#">删除重复的行</a></li>--%>
@@ -586,7 +631,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <c:forEach  items="${dateOperating}" var="v">
-                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                                <li><a onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
                               </c:forEach>
                               <%--<li><a href="#">xxxx-xx-xx xx:xx:xx</a></li>--%>
                               <%--<li><a href="#">xxxx年xx月xx日 xx时xx分xx秒</a></li>--%>
@@ -598,17 +643,25 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <c:forEach  items="${addressOperating}" var="v">
-                                <li><a href="#" onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
+                                <li><a onclick="cleanProcess(${v.cleanStategyId})">${v.name}</a></li>
                               </c:forEach>
                               <%--<li><a href="#">合并两列</a></li>--%>
                               <%--<li><a href="#">拆分为两列</a></li>--%>
                             </ul>
                           </div>
                       </td>
-
-                      <%--<td><input type="text" class="form-control"/></td>--%>
                     </tr>
-
+                    <tr>
+                      <td colspan="2"><div class="whead"><h6>如果要替换自定义值，请先在下面填入，再点击清洗策略进行对应清洗操作</h6></div></td>
+                    </tr>
+                    <tr>
+                      <td>要替换的子字符串（字符串错误\行操作）</td>
+                      <td><input id="oldValue" type="text" class="form-control autocomplete" placeholder="要替换掉的子字符串\正则表达式"/></td>
+                    </tr>
+                    <tr>
+                      <td>替换为（缺失值\字符串错误）</td>
+                      <td><input id="newValue" type="text"  class="form-control autocomplete" data-source="etldemodata/autocomplete.json" placeholder="填充指定值\要替换成的新值"/></td>
+                    </tr>
                     <%--下面这两组原来不可见，动态生成，当点击替换制定字符串时显示前两个并要求填入，如果选择正则则显示后两个--%>
                     <%--
                     <tr>

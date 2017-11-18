@@ -5,9 +5,27 @@ package com.sicdlib.entity;
  */
 public class UserOperaEntity {
     private String operaId;
-    private String userId;
-    private String objectId;
     private String operaType;
+    /**多个用户操作属于一个用户 */
+    private UserEntity userEntity;
+    /**多个用户操作属于一个舆情对象*/
+    private ObjectEntity objectEntity;
+
+    public ObjectEntity getObjectEntity() {
+        return objectEntity;
+    }
+
+    public void setObjectEntity(ObjectEntity objectEntity) {
+        this.objectEntity = objectEntity;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
 
     public String getOperaId() {
         return operaId;
@@ -15,22 +33,6 @@ public class UserOperaEntity {
 
     public void setOperaId(String operaId) {
         this.operaId = operaId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
     }
 
     public String getOperaType() {
@@ -49,19 +51,18 @@ public class UserOperaEntity {
         UserOperaEntity that = (UserOperaEntity) o;
 
         if (operaId != null ? !operaId.equals(that.operaId) : that.operaId != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (objectId != null ? !objectId.equals(that.objectId) : that.objectId != null) return false;
         if (operaType != null ? !operaType.equals(that.operaType) : that.operaType != null) return false;
+        if (userEntity != null ? !userEntity.equals(that.userEntity) : that.userEntity != null) return false;
+        return objectEntity != null ? objectEntity.equals(that.objectEntity) : that.objectEntity == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = operaId != null ? operaId.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (objectId != null ? objectId.hashCode() : 0);
         result = 31 * result + (operaType != null ? operaType.hashCode() : 0);
+        result = 31 * result + (userEntity != null ? userEntity.hashCode() : 0);
+        result = 31 * result + (objectEntity != null ? objectEntity.hashCode() : 0);
         return result;
     }
 }

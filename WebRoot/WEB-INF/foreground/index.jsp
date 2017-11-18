@@ -9,7 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE html>
 <html class="no-js">
-    
     <head>
         <base href="<%=basePath%>foreground/"/>
         <title>首页 - Socialmind大平台</title>
@@ -331,12 +330,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
             </div>
-            <hr>
-            <footer>
-                <p>&copy; Vincent Gabriel 2013</p>
-            </footer>
         </div>
-        <!--/.fluid-container-->
+    <!-- 引入尾部模板 -->
+    <jsp:include page="/static/fore_footer.jsp"></jsp:include>
+
+    <!--/.fluid-container-->
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="assets/scripts.js"></script>
@@ -347,5 +345,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
         </script>
     </body>
-
 </html>
