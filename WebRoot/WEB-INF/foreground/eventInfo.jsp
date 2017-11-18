@@ -102,7 +102,7 @@
                                 <c:forEach items="${artileList}" var="al" varStatus="sts">
 
                                     <img src="./images/11.png"  width="20px"></img>[${al.postTime}] ${al.title}
-                                    【 ${al.websiteId}】
+                                    <%--【 ${al.websiteEntity.websiteId}】--%>【 ${al.websiteId}】
                                     <br/>
 
                                 </c:forEach>

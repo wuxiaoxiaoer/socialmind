@@ -2,6 +2,7 @@ package com.sicdlib.service;
 
 import com.alibaba.fastjson.JSON;
 import com.sicdlib.entity.ArticleEntity;
+import com.sicdlib.entity.WebsiteEntity;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,9 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 ArticleEntity a = new ArticleEntity();
                 a.setPostTime(rs.getString(1));
                 a.setTitle(rs.getString(2));
+                /*WebsiteEntity web = new WebsiteEntity();
+                web.setWebsiteId(rs.getString(3));
+                a.setWebsiteEntity(web);*/
                 a.setWebsiteId(rs.getString(3));
                 list.add(a);
             }
@@ -104,6 +108,9 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             while (rs.next()){
                 ArticleEntity article = new ArticleEntity();
                 article.setTitle(rs.getString(1));
+                /*WebsiteEntity web = new WebsiteEntity();
+                web.setWebsiteId(rs.getString(2));
+                article.setWebsiteEntity(web);*/
                 article.setWebsiteId(rs.getString(2));
                 article.setPostTime(rs.getString(3));
                 article.setRecommendNumber(rs.getInt(4));
