@@ -25,15 +25,16 @@ public class AuthorEntityService extends DefaultEntityManager<AuthorEntity> {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
             Statement statement = conn.createStatement();
-            String sql = "select au.name,au.elitePostNumber from author au " +
+            String sql = "select au.authorId,au.name,au.elitePostNumber from author au " +
                     "where au.authorID in " +
                     "(select DISTINCT(a.authorID) from article a where a.objectID = '" +objectId+"') " +
                     "ORDER BY au.elitePostNumber desc limit 4";
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()){
                 AuthorEntity authorEntity = new AuthorEntity();
-                authorEntity.setName(rs.getString(1));
-                authorEntity.setElitePostNumber(rs.getInt(2));
+                authorEntity.setAuthorId(rs.getString(1));
+                authorEntity.setName(rs.getString(2));
+                authorEntity.setElitePostNumber(rs.getInt(3));
                 list.add(authorEntity);
             }
 
