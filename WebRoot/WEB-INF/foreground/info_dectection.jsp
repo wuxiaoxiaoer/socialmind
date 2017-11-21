@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
     
     <head>
+        <base href="<%=basePath%>"/>
         <title>信息监测 - socialmind大平台</title>
         <!-- Bootstrap -->
         <link href="foreground/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -28,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 引入头模板 -->
     <jsp:include page="/static/fore_header.jsp"/>
 
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-top: 4%;">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
@@ -114,7 +115,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                 </div>
             </div>
-            <hr>
 
             <!-- 引入尾部模板 -->
             <jsp:include page="/static/fore_footer.jsp"></jsp:include>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.UserEntity" table="user" schema="socialmind">
@@ -15,5 +15,13 @@
         <property name="address" column="address"/>
         <!-- 表之间的映射：多个用户属于一个角色 -->
         <many-to-one name="role" column="roleID"></many-to-one>
+        <set name="userOperas" cascade="all">
+            <key column="userID"></key>
+            <one-to-many class="com.sicdlib.entity.UserOperaEntity"></one-to-many>
+        </set>
+        <set name="comments">
+            <key column="userID"></key>
+            <one-to-many class="com.sicdlib.entity.CommentEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

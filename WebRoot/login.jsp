@@ -62,6 +62,19 @@
               letter-spacing:1px
           }
       </style>
+      <script src="foreground/vendors/jquery-1.9.1.min.js"></script>
+      <script type="text/javascript">
+          $(document).ready(function(){
+              //通过调用新浪IP地址库接口查询用户当前所在国家、省份、城市、运营商信息
+              $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){
+                  $(".country").html(remote_ip_info.country);
+                  $(".province").html(remote_ip_info.province);
+                  $(".city").html(remote_ip_info.city);
+                  $(".isp").html(remote_ip_info.isp);
+                  $("#id_address").val(remote_ip_info.city);
+              });
+          });
+      </script>
   </head>
   <body id="login" class="bg">
     <div class="container">
@@ -70,6 +83,8 @@
 
         </div>
       <form class="form-signin" action="user/login" method="post" style="opacity:0.90; margin-top:1.9%;">
+          <!-- 将地理信息传到后台 -->
+          <input id="id_address" type="hidden" name="address" value=""/>
         <h2 class="form-signin-heading">Login</h2>
         <input type="text"  value="<%=u_name%>" name="username" id="username" class="input-block-level" onblur="usernameIsString();" />
           <label id="lab_username" style="color:red"></label>
@@ -92,7 +107,6 @@
     </div>
 
     <!-- /container -->
-    <script src="foreground/vendors/jquery-1.9.1.min.js"></script>
     <script src="foreground/bootstrap/js/bootstrap.min.js"></script>
   </body>
   <script type="text/javascript">

@@ -49,22 +49,22 @@
         <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>首页</span></a></li>
         <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>爬虫</span><span class="label">3</span></a>
             <ul>
-                <li><a href="<%=basePath%>spiderMonitor">爬虫监控</a></li>
-                <li><a href="<%=basePath%>spiderList">爬虫管理</a></li>
-                <li><a href="<%=basePath%>spiderConfigList">爬虫配置</a></li>
+                <li><a href="spiderMonitor.html">爬虫监控</a></li>
+                <li><a href="spiderList.html">爬虫管理</a></li>
+                <li><a href="configList.html">爬虫配置</a></li>
             </ul>
         </li>
         <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>数据清洗</span><span class="label">4</span></a>
             <ul>
                 <li><a href="data_stats.html">清洗数据统计</a></li>
                 <li><a href="dataClean_conf.html">数据清洗策略配置</a></li>
-                <li><a href="#.html">数据清洗</a></li>
+                <li><a href="<%=basePath%>dataClean">数据清洗</a></li>
                 <li><a href="dataClean_diary.html">数据清洗日志管理</a></li>
             </ul>
         </li>
         <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>舆情对象管理</span><span class="label">1</span></a>
             <ul>
-                <li><a href="eventManager.html">舆情对象管理</a></li>
+                <li><a href="<%=basePath%>object/objectsManager">舆情对象管理</a></li>
                 <li><a href="event_stats.html">舆情对象统计</a></li>
                 <!--<li><a href="eventManager.html">实体管理</a></li>
                 <li><a href="form-common.html">实体统计</a></li>-->
@@ -75,9 +75,9 @@
                 <li><a href="topics.html">主题管理</a></li>
             </ul>
         </li>
-        <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>语义工具集</span><span class="label">1</span></a>
+        <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>算法工具集</span><span class="label">1</span></a>
             <ul>
-                <li><a href="semanticsToolkits.html">语义工具集管理</a></li>
+                <li><a href="semanticsToolkits.html">算法工具集管理</a></li>
             </ul>
         </li>
         <li><a href="tables.html"><i class="icon icon-th"></i> <span>用户评论管理</span></a><span class="label">1</span>
@@ -92,17 +92,16 @@
         </li>
         <li class="submenu"> <a href="roleManagement.html"><i class="icon icon-th-list"></i> <span>角色管理</span> <span class="label">1</span></a>
             <ul>
-                <li><a href="<%=basePath%>roleManagement">角色管理</a></li>
+                <li><a href="roleManagement.html">角色管理</a></li>
             </ul>
         </li>
         <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>权限管理</span></a>
             <ul>
-                <li><a href="<%=basePath%>permission">权限列表</a></li>
-                <li><a href="<%=basePath%>toPermissionAllot">权限分配</a></li>
+                <li><a href="permission.html">权限管理</a></li>
             </ul></li>
         <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>日志管理</span></a>
             <ul>
-                <li><a href="<%=basePath%>log">操作日志</a></li>
+                <li><a href="operateDiary.html">操作日志</a></li>
             </ul></li>
         <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>公告管理</span> <span class="label">1</span></a>
             <ul>

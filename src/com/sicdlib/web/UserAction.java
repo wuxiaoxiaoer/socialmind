@@ -13,7 +13,6 @@ import edu.xjtsoft.base.orm.support.PropertyFilter;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -34,8 +33,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author wlw
@@ -47,7 +45,6 @@ public class UserAction {
 
 	@Autowired(required=true)
 	private UserService userService;
-
 	@Autowired
 	private UserEntityService userEntityService;
 	@Autowired
@@ -62,16 +59,26 @@ public class UserAction {
     private RoleEntityService roleEntityService;
     @Autowired
     private AdminEntityService adminEntityService;
+    @Autowired
+    private ObjectEntityService objectEntityService;
+    @Autowired
+    private EventEntityService eventEntityService;
+    @Autowired
+    private IndicatorValueEntityService indicatorValueEntityService;
 
 	
 	//登录模块
 	@RequestMapping("login")
-	public String login(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+	public String login(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException{
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 		String username = req.getParameter("username");
 		String userpwd = req.getParameter("userpwd");
 		boolean isRemPwd = Boolean.parseBoolean(req.getParameter("isRemPwd"));
+        String address = "";
+        if (req.getParameter("address") != null){
+            address = req.getParameter("address");
+        }
 		PrintWriter out = resp.getWriter();
 		HttpSession session = req.getSession();
 		PropertyFilter filters = new PropertyFilter("userName",username);
@@ -106,25 +113,46 @@ public class UserAction {
                         session.setAttribute("user", adminUser);
 						out.print("admin");
 						return "/WEB-INF/admin/index";
-                    }else if (user.getRole().getRoleName().equals("政府")){
-                        GovUserEntity govUser = govUserEntityService.load(user.getUserId());
-                        session.setAttribute("user", govUser);
-                    	out.print("gov");
-						return "/WEB-INF/foreground/info_dectection";
-					}else if (user.getRole().getRoleName().equals("事业单位")){
-                        InstitutionUserEntity institutionUser = institutionUserEntityService.load(user.getUserId());
-                        session.setAttribute("user", institutionUser);
-                        out.print("institution");
-                        return "/WEB-INF/foreground/index";
-                    }else if (user.getRole().getRoleName().equals("企业")){
-                        CompanyUserEntity companyUser = companyUserEntityService.load(user.getUserId());
-                        session.setAttribute("user", companyUser);
-                        out.print("company");
-                        return "/WEB-INF/foreground/index";
-                    }else if (user.getRole().getRoleName().equals("个人")){
-                        PersonUserEntity personUser = personUserEntityService.load(user.getUserId());
-                        session.setAttribute("user", personUser);
-                        out.print("personal");
+                    }else {
+                        if (user.getRole().getRoleName().equals("政府")) {
+                            GovUserEntity govUser = govUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", govUser);
+                        } else if (user.getRole().getRoleName().equals("事业单位")) {
+                            InstitutionUserEntity institutionUser = institutionUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", institutionUser);
+                        } else if (user.getRole().getRoleName().equals("企业")) {
+                            CompanyUserEntity companyUser = companyUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", companyUser);
+                        } else if (user.getRole().getRoleName().equals("个人")) {
+                            PersonUserEntity personUser = personUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", personUser);
+                        }
+                        //获得不同角色用户与该对象相关的事件(包括热度)
+                        session.setAttribute("commonUser", user);
+                        Page<ObjectEntity> page = new Page<>(5);
+                        page.setPageNo(1);
+                        objectEntityService.loadAll(page);
+                        mode.addAttribute("page", page);
+                        //1.获得热门事件
+                        //获得事件类型的舆情对象
+                        List<ObjectEntity> objects = objectEntityService.getObjectIndicators("事件", "", "2016-10-10 12:00:00");
+                        List<DynamicObjectIndexIndicator> dynamicObjIndexs = getDynamicObjIndexs(objects);
+                        //根据指标值（如热度）进行排序
+                        objectsSort(dynamicObjIndexs);
+                        //获得前5条
+                        List<DynamicObjectIndexIndicator> top5DynamicObjIndexs = getTop5DynamicObjIndexs(dynamicObjIndexs);
+                        mode.addAttribute("top5DynamicObjIndexs", top5DynamicObjIndexs);
+                        //2.获得当地事件
+                        //获得事件类型的舆情对象
+                        System.out.println("地址：" + address);
+                        List<ObjectEntity> addressObjects = objectEntityService.getObjectIndicators("事件", address, "2016-10-10 12:00:00");
+                        List<DynamicObjectIndexIndicator> dynamicAddressObjIndexs = getDynamicObjIndexs(addressObjects);
+                        //根据指标值（如热度）进行排序
+                        objectsSort(dynamicAddressObjIndexs);
+                        //获得前5条
+                        List<DynamicObjectIndexIndicator> top5DynamicAddressObjIndexs = getTop5DynamicObjIndexs(dynamicAddressObjIndexs);
+                        mode.addAttribute("top5DynamicAddressObjIndexs", top5DynamicAddressObjIndexs);
+
                         return "/WEB-INF/foreground/index";
                     }
 				}
@@ -133,12 +161,76 @@ public class UserAction {
 		return "";
 	}
 
-	@Test
-    public void test(){
-        System.out.println(UUIDUtil.getUUID());
+    /**
+     * 根据对象类型、地点、新增事件时间获得舆情对象
+     * @param objectType
+     * @param place
+     * @param addTime
+     * @return
+     */
+	public List<ObjectEntity> getObjects(String objectType, String place, String addTime){
+        List<ObjectEntity> objects = objectEntityService.getObjectIndicators(objectType, place, addTime);
+        return objects;
     }
 
-	//注册模块--跳转
+    /**
+     * 根据舆情对象列表查询指标(热度)
+     * @param objects
+     * @return
+     */
+    public List<DynamicObjectIndexIndicator> getDynamicObjIndexs(List<ObjectEntity> objects){
+        List<DynamicObjectIndexIndicator> dynamicObjIndexs = new ArrayList<>();
+        //获得事件的指标值（如热度）的统计
+        for (ObjectEntity obj : objects){
+            DynamicObjectIndexIndicator dynamicObjIndex = new DynamicObjectIndexIndicator();
+            Double hotValue = 0.0;
+            List<IndicatorValueEntity> indicators = indicatorValueEntityService
+                    .getObjectIndicators(obj.getObjectId(), "热度", "sex", "", "2016-10-10 12:00:00", "2099-11-07 12:00:00");
+            for (IndicatorValueEntity ind : indicators){
+                Double value = Double.parseDouble(ind.getIndicatorValue());
+                hotValue += value;
+            }
+            dynamicObjIndex.setObject(obj);
+            dynamicObjIndex.setHotValue(hotValue);
+            dynamicObjIndexs.add(dynamicObjIndex);
+        }
+        return dynamicObjIndexs;
+    }
+
+    /**
+     * 获得实体与指标构成的动态对象指标的前5条
+     * @param dynamicObjIndexs
+     * @return
+     */
+    public List<DynamicObjectIndexIndicator> getTop5DynamicObjIndexs(List<DynamicObjectIndexIndicator> dynamicObjIndexs){
+        //获得前5条
+        List<DynamicObjectIndexIndicator> top5DynamicObjIndexs = new ArrayList<>();
+        if (dynamicObjIndexs.size() > 5){
+            top5DynamicObjIndexs = dynamicObjIndexs.subList(0,4);
+        }else {
+            top5DynamicObjIndexs = dynamicObjIndexs;
+        }
+        return top5DynamicObjIndexs;
+    }
+
+    /**
+     * 根据指标值（如热度）进行排序
+     * @param dynamicObjIndexs
+     * @return
+     */
+	public List<DynamicObjectIndexIndicator> objectsSort(List<DynamicObjectIndexIndicator> dynamicObjIndexs){
+        Collections.sort(dynamicObjIndexs, new Comparator<DynamicObjectIndexIndicator>() {
+            @Override
+            public int compare(DynamicObjectIndexIndicator o1, DynamicObjectIndexIndicator o2) {
+                //降序排列
+                if (o1.getHotValue() > o2.getHotValue()){}
+                return 1;
+            }
+        });
+	    return dynamicObjIndexs;
+    }
+
+    //注册模块--跳转
 	@RequestMapping(value="register", method = RequestMethod.GET)
 	public String register(){
 		return "register";

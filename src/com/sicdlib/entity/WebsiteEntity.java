@@ -1,5 +1,7 @@
 package com.sicdlib.entity;
 
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
@@ -9,6 +11,16 @@ public class WebsiteEntity {
     private String websiteUrl;
     private String containTableId;
     private String websiteTypeId;
+    /** 一个网站对应多个文章 */
+    private Set<ArticleEntity> articles;
+
+    public Set<ArticleEntity> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<ArticleEntity> articles) {
+        this.articles = articles;
+    }
 
     public String getWebsiteId() {
         return websiteId;

@@ -7,8 +7,17 @@ public class PermissionEntity {
     private String permissionId;
     private String permissionName;
     private String action;
+    private String description;
     private String resourceId;
     private String operateId;
+
+    public String getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(String permissionId) {
+        this.permissionId = permissionId;
+    }
 
     public String getPermissionName() {
         return permissionName;
@@ -26,12 +35,12 @@ public class PermissionEntity {
         this.action = action;
     }
 
-    public String getPermissionId() {
-        return permissionId;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPermissionId(String permissionId) {
-        this.permissionId = permissionId;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getResourceId() {
@@ -48,41 +57,5 @@ public class PermissionEntity {
 
     public void setOperateId(String operateId) {
         this.operateId = operateId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PermissionEntity that = (PermissionEntity) o;
-
-        if (permissionId != null ? !permissionId.equals(that.permissionId) : that.permissionId != null) return false;
-        if (permissionName != null ? !permissionName.equals(that.permissionName) : that.permissionName != null)
-            return false;
-        if (action != null ? !action.equals(that.action) : that.action != null) return false;
-        if (resourceId != null ? !resourceId.equals(that.resourceId) : that.resourceId != null) return false;
-        return operateId != null ? operateId.equals(that.operateId) : that.operateId == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = permissionId != null ? permissionId.hashCode() : 0;
-        result = 31 * result + (permissionName != null ? permissionName.hashCode() : 0);
-        result = 31 * result + (action != null ? action.hashCode() : 0);
-        result = 31 * result + (resourceId != null ? resourceId.hashCode() : 0);
-        result = 31 * result + (operateId != null ? operateId.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "PermissionEntity{" +
-                "permissionId='" + permissionId + '\'' +
-                ", permissionName='" + permissionName + '\'' +
-                ", action='" + action + '\'' +
-                ", resourceId='" + resourceId + '\'' +
-                ", operateId='" + operateId + '\'' +
-                '}';
     }
 }

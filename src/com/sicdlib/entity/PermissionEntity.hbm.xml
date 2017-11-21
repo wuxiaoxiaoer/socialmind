@@ -3,11 +3,11 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.PermissionEntity" table="permission" schema="socialmind">
         <id name="permissionId" column="permissionID"/>
         <property name="permissionName" column="permissionName"/>
         <property name="action" column="action"/>
+        <property name="description" column="description"/>
         <property name="resourceId" column="resourceID"/>
         <property name="operateId" column="operateID"/>
     </class>

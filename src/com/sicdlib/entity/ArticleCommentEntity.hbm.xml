@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.ArticleCommentEntity" table="article_comment" schema="socialmind">
@@ -15,5 +16,7 @@
         <property name="graphUrl" column="graphURL"/>
         <property name="articleId" column="articleID"/>
         <property name="fatherCommentId" column="fatherCommentID"/>
+        <many-to-one name="articleEntity" column="articleId"></many-to-one>
+        <many-to-one name="authorEntity" column="authorId"></many-to-one>
     </class>
 </hibernate-mapping>
