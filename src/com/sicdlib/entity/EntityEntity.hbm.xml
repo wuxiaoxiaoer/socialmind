@@ -3,7 +3,6 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.EntityEntity" table="entity" schema="socialmind">
         <id name="objectId" column="objectID"/>
         <property name="objectTypeId" column="objectTypeID"/>

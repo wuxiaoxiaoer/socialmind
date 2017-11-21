@@ -12,6 +12,9 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
+<head>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>foreground/css/base.css" />
+</head>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
@@ -24,7 +27,6 @@
                 <ul class="nav pull-right">
                     <li class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 吴连伟 <i class="caret"></i>
-
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -48,10 +50,10 @@
                         <a href="<%=basePath%>infodetection">信息监测</a>
                     </li>
                     <li class="">
-                        <a href="fullRetrival.html">全文检索</a>
+                        <a href="<%=basePath%>fullRetrival">全文检索</a>
                     </li>
                     <li class="">
-                        <a href="event.html">全网事件分析</a>
+                        <a href="<%=basePath%>event/all">全网事件分析</a>
                     </li>
                     <li class="">
                         <a href="makeReporter_1.html">简报制作</a>
@@ -62,4 +64,7 @@
         </div>
     </div>
 </div>
+
+
+
 

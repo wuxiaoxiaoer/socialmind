@@ -1,0 +1,2 @@
+https://github.com/harvesthq/chosen/releases
+https://github.com/bassjobsen/Bootstrap-3-Typeahead

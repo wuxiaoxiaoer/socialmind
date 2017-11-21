@@ -130,7 +130,6 @@ public class AdminSpiderController {
         spider.setAddTime(addTime);
 
         spiderService.saveOrUpdate(spider);
-
         return "redirect:/spiderList";
     }
      /**
@@ -174,47 +173,32 @@ public class AdminSpiderController {
     }
 
 
-
-
-
-
-
     /**
      * 管理员更改爬虫状态
      */
-
-
     @RequestMapping("updateState")
     public void updateState(HttpServletRequest req, HttpServletResponse res) throws IOException{
 
         String spiderId= req.getParameter("spiderId");
         SpiderInfoEntity spider=spiderService.load(spiderId);
-
         String state=spider.getSpiderState();
-
         if(state.equals("开启"))
         {
             spider.setSpiderState("暂停");
-
         }else {
             spider.setSpiderState("开启");
-
         }
         spiderService.saveOrUpdate(spider);
         state=spider.getSpiderState();
-
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("state",state);
-
         Gson gson = new Gson();
         try {
-
             res.setContentType( "text/html;charset=UTF-8");
             res.getWriter().write( gson.toJson(map));
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-
     }
 
 
@@ -238,16 +222,12 @@ public class AdminSpiderController {
     @RequestMapping("addConfig")
     public String addConfig( HttpServletRequest req) {
 
-
         String configName = req.getParameter("configName");
-
         SpiderConfigEntity spiderConfig = new SpiderConfigEntity();
-
 
         //String spiderRunTime = req.getParameter("runTime");
        // String logPath = req.getParameter("logPath");
         //Integer spiderFrequency = Integer.parseInt(req.getParameter("frequence"));
-
         spiderConfig.setSpiderConfigId(UUIDUtil.getUUID().toString());
         spiderConfig.setConfigName(configName);
         //spiderConfig.setSpiderRunTime(spiderRunTime);
@@ -258,7 +238,6 @@ public class AdminSpiderController {
         String addTime = sdf.format(d);
         spiderConfig.setConfigTime(addTime);
         spiderConfigService.saveOrUpdate(spiderConfig);
-
 
         List<ConfigitemEntity> configItemList = new ArrayList<ConfigitemEntity>();
         configItemList = configitemService.loadAll();

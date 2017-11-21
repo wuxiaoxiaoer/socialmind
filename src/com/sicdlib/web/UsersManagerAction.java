@@ -24,7 +24,6 @@ public class UsersManagerAction {
 
 	@Autowired(required=true)
 	private UserService userService;
-
 	@Autowired
 	private UserEntityService userEntityService;
 	@Autowired

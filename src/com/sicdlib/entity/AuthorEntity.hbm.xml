@@ -3,7 +3,6 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.AuthorEntity" table="author" schema="socialmind">
         <id name="authorId" column="authorID"/>
         <property name="name" column="name"/>
@@ -40,5 +39,13 @@
         <property name="qq" column="QQ"/>
         <property name="bloodType" column="bloodType"/>
         <property name="isBigV" column="isBigV"/>
+        <set name="articles">
+            <key column="authorId"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleEntity"></one-to-many>
+        </set>
+        <set name="articleComments">
+            <key column="authorId"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleCommentEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

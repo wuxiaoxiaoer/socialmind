@@ -15,5 +15,13 @@
         <property name="address" column="address"/>
         <!-- 表之间的映射：多个用户属于一个角色 -->
         <many-to-one name="role" column="roleID"></many-to-one>
+        <set name="userOperas" cascade="all">
+            <key column="userID"></key>
+            <one-to-many class="com.sicdlib.entity.UserOperaEntity"></one-to-many>
+        </set>
+        <set name="comments">
+            <key column="userID"></key>
+            <one-to-many class="com.sicdlib.entity.CommentEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

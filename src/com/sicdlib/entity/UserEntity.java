@@ -1,5 +1,8 @@
 package com.sicdlib.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by DeMH on 2017/11/2.
  */
@@ -14,6 +17,26 @@ public class UserEntity {
     private String address;
     /** 表之间的映射：多个用户属于一个角色 */
     private RoleEntity role;
+    /** 一个用户包含多个操作*/
+    private Set<UserOperaEntity> userOperas = new HashSet<>();
+    /** 一个用户包含对个系统评论 */
+    private Set<CommentEntity> comments = new HashSet<>();
+
+    public Set<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentEntity> comments) {
+        this.comments = comments;
+    }
+
+    public Set<UserOperaEntity> getUserOperas() {
+        return userOperas;
+    }
+
+    public void setUserOperas(Set<UserOperaEntity> userOperas) {
+        this.userOperas = userOperas;
+    }
 
     public String getIsAuthenticated() {
         return isAuthenticated;
@@ -90,20 +113,39 @@ public class UserEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
 
         UserEntity that = (UserEntity) o;
 
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (registrantId != null ? !registrantId.equals(that.registrantId) : that.registrantId != null) return false;
-        if (userType != null ? !userType.equals(that.userType) : that.userType != null) return false;
-        if (isAuthenticated != null ? !isAuthenticated.equals(that.isAuthenticated) : that.isAuthenticated != null)
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null){
             return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        }
+        if (userName != null ? !userName.equals(that.userName) : that.userName != null){
+            return false;
+        }
+        if (password != null ? !password.equals(that.password) : that.password != null){
+            return false;
+        }
+        if (email != null ? !email.equals(that.email) : that.email != null){
+            return false;
+        }
+        if (registrantId != null ? !registrantId.equals(that.registrantId) : that.registrantId != null){
+            return false;
+        }
+        if (userType != null ? !userType.equals(that.userType) : that.userType != null){
+            return false;
+        }
+        if (isAuthenticated != null ? !isAuthenticated.equals(that.isAuthenticated) : that.isAuthenticated != null){
+            return false;
+        }
+        if (address != null ? !address.equals(that.address) : that.address != null){
+            return false;
+        }
         return role != null ? role.equals(that.role) : that.role == null;
 
     }

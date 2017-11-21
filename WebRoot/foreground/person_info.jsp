@@ -1,0 +1,512 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: admin
+  Date: 2017/10/31
+  Time: 9:34
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>个人中心</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
+    <link href="assets/styles.css" rel="stylesheet" media="screen">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">social mind舆情分析平台</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 吴连伟 <i class="caret"></i>
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a tabindex="-1" href="person_info.html">个人中心</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a tabindex="-1" href="login.html">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav">
+                    <li class="">
+                        <a href="heatIndex.html">热度指标</a>
+                    </li>
+                    <li class="">
+                        <a href="emotionMap.html">情绪地图</a>
+                    </li>
+                    <li class="">
+                        <a href="info_dectection.html">信息监测</a>
+                    </li>
+                    <li class="">
+                        <a href="fullRetrival.html">全文检索</a>
+                    </li>
+                    <li class="">
+                        <a href="event.html">全网事件分析</a>
+                    </li>
+                    <li class="">
+                        <a href="makeReporter_1.html">简报制作</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" id="sidebar">
+            <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+
+                <li>
+                    <a href="#1"><i class="icon-chevron-right"></i>基本资料</a>
+                </li>
+                <li>
+                    <a href="#2"><i class="icon-chevron-right"></i> 统计情况</a>
+                </li>
+                <li>
+                    <a href="#3"><i class="icon-chevron-right"></i> 我的收藏</a>
+                </li>
+                <li>
+                    <a href="#4"><i class="icon-chevron-right"></i> 我的浏览</a>
+                </li>
+                <li>
+                    <a href="#5"><i class="icon-chevron-right"></i> 我的点赞</a>
+                </li>
+                <li>
+                    <a href="#6"><i class="icon-chevron-right"></i> 我的评论</a>
+                </li>
+                <li>
+                    <a href="#7"><i class="icon-chevron-right"></i>真假事件</a>
+                </li>
+                <li>
+                    <a href="#8"><i class="icon-chevron-right"></i>我的简报</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--/span-->
+        <div class="span9" id="content">
+
+            <div class="row-fluid">
+                <!-- block -->
+
+                <h2>个人中心</h2>
+
+
+                <div class="block" id=1>
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">基本资料</div>
+                        <div class="pull-right"><span class="badge badge-warning"> <a href="alterUserInfo.html" >修改资料 </a></span></div>
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span3">
+
+
+                                <img src="images/head.jpg" alt="100x100" style="width: 100px; height: 100px;" />
+
+                        </div>
+
+                        <div class="span3" style="padding-top:30px">
+
+                            <li> 用户名： zcx     </li>
+                            <li> 角色： zcx       </li>
+                            <li> 年龄： zcx      </li>
+
+
+
+
+                        </div>
+                        <div class="span3" style="padding-top:30px">
+                            <li> 性别： zcx       </li>
+                            <li> 职业： zcx       </li>
+                            <li> 注册时间：2017-07-07</li>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+
+
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block" id="2">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">统计概况</div>
+
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span2">
+                            <div class="chart" data-percent="73">73</div>
+                            <div class="chart-bottom-heading"><span class="label label-info">我的收藏量</span>
+
+                            </div>
+                        </div>
+                        <div class="span2">
+                            <div class="chart" data-percent="53">53</div>
+                            <div class="chart-bottom-heading"><span class="label label-info">我的浏览量</span>
+
+                            </div>
+                        </div>
+                        <div class="span2">
+                            <div class="chart" data-percent="83">83</div>
+                            <div class="chart-bottom-heading"><span class="label label-info">我的点赞量</span>
+
+                            </div>
+                        </div>
+                        <div class="span2">
+                            <div class="chart" data-percent="13">13</div>
+                            <div class="chart-bottom-heading"><span class="label label-info">我的评论量</span>
+
+                            </div>
+                        </div>
+
+                        <div class="span2">
+                            <div class="chart" data-percent="45">45</div>
+                            <div class="chart-bottom-heading"><span class="label label-info">我认为真</span>
+
+                            </div>
+                        </div>
+                        <div class="span2">
+                            <div class="chart" data-percent="36"> 36</div>
+                            <div class="chart-bottom-heading"><span class="label label-info">我认为假</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+
+
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <!-- block -->
+                    <div class="block" id="3">
+                        <div class="navbar navbar-inner block-header">
+                            <div class="muted pull-left">我的收藏</div>
+                            <div class="pull-right"><span class="badge badge-info">查看更多</span>
+
+                            </div>
+                        </div>
+                        <div class="block-content collapse in">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+
+                                    <th width="90%"></th>
+                                    <th ></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+
+                                    <td>事件1</td>
+
+                                    <td>删除</td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件2</td>
+
+                                    <td>删除</td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件3</td>
+
+                                    <td>删除</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+                <div class="span6">
+                    <!-- block -->
+                    <div class="block" id="4">
+                        <div class="navbar navbar-inner block-header">
+                            <div class="muted pull-left">我的浏览</div>
+                            <div class="pull-right"><span class="badge badge-info">查看更多</span>
+
+                            </div>
+                        </div>
+                        <div class="block-content collapse in">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+
+                                    <th width="80%"></th>
+                                    <th ></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+
+                                    <td>事件3</td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件4</td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件5</td>
+
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <!-- block -->
+                    <div class="block" id="5">
+                        <div class="navbar navbar-inner block-header">
+                            <div class="muted pull-left">我的点赞</div>
+                            <div class="pull-right"><span class="badge badge-info">查看更多</span>
+
+                            </div>
+                        </div>
+                        <div class="block-content collapse in">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+
+                                    <th width="90%"></th>
+                                    <th ></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+
+                                    <td>事件7</td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件6</td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件5</td>
+
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+                <div class="span6">
+                    <!-- block -->
+                    <div class="block" id="6">
+                        <div class="navbar navbar-inner block-header">
+                            <div class="muted pull-left">我的评论</div>
+                            <div class="pull-right"><span class="badge badge-info">查看更多</span>
+                            </div>
+                        </div>
+                        <div class="block-content collapse in">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th width="40%"> </th>
+                                    <th width="50%"> </th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>事件1</td>
+                                    <td>评论1</td>
+                                    <td>删除</td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件1</td>
+                                    <td>评论2</td>
+                                    <td>删除</td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件1</td>
+                                    <td>评论3</td>
+                                    <td>删除</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+
+
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <!-- block -->
+                    <div class="block" id="7">
+                        <div class="navbar navbar-inner block-header">
+                            <div class="muted pull-left">真假事件</div>
+                            <div class="pull-right"><span class="badge badge-info">查看更多</span>
+
+                            </div>
+                        </div>
+                        <div class="block-content collapse in">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+
+                                    <th width="90%"></th>
+                                    <th ></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+
+                                    <td>事件1</td>
+
+                                    <td>判假</td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件2</td>
+
+                                    <td>判假</td>
+                                </tr>
+                                <tr>
+
+                                    <td>事件3</td>
+
+                                    <td>判真</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+
+
+
+                <div class="span6">
+                    <!-- block -->
+                    <div class="block" id="8">
+                        <div class="navbar navbar-inner block-header">
+                            <div class="muted pull-left">我的简报</div>
+                            <div class="pull-right"><span class="badge badge-info">查看更多</span>
+
+                            </div>
+                        </div>
+                        <div class="block-content collapse in">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+
+                                    <th width="90%"></th>
+                                    <th ></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+
+                                    <td>简报1</td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+
+                                    <td>简报2</td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+
+                                    <td>简报3</td>
+
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <hr>
+    <footer>
+        <p>&copy; Vincent Gabriel 2013</p>
+    </footer>
+</div>
+<!--/.fluid-container-->
+<script src="vendors/jquery-1.9.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+<script src="assets/scripts.js"></script>
+
+
+
+
+<script>
+    $(function() {
+        // Easy pie charts
+        $('.chart').easyPieChart({animate: 1000});
+    });
+</script>
+</body>
+
+</html>

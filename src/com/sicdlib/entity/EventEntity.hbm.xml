@@ -3,12 +3,11 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.EventEntity" table="event" schema="socialmind">
         <id name="objectId" column="objectID"/>
         <property name="eventSummary" column="eventSummary"/>
-        <property name="eventBeainTime" column="eventBeainTime"/>
-        <property name="eventOverTime" column="eventOverTime"/>
+        <property name="eventBeginTime" column="eventBeginTime"/>
+        <property name="eventEndTime" column="eventEndTime"/>
         <property name="introduction" column="introduction"/>
     </class>
 </hibernate-mapping>

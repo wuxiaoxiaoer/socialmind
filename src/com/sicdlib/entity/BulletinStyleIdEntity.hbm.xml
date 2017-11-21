@@ -3,7 +3,6 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.BulletinStyleIdEntity" table="bulletin_style_id" schema="socialmind">
         <id name="bulletinStyleId" column="bulletinStyleID"/>
         <property name="name" column="name"/>

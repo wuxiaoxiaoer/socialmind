@@ -3,13 +3,12 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.CommentEntity" table="comment" schema="socialmind">
         <id name="commentId" column="commentID"/>
-        <property name="userId" column="userID"/>
         <property name="commentContent" column="commentContent"/>
         <property name="fathercommentId" column="fathercommentID"/>
         <property name="commentTime" column="commentTime"/>
-        <property name="objectId" column="objectID"/>
+        <many-to-one name="objectEntity" column="objectID"></many-to-one>
+        <many-to-one name="userEntity" column="userID"></many-to-one>
     </class>
 </hibernate-mapping>

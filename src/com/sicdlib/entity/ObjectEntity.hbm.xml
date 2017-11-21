@@ -3,7 +3,6 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.ObjectEntity" table="object" schema="socialmind">
         <id name="objectId" column="objectID"/>
         <property name="scanNumber" column="scanNumber"/>
@@ -17,5 +16,23 @@
         <property name="objectType" column="objectType"/>
         <property name="objectFatherId" column="objectFatherID"/>
         <property name="commentNumber" column="commentNumber"/>
+        <!-- 一个舆情对象对应多个指标 -->
+        <set name="indicatorValues">
+            <key column="objectID"></key>
+            <one-to-many class="com.sicdlib.entity.IndicatorValueEntity"></one-to-many>
+        </set>
+        <!--一个舆情对象对应着多个文章-->
+        <set name="articles">
+            <key column="objectID"></key>
+            <one-to-many class="com.sicdlib.entity.ArticleEntity"></one-to-many>
+        </set>
+        <set name="userOperas">
+            <key column="objectID"></key>
+            <one-to-many class="com.sicdlib.entity.UserOperaEntity"></one-to-many>
+        </set>
+        <set name="comments">
+            <key column="objectID"></key>
+            <one-to-many class="com.sicdlib.entity.CommentEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>
