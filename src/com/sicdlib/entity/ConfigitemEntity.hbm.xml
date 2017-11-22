@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.ConfigitemEntity" table="configitem" schema="socialmind">
+        <id name="configItemId" column="configItemID"/>
+        <property name="displayName" column="displayName"/>
+        <property name="name" column="name"/>
+        <property name="type" column="type"/>
+        <property name="note" column="note"/>
+        <property name="defaultValue" column="defaultValue"/>
+
+
+        <!--&lt;!&ndash; 表之间的映射：多个用户属于一个角色 &ndash;&gt;-->
+        <set name="configConfigItems" cascade="save-update">
+            <key column="configItemID"></key>
+            <one-to-many class="com.sicdlib.entity.ConfigConfigitemEntity"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

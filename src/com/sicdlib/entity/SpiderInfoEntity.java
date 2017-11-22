@@ -14,6 +14,17 @@ public class SpiderInfoEntity {
     private String spiderState;
     private String spiderConfigId;
 
+    /** 表之间的映射：多个(配置_配置项)属于一个配置 */
+    private SpiderConfigEntity spiderConfig;
+
+    public SpiderConfigEntity getSpiderConfig() {
+        return spiderConfig;
+    }
+
+    public void setSpiderConfig(SpiderConfigEntity spiderConfig) {
+        this.spiderConfig = spiderConfig;
+    }
+
     public String getSpiderId() {
         return spiderId;
     }
