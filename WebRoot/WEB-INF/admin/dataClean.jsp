@@ -11,14 +11,16 @@
 
 <head>
   <base href="<%=basePath%>admin/"/>
+  <!-- core js files -->
+  <script>src="js/etljs/jquery-3.2.1.js"</script>
+  <script src="js/etljs/jquery-3.2.1.min.js"></script>
+  <script src="js/etljs/nprogress.js"></script>
   <script src="js/etljs/echarts.min.js"></script>
   <script src="js/etljs/html5.js"></script>
   <![endif]-->
   <%--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
-  <!-- core js files -->
-  <script>src="js/etljs/jquery.js"</script>
-  <script src="js/etljs/jquery-1.11.0.min.js"></script>
+
   <%--下面这个包有问题--%>
 
   <script src="js/bootstrap.min.js"></script>
@@ -116,7 +118,9 @@
           inputTag.focus();
           }
           /*提交当前点击的列名字来改变统计值*/
+          $('#YWaitDialog').show();
           var myChart = echarts.init(document.getElementById("stats"));
+          // 加载前显示等待框
 
           $.post("ClickTableServlet",
               {
@@ -124,49 +128,54 @@
                   column: columnName
               },
               function (data, status) {
+                  //请求完成隐藏等待框
+                  $('#YWaitDialog').hide();
+                  if(data=="此列有空值!"){
+                      alert(data);
+                  }else {
 //                  alert(data);
-                  var dataJson= eval('(' + data + ')');
-                  var statsContent ="";
-                  var Arr = new Array();//key
-                  var ArrNum = new Array()//个数
-                  for (var key in dataJson)
-                  {
-                              Arr.push( key);//存入arr
-                              ArrNum.push({"value": dataJson[key],"name":key});
-                  }
-                  option = {
+                      var dataJson = eval('(' + data + ')');
+                      var statsContent = "";
+                      var Arr = new Array();//key
+                      var ArrNum = new Array()//个数
+                      for (var key in dataJson) {
+                          Arr.push(key);//存入arr
+                          ArrNum.push({"value": dataJson[key], "name": key});
+                      }
+                      option = {
 //                      title : {
 //                          text: '字段中频繁项统计图',
 ////                          subtext: '纯属虚构',
 //                          x:'center'
 //                      },
-                      tooltip : {
-                          trigger: 'item',
-                          formatter: "{a} <br/>{b} : {c} ({d}%)"
-                      },
-                      legend: {
-                          orient: 'vertical',
-                          left: 'left',
-                          data: Arr
-                      },
-                      series : [
-                          {
-                              name: '频繁项',
-                              type: 'pie',
-                              radius : '60%',
-                              center: ['52%', '70%'],
-                              data: ArrNum,
-                              itemStyle: {
-                                  emphasis: {
-                                      shadowBlur: 10,
-                                      shadowOffsetX: 0,
-                                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                          tooltip: {
+                              trigger: 'item',
+                              formatter: "{a} <br/>{b} : {c} ({d}%)"
+                          },
+                          legend: {
+                              orient: 'vertical',
+                              left: 'left',
+                              data: Arr
+                          },
+                          series: [
+                              {
+                                  name: '频繁项',
+                                  type: 'pie',
+                                  radius: '60%',
+                                  center: ['52%', '70%'],
+                                  data: ArrNum,
+                                  itemStyle: {
+                                      emphasis: {
+                                          shadowBlur: 10,
+                                          shadowOffsetX: 0,
+                                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                      }
                                   }
                               }
-                          }
-                      ]
-                  };
-                  myChart.setOption(option);
+                          ]
+                      };
+                      myChart.setOption(option);
+                  }
               });
 
       }
@@ -329,6 +338,7 @@
           }else if(strategyID=="23"&&(newValue==""||oldValue=="")){
               alert("请先输入自定义的值");
           }else{
+
               $.post("cleanProcessAction",
                   {
                       currentTable: currentTable,
@@ -701,7 +711,8 @@
                   <a href="#" class="btn btn-sm btn-success">İptal</a>
                 </div>
                 <div class="wbody" id="stats">
-                  <%--<div class="progress">--%>
+
+                <%--<div class="progress">--%>
                     <%--<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">--%>
                       <%--<span class="sr-only">40% Complete (success)</span>--%>
                     <%--</div>--%>
@@ -721,6 +732,19 @@
                       <%--<span class="sr-only">80% Complete</span>--%>
                     <%--</div>--%>
                   <%--</div>--%>
+
+                </div>
+                <div id="YWaitDialog"
+                     style="
+                      position: absolute;
+                      margin: auto;
+                      top: 150px;
+                      left: 100px;
+                      display: none;
+                      height: 60px;
+                      width: 300px;">
+                    请等待，正在统计……
+                    <img src="images/etlimg/loading2.gif" />
 
                 </div>
               </div>

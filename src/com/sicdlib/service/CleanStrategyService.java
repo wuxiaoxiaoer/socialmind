@@ -32,4 +32,19 @@ public class CleanStrategyService extends DefaultEntityManager<CleanStrategyEnti
         strategyList.add(strategyList5);
         return strategyList;
     }
+
+    // get using strategies
+    public List<CleanStrategyEntity>  getUsingStrategies(String strategyID){
+        List<CleanStrategyEntity> strategyList=new ArrayList<CleanStrategyEntity>();
+        String hql = "from CleanStrategyEntity strategy where strategy.type = '"+strategyID+"' AND strategy.isUse = '1'";
+        strategyList = getEntityDao().find(hql);
+        return strategyList;
+    }
+    //get not using strategies
+    public List<CleanStrategyEntity>  getNotUsingStrategies(String strategyID){
+        List<CleanStrategyEntity> strategyList=new ArrayList<CleanStrategyEntity>();
+        String hql = "from CleanStrategyEntity strategy where strategy.type = '"+strategyID+"' AND strategy.isUse = '0'";
+        strategyList = getEntityDao().find(hql);
+        return strategyList;
+    }
 }
