@@ -3,12 +3,14 @@ package com.sicdlib.web;
 import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
 import com.sicdlib.util.UUIDUtil.UUIDUtil;
+import edu.xjtsoft.base.orm.support.MatchType;
 import edu.xjtsoft.base.orm.support.Page;
 import edu.xjtsoft.base.orm.support.PropertyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +38,17 @@ public class SystemOperation {
 	@Autowired
 	private CommentEntityService commentEntityService;
 
-	//系统操作
+	//临时设定上次登陆时间
+	String date = "2017-11-11 00:00:00";
+    //获得当前时间
+    public String getTime(){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String strDate = sdf.format(date);
+        return strDate;
+    }
+
+	//前台：系统操作
 	@RequestMapping(value="SystemOperation")
 	public void SystemOperation(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		UserEntity userEntity = (UserEntity) req.getSession().getAttribute("commonUser");
@@ -57,6 +69,7 @@ public class SystemOperation {
 				userOperaEntity.setObjectEntity(objectEntity);
 				userOperaEntity.setUserEntity(userEntity);
 				userOperaEntity.setOperaType(dataDictionaryEntity.getDataDictionaryId());
+                userOperaEntity.setOperaTime(getTime());
 				userOperaEntityService.saveOrUpdate(userOperaEntity);
 				out.print(dataDictionaryEntity.getAttributeValue());
 			}
@@ -82,7 +95,9 @@ public class SystemOperation {
 				userOperaEntity.setOperaId(UUIDUtil.getUUID());
 				userOperaEntity.setObjectEntity(objectEntity);
 				userOperaEntity.setUserEntity(userEntity);
+				//从数据字典中获得操作类型
 				userOperaEntity.setOperaType(dataDictTrue.getDataDictionaryId());
+                userOperaEntity.setOperaTime(getTime());
 				userOperaEntityService.saveOrUpdate(userOperaEntity);
 				out.print(dataDictTrue.getAttributeValue());
 			}
@@ -94,6 +109,7 @@ public class SystemOperation {
 				userOperaEntity.setObjectEntity(objectEntity);
 				userOperaEntity.setUserEntity(userEntity);
 				userOperaEntity.setOperaType(dataDictTrue.getDataDictionaryId());
+                userOperaEntity.setOperaTime(getTime());
 				userOperaEntityService.saveOrUpdate(userOperaEntity);
 				out.print(dataDictTrue.getAttributeValue());
 				//除假
@@ -107,6 +123,7 @@ public class SystemOperation {
 				userOperaEntity.setObjectEntity(objectEntity);
 				userOperaEntity.setUserEntity(userEntity);
 				userOperaEntity.setOperaType(dataDictFalse.getDataDictionaryId());
+                userOperaEntity.setOperaTime(getTime());
 				userOperaEntityService.saveOrUpdate(userOperaEntity);
 				out.print(dataDictFalse.getAttributeValue());
 				//除真
@@ -130,17 +147,14 @@ public class SystemOperation {
 		if (commentId != null){
 			commentEntity.setFathercommentId(commentId);
 		}
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String strDate = sdf.format(date);
-		commentEntity.setCommentTime(strDate);
+		commentEntity.setCommentTime(getTime());
 		commentEntityService.saveOrUpdate(commentEntity);
 		PrintWriter out = resp.getWriter();
 		out.print("success");
 	}
 
 
-	//系统评论展示
+	//前台：系统评论展示
 	@RequestMapping("systemCommentsShow")
 	public String systemCommentsShow(HttpServletRequest req, Model mode){
 		String objId = req.getParameter("objId");
@@ -163,9 +177,40 @@ public class SystemOperation {
 		return "/WEB-INF/foreground/systemCommentsShow";
 	}
 
-	public List<CommentEntity> getSortComments(List<CommentEntity> comments){
 
-		return null;
+	/**
+	 * 后台：系统操作显示：显示系统操作，舆情对象的用户操作统计
+	 */
+	@RequestMapping("operationShow")
+	public String operationShow(@RequestParam(defaultValue = "1") int pageNo, HttpServletRequest req, Model mode){
+		Page<UserOperaEntity> page = new Page<>(20);
+		page.setPageNo(pageNo);
+		PropertyFilter filter = new PropertyFilter("operaTime", date, MatchType.GT);
+		userOperaEntityService.search(page, filter);
+		mode.addAttribute("userOperasPage", page);
+		//从数据字典中获得操作名称
+		PropertyFilter filter_dic = new PropertyFilter("attributeName", "operateName");
+		List<DataDictionaryEntity> operas = dataDictionaryEntityService.search(filter_dic);
+		mode.addAttribute("operas", operas);
+		Page<ObjectEntity> objectPage = new Page<>(10);
+		page.setPageNo(pageNo);
+		objectEntityService.loadAll(objectPage);
+		mode.addAttribute("objectPage", objectPage);
+		return "/WEB-INF/admin/operationShow";
+	}
+	/**
+	 * 后台：显示某舆情对象的用户具体操作：如某事件的点赞详细信息
+	 */
+	@RequestMapping("userOperaDetail")
+	public String userOperaDetail(HttpServletRequest req, Model mode){
+		String objId = req.getParameter("objId");
+		String op = req.getParameter("op");
+		List<UserOperaEntity> userOperas = userOperaEntityService.getUserOperasByObjIdAndOpera(objId, op);
+		mode.addAttribute("userOperas", userOperas);
+		PropertyFilter filter_dic = new PropertyFilter("attributeName", "operateName");
+		List<DataDictionaryEntity> operas = dataDictionaryEntityService.search(filter_dic);
+		mode.addAttribute("operas", operas);
+		return "/WEB-INF/admin/userOperaDetail";
 	}
 
 }

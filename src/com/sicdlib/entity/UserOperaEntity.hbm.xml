@@ -7,6 +7,7 @@
     <class name="com.sicdlib.entity.UserOperaEntity" table="user_opera" schema="socialmind">
         <id name="operaId" column="operaID"/>
         <property name="operaType" column="operaType"/>
+        <property name="operaTime" column="operaTime"/>
         <many-to-one name="userEntity" column="userID"></many-to-one>
         <many-to-one name="objectEntity" column="objectID"></many-to-one>
     </class>
