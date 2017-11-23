@@ -1,6 +1,6 @@
 package com.sicdlib.service;
 
-import com.sicdlib.entity.CommentEntity;
+import com.sicdlib.entity.ArticleCommentEntity;
 import com.sicdlib.util.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
@@ -14,19 +14,20 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CommentEntityService extends DefaultEntityManager<CommentEntity> {
+public class ArticleCommentEntityService extends DefaultEntityManager<ArticleCommentEntity>{
     //查找网民观点
-    public List<CommentEntity> findPeopleComment(String objectId){
+    public List<ArticleCommentEntity> findArticleComment(String articleId){
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select c.commentContent from comment c where c.objectID = "+objectId+" limit 1";
+            String sql = "SELECT ac.content from article_comment ac " +
+                    "where ac.authorID = "+articleId+" ORDER BY (ac.replayNumber+ac.likeNumber) desc limit 1";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
-                CommentEntity comment = new CommentEntity();
-                comment.setCommentContent(rs.getString(1));
-                list.add(comment);
+                ArticleCommentEntity articleComment = new ArticleCommentEntity();
+                articleComment.setContent(rs.getString(1));
+                list.add(articleComment);
             }
             new DBUtil().closeConn(rs,psmt,conn);
             return list;

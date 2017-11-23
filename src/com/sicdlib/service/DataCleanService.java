@@ -245,7 +245,10 @@ public class DataCleanService {
             //填充空字符串为o
             case "11":
             {
-                util.upsertColumn(currentTable,currentColumn,"","0");
+                Boolean state=util.upsertColumn(currentTable,currentColumn,"","0");
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //填充空字符串为均值
@@ -253,7 +256,10 @@ public class DataCleanService {
             {
                 String avg=specialPhoenixUtil.getAverage(currentTable,currentColumn);
                 System.out.println("平均值是:"+avg);
-                util.upsertColumn(currentTable,currentColumn,"",avg);
+                Boolean state=util.upsertColumn(currentTable,currentColumn,"",avg);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //填充空字符串为最频繁值
@@ -263,31 +269,46 @@ public class DataCleanService {
                 LinkedHashMap<String,Integer> frequentValue =getOrder(currentTable,currentColumn);
                 String value =frequentValue.entrySet().iterator().next().getKey().toString();
 //                System.out.println("最频繁值是:"+value);
-                util.upsertColumn(currentTable,currentColumn,"",value);
+                Boolean state=util.upsertColumn(currentTable,currentColumn,"",value);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //取最大值
             case "14":{
                 String maxNum =specialPhoenixUtil.getMaxNum(currentTable,currentColumn);
 //                System.out.println("最大值是:"+maxNum);
-                util.upsertColumn(currentTable,currentColumn,"",maxNum);
+                Boolean state=util.upsertColumn(currentTable,currentColumn,"",maxNum);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //取最小值
             case "15":{
                 String minNum =specialPhoenixUtil.getMinNum(currentTable,currentColumn);
 //                System.out.println("最小值是:"+minNum);
-                util.upsertColumn(currentTable,currentColumn,"",minNum);
+                Boolean state=util.upsertColumn(currentTable,currentColumn,"",minNum);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             case "16":{
-                util.upsertColumn(currentTable,currentColumn,"",newValue);
+                Boolean state=util.upsertColumn(currentTable,currentColumn,"",newValue);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             /*错误字符串的处理*/
             //删除该列
             case "17":{
-                util.deleteColumn(currentTable,currentColumn);
+                Boolean state=util.deleteColumn(currentTable,currentColumn);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //删除字符串中的空格
@@ -299,55 +320,94 @@ public class DataCleanService {
             }
             //删除字符串中的\n
             case "19":{
-                util.upsertColumnWithRegex(currentTable,currentColumn,"\n","");
+                Boolean state=util.upsertColumnWithRegex(currentTable,currentColumn,"\n","");
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //删除字符串中的双标签以及其中的值
             case "20":{
-                util.upsertColumnWithRegex(currentTable,currentColumn,"<.*?>.*?<.*?>","");
+                Boolean state=util.upsertColumnWithRegex(currentTable,currentColumn,"<.*?>.*?<.*?>","");
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //删除字符串中的单标签及其中的值
             case "21":{
-                util.upsertColumnWithRegex(currentTable,currentColumn,"<.*?>","");
+                Boolean state=util.upsertColumnWithRegex(currentTable,currentColumn,"<.*?>","");
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //修改某特定字符串
             case "22":{
-                util.upsertColumn(currentTable,currentColumn,oldValue,newValue);
+                Boolean state=util.upsertColumn(currentTable,currentColumn,oldValue,newValue);
+                if(state==false){
+                    return false;
+                }
+                break;
             }
             //正则修改某字符串
             case "23":{
-                util.upsertColumnWithRegex(currentTable,currentColumn,oldValue,newValue);
+                Boolean state=util.upsertColumnWithRegex(currentTable,currentColumn,oldValue,newValue);
+                if(state==false){
+                    return false;
+                }
+                break;
             }
             /*行操作*/
             //删除某字段包含特定字符串的所有行
             case "24":{
-                util.deleteRow(currentTable,currentColumn,oldValue);
+                Boolean state=util.deleteRow(currentTable,currentColumn,oldValue);
+                if(state==false){
+                    return false;
+                }
+                break;
             }
             //正则匹配一列修改符合条件的行
             case "25":{
-                util.deleteRowWithRegex(currentTable,currentColumn,oldValue);
+                Boolean state=util.deleteRowWithRegex(currentTable,currentColumn,oldValue);
+                if(state==false){
+                    return false;
+                }
+                break;
             }
             //针对一列删除重复的行
             case "26":{
-                util.deleteRepeatRow(currentTable,currentColumn);
+                Boolean state=util.deleteRepeatRow(currentTable,currentColumn);
+                if(state==false){
+                    return false;
+                }
+                break;
             }
             //统一为xxxx-xx-xx xx:xx:xx
             case "27":{
-
+                Boolean state=util.changeTimeFormat(currentTable,currentColumn);
+                if(state==false){
+                    return false;
+                }
+                break;
             }
 
         //该列重置
             case "resetColumn":
             {
-                specialPhoenixUtil.resetColumn(currentTable, sourceTable,currentColumn);
+                Boolean state=specialPhoenixUtil.resetColumn(currentTable, sourceTable,currentColumn);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
             //重置整个表,可能不能用……
             case "resetTable":
             {
-                specialPhoenixUtil.resetTable(currentTable,sourceTable);
+                Boolean state=specialPhoenixUtil.resetTable(currentTable,sourceTable);
+                if(state==false){
+                    return false;
+                }
                 break;
             }
         }

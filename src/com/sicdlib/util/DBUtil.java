@@ -2,6 +2,8 @@ package com.sicdlib.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class DBUtil {
     public Connection GetConnection(){
@@ -18,4 +20,29 @@ public class DBUtil {
         }
         return conn;
     }
+    public void closeConn(ResultSet rs, PreparedStatement pstmt, Connection conn){
+        try {
+            if (rs!=null) {//如果返回的结果集对象不能为空,就关闭连接
+                rs.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (pstmt!=null) {
+                pstmt.close();//关闭预编译对象
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (conn!=null) {
+                conn.close();//关闭结果集对象
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
