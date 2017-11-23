@@ -39,4 +39,11 @@ public class DataCleanConfAction {
         model.addAttribute("rightList",strategyList2);
         return "/WEB-INF/admin/strategyConf";
     }
+
+    @RequestMapping("/admin/moveStrategy")
+    public void moveStrategy(HttpServletRequest request, HttpServletResponse response, Model model){
+        String strategyID =request.getParameter("strategyID");
+        String useStatus = request.getParameter("useStatus");
+        Boolean result =cleanStrategyService.moveStrategy(strategyID,useStatus);
+    }
 }

@@ -36,15 +36,31 @@ public class CleanStrategyService extends DefaultEntityManager<CleanStrategyEnti
     // get using strategies
     public List<CleanStrategyEntity>  getUsingStrategies(String strategyID){
         List<CleanStrategyEntity> strategyList=new ArrayList<CleanStrategyEntity>();
-        String hql = "from CleanStrategyEntity strategy where strategy.type = '"+strategyID+"' AND strategy.isUse = '1'";
+        String hql = "from CleanStrategyEntity strategy where strategy.type = '"+strategyID+"' AND strategy.isUse = '0'";
         strategyList = getEntityDao().find(hql);
         return strategyList;
     }
     //get not using strategies
     public List<CleanStrategyEntity>  getNotUsingStrategies(String strategyID){
         List<CleanStrategyEntity> strategyList=new ArrayList<CleanStrategyEntity>();
-        String hql = "from CleanStrategyEntity strategy where strategy.type = '"+strategyID+"' AND strategy.isUse = '0'";
+        String hql = "from CleanStrategyEntity strategy where strategy.type = '"+strategyID+"' AND strategy.isUse = '1'";
         strategyList = getEntityDao().find(hql);
         return strategyList;
+    }
+
+    //change use status
+    public Boolean moveStrategy(String strategyID, String useStatus){
+        String newStatus;
+        if(useStatus.equals("0")){
+            newStatus ="1";
+        }else{
+            newStatus ="0";
+        }
+//        String hql = "update CleanStrategyEntity strategy set strategy.isUse='"+newStatus+"' where strategy.type = '"+strategyID+"' AND strategy.isUse = '"+useStatus+"'";
+//        getEntityDao().createQuery(hql);
+        CleanStrategyEntity cleanStrategyEntity=this.load(strategyID);
+        cleanStrategyEntity.setIsUse(newStatus);
+        this.saveOrUpdate(cleanStrategyEntity);
+        return true;
     }
 }

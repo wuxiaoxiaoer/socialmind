@@ -73,8 +73,6 @@ public class DataCleanAction {
         System.out.println("controller中的result:"+orderResult);
         PrintWriter out = response.getWriter();       //向客户端发送字符数据
         try{
-
-
 //        Gson gson = new Gson();
 ////        String strHead = gson.toJson(tHeadValue);
 //        String strBody = gson.toJson(result.get(0));
