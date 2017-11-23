@@ -25,4 +25,5 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
         List<EventEntity> eventInfo = getEntityDao().find(hql);
         return eventInfo;
     }
+
 }

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,6 +24,10 @@ public class EventAction {
     private EventEntityService eventEntityService;
     @Autowired
     private ArticleEntityService articleEntityService;
+    @Autowired
+    private ArticleCommentEntityService articleCommentEntityService;
+    @Autowired
+    private CommentEntityService commentEntityService;
     @Autowired
     private AuthorEntityService authorEntityService;
     @Autowired
@@ -61,13 +63,6 @@ public class EventAction {
         return "/WEB-INF/foreground/event";
     }
 
-    /*@RequestMapping(value="test",produces="application/json;charset=UTF-8")
-    @ResponseBody
-    public String test(HttpServletRequest req, HttpServletResponse resp, Model mode){
-
-        return "";
-    }*/
-
     //查找事件信息
     @RequestMapping("eventInfo")
     public String findEventInfo(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
@@ -78,23 +73,52 @@ public class EventAction {
         List<Map> keywords = articleEntityService.findKeywords(objectId);
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
         List<AuthorEntity> hotAuthor = authorEntityService.findHotAuthor(objectId);
-        List periodList = articleEntityService.findPeriod(objectId);
 
+        List<ArticleCommentEntity> articleCommentList = articleCommentEntityService.findArticleComment(hotAuthor.get(0).getAuthorId());
+        List<CommentEntity> comment = commentEntityService.findPeopleComment(objectId);
+
+
+        List periodList = articleEntityService.findPeriod(objectId);
         List hotInformation = articleEntityService.findHotInformation(objectId);
         List<WebsiteEntity> webs = websiteEntityService.findWebsite();
-        System.out.println("webs:"+webs.toString());
-        System.out.println("webs to json"+JSON.toJSON(webs));
+       /* List websiteStatistic = new ArrayList();
+        for(int i = 0 ; i < webs.size() ; i++) {
+            List list = new ArrayList();
+            for(int j = 0 ; j < periodList.size() ; j++) {
+                time = periodList.get(j).toString();
+                List<Map> websiteList = articleEntityService.findWebsites(objectId,time);
+                List list1 = new ArrayList();
+                for(int z = 0 ; z < websiteList.size() ; z++) {
+                    list1.add(websiteList.get(z).get("websiteNum").toString());
+                }
+                System.out.println(list1.toString());
+                list.add(list1);
+            }
+            websiteStatistic.add(list);
+        }*/
+
+
+        //网站统计。。。。。开始
         List websiteStatistic = new ArrayList();
-        for(int i = 0 ; i < periodList.size() ; i++) {
-            time = periodList.get(i).toString();
-            List websiteList = articleEntityService.findWebsites(objectId,time);
-            System.out.println("websiteList :"+websiteList.toString());
-            System.out.println("json.tojson:"+JSON.toJSON(websiteList));
+        for(int j = 0 ; j < periodList.size() ; j++) {
+            time = periodList.get(j).toString();
+            List<Map> websiteList = articleEntityService.findWebsites(objectId,time);
+            List list1 = new ArrayList();
+            for(int z = 0 ; z < websiteList.size() ; z++) {
+                list1.add(websiteList.get(z).get("websiteNum").toString());
+            }
+            websiteStatistic.add(list1);
+        }
+        String[] array = new String[websiteStatistic.size()];
+        // List转换成数组
+        String[] newArray = {};
+        for (int i = 0; i < websiteStatistic.size(); i++) {
+            array[i] = websiteStatistic.get(i).toString();
+            System.out.println("3:"+array[i]);
         }
 
+        //网站统计。。。。。结束
 
-        /*String[] strings = new String[periodList.size()];
-        System.out.println("periodList.toArray(strings):"+JSON.toJSON(strings));*/
         List event = new ArrayList();
         for(int i = 0 ; i < objectInfo.size() ; i++) {
             for(int j = 0 ; j < eventInfo.size() ; j++) {
@@ -109,16 +133,21 @@ public class EventAction {
 
         List mediaSource = websiteEntityService.findMediaSource(objectId);
         List areaSource = indicatorValueEntityService.getObjectArea(objectId);
-        System.out.println("json de keywords:"+JSON.toJSON(keywords));
+        List<IndicatorValueEntity> reliablity = indicatorValueEntityService.getObjectReliablity(objectId);
+
         mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
         mode.addAttribute("areaSource", JSON.toJSON(areaSource));
         mode.addAttribute("periodList", JSON.toJSON(periodList));
         mode.addAttribute("webs",JSON.toJSON(webs));
+        mode.addAttribute("websiteStatistic",websiteStatistic);
         mode.addAttribute("artileList", artileList);
         mode.addAttribute("hotInformation", hotInformation);
         mode.addAttribute("hotAuthor", hotAuthor);
+        mode.addAttribute("articleCommentList", articleCommentList);
+        mode.addAttribute("comment", comment);
         mode.addAttribute("keywords", JSON.toJSON(keywords).toString());
         mode.addAttribute("event", event);
+        mode.addAttribute("reliablity", reliablity);
         return "/WEB-INF/foreground/eventInfo";
     }
 }

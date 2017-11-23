@@ -19,6 +19,22 @@ public class PermissionEntity {
         this.permissionId = permissionId;
     }
 
+    public String getPermissionName() {
+        return permissionName;
+    }
+
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -41,21 +57,5 @@ public class PermissionEntity {
 
     public void setOperateId(String operateId) {
         this.operateId = operateId;
-    }
-
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
-    }
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
     }
 }

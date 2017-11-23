@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.ConfigConfigitemEntity" table="config_configitem" schema="socialmind">
+        <id name="spiderConfigItemId" column="spiderConfigItemID"/>
+        <property name="spiderConfigId" column="spiderConfigID"/>
+        <!--<property name="configItemId" column="configItemID"/>-->
+        <property name="configItemValue" column="configItemValue"/>
+        <property name="note" column="note"/>
+
+
+        <!-- 表之间的映射：多个（配置——配置项）属于一个配置项，属于一个爬虫配置 -->
+        <many-to-one name="configItem" class="com.sicdlib.entity.ConfigitemEntity" column="configItemID"></many-to-one>
+
+       <!--<many-to-one name="spiderConfig" class="com.sicdlib.entity.SpiderConfigEntity" column="spiderConfigID"></many-to-one>-->
+
+
+    </class>
+</hibernate-mapping>

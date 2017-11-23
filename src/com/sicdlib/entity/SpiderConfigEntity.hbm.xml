@@ -1,15 +1,30 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.SpiderConfigEntity" table="spider_config" schema="socialmind">
         <id name="spiderConfigId" column="spiderConfigID"/>
+        <property name="configName" column="configName"/>
         <property name="configTime" column="configTime"/>
         <property name="spiderRunTime" column="spiderRunTime"/>
         <property name="logPath" column="logPath"/>
         <property name="filePath" column="filePath"/>
         <property name="spiderFrequency" column="spiderFrequency"/>
+
+
+        <!-- 表之间的映射：一个配置包含多个(配置——配置项) -->
+        <set name="configItems" cascade="save-update" inverse="true">
+            <key column="spiderConfigID"></key>
+            <one-to-many class="com.sicdlib.entity.ConfigConfigitemEntity"></one-to-many>
+        </set>
+
+        <!-- 表之间的映射：一个配置包含多个(爬虫)  -->
+        <set name="spiders" cascade="save-update" inverse="true">
+            <key column="spiderConfigID"></key>
+            <one-to-many class="com.sicdlib.entity.SpiderInfoEntity"></one-to-many>
+        </set>
+
     </class>
 </hibernate-mapping>
