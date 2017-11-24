@@ -22,7 +22,6 @@ import java.util.Map;
 //数据清洗
 @Controller
 @RequestMapping("/*")
-
 public class DataCleanAction {
     @Autowired
     private DataCleanService dataCleanService;
@@ -74,8 +73,6 @@ public class DataCleanAction {
         System.out.println("controller中的result:"+orderResult);
         PrintWriter out = response.getWriter();       //向客户端发送字符数据
         try{
-
-
 //        Gson gson = new Gson();
 ////        String strHead = gson.toJson(tHeadValue);
 //        String strBody = gson.toJson(result.get(0));
@@ -88,6 +85,7 @@ public class DataCleanAction {
         }catch(Exception e){
             System.out.println(e);
             System.out.println("函数getOrder得到的map键有空值");
+            out.write("此列有空值!");
         }finally {
             return;
         }
@@ -105,7 +103,5 @@ public class DataCleanAction {
         String newValue =request.getParameter("newValue");
 //        System.out.println("currentTable:"+currentTable+"\n"+"currentColumn:"+currentColumn+"\n"+"strategyID"+strategyID);
         Boolean cleanResult =dataCleanService.doClean(currentTable,currentColumn,strategyID,oldValue,newValue);
-
-
     }
 }

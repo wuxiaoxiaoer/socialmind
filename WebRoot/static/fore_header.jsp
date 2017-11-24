@@ -56,7 +56,7 @@
                         <a href="<%=basePath%>event/all">全网事件分析</a>
                     </li>
                     <li class="">
-                        <a href="makeReporter_1.html">简报制作</a>
+                        <a href="<%=basePath%>makeReporter">简报制作</a>
                     </li>
                 </ul>
             </div>

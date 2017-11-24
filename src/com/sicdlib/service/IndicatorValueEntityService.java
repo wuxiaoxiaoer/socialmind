@@ -7,10 +7,7 @@ import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,26 +44,49 @@ public class IndicatorValueEntityService extends DefaultEntityManager<IndicatorV
         return indicators;
     }
 
+    //事件
     public List getObjectArea(String objectId){
 
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            Statement statement = conn.createStatement();
-            String sql = "select i.dimensionValue,SUM(i.indicatorValue) from indicator_value i where i.objectID ='" +objectId+"' AND i.indexName=\"地域\" GROUP BY i.dimensionValue";
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "select i.dimensionValue,SUM(i.indicatorValue) from indicator_value i " +
+                    "where i.objectID ='" +objectId+"' AND i.indexName=\"地域\" GROUP BY i.dimensionValue";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
                 Map map = new HashMap();
                 map.put("name",rs.getString(1));
                 map.put("value",rs.getInt(2));
                 list.add(map);
             }
-
+            new DBUtil().closeConn(rs,psmt,conn);
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        return null;
+    }
+    //查找事件的可信度
+    public List<IndicatorValueEntity> getObjectReliablity(String objectId){
+
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT SUM(i.indicatorValue) from indicator_value i where i.objectID = "+objectId+" AND i.indexName = \"可信度\"";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                IndicatorValueEntity indicatorValue = new IndicatorValueEntity();
+                indicatorValue.setIndicatorValue(rs.getString(1));
+                list.add(indicatorValue);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

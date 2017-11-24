@@ -34,37 +34,37 @@
         <div class="span3" id="sidebar">
             <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
                 <li>
-                    <a href="#001"><i class="icon-chevron-right"></i> 事件简介</a>
+                    <a onclick="document.getElementById('001').scrollIntoView();"><i class="icon-chevron-right"></i> 事件简介</a>
                 </li>
                 <li>
-                    <a href="#002"><i class="icon-chevron-right"></i>事件走势</a>
+                    <a onclick="document.getElementById('002').scrollIntoView();"><i class="icon-chevron-right"></i>事件走势</a>
                 </li>
                 <li>
-                    <a href="#003"><i class="icon-chevron-right"></i> 网站统计</a>
+                    <a onclick="document.getElementById('003').scrollIntoView();"><i class="icon-chevron-right"></i> 网站统计</a>
                 </li>
                 <li>
-                    <a href="#004"><i class="icon-chevron-right"></i>数据类型</a>
+                    <a onclick="document.getElementById('004').scrollIntoView();"><i class="icon-chevron-right"></i>数据类型</a>
                 </li>
                 <li>
-                    <a href="#005"><i class="icon-chevron-right"></i>关键词云</a>
+                    <a onclick="document.getElementById('005').scrollIntoView();"><i class="icon-chevron-right"></i>关键词云</a>
                 </li>
                 <li>
-                    <a href="#006"><i class="icon-chevron-right"></i>热门信息</a>
+                    <a onclick="document.getElementById('006').scrollIntoView();"><i class="icon-chevron-right"></i>热门信息</a>
                 </li>
                 <li>
-                    <a href="#007"><i class="icon-chevron-right"></i>热点网民</a>
+                    <a onclick="document.getElementById('007').scrollIntoView();"><i class="icon-chevron-right"></i>热点网民</a>
                 </li>
                 <li>
-                    <a href="#008"><i class="icon-chevron-right"></i> 传播路径</a>
+                    <a onclick="document.getElementById('008').scrollIntoView();"><i class="icon-chevron-right"></i> 传播路径</a>
                 </li>
                 <li>
-                    <a href="#009"><i class="icon-chevron-right"></i>关联词</a>
+                    <a onclick="document.getElementById('009').scrollIntoView();"><i class="icon-chevron-right"></i>关联词</a>
                 </li>
                 <li>
-                    <a href="#010"><i class="icon-chevron-right"></i>网民观点</a>
+                    <a onclick="document.getElementById('010').scrollIntoView();"><i class="icon-chevron-right"></i>网民观点</a>
                 </li>
                 <li>
-                    <a href="#011"><i class="icon-chevron-right"></i> 舆情总结</a>
+                    <a onclick="document.getElementById('011').scrollIntoView();"><i class="icon-chevron-right"></i> 舆情总结</a>
                 </li>
             </ul>
         </div>
@@ -102,7 +102,7 @@
                                 <c:forEach items="${artileList}" var="al" varStatus="sts">
 
                                     <img src="./images/11.png"  width="20px"></img>[${al.postTime}] ${al.title}
-                                    【 ${al.websiteId}】
+                                    【 ${al.websiteEntity.websiteId}】
                                     <br/>
 
                                 </c:forEach>
@@ -115,7 +115,7 @@
 
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left">网站统计</div>
+                        <div class="muted pull-left" id="003">网站统计</div>
                         <div class="pull-right"><span class="badge badge-warning">View More</span>
 
                         </div>
@@ -203,7 +203,7 @@
                                 <c:forEach items="${hotInformation}" var="h" varStatus="sts">
                                     <tr>
                                         <td>${h.title}</td>
-                                        <td>${h.websiteId}</td>
+                                        <td>${h.websiteEntity.websiteId}</td>
                                         <td>${h.postTime}</td>
                                         <td>${h.recommendNumber}</td>
                                     </tr>
@@ -298,28 +298,19 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <%--<div class="alert">
-                                <h4 class="alert-heading">观点一：高考成绩陆续放榜(87%)</h4>
-                                <button class="close" data-dismiss="alert">&times;</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;婷婷:高考成绩近期陆续放榜，对分数有异议可申请复核。
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;单身植物:我不同意
-                            </div>
-                            <div class="alert alert-success">
-                                <h4 class="alert-heading">观点二：高考成绩昨天放榜(12%)</h4>
-                                <button class="close" data-dismiss="alert">&times;</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;婷婷:高考成绩近期陆续放榜，对分数有异议可申请复核。
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;单身植物:我不同意
-                            </div>
-                            <div class="alert alert-info">
-                                <h4 class="alert-heading">观点三：高考成绩不放榜(87%)</h4>
-                                <button class="close" data-dismiss="alert">&times;</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;婷婷:高考成绩近期陆续放榜，对分数有异议可申请复核。
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;单身植物:我不同意
-                            </div>--%>
+                            <c:forEach items="${articleCommentList}" var="ac">
+                                <div class="alert">
+                                    <h4 class="alert-heading">观点一：${ac.content}</h4>
 
+                                </div>
+                            </c:forEach>
+                            <c:forEach items="${comment}" var="c">
+                                <div class="alert alert-success">
+                                    <h4 class="alert-heading">观点二：${c.commentContent}</h4>
+
+
+                                </div>
+                            </c:forEach>
 
                         </div>
                     </div>
@@ -328,17 +319,18 @@
             </div>
 
             <div class="alert alert-block">
-                <c:forEach items="${event}" var="e" varStatus="sts">
+                <c:forEach items="${event}" var="e">
                 <h4 class="alert-heading" id="011">舆情总结</h4>
-                    ${e.event.eventSummary}
-
-                <%--<div class="alert alert-success">
-                    综合信息可得，该事件可信度为<strong>真</strong>
-                </div>--%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;${e.event.eventSummary}
+                </c:forEach>
+                <div class="alert alert-success">
+                    <c:forEach items="${reliablity}" var="r">
+                    综合信息可得，该事件可信度为&nbsp;&nbsp;<strong>${r.indicatorValue}</strong>
+                    </c:forEach>
+                </div>
             </div>
-
         </div>
-        </c:forEach>
+
     </div>
     <hr>
     <!-- 引入尾部模板 -->
@@ -369,47 +361,35 @@
 
 <script  type="text/javascript">
 
-    var keyWords = [{"name":"老百姓","value":1},
-        {"name":"市场经济","value":1},
-        {"name":"基层","value":1},
-        {"name":"工作队","value":1},
-        {"name":"十九大","value":1}];
-
+    var keyword = ${keywords};
     //基于准备好的dom,初始化echarts实例
     var myChart = echarts.init(document.getElementById('keywords'));
-    function createRandomItemStyle() {
-        return {
-            normal: {
-                color: 'rgb(' + [
-                    Math.round(Math.random() * 160),
-                    Math.round(Math.random() * 160),
-                    Math.round(Math.random() * 160)
-                ].join(',') + ')'
-            }
-        };
-    }
 
     var option = {
-        title: {
-            text: '',
-            link: 'http://www.google.com/trends/hottrends'
-        },
-        tooltip: {
-            show: true
-        },
-        series: [{
-            name: '',
-            type: 'wordCloud',
-            size: ['80%', '80%'],
-            textRotation : [0, 45, 90, -45],
-            textPadding: 0,
-            autoSize: {
-                enable: true,
-                minSize: 14
+        tooltip : {},
+        series : [ {
+            type : 'wordCloud',
+            shape:'smooth',
+            gridSize : 2,
+            sizeRange : [ 50, 100 ],
+            rotationRange : [ 46, 80 ],
+            textStyle : {
+                normal : {
+                    color : function() {
+                        return 'rgb('
+                            + [ Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160) ]
+                                .join(',') + ')';
+                    }
+                },
+                emphasis : {
+                    shadowBlur : 10,
+                    shadowColor : '#333'
+                }
             },
-            data:keyWords
-        }]
-
+            data : keyword
+        } ]
     };
     // 为echarts对象加载数据
     myChart.setOption(option);
@@ -419,11 +399,13 @@
 
     });
 </script>
+<input type="hidden" value="${webs}">
+<%--<c:forEach items="${websiteStatistic}" var="web" varStatus="sts">
+    <c:forEach items="${web}" var="webss" varStatus="sts">
+        ${webss}
+    </c:forEach>
+</c:forEach>--%>
 <script>
-    var websdata = JSON.stringify(${webs}).replace(/\"/g,"'");
-    var webstimedata = JSON.stringify(${periodList}).replace(/\-/g,".").replace(/\"/g,"'");
-//    alert(websdata);
-//    alert(webstimedata);
     //基于准备好的dom,初始化echarts实例
     var myChart1 = echarts.init(document.getElementById('website_statistic'));
 
@@ -432,7 +414,7 @@
             trigger: 'axis'
         },
         legend: {
-            data:websdata
+            data:${webs}
 
         },
         toolbox: {
@@ -450,7 +432,7 @@
             {
                 type : 'category',
                 boundaryGap : false,
-                data : ['2017.11.07','2017.11.08','2017.11.09','2017.11.10','2017.11.11']
+                data : ${periodList}
 
             }
         ],
@@ -459,12 +441,13 @@
                 type : 'value'
             }
         ],
-        series : [
+        series :<%--${websiteStatistic}--%>
+            [
             {
                 name:'网易博客',
                 type:'line',
                 stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
+                data:["120", "132", "101", "134", "90", "230", "210"]
             },
             {
                 name:'天涯BBS',
@@ -786,17 +769,17 @@
                         }
                     },
                     data: [
-                        {xAxis:0, y: 350, name:'Line', symbolSize:20, symbol: 'image://../asset/ico/折线图.png'},
-                        {xAxis:1, y: 350, name:'Bar', symbolSize:20, symbol: 'image://../asset/ico/柱状图.png'},
-                        {xAxis:2, y: 350, name:'Scatter', symbolSize:20, symbol: 'image://../asset/ico/散点图.png'},
-                        {xAxis:3, y: 350, name:'K', symbolSize:20, symbol: 'image://../asset/ico/K线图.png'},
-                        {xAxis:4, y: 350, name:'Pie', symbolSize:20, symbol: 'image://../asset/ico/饼状图.png'},
-                        {xAxis:5, y: 350, name:'Radar', symbolSize:20, symbol: 'image://../asset/ico/雷达图.png'},
-                        {xAxis:6, y: 350, name:'Chord', symbolSize:20, symbol: 'image://../asset/ico/和弦图.png'},
-                        {xAxis:7, y: 350, name:'Force', symbolSize:20, symbol: 'image://../asset/ico/力导向图.png'},
-                        {xAxis:8, y: 350, name:'Map', symbolSize:20, symbol: 'image://../asset/ico/地图.png'},
-                        {xAxis:9, y: 350, name:'Gauge', symbolSize:20, symbol: 'image://../asset/ico/仪表盘.png'},
-                        {xAxis:10, y: 350, name:'Funnel', symbolSize:20, symbol: 'image://../asset/ico/漏斗图.png'},
+                        {xAxis:0, y: 350, name:'Line', symbolSize:20, symbol: ''},
+                        {xAxis:1, y: 350, name:'Bar', symbolSize:20, symbol: ''},
+                        {xAxis:2, y: 350, name:'Scatter', symbolSize:20, symbol: ''},
+                        {xAxis:3, y: 350, name:'K', symbolSize:20, symbol: ''},
+                        {xAxis:4, y: 350, name:'Pie', symbolSize:20, symbol: ''},
+                        {xAxis:5, y: 350, name:'Radar', symbolSize:20, symbol: ''},
+                        {xAxis:6, y: 350, name:'Chord', symbolSize:20, symbol: ''},
+                        {xAxis:7, y: 350, name:'Force', symbolSize:20, symbol: ''},
+                        {xAxis:8, y: 350, name:'Map', symbolSize:20, symbol: ''},
+                        {xAxis:9, y: 350, name:'Gauge', symbolSize:20, symbol: ''},
+                        {xAxis:10, y: 350, name:'Funnel', symbolSize:20, symbol: ''},
                     ]
                 }
             }
@@ -1004,7 +987,6 @@
     function labelFormatter(label, series) {
         return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
     }
-
 
 </script>
 </body>

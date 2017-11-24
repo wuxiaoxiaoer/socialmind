@@ -299,4 +299,75 @@ public class PhoenixUtil{
         return true;
     }
 
+    //change time format, the third value is the value matches "when", the forth value is which after "then". In this process, we just clean data, not unify the length of every kind of data.
+    public Boolean changeTimeFormat(String tableName, String columnName){
+        PhoenixUtil util =new PhoenixUtil();
+        Connection conn = null;
+        try {
+            // get connection
+            conn = util.GetConnection();
+
+            // check connection
+            if (conn == null) {
+                System.out.println("conn is null...");
+                return false;
+            }
+            String count="SELECT COUNT(*) FROM \""+tableName+"\"";
+            PreparedStatement ps = conn.prepareStatement(count);
+            ResultSet result=ps.executeQuery();
+            conn.commit();
+            int totleRow=0;
+            while(result.next()){
+                totleRow=result.getInt(1);
+            }
+            //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
+            //When we use the judge sentence case, when it maches the first case, it won't execute else
+            for (int i=0;i<totleRow;i+=400000){
+//                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
+//                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
+                String sql ="UPSERT INTO \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\") SELECT \"PK\"," +
+                        //deal with 2017/11/21, change / to -
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'%/%/%\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\", '\\', '-') " +
+                        //deal with 17-11-21, change 17 to 2017   then后面是字符串可否？
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'[01]_-__-__\' THEN \'\"20\"+\"info\".\""+columnName+"\"\' " +
+                        //2017年11月21日 23:54:12,将汉字替换为-
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'____年__月__日 __:__:__\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\", '[\\u4e00-\\u9fa5]', '-')" +
+                        //17-11-12 9:40:12
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'[01]_-__-__ __:__:__\' THEN \'\"20\"+\""+columnName+"\"\' " +
+                        //2017-11-22 16:38星期三
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'____-__-__ __:__:星期_\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\", '[\\u4e00-\\u9fa5]', '')" +
+                        //(2017-11-22 16:52:12)
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'(____-__-__ __:__:__)\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\",'[()]','')" +
+                        //if the format is like   Sat Jul 26 09:59:57 CST 2014  ,we first delete "Sat "and " CST",which we don't need, second, we transfer Jul to 07, and connect the day 26 with a '-', and put 2014 to the first place and transfer it to 2014-
+                        "" +
+                        " FROM \""+tableName+"\" LIMIT 400000 OFFSET "+i;
+                PreparedStatement ps2 = conn.prepareStatement(sql);
+
+                // execute upsert
+                String msg = ps2.executeUpdate() > 0 ? "insert success..."
+                        : "insert fail...";
+
+                // you must commit
+                conn.commit();
+                System.out.println(msg);
+                if(msg =="insert fail..."){
+                    return false;
+                }
+            }
+
+        } catch (SQLException e) {
+            //报错未必不执行，如socket超时，因此不在这里retrun false
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return true;
+    }
+
 }

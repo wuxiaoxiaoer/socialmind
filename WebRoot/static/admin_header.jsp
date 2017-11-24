@@ -56,7 +56,7 @@
         <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>数据清洗</span><span class="label">4</span></a>
             <ul>
                 <li><a href="data_stats.html">清洗数据统计</a></li>
-                <li><a href="dataClean_conf.html">数据清洗策略配置</a></li>
+                <li><a href="<%=basePath%>dataCleanConf">数据清洗策略配置</a></li>
                 <li><a href="<%=basePath%>dataClean">数据清洗</a></li>
                 <li><a href="dataClean_diary.html">数据清洗日志管理</a></li>
             </ul>
@@ -79,9 +79,10 @@
                 <li><a href="semanticsToolkits.html">算法工具集管理</a></li>
             </ul>
         </li>
-        <li><a href="tables.html"><i class="icon icon-th"></i> <span>用户评论管理</span></a><span class="label">1</span>
+        <li><a href="#"><i class="icon icon-th"></i> <span>系统操作管理</span></a><span class="label">1</span>
             <ul>
-                <li><a href="userComments.html">用户评论管理</a></li>
+                <li><a href="<%=basePath%>commentsManager?flag=1">系统用户评论管理</a></li>
+                <li><a href="<%=basePath%>operationShow">系统用户操作管理</a></li>
             </ul>
         </li>
         <li><a href="grid.html"><i class="icon icon-fullscreen"></i> <span>用户管理</span></a><span class="label">1</span>

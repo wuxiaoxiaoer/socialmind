@@ -22,4 +22,11 @@ public class UserOperaEntityService extends DefaultEntityManager<UserOperaEntity
             return null;
         }
     }
+    /**
+     * 通过对象Id、操作 查询用户操作
+     */
+    public List<UserOperaEntity> getUserOperasByObjIdAndOpera(String objId, String opera){
+        String hql = "select o from UserOperaEntity o where o.objectEntity.objectId = '" + objId +"' and o.operaType = '" + opera + "'";
+        return getEntityDao().find(hql);
+    }
 }

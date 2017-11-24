@@ -6,10 +6,19 @@ package com.sicdlib.entity;
 public class UserOperaEntity {
     private String operaId;
     private String operaType;
+    private String operaTime;
     /**多个用户操作属于一个用户 */
     private UserEntity userEntity;
     /**多个用户操作属于一个舆情对象*/
     private ObjectEntity objectEntity;
+
+    public String getOperaTime() {
+        return operaTime;
+    }
+
+    public void setOperaTime(String operaTime) {
+        this.operaTime = operaTime;
+    }
 
     public ObjectEntity getObjectEntity() {
         return objectEntity;
