@@ -202,9 +202,12 @@
       //用户点击某表btn时，将该表名存入input引发其改变，从而触发ajax的onchange函数，清空
 
       function display(value) {
+          //每次点击先刷新统计表
+          $("#stats").html("");
 //          在页面上显示当前表名字
           $("#currentTable").text(value);
-
+          //显示等待动画
+          $('#YWaitTable').show();
           $.post("TableServlet",
               {
                   tablename: value
@@ -212,7 +215,7 @@
               function (data, status) {
                   //前台拿到的是一个字符串
 //                  data=data.replace(new RegExp("&","gm"),"null");
-
+                  $('#YWaitTable').hide();
                   var headData = data.split("++")[0];
                   //bodyData得到的是中括号包含大括号的json
                   headData="("+headData+")";
@@ -530,7 +533,6 @@
                     <%--测试用表--%>
                     <div id="test">
                       <a href="javascript:display('test2')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test2</a>
-
                     </div>
                     <%--<div id="btn_sanqin">--%>
                     <%--<a href="javascript:display('news_sanqin')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">news_sanqin</a>--%>
@@ -758,7 +760,22 @@
                 <div class="widget">
                 <div class="whead" style="height:50px;" >
                   <h6><i class="fa fa-cloud"></i>数据展示与清洗</h6>
-                  <div class="showPage" id="showPage" style="height:50px; float:right; margin: 0;"></div>
+                  <div class="showPage" id="showPage" style="height:50px; float:right; margin: 0;">
+
+                    <div id="YWaitTable"
+                         style="
+                      position: absolute;
+                      margin: auto;
+                      top: 150px;
+                      left: 100px;
+                      display: none;
+                      height: 60px;
+                      width: 300px;">
+                      请等待，正在统计……
+                      <img src="images/etlimg/loading2.gif" />
+
+                    </div>
+                  </div>
                 </div>
 
               <div class="col-md-12" style="width:99.5%; height:420px; overflow:scroll;">
