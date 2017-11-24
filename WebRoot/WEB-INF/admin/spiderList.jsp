@@ -148,7 +148,7 @@
                                     <td>${configmap[v.spiderConfigId]["收集最大深度"]}</td>
                                     <td>
                                         <a href="#" class="tip-top" data-original-title="修改" onclick="pop('${v.spiderConfigId}')"><i class="icon-edit"></i></a>
-                                        <a href="#" class="tip-top" data-original-title="删除" onclick="deleteConfig('${v.spiderConfigId}')"><i class="icon-remove" ></i></a>
+                                        <a href="#" class="tip-top"  onclick="deleteConfig('${v.spiderConfigId}');"><i class="icon-remove" ></i></a>
                                     </td>
 
                                 </tr>
@@ -178,7 +178,7 @@
     <div class="modal-body">
 
         <input type="text"  style="display: none;" id="id" name="id" ><br/>
-        爬虫名称：<input type="text" id="spiderNewName" ><br/>
+        爬虫名称：<input type="text" id="spiderNewName"  name="spiderNewName"><br/>
         爬虫配置: <select id="configId" name="configId" placeholder="请选择配置" style="z-index:1000">
                 <c:forEach items="${configList}" var="v">
                     <option style="z-index:1000" value="${v.spiderConfigId}">${v.configName}</option>
@@ -195,7 +195,7 @@
 
 
 
-<!-- Modal -->
+<!-- 修改配置Modal -->
 <div class="modal hide fade" id="config" tabindex="-1" role="dialog" style="overflow:auto">
     <form class="form-horizontal" method="post" action="editConfig" name="basic_validate" id="basic_validate" novalidate="novalidate">
     <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
@@ -226,8 +226,8 @@
                     <label class="control-label">${v.displayName}</label>
                     <div class="controls">
                         <select  name="${v.configItemId}" id="${v.configItemId}">
-                            <option  value="true">是</option>
-                            <option  value="false">否</option>
+                            <option  value="True">是</option>
+                            <option  value="False">否</option>
                         </select>
                     </div>
                 </div>
@@ -256,6 +256,41 @@
 
 
 <script>
+
+
+    /*删除配置*/
+    function deleteConfig(configId) {
+
+        var result = false;
+        if (confirm("确定删除吗?") == false) {
+            return;
+        }
+        $.ajax({
+            async : false,
+            type : 'post',
+            url : 'deleteConfig?spiderConfigId=' + configId,
+            success : function(msg) {
+                if (msg == 'success') {
+                    window.location.reload();
+                    result = true;
+                } else {
+                    alert("删除失败");
+                    result = false;
+                }
+            }
+        });
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
 
     /*弹出修改配置*/
     function pop(Id){
@@ -308,7 +343,7 @@
         });
     }
 
-    /*弹出修改配置*/
+    /*弹出修改爬虫*/
     function popModel(spiderId,spiderName,spiderConfigId){
 
         document.getElementById("id").value=spiderId;
@@ -346,31 +381,6 @@
         return result;
     }
 
-
-
-    /*删除配置*/
-    function deleteConfig(configId) {
-
-        var result = false;
-        if (confirm("确定删除吗?") == false) {
-            return;
-        }
-        $.ajax({
-            async : false,
-            type : 'post',
-            url : 'deleteConfig?spiderConfigId=' + configId,
-            success : function(msg) {
-                if (msg == 'success') {
-                    window.location.reload();
-                    result = true;
-                } else {
-                    alert("删除失败");
-                    result = false;
-                }
-            }
-        });
-        return result;
-    }
 
 
 

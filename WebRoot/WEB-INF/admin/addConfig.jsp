@@ -60,7 +60,7 @@
                             <div class="control-group">
                              <label class="control-label">${v.displayName}</label>
                              <div class="controls">
-                                 <input type="text" value="" name="${v.configItemId}" >
+                                 <input type="text"  name="${v.configItemId}" >
 
                              </div>
                          </div>
@@ -70,8 +70,8 @@
                             <label class="control-label">${v.displayName}</label>
                             <div class="controls">
                             <select  name="${v.configItemId}" >
-                                <option  value="true">是</option>
-                                <option  value="false">否</option>
+                                <option  value="True">是</option>
+                                <option  value="False">否</option>
                             </select>
                             </div>
                         </div>
