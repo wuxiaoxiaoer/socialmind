@@ -51,7 +51,6 @@
             <ul>
                 <li><a href="<%=basePath%>spiderMonitor">爬虫监控</a></li>
                 <li><a href="<%=basePath%>spiderList">爬虫管理</a></li>
-                <li><a href="<%=basePath%>spiderConfigList">爬虫配置</a></li>
             </ul>
         </li>
         <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>数据清洗</span><span class="label">4</span></a>
@@ -97,7 +96,7 @@
         </li>
         <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>权限管理</span></a>
             <ul>
-                <li><a href="<%=basePath%>permission">权限列表</a></li>
+                <li><a href="<%=basePath%>permission">权限管理</a></li>
                 <li><a href="<%=basePath%>toPermissionAllot">权限分配</a></li>
             </ul></li>
         <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>日志管理</span></a>

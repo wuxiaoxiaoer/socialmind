@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 引入头模板 -->
     <jsp:include page="/static/fore_header.jsp"/>
 
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-top: 4%;">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
