@@ -481,7 +481,8 @@
                     </div>
                     <div id="btn_bbs_people">
                       <a href="javascript:display('bbs_people_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_people_author</a>
-                      <a href="javascript:display('bbs_people_post')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_people_post</a>
+                      <a href="javascript:display('bbs_people_comment')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_people_comment</a>
+                      <a href="javascript:display('bbs_people_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_people_post</a>
                     </div>
                     <div id="btn_bbs_sohu">
                       <a href="javascript:display('bbs_sohu_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_sohu_author</a>
@@ -532,7 +533,7 @@
                     </div>
                     <%--测试用表--%>
                     <div id="test">
-                      <a href="javascript:display('test2')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test2</a>
+                      <a href="javascript:display('test')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test</a>
                     </div>
                     <%--<div id="btn_sanqin">--%>
                     <%--<a href="javascript:display('news_sanqin')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">news_sanqin</a>--%>

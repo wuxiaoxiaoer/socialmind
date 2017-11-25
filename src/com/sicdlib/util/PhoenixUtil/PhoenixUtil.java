@@ -130,7 +130,7 @@ public class PhoenixUtil{
                 System.out.println("conn is null...");
                 return false;
             }
-            String sql = "DELETE FROM \""+tableName+"\" WHERE \""+columnName+"\" in (SELECT \""+columnName+"\" FROM \""+tableName+"\" GROUP BY \""+columnName+"\" HAVING COUNT(\""+columnName+"\" >1) AND \"PK\" not in (SELECT MIN(\"PK\") FROM \""+tableName+"\" GROUP BY \""+columnName+"\" HAVING COUNT(*)>1)";
+            String sql = "DELETE FROM \""+tableName+"\" WHERE \""+columnName+"\" in (SELECT \""+columnName+"\" FROM \""+tableName+"\" GROUP BY \""+columnName+"\" HAVING COUNT(\""+columnName+"\")>1) AND \"PK\" not in (SELECT MIN(\"PK\") FROM \""+tableName+"\" GROUP BY \""+columnName+"\" HAVING COUNT(*)>1)";
             PreparedStatement stmt =conn.prepareStatement(sql);
             //如何判断删除成功或失败?
             int msg =stmt.executeUpdate();
@@ -321,26 +321,31 @@ public class PhoenixUtil{
                 totleRow=result.getInt(1);
             }
             //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
-            //When we use the judge sentence case, when it maches the first case, it won't execute else
+            //When we use the judge sentence case, when it maches the first case, it won't execute else.so we match which has detail time first and then maches which doesn't have detail time.
             for (int i=0;i<totleRow;i+=400000){
-//                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
-//                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
+
                 String sql ="UPSERT INTO \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\") SELECT \"PK\"," +
+                        //2017-11-22 16:38星期三   bbs_tianya_post
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'%-%-%星期%\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd HH:mm EEE','CST+8:00')),'[^\\.]+')" +
+                        //(2017-11-22 16:52:12)  blog_china_post
+                        "WHEN \"info\".\""+columnName+"\" LIKE \'(____-__-__ __:__:__)\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", '(yyyy-MM-dd HH:mm:ss','CST+8:00)')),'[^\\.]+')" +
+                        //deal with true format, to avoid it matches other format so as to be changed.
+                        "WHEN \"info\".\""+columnName+"\" LIKE '____-__-__ __:%:__' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd HH:mm:ss','CST+8:00')),'[^\\.]+')" +
+                        //deal with 2017/11/21 06:12:24, change / to -
+                        "WHEN \"info\".\""+columnName+"\" LIKE '%/%/% %:%:%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy/MM/dd HH:mm:ss','CST+8:00')),'[^\\.]+')" +
                         //deal with 2017/11/21, change / to -
-                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'%/%/%\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\", '\\', '-') " +
-                        //deal with 17-11-21, change 17 to 2017   then后面是字符串可否？
-                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'[01]_-__-__\' THEN \'\"20\"+\"info\".\""+columnName+"\"\' " +
-                        //2017年11月21日 23:54:12,将汉字替换为-
-                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'____年__月__日 __:__:__\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\", '[\\u4e00-\\u9fa5]', '-')" +
-                        //17-11-12 9:40:12
-                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'[01]_-__-__ __:__:__\' THEN \'\"20\"+\""+columnName+"\"\' " +
-                        //2017-11-22 16:38星期三
-                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'____-__-__ __:__:星期_\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\", '[\\u4e00-\\u9fa5]', '')" +
-                        //(2017-11-22 16:52:12)
-                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'(____-__-__ __:__:__)\' THEN REGEXP_REPLACE(\"info\".\""+columnName+"\",'[()]','')" +
-                        //if the format is like   Sat Jul 26 09:59:57 CST 2014  ,we first delete "Sat "and " CST",which we don't need, second, we transfer Jul to 07, and connect the day 26 with a '-', and put 2014 to the first place and transfer it to 2014-
-                        "" +
-                        " FROM \""+tableName+"\" LIMIT 400000 OFFSET "+i;
+                        "WHEN \"info\".\""+columnName+"\" LIKE '%/%/%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy/MM/dd','CST+8:00')),'[^\\.]+')" +
+                        //deal with 17-11-21 06:39:28, change 17 to 2017 ,if the yy represents 00-17, it will be filled to 2000-2017,or be filled to 19..
+                        "WHEN \"info\".\""+columnName+"\" LIKE '__-%-% %:%:%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yy-MM-dd HH:mm:ss','CST+8:00')),'[^\\.]+')" +
+                        //deal with 2017-11-21
+                        "WHEN \"info\".\""+columnName+"\" LIKE '____-%-%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd','CST+8:00')),'[^\\.]+')" +
+//                        //deal with 17-11-21, change 17 to 2017 ,if the yy represents 00-17, it will be filled to 2000-2017,or be filled to 19..
+                        "WHEN \"info\".\""+columnName+"\" LIKE '__-%-%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yy-MM-dd','CST+8:00')),'[^\\.]+')" +
+//                        //2017年11月21日 23:54:12,将汉字替换为-
+                        "WHEN \"info\".\""+columnName+"\" LIKE \'%年%月%日 __:__:__\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy年MM月dd日 HH:mm:ss','CST+8:00')),'[^\\.]+')" +
+                        //if the format is like   Sat Jul 26 09:59:57 CST 2014
+                        "WHEN \"info\".\""+columnName+"\" LIKE \'%CST%\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'EEE MMM dd HH:mm:ss \\'CST\\' yyyy','CST+8:00')),'[^\\.]+') " +
+                        "ELSE \"info\".\""+columnName+"\" END FROM \""+tableName+"\" LIMIT 400000 OFFSET "+i;
                 PreparedStatement ps2 = conn.prepareStatement(sql);
 
                 // execute upsert
