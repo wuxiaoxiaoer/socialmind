@@ -18,7 +18,6 @@ public class Index {
 	@RequestMapping(value="login")
 	public String login(){
 		return "/WEB-INF/foreground/login";
-
 	}
 
 
