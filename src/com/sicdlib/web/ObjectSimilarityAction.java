@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-//用户管理模块
+//舆情对象相似度
 @Controller
 @RequestMapping("/*")
 public class ObjectSimilarityAction {
@@ -19,9 +19,9 @@ public class ObjectSimilarityAction {
 	@Autowired(required=true)
 	private UserService userService;
 
-	//用户登陆
-	@RequestMapping(value="login")
-	public String login(HttpServletRequest req){
+	//相似度
+	@RequestMapping(value="similarity")
+	public String similarity(HttpServletRequest req){
 		String eventName = req.getParameter("eventName");
 		Float simi = Float.parseFloat(req.getParameter("simi"));
 		//1. 将事件分词进行NER获得带有权值的人名、地名、组织名列表
