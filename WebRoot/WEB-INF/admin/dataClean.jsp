@@ -336,10 +336,10 @@
               alert("清选择您要清洗的列（直接在表格上点击列的任一项");
           }else if(strategyID=="16"&&newValue==""){
               alert("请先输入自定义的填充值");
-          }else if(strategyID=="22"&&(newValue==""||oldValue=="")){
-              alert("请先输入自定义的值");
-          }else if(strategyID=="23"&&(newValue==""||oldValue=="")){
-              alert("请先输入自定义的值");
+          }else if(strategyID=="22"&&(oldValue=="")){
+              alert("请先输入要替换的子字符串，如果不输入新值则默认为替换为空");
+          }else if(strategyID=="23"&&(oldValue=="")){
+              alert("请先输入正则，如果不输入新值则默认为替换为空");
           }else{
 
               $.post("cleanProcessAction",
@@ -772,7 +772,7 @@
                       display: none;
                       height: 60px;
                       width: 300px;">
-                      请等待，正在统计……
+                      请等待，正在加载……
                       <img src="images/etlimg/loading2.gif" />
 
                     </div>
