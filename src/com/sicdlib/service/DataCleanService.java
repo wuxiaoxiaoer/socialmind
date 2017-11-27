@@ -399,7 +399,14 @@ public class DataCleanService {
 //                }
 //                break;
 //            }
-
+            //地址统一为陕西省西安市
+            case "29":{
+                Boolean state=util.changeLocationFormat(currentTable,currentColumn);
+                if(state==false){
+                    return false;
+                }
+                break;
+            }
         //该列重置
             case "resetColumn":
             {
