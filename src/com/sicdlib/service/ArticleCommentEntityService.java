@@ -16,17 +16,19 @@ import java.util.List;
 @Transactional
 public class ArticleCommentEntityService extends DefaultEntityManager<ArticleCommentEntity>{
     //查找网民观点
-    public List<ArticleCommentEntity> findArticleComment(String articleId){
+    public List findArticleComment(String authorId){
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "SELECT ac.content from article_comment ac " +
-                    "where ac.authorID = "+articleId+" ORDER BY (ac.replayNumber+ac.likeNumber) desc limit 5";
+            String sql = "select w.websiteName,ac.content from article_comment ac,article a,website w " +
+                    "where ac.authorID = "+authorId+" and ac.articleID= a.articleID and w.websiteID = a.websiteID " +
+                    "ORDER BY (ac.replayNumber+ac.likeNumber) desc limit 5";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
                 ArticleCommentEntity articleComment = new ArticleCommentEntity();
-                articleComment.setContent(rs.getString(1));
+                articleComment.setSourceCommentId(rs.getString(1));
+                articleComment.setContent(rs.getString(2));
                 list.add(articleComment);
             }
             new DBUtil().closeConn(rs,psmt,conn);

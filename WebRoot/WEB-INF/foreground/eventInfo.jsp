@@ -76,7 +76,7 @@
             <div class="row-fluid">
                 <!-- block -->
                 <div class="alert alert-info alert-block">
-                    <div style="margin-left:40%"><a style="size: 60pc">${e.object.name}</a></div>
+                    <div style="margin-left:40%" id="objectName"><a style="size: 60pc">${e.object.name}</a></div>
                 </div>
                 <div class="alert alert-block">
                     <h1 class="alert-heading" id="001">事件简介</h1>
@@ -301,7 +301,7 @@
                             <div id="opinion" style="width:1000px;height: 250px;"></div>
                             <c:forEach items="${articleCommentList}" var="ac" varStatus="sts">
                                 <div class="alert">
-                                    <h4 class="alert-heading">观点${sts.index+1}：${ac.content}</h4>
+                                    <h4 class="alert-heading">观点${sts.index+1}：${ac.content} 【${ac.sourceCommentId}】</h4>
                                 </div>
                             </c:forEach>
 
@@ -756,12 +756,6 @@
                 roam: 'move',
                 nodes:${keywordList},
                 links :${listkey},
-                    /*[
-                    {source : '基层', target : '十九大', weight : 1,},
-                    {source : '老百姓', target : '十九大', weight : 2},
-                    {source : '工作队', target : '十九大', weight : 10},
-                    {source : '北京', target : '十九大', weight : 2}
-                ]*/
             }
         ]
     };
@@ -781,9 +775,9 @@
             console.log("选中了" + data.name + '(' + data.value + ')');
         }
     }
-
     myChart5.setOption(option5);
 </script>
+<input type="hidden" value="${event}">
 <script>
     var myChart6 = echarts.init(document.getElementById('transfer'));
     var option6 = {
@@ -811,7 +805,7 @@
                 name:'树图',
                 type:'tree',
                 orient: 'horizontal',  // vertical horizontal
-                rootLocation: {x: 100, y: '60%'}, // 根节点位置  {x: 'center',y: 10}
+                rootLocation: {x: 400, y: '60%'}, // 根节点位置  {x: 'center',y: 10}
                 nodePadding: 20,
                 symbol: 'circle',
                 symbolSize: 40,
@@ -840,7 +834,7 @@
                 },
                 data: [
                     {
-                        name: '起源',
+                        name: '',
                         value: 6,
 //                        symbol: 'circle',
 //                        symbolSize: 60,
@@ -856,7 +850,7 @@
                         children: [
                             {
                                 name: '转发',
-                                value: 20,
+                                value: ${transferNum},
                                 symbol: 'circle',
                                 symbolSize: 40,
                                 itemStyle: {
@@ -868,8 +862,8 @@
                                     }
                                 },
                                 children: [
-                                    {
-                                        name: '小米1',
+                                    /*{
+                                        name: ${mediaList},
                                         symbol: 'circle',
                                         symbolSize: 20,
                                         value: 4,
@@ -889,9 +883,9 @@
                                                 borderWidth: 0
                                             }
                                         }
-                                    },
+                                    },*/
                                     {
-                                        name: '小米2',
+                                        name: '新闻',
                                         value: 4,
                                         symbol: 'circle',
                                         symbolSize: 20,
@@ -913,7 +907,7 @@
                                         }
                                     },
                                     {
-                                        name: '小米3',
+                                        name: '论坛',
                                         value: 2,
                                         symbol: 'circle',
                                         symbolSize: 20,

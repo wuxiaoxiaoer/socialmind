@@ -101,7 +101,6 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             map.put("value",2500);
             list.add(map);
         }
-
         return list;
     }
 
@@ -152,6 +151,25 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 article.setPostTime(rs.getString(3));
                 article.setRecommendNumber(rs.getInt(4));
                 list.add(article);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
+    //事件的媒体转发数
+    //查事件的事件段
+    public List findTransferNum(String objectId){
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select COUNT(a.articleID) from article a where a.objectID ="+objectId+"";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                list.add(rs.getString(1));
             }
             new DBUtil().closeConn(rs,psmt,conn);
             return list;
