@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
 import com.sicdlib.util.UUIDUtil.UUIDUtil;
+import edu.xjtsoft.base.orm.support.PropertyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,10 @@ public class AdminSpiderController {
     private ConfigitemService configitemService;
     @Autowired(required=true)
     private ConfigConfigItemService configConfigitemService;
+
+    @Autowired
+    private RunSpiderService runSpiderService;
+
 
     /**
      * 爬虫列表
@@ -164,6 +170,9 @@ public class AdminSpiderController {
         System.out.print("####"+spider.getSpiderId());
 
         String spiderName = req.getParameter("spiderNewName");
+
+        System.out.print("####spiderName###"+spiderName);
+
         String configId = req.getParameter("configId");
 
         spider.setSpiderName(spiderName);
@@ -175,20 +184,15 @@ public class AdminSpiderController {
 
 
 
-
-
-
-
     /**
      * 管理员更改爬虫状态
      */
-
-
     @RequestMapping("updateState")
     public void updateState(HttpServletRequest req, HttpServletResponse res) throws IOException{
 
         String spiderId= req.getParameter("spiderId");
         SpiderInfoEntity spider=spiderService.load(spiderId);
+        String configId=spider.getSpiderConfig().getSpiderConfigId();
 
         String state=spider.getSpiderState();
 
@@ -201,7 +205,18 @@ public class AdminSpiderController {
 
         }
         spiderService.saveOrUpdate(spider);
+
+
         state=spider.getSpiderState();
+
+        if(state.equals("开启")){
+            try {
+                String result = runSpiderService.runSpider(spiderId,configId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("state",state);
@@ -265,16 +280,19 @@ public class AdminSpiderController {
 
         for(int i=0;i<configItemList.size();i++) {
             ConfigConfigitemEntity configConfigItem = new ConfigConfigitemEntity();
-            String value=req.getParameter(configItemList.get(i).getConfigItemId());
             configConfigItem.setSpiderConfigItemId(UUIDUtil.getUUID().toString());
             configConfigItem.setConfigItem(configitemService.load(configItemList.get(i).getConfigItemId()));
+            String value=req.getParameter(configItemList.get(i).getConfigItemId());
+
+
             configConfigItem.setConfigItemValue(value);
             //configConfigItem.setSpiderConfig(spiderConfig);
             configConfigItem.setSpiderConfigId(spiderConfig.getSpiderConfigId());
 
             configConfigitemService.saveOrUpdate(configConfigItem);
-        }
 
+
+        }
 
         return "redirect:/spiderList";
     }
@@ -288,14 +306,11 @@ public class AdminSpiderController {
     public void deleteConfig(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         String spiderConfigId = req.getParameter("spiderConfigId");
-        SpiderConfigEntity spiderConfig = spiderConfigService.load(spiderConfigId);
-        Set<ConfigConfigitemEntity> items= spiderConfig.getConfigItems();
 
-        for(ConfigConfigitemEntity c : items) {
-            configConfigitemService.remove(c.getSpiderConfigItemId());
-        }
+        // Hibernate 一对多级联删除,即在“一方”的hbm.xml文件中,
+        // <set name="replaies" inverse="true" cascade="all" > 或者：cascade="delete"
+        //不用先删除中间表再删除父表
         spiderConfigService.remove(spiderConfigId);
-
         PrintWriter out = res.getWriter();
         out.print("success");
     }
@@ -315,14 +330,6 @@ public class AdminSpiderController {
         SpiderConfigEntity spiderConfig = spiderConfigService.load(spiderConfigId);
 
         Set<ConfigConfigitemEntity> items= spiderConfig.getConfigItems();
-
-
-        System.out.println("items####"+items.size()) ;
-
-        //List<ConfigitemEntity> configItem= new ArrayList<ConfigitemEntity>();
-
-        //configItem = configitemService.loadAll();
-
 
         Map<String, Object> itemMap = new HashMap<String,Object>();
 
@@ -367,13 +374,22 @@ public class AdminSpiderController {
     @RequestMapping("editConfig")
     public String editConfig( HttpServletRequest req) {
 
-
         String configName = req.getParameter("configName");
         String spiderConfigId = req.getParameter("sConfigId");
 
         SpiderConfigEntity spiderConfig = spiderConfigService.load(spiderConfigId);
 
-        //spiderConfig.setSpiderConfigId(UUIDUtil.getUUID().toString());
+
+        //之前的配置删掉
+        Set<ConfigConfigitemEntity> configItemSet=spiderConfig.getConfigItems();
+        spiderConfig.setConfigItems(null);
+
+        Iterator<ConfigConfigitemEntity> iter = configItemSet.iterator();
+        while (iter.hasNext()){
+            ConfigConfigitemEntity conConfigitem = iter.next();
+            configConfigitemService.remove(conConfigitem.getSpiderConfigItemId());
+        }
+
         spiderConfig.setConfigName(configName);
 
         Date d = new Date();
@@ -385,19 +401,15 @@ public class AdminSpiderController {
 
         List<ConfigitemEntity> configItemList = new ArrayList<ConfigitemEntity>();
         configItemList = configitemService.loadAll();
-
         for(int i=0;i<configItemList.size();i++) {
-            ConfigConfigitemEntity configConfigItem = new ConfigConfigitemEntity();
-            String value=req.getParameter(configItemList.get(i).getConfigItemId());
+            ConfigConfigitemEntity configConfigItem=new ConfigConfigitemEntity();
             configConfigItem.setSpiderConfigItemId(UUIDUtil.getUUID().toString());
+            String value=req.getParameter(configItemList.get(i).getConfigItemId());
             configConfigItem.setConfigItem(configitemService.load(configItemList.get(i).getConfigItemId()));
             configConfigItem.setConfigItemValue(value);
-            //configConfigItem.setSpiderConfig(spiderConfig);
             configConfigItem.setSpiderConfigId(spiderConfig.getSpiderConfigId());
-
             configConfigitemService.saveOrUpdate(configConfigItem);
         }
-
 
         return "redirect:/spiderList";
     }

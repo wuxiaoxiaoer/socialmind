@@ -63,15 +63,28 @@
                 }
             }
         }
-        //移动
-        function moveOption(obj1, obj2)
+        //移动,source表示原来是0还是1，左边为0（未选择）
+        function moveOption(obj1, obj2, useStatus)
         {
+
+
             for(var i = obj1.options.length - 1 ; i >= 0 ; i--)
             {
                 if(obj1.options[i].selected)
                 {
                     var opt = new Option(obj1.options[i].text,obj1.options[i].value);
                     opt.selected = true;
+					//opt.calue就是当前选择的其中一个的strategyID
+//                    alert(opt.value);
+					var strategyID =opt.value;
+                    $.post("moveStrategy",
+                        {
+                            strategyID: strategyID,
+                            useStatus : useStatus
+                        },
+                        function (data, status) {
+
+                        });
                     obj2.options.add(opt);
                     obj1.remove(i);
                 }
@@ -152,9 +165,7 @@
 
 <!-- 引入后台头模板-->
 <jsp:include page="/static/admin_header.jsp"></jsp:include>
-		
-		
-		
+
 		<div id="content">
 			<div id="content-header">
 				<div id="breadcrumb">
@@ -227,8 +238,49 @@
 				</div>
 			</div>
 			
-						<div class="container-fluid" id="getStrategy">
-							<%@ include file="strategyConf.jsp"%>
+						<div class="container-fluid">
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="widget-box">
+										<div class="widget-title">
+								<span class="icon">
+									<i class="icon-pencil"></i>
+								</span>
+											<h5>策略管理</h5>
+										</div>
+										<div class="widget-content nopadding">
+											<div id="form-wizard-1" class="step">
+												选择策略分类
+												<div class="btn-group">
+													<button type="button" id="strategyClassify" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">选择策略分类
+														<span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu" role="menu">
+														<li><a onclick="strategyConf('1')">缺失值</a></li>
+														<li><a onclick="strategyConf('2')">字符串错误</a></li>
+														<li><a onclick="strategyConf('3')">行操作</a></li>
+														<li><a onclick="strategyConf('4')">时间格式</a></li>
+														<li><a onclick="strategyConf('5')">日期格式</a></li>
+													</ul>
+												</div>
+												<label class="control-label">管理策略</label>
+												<span id='feedback'></span>
+												<form method="post" name="myform" id ="getStrategy">
+												//引入要加载的策略表
+												<%@ include file="strategyConf.jsp"%>
+												</form>
+											</div>
+
+											<div class="form-actions">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="goBack" class="btn btn-primary" type="text" >撤销</button>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="submit1" class="btn btn-primary" type="text" >提交</button>
+												<div id="status"></div>
+											</div>
+											<div id="submitted"></div>
+										</div>
+									</div>
+								</div>
+							</div>
 			</div>
 			
 

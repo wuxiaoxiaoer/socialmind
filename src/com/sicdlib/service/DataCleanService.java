@@ -383,7 +383,7 @@ public class DataCleanService {
                 }
                 break;
             }
-            //统一为xxxx-xx-xx xx:xx:xx
+            //时间统一为xxxx-xx-xx xx:xx:xx
             case "27":{
                 Boolean state=util.changeTimeFormat(currentTable,currentColumn);
                 if(state==false){
@@ -391,6 +391,14 @@ public class DataCleanService {
                 }
                 break;
             }
+            //时间统一为xxxx年xx月xx日 xx:xx:xx
+//            case "27":{
+//                Boolean state=util.changeTimeFormat2(currentTable,currentColumn);
+//                if(state==false){
+//                    return false;
+//                }
+//                break;
+//            }
 
         //该列重置
             case "resetColumn":

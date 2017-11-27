@@ -35,7 +35,7 @@ public class ConfigConfigitemEntity {
 //    public void setSpiderConfig(SpiderConfigEntity spiderConfig) {
 //        this.spiderConfig = spiderConfig;
 //    }
-//
+////
     public ConfigitemEntity getConfigItem() {
         return configItem;
     }

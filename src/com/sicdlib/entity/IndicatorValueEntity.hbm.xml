@@ -9,6 +9,7 @@
         <property name="indicatorValue" column="indicatorValue"/>
         <property name="indexName" column="indexName"/>
         <property name="dimensionName" column="dimensionName"/>
+        <property name="dimensionValue" column="dimensionValue"/>
         <property name="startTime" column="startTime"/>
         <property name="endTime" column="endTime"/>
         <!-- 多对一 -->

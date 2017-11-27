@@ -49,9 +49,8 @@
         <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>首页</span></a></li>
         <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>爬虫</span><span class="label">3</span></a>
             <ul>
-                <li><a href="spiderMonitor.html">爬虫监控</a></li>
-                <li><a href="spiderList.html">爬虫管理</a></li>
-                <li><a href="configList.html">爬虫配置</a></li>
+                <li><a href="<%=basePath%>spiderMonitor">爬虫监控</a></li>
+                <li><a href="<%=basePath%>spiderList">爬虫管理</a></li>
             </ul>
         </li>
         <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>数据清洗</span><span class="label">4</span></a>
@@ -93,16 +92,17 @@
         </li>
         <li class="submenu"> <a href="roleManagement.html"><i class="icon icon-th-list"></i> <span>角色管理</span> <span class="label">1</span></a>
             <ul>
-                <li><a href="roleManagement.html">角色管理</a></li>
+                <li><a href="<%=basePath%>roleManagement">角色管理</a></li>
             </ul>
         </li>
         <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>权限管理</span></a>
             <ul>
-                <li><a href="permission.html">权限管理</a></li>
+                <li><a href="<%=basePath%>permission">权限管理</a></li>
+                <li><a href="<%=basePath%>toPermissionAllot">权限分配</a></li>
             </ul></li>
         <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>日志管理</span></a>
             <ul>
-                <li><a href="operateDiary.html">操作日志</a></li>
+                <li><a href="<%=basePath%>log">操作日志</a></li>
             </ul></li>
         <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>公告管理</span> <span class="label">1</span></a>
             <ul>
