@@ -1,6 +1,6 @@
 package com.sicdlib.service;
 
-import com.sicdlib.entity.ArticleCommentEntity;
+import com.sicdlib.entity.KeywordEntity;
 import com.sicdlib.util.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
@@ -10,31 +10,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
-public class ArticleCommentEntityService extends DefaultEntityManager<ArticleCommentEntity>{
-    //查找网民观点
-    public List findArticleComment(String authorId){
+public class KeywordEntityService extends DefaultEntityManager<KeywordEntity> {
+    //在关键词表中查询事件的关键词与权重
+    public List<Map> findKeywords(String objectId){
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select w.websiteName,ac.content from article_comment ac,article a,website w " +
-                    "where ac.authorID = "+authorId+" and ac.articleID= a.articleID and w.websiteID = a.websiteID " +
-                    "ORDER BY (ac.replayNumber+ac.likeNumber) desc limit 5";
+            String sql = "select keyword,weight,keywordId from keyword k where k.objectID = "+objectId+" ORDER BY weight DESC";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
-                ArticleCommentEntity articleComment = new ArticleCommentEntity();
-                articleComment.setSourceCommentId(rs.getString(1));
-                articleComment.setContent(rs.getString(2));
-                list.add(articleComment);
+                Map map = new HashMap();
+                map.put("name",rs.getString(1));
+                map.put("value",rs.getString(2));
+                map.put("keywordId",rs.getString(3));
+                list.add(map);
             }
             new DBUtil().closeConn(rs,psmt,conn);
             return list;
         }catch (Exception e){
-
         }
         return null;
     }

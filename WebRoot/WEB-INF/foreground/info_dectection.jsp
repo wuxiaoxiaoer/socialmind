@@ -67,9 +67,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
 							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
 							</div>
                             
                         </div>
@@ -80,9 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
 							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
 							</div>
                             
                         </div>
@@ -93,10 +93,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
 							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-							</div>
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
+							</div
                             
                         </div>
                         <div class="block">
@@ -106,9 +106,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
 							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
+								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png" height="200px" width="300px"></a>
+                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png" height="200px" width="300px"></a>
 							</div>
                         </div>
                 </div>
@@ -129,11 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <script src="foreground/assets/scripts.js"></script>
         <script src="foreground/assets/DT_bootstrap.js"></script>
-        <script>
-        $(function() {
-            
-        });
-        </script>
+
     </body>
 
 

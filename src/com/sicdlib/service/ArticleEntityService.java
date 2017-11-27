@@ -75,11 +75,9 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 ArticleEntity a = new ArticleEntity();
                 a.setPostTime(rs.getString(1));
                 a.setTitle(rs.getString(2));
-
                 WebsiteEntity web = new WebsiteEntity();
                 web.setWebsiteId(rs.getString(3));
                 a.setWebsiteEntity(web);
-//                a.setWebsiteId(rs.getString(3));
                 list.add(a);
             }
             new DBUtil().closeConn(rs,psmt,conn);
@@ -103,7 +101,6 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             map.put("value",2500);
             list.add(map);
         }
-
         return list;
     }
 
@@ -111,36 +108,24 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
     public List findPeriod(String objectId){
         String hql = "select DISTINCT(substring(a.postTime,1,10)) from ArticleEntity a where a.objectEntity = '" +objectId+"' order by a.postTime";
         List period = getEntityDao().find(hql);
-        System.out.println("service中的时间段："+period.toString());
         return period;
     }
 
     //查找事件的网站统计
-    public List<Map> findWebsites(String objectId,String time){
+    public List<Map> findWebsites(String objectId,String websiteId,String websiteName){
         try {
-            List list = new ArrayList();
+            List coutList = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-
-            String sql = "SELECT w.websiteName,t.num  from website w LEFT OUTER JOIN " +
-                    "(select a.websiteID,COUNT(a.websiteID) num from article a WHERE a.postTime " +
-                    "LIKE '" +time+"%' and a.objectID =" +objectId+" group by a.websiteID) t on w.websiteID= t.websiteID";
-//            String sql1 = "select w.websiteName,COUNT(a.articleID) from article a,website w where a.websiteID = w.websiteID
-// and a.postTime LIKE '" +time+"%' and a.objectID=" +objectId+" GROUP BY a.postTime";
+            String sql = "SELECT c.postTime,IFNULL(t.m,0) FROM article c LEFT OUTER JOIN (SELECT postTime,COUNT(a.articleID) m " +
+                    "FROM article a,website w WHERE a.websiteID = w.websiteID AND a.objectID = " +objectId+" " +
+                    "AND a.websiteID = "+websiteId+" GROUP BY a.postTime) t on c.postTime = t.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
-                Map map = new HashMap();
-                map.put("time",time);
-                map.put("name",rs.getString(1));
-                map.put("type","line");
-                map.put("stack","发布文章的数量");
-                /*ArrayList al = new ArrayList();
-                al.add(rs.getString(2));*/
-                map.put("websiteNum",rs.getInt(2));
-                list.add(map);
+                coutList.add(rs.getString(2));
             }
             new DBUtil().closeConn(rs,psmt,conn);
-            return list;
+            return coutList;
         }catch (Exception e){
         }
         return null;
@@ -163,10 +148,28 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 WebsiteEntity web = new WebsiteEntity();
                 web.setWebsiteId(rs.getString(2));
                 article.setWebsiteEntity(web);
-//                article.setWebsiteId(rs.getString(2));
                 article.setPostTime(rs.getString(3));
                 article.setRecommendNumber(rs.getInt(4));
                 list.add(article);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
+    //事件的媒体转发数
+    //查事件的事件段
+    public List findTransferNum(String objectId){
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select COUNT(a.articleID) from article a where a.objectID ="+objectId+"";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                list.add(rs.getString(1));
             }
             new DBUtil().closeConn(rs,psmt,conn);
             return list;
