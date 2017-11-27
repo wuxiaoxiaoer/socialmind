@@ -8,5 +8,6 @@
         <id name="cleanStategyId" column="cleanStategyID"/>
         <property name="name" column="name"/>
         <property name="type" column="type"/>
+        <property name="isUse" column="IsUse"/>
     </class>
 </hibernate-mapping>

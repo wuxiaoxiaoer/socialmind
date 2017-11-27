@@ -77,23 +77,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       	<form action="user/login" method="post" onsubmit="return login()" class="templatemo-login-form">
 	        	<div class="form-group">
 	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input name="u_name" id="u_name" type="text" value="<%=u_name%>" class="form-control" placeholder="username">           
-		          	</div>	
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+		              	<input name="u_name" id="u_name" type="text" value="<%=u_name%>" class="form-control" placeholder="username">
+		          	</div>
 	        	</div>
 	        	<div class="form-group">
 	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input name="u_pwd" id="u_pwd" type="password" value="<%=u_pwd%>" class="form-control" placeholder="******">           
-		          	</div>	
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>
+		              	<input name="u_pwd" id="u_pwd" type="password" value="<%=u_pwd%>" class="form-control" placeholder="******">
+		          	</div>
 	        	</div>
 	        	<!-- <div class="form-group">
 	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-heart-o fa-fw"></i></div>	        		
+		        		<div class="input-group-addon"><i class="fa fa-heart-o fa-fw"></i></div>
 		              	<select name="usertype_id" class="form-control">
 		              		<option value="1">管理员</option>
 		              		<option value="2">普通用户</option>
-		              	</select>           
+		              	</select>
 		          	</div>
 	        	</div> -->
 	          	<div class="form-group">
@@ -101,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <input type="checkbox" id="c1" name="cc" <%=checked%>/>
 						<label for="c1"><span></span>记住密码</label>
 						<label id="prompt" style="color: red;float:right"></label>
-				    </div>				    
+				    </div>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="templatemo-blue-button width-100">登 录</button>
@@ -110,16 +110,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
 			没有账户? <strong><a href="user/register/0" class="blue-text">立即注册</a></strong>&nbsp;&nbsp;</p>
-			
+
 		</div>
-		
-		<div style="padding:20px;width:100%;height:10%;bottom:0;position:absolute;">
-         	<jsp:include page="/jsp/statics/foot.jsp"/> 
-       	</div> 
-		
+
 	</body>
 	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
-    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->  
+    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 	<script type="text/javascript">
 		function login(){
 			var u_name = $.trim($("#u_name").val());
@@ -139,4 +135,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return false;
 		}
 	</script>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

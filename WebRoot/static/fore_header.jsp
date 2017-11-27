@@ -41,7 +41,7 @@
                 </ul>
                 <ul class="nav">
                     <li class="">
-                        <a href="heatIndex.html">热度指标</a>
+                        <a href="<%=basePath%>heatIndex">热度指标</a>
                     </li>
                     <li class="">
                         <a href="emotionMap.html">情绪地图</a>
@@ -56,7 +56,7 @@
                         <a href="<%=basePath%>event/all">全网事件分析</a>
                     </li>
                     <li class="">
-                        <a href="makeReporter_1.html">简报制作</a>
+                        <a href="<%=basePath%>makeReporter">简报制作</a>
                     </li>
                 </ul>
             </div>

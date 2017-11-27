@@ -11,14 +11,16 @@
 
 <head>
   <base href="<%=basePath%>admin/"/>
+  <!-- core js files -->
+  <script>src="js/etljs/jquery-3.2.1.js"</script>
+  <script src="js/etljs/jquery-3.2.1.min.js"></script>
+  <script src="js/etljs/nprogress.js"></script>
   <script src="js/etljs/echarts.min.js"></script>
   <script src="js/etljs/html5.js"></script>
   <![endif]-->
   <%--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
-  <!-- core js files -->
-  <script>src="js/etljs/jquery.js"</script>
-  <script src="js/etljs/jquery-1.11.0.min.js"></script>
+
   <%--下面这个包有问题--%>
 
   <script src="js/bootstrap.min.js"></script>
@@ -116,7 +118,9 @@
           inputTag.focus();
           }
           /*提交当前点击的列名字来改变统计值*/
+          $('#YWaitDialog').show();
           var myChart = echarts.init(document.getElementById("stats"));
+          // 加载前显示等待框
 
           $.post("ClickTableServlet",
               {
@@ -124,49 +128,54 @@
                   column: columnName
               },
               function (data, status) {
+                  //请求完成隐藏等待框
+                  $('#YWaitDialog').hide();
+                  if(data=="此列有空值!"){
+                      alert(data);
+                  }else {
 //                  alert(data);
-                  var dataJson= eval('(' + data + ')');
-                  var statsContent ="";
-                  var Arr = new Array();//key
-                  var ArrNum = new Array()//个数
-                  for (var key in dataJson)
-                  {
-                              Arr.push( key);//存入arr
-                              ArrNum.push({"value": dataJson[key],"name":key});
-                  }
-                  option = {
+                      var dataJson = eval('(' + data + ')');
+                      var statsContent = "";
+                      var Arr = new Array();//key
+                      var ArrNum = new Array()//个数
+                      for (var key in dataJson) {
+                          Arr.push(key);//存入arr
+                          ArrNum.push({"value": dataJson[key], "name": key});
+                      }
+                      option = {
 //                      title : {
 //                          text: '字段中频繁项统计图',
 ////                          subtext: '纯属虚构',
 //                          x:'center'
 //                      },
-                      tooltip : {
-                          trigger: 'item',
-                          formatter: "{a} <br/>{b} : {c} ({d}%)"
-                      },
-                      legend: {
-                          orient: 'vertical',
-                          left: 'left',
-                          data: Arr
-                      },
-                      series : [
-                          {
-                              name: '频繁项',
-                              type: 'pie',
-                              radius : '60%',
-                              center: ['52%', '70%'],
-                              data: ArrNum,
-                              itemStyle: {
-                                  emphasis: {
-                                      shadowBlur: 10,
-                                      shadowOffsetX: 0,
-                                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                          tooltip: {
+                              trigger: 'item',
+                              formatter: "{a} <br/>{b} : {c} ({d}%)"
+                          },
+                          legend: {
+                              orient: 'vertical',
+                              left: 'left',
+                              data: Arr
+                          },
+                          series: [
+                              {
+                                  name: '频繁项',
+                                  type: 'pie',
+                                  radius: '60%',
+                                  center: ['52%', '70%'],
+                                  data: ArrNum,
+                                  itemStyle: {
+                                      emphasis: {
+                                          shadowBlur: 10,
+                                          shadowOffsetX: 0,
+                                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                      }
                                   }
                               }
-                          }
-                      ]
-                  };
-                  myChart.setOption(option);
+                          ]
+                      };
+                      myChart.setOption(option);
+                  }
               });
 
       }
@@ -193,9 +202,12 @@
       //用户点击某表btn时，将该表名存入input引发其改变，从而触发ajax的onchange函数，清空
 
       function display(value) {
+          //每次点击先刷新统计表
+          $("#stats").html("");
 //          在页面上显示当前表名字
           $("#currentTable").text(value);
-
+          //显示等待动画
+          $('#YWaitTable').show();
           $.post("TableServlet",
               {
                   tablename: value
@@ -203,7 +215,7 @@
               function (data, status) {
                   //前台拿到的是一个字符串
 //                  data=data.replace(new RegExp("&","gm"),"null");
-
+                  $('#YWaitTable').hide();
                   var headData = data.split("++")[0];
                   //bodyData得到的是中括号包含大括号的json
                   headData="("+headData+")";
@@ -324,11 +336,12 @@
               alert("清选择您要清洗的列（直接在表格上点击列的任一项");
           }else if(strategyID=="16"&&newValue==""){
               alert("请先输入自定义的填充值");
-          }else if(strategyID=="22"&&(newValue==""||oldValue=="")){
-              alert("请先输入自定义的值");
-          }else if(strategyID=="23"&&(newValue==""||oldValue=="")){
-              alert("请先输入自定义的值");
+          }else if(strategyID=="22"&&(oldValue=="")){
+              alert("请先输入要替换的子字符串，如果不输入新值则默认为替换为空");
+          }else if(strategyID=="23"&&(oldValue=="")){
+              alert("请先输入正则，如果不输入新值则默认为替换为空");
           }else{
+
               $.post("cleanProcessAction",
                   {
                       currentTable: currentTable,
@@ -468,7 +481,8 @@
                     </div>
                     <div id="btn_bbs_people">
                       <a href="javascript:display('bbs_people_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_people_author</a>
-                      <a href="javascript:display('bbs_people_post')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_people_post</a>
+                      <a href="javascript:display('bbs_people_comment')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_people_comment</a>
+                      <a href="javascript:display('bbs_people_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_people_post</a>
                     </div>
                     <div id="btn_bbs_sohu">
                       <a href="javascript:display('bbs_sohu_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_sohu_author</a>
@@ -519,8 +533,7 @@
                     </div>
                     <%--测试用表--%>
                     <div id="test">
-                      <a href="javascript:display('test2')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test2</a>
-
+                      <a href="javascript:display('test')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test</a>
                     </div>
                     <%--<div id="btn_sanqin">--%>
                     <%--<a href="javascript:display('news_sanqin')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">news_sanqin</a>--%>
@@ -701,7 +714,8 @@
                   <a href="#" class="btn btn-sm btn-success">İptal</a>
                 </div>
                 <div class="wbody" id="stats">
-                  <%--<div class="progress">--%>
+
+                <%--<div class="progress">--%>
                     <%--<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">--%>
                       <%--<span class="sr-only">40% Complete (success)</span>--%>
                     <%--</div>--%>
@@ -723,6 +737,19 @@
                   <%--</div>--%>
 
                 </div>
+                <div id="YWaitDialog"
+                     style="
+                      position: absolute;
+                      margin: auto;
+                      top: 150px;
+                      left: 100px;
+                      display: none;
+                      height: 60px;
+                      width: 300px;">
+                    请等待，正在统计……
+                    <img src="images/etlimg/loading2.gif" />
+
+                </div>
               </div>
             </div>
 
@@ -734,7 +761,22 @@
                 <div class="widget">
                 <div class="whead" style="height:50px;" >
                   <h6><i class="fa fa-cloud"></i>数据展示与清洗</h6>
-                  <div class="showPage" id="showPage" style="height:50px; float:right; margin: 0;"></div>
+                  <div class="showPage" id="showPage" style="height:50px; float:right; margin: 0;">
+
+                    <div id="YWaitTable"
+                         style="
+                      position: absolute;
+                      margin: auto;
+                      top: 150px;
+                      left: 100px;
+                      display: none;
+                      height: 60px;
+                      width: 300px;">
+                      请等待，正在加载……
+                      <img src="images/etlimg/loading2.gif" />
+
+                    </div>
+                  </div>
                 </div>
 
               <div class="col-md-12" style="width:99.5%; height:420px; overflow:scroll;">

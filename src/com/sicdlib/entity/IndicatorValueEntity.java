@@ -8,7 +8,11 @@ public class IndicatorValueEntity {
     private String indicatorValue;
     private String indexName;
     private String dimensionName;
+    private String dimensionValue;
     private String startTime;
+
+
+
     private String endTime;
     /** 多个指标对应一个舆情对象 */
     private ObjectEntity objectEntity;
@@ -51,6 +55,14 @@ public class IndicatorValueEntity {
 
     public void setDimensionName(String dimensionName) {
         this.dimensionName = dimensionName;
+    }
+
+    public String getDimensionValue() {
+        return dimensionValue;
+    }
+
+    public void setDimensionValue(String dimensionValue) {
+        this.dimensionValue = dimensionValue;
     }
 
     public String getStartTime() {

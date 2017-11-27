@@ -1,0 +1,10 @@
+2017-11-27 10:10:35,114 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2017-11-27 10:10:35,120 WARN [DICLOG] - init userLibrary  warning :D:\project\socialmind\socialmind\library\default.dic because : file not found or failed to read !
+2017-11-27 10:10:35,125 WARN [DICLOG] - init ambiguity  error :D:\project\socialmind\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2017-11-27 10:10:36,494 INFO [DICLOG] - init core library ok use time :1322
+2017-11-27 10:10:37,360 INFO [DICLOG] - init ngram ok use time :844
+2017-11-27 10:30:31,285 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2017-11-27 10:30:31,291 WARN [DICLOG] - init userLibrary  warning :D:\project\socialmind\socialmind\library\default.dic because : file not found or failed to read !
+2017-11-27 10:30:31,295 WARN [DICLOG] - init ambiguity  error :D:\project\socialmind\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2017-11-27 10:30:32,706 INFO [DICLOG] - init core library ok use time :1356
+2017-11-27 10:30:33,618 INFO [DICLOG] - init ngram ok use time :887

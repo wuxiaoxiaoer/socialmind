@@ -7,7 +7,14 @@ public class CleanStrategyEntity {
     private String name;
     private String cleanStategyId;
     private String type;
+    private String isUse;
+    public String getIsUse() {
+        return isUse;
+    }
 
+    public void setIsUse(String isUse) {
+        this.isUse = isUse;
+    }
     public String getName() {
         return name;
     }
