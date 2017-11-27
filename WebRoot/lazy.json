@@ -1,0 +1,68 @@
+{
+	"data": [
+		{
+			"data": {
+				"name": "Lazy Folder 0",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		},
+		{
+			"data": {
+				"name": "Lazy Folder 1",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		},
+		{
+			"data": {
+				"name": "Lazy Folder 2",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		},
+		{
+			"data": {
+				"name": "Lazy Folder 1",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		},
+		{
+			"data": {
+				"name": "Lazy Folder 0",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		},
+		{
+			"data": {
+				"name": "Lazy Folder 1",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		},
+		{
+			"data": {
+				"name": "Lazy Folder 2",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		},
+		{
+			"data": {
+				"name": "Lazy Folder 1",
+				"parent": "0",
+				"number": 1
+			},
+			"leaf": false
+		}
+	]
+}
