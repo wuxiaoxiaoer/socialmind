@@ -1,12 +1,17 @@
 package com.sicdlib.util.PhoenixUtil;
 
+import com.sicdlib.entity.ProvinceEntity;
+import com.sicdlib.service.ProvinceService;
+import com.sicdlib.util.DBUtil;
 import com.sicdlib.web.DataCleanAction;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.ansj.domain.Result;
+import org.ansj.library.UserDefineLibrary;
+import org.ansj.splitWord.analysis.ToAnalysis;
+import org.apache.phoenix.shaded.org.apache.velocity.runtime.directive.Foreach;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class PhoenixUtil{
@@ -47,7 +52,7 @@ public class PhoenixUtil{
 //
 //
 //    }
-    //phoenix的查询方法,目前限制查询一列
+    //phoenix的查询方法
     public List<Map<String, Object>> Select(String tableName,int limits){
         PhoenixUtil util =new PhoenixUtil();
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
@@ -376,14 +381,187 @@ public class PhoenixUtil{
         }
         return true;
     }
+    //get PK and address in a table, to serve for the next function
+    public List<Map<String, Object>> SelectPKAndAddress(String tableName,String addrColumnName){
+        PhoenixUtil util =new PhoenixUtil();
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+        try{
+            Connection conn =util.GetConnection();
+            String sql="Select \"PK\",\""+addrColumnName+"\" FROM \""+tableName+"\"  ";
 
+            //将一列的字符串中的<>及其中内容删掉
+//            int col = rs.getMetaData().getColumnCount();
+            Statement stmt =conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+//            List list =new ArrayList();
+//            while(set.next()){
+////                System.out.println(set.getString(1));
+////                System.out.println(set.getString(2));
+//                result.add(set);
+//            }
+            GetList getList=new GetList();
+            result = getList.getListFromRs(rs);
+            rs.close();
+            stmt.close();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    //upsert table with rowkey and name
+    public Boolean upsertAddress(Connection conn,String tableName,String columnName,String rowkey,String newValue) {
+
+            try{
+                String sql ="upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",\'"+newValue+"\' FROM \""+tableName+"\" WHERE \"PK\" =\'"+rowkey+"\'";
+                PreparedStatement ps2 = conn.prepareStatement(sql);
+
+                // execute upsert
+                String msg = ps2.executeUpdate() > 0 ? "insert success..."
+                        : "insert fail...";
+                if(msg =="insert fail..."){
+                    return false;
+                }
+                // you must commit
+                conn.commit();
+                System.out.println(msg);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
     //29 deal with location which has no label"省""市"
     public Boolean changeLocationFormat(String tableName, String columnName){
         //1.取mysql中的地址数据，一个是省地址，一个是市地址，分别存到list中
+//        ProvinceService provinceService= new ProvinceService();
+//        List<ProvinceEntity> provinces =provinceService.getProvinces();
+//        System.out.println(provinces.get(1).getName());
 
-        //2.对hbase中对应地址数据中文分词
+        List<String> provinceNameList =new ArrayList<String>();
+        List<String> cityNameList =new ArrayList<String>();
+        DBUtil dbUtil =new DBUtil();
+        Connection conn =dbUtil.GetConnection();
+        String sql1 = "select id,name from province";
+        String sql2= "select id,name from city";
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
+        ResultSet rs =null;
+        ResultSet rs2 =null;
+        try {
+            conn.setAutoCommit(false);
+            pstmt = conn.prepareStatement(sql1);
+            pstmt2 =conn.prepareStatement(sql2);
+            rs = pstmt.executeQuery();
+            rs2 =pstmt2.executeQuery();
+            conn.commit();
+            while(rs.next()){
+                //Retrieve by column name
+                int provinceId  = rs.getInt("id");
+                String provinceName = rs.getString("name");
+//                System.out.println(provinceId+":"+provinceName);
+                provinceNameList.add(provinceName);
+            }
+            while(rs2.next()){
+                //Retrieve by column name
+                int cityId  = rs2.getInt("id");
+                String cityName = rs2.getString("name");
+//                System.out.println(cityId+":"+cityName);
+                cityNameList.add(cityName);
+            }
+            rs2.close();
+            pstmt2.close();
+            dbUtil.closeConn(rs,pstmt,conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //2.将省市信息添加到分词词库
+        for(int i=0;i<provinceNameList.size();i++){
+            String provinceName =provinceNameList.get(i);
+            UserDefineLibrary.insertWord(provinceName, "n", 1000);
+        }
+        for(int i=0;i<cityNameList.size();i++){
+            String cityName =cityNameList.get(i);
+            UserDefineLibrary.insertWord(cityName, "n", 1000);
+        }
 
-        //3.判断，并返回完整的地址
+        //3.对hbase中对应地址数据中文分词
+            //3.1首先在表中读出PK和对应的地址值，存到map中，每一行是一个map(两个键值对，键是列名),然后放到一个list里
+        List<Map<String, Object>> oldValueList =SelectPKAndAddress(tableName,columnName);
+        List oldResult = new ArrayList(oldValueList.size());
+        //存成键值对，将主键和地址名对应起来
+//        Map<String, String> mapResult = new HashMap<String, String>();
+        //得到包含主键和地址名的list
+        for(int i=0;i<oldValueList.size();i++) {
+            org.json.JSONObject jsonObject = new org.json.JSONObject(oldValueList.get(i));
+            Iterator iterator = jsonObject.keys();
+            while (iterator.hasNext()) {
+                String key = (String) iterator.next();
+                //result.add(key);
+                oldResult.add(jsonObject.getString(key));
+            }
+        }
+            // 3.2然后对list中的所有值分词处理，与地址表分别对比并补全,然后将主键和地址名的分词结果对应起来存到map里
+        Map<String,String> splitResult = new HashMap<String,String>();
+        for(int j =0;j<oldResult.size();){
+            int k=j+1;
+            String key=oldResult.get(j).toString();
+            String value=oldResult.get(k).toString();
+            String valueTerms = ToAnalysis.parse(value).toStringWithOutNature(" ");
+            //将valueTerms中分好的词分别取出存到数组中和mysql中的province和city表分别比对，如果包含在该词表中则返回词表中完整的地址
+            String[] splitAddress=valueTerms.split(" ");
+//bug:吉林吉林？吉林省？吉林市？
+            String connect="";
+            for(String str : splitAddress ){
+                String tmp="";
+                for(String standredProvinceName : provinceNameList){
+                    if(standredProvinceName.contains(str)){
+                        tmp = standredProvinceName;
+                    }
+                }
+                if (tmp=="") {
+                    for (String standredcityName : cityNameList) {
+                        if (standredcityName.contains(str)) {
+                            tmp = standredcityName;
+                        }
+                    }
+                }
+                if (tmp==""){
+                    tmp =str;
+                }
+                connect=connect+tmp;
+            }
+            //将当期的主键和处理后的地址名存入Map
+            splitResult.put(key,connect);
+            j=j+2;
+        }
+        //4.插入回原phoenix表
+        Iterator<Map.Entry<String, String>> entries = splitResult.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<String, String> entry = entries.next();
+//            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            PhoenixUtil util =new PhoenixUtil();
+            Connection connPhoenix = null;
+            try {
+                // get connection
+                connPhoenix = util.GetConnection();
+
+                // check connection
+                if (connPhoenix == null) {
+                    System.out.println("conn is null...");
+                    return false;
+                }
+            } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            upsertAddress(connPhoenix,tableName,columnName,entry.getKey(),entry.getValue());
+            if (connPhoenix != null) {
+                try {
+                    connPhoenix.close();
+                } catch (SQLException e) {
+                            e.printStackTrace();
+                }
+
+            }
+        }
         return true;
     }
 }

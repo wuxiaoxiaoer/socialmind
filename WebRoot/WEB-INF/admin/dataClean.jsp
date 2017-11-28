@@ -535,6 +535,9 @@
                     <div id="test">
                       <a href="javascript:display('test')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test</a>
                     </div>
+                    <div id="test3">
+                      <a href="javascript:display('test3')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test3</a>
+                    </div>
                     <%--<div id="btn_sanqin">--%>
                     <%--<a href="javascript:display('news_sanqin')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">news_sanqin</a>--%>
                     <%--</div>--%>
