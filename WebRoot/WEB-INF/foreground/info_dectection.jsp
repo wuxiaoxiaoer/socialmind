@@ -42,78 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     </ul>
                 </div>
-				
-
-				
                 <!--/span-->
-                <div class="span9" id="content">
-                   	<!--title-->
-					<h3 align="center">信息监测</h3>
-                    <form action="infodetection/search">
-                        <div align="center">
-                            <input type="text" name="name" data-required="1" class="span5 m-wrap" placeholder="信息检测关键词">
-                            <button class="btn btn-success" style="margin:-11px 0 0 20px;" type="submit">搜索</button>
-                        </div>
-                    </form>
-					<!--推荐事件-->
-				
-					<!--map-->
-					<div class="row-fluid">
-                        <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">政府：敏感事件</div>
-                                <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                                </div>
-                            </div>
-							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-							</div>
-                            
-                        </div>
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">事业单位：内部事件</div>
-                                <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                                </div>
-                            </div>
-							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-							</div>
-                            
-                        </div>
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">企业：负面舆情</div>
-                                <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                                </div>
-                            </div>
-							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-							</div>
-                            
-                        </div>
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">个人：热门关注</div>
-                                <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                                </div>
-                            </div>
-							<div class="block-content collapse in" id="map">
-								<a href="info_dectection_info_text.jsp"><img src="foreground/images/event1.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event2.png"/ height="200px" width="300px"></a>
-                                <a href="info_dectection_info_text.jsp"><img src="foreground/images/event3.png"/ height="200px" width="300px"></a>
-							</div>
-                        </div>
-                </div>
 
-                </div>
             </div>
 
             <!-- 引入尾部模板 -->
@@ -129,11 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <script src="foreground/assets/scripts.js"></script>
         <script src="foreground/assets/DT_bootstrap.js"></script>
-        <script>
-        $(function() {
-            
-        });
-        </script>
+
     </body>
 
 

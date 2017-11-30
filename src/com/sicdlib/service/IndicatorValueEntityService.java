@@ -44,9 +44,8 @@ public class IndicatorValueEntityService extends DefaultEntityManager<IndicatorV
         return indicators;
     }
 
-    //事件
+    //事件 地域
     public List getObjectArea(String objectId){
-
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
@@ -89,5 +88,7 @@ public class IndicatorValueEntityService extends DefaultEntityManager<IndicatorV
         }
         return null;
     }
+
+    //
 
 }
