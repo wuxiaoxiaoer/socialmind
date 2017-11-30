@@ -1,8 +1,5 @@
 package com.sicdlib.util.PhoenixUtil;
 
-import com.sicdlib.web.DataCleanAction;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +44,37 @@ public class PhoenixUtil{
 //
 //
 //    }
+
+    @org.junit.Test
+    public void test01(){
+        //数据源表与website建立关系
+        String sql = "select * from \"bbs_china_post_copy\" limit 10 offset 1";
+        List<Map<String, Object>> result = selectHbaseBySql(sql);
+//        List<Map<String, Object>> result = Select("bbs_china_post_copy", 10);
+        System.out.println("结果：" + result.size());
+
+    }
+
+    //查询
+    public static List<Map<String, Object>> selectHbaseBySql(String sql){
+        PhoenixUtil util =new PhoenixUtil();
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+        Connection conn =util.GetConnection();
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            GetList getList=new GetList();
+            result = getList.getListFromRs(rs);
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
     //phoenix的查询方法,目前限制查询一列
     public List<Map<String, Object>> Select(String tableName,int limits){
         PhoenixUtil util =new PhoenixUtil();
@@ -325,29 +353,28 @@ public class PhoenixUtil{
             //When we use the judge sentence case, when it maches the first case, it won't execute else.so we match which has detail time first and then maches which doesn't have detail time.
             for (int i=0;i<totleRow;i+=400000){
 
-                String sql ="UPSERT INTO \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\") SELECT \"PK\",CASE " +
-                        //if the format is like   Sat Jul 26 09:59:57 CST 2014,currently this order are unable to use here, but useful in squirrel
-                        "WHEN \"info\".\""+columnName+"\" LIKE '%GMT%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'EEE, d MMM yyyy HH:mm:ss zzz')),'[^\\.]+') " +
+                String sql ="UPSERT INTO \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\") SELECT \"PK\"," +
                         //2017-11-22 16:38星期三   bbs_tianya_post
-                        "WHEN \"info\".\""+columnName+"\" LIKE \'%-%-%星期%\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd HH:mm EEE','CST+8:00')),'[^\\.]+') " +
+                        "CASE WHEN \"info\".\""+columnName+"\" LIKE \'%-%-%星期%\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd HH:mm EEE','CST+8:00')),'[^\\.]+')" +
                         //(2017-11-22 16:52:12)  blog_china_post
-                        "WHEN \"info\".\""+columnName+"\" LIKE \'(____-__-__ __:__:__)\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", '(yyyy-MM-dd HH:mm:ss','CST+8:00)')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE \'(____-__-__ __:__:__)\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", '(yyyy-MM-dd HH:mm:ss','CST+8:00)')),'[^\\.]+')" +
                         //deal with true format, to avoid it matches other format so as to be changed.
-                        "WHEN \"info\".\""+columnName+"\" LIKE '____-__-__ __:%:__' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd HH:mm:ss','CST+8:00')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE '____-__-__ __:%:__' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd HH:mm:ss','CST+8:00')),'[^\\.]+')" +
                         //deal with 2017/11/21 06:12:24, change / to -
-                        "WHEN \"info\".\""+columnName+"\" LIKE '%/%/% %:%:%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy/MM/dd HH:mm:ss','CST+8:00')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE '%/%/% %:%:%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy/MM/dd HH:mm:ss','CST+8:00')),'[^\\.]+')" +
                         //deal with 2017/11/21, change / to -
-                        "WHEN \"info\".\""+columnName+"\" LIKE '%/%/%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy/MM/dd','CST+8:00')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE '%/%/%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy/MM/dd','CST+8:00')),'[^\\.]+')" +
                         //deal with 17-11-21 06:39:28, change 17 to 2017 ,if the yy represents 00-17, it will be filled to 2000-2017,or be filled to 19..
-                        "WHEN \"info\".\""+columnName+"\" LIKE '__-%-% %:%:%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yy-MM-dd HH:mm:ss','CST+8:00')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE '__-%-% %:%:%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yy-MM-dd HH:mm:ss','CST+8:00')),'[^\\.]+')" +
                         //deal with 2017-11-21
-                        "WHEN \"info\".\""+columnName+"\" LIKE '____-%-%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd','CST+8:00')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE '____-%-%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy-MM-dd','CST+8:00')),'[^\\.]+')" +
 //                        //deal with 17-11-21, change 17 to 2017 ,if the yy represents 00-17, it will be filled to 2000-2017,or be filled to 19..
-                        "WHEN \"info\".\""+columnName+"\" LIKE '__-%-%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yy-MM-dd','CST+8:00')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE '__-%-%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yy-MM-dd','CST+8:00')),'[^\\.]+')" +
 //                        //2017年11月21日 23:54:12,将汉字替换为-
-                        "WHEN \"info\".\""+columnName+"\" LIKE \'%年%月%日 __:__:__\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy年MM月dd日 HH:mm:ss','CST+8:00')),'[^\\.]+') " +
+                        "WHEN \"info\".\""+columnName+"\" LIKE \'%年%月%日 __:__:__\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'yyyy年MM月dd日 HH:mm:ss','CST+8:00')),'[^\\.]+')" +
+                        //if the format is like   Sat Jul 26 09:59:57 CST 2014
+                        "WHEN \"info\".\""+columnName+"\" LIKE \'%CST%\' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\""+columnName+"\", 'EEE MMM dd HH:mm:ss \\'CST\\' yyyy','CST+8:00')),'[^\\.]+') " +
                         "ELSE \"info\".\""+columnName+"\" END FROM \""+tableName+"\" LIMIT 400000 OFFSET "+i;
-//                String sql="upsert into \"test\"(\"PK\",\"info\".\"date_time\") SELECT \"PK\",CASE WHEN \"info\".\"date_time\" LIKE '%GMT%' THEN REGEXP_SUBSTR(TO_CHAR(TO_DATE(\"info\".\"date_time\", 'EEE MMM dd HH:mm:ss z yyyy')),'[^\\.]+') ELSE \"info\".\"date_time\" END FROM \"test\"";
                 PreparedStatement ps2 = conn.prepareStatement(sql);
 
                 // execute upsert
@@ -377,13 +404,4 @@ public class PhoenixUtil{
         return true;
     }
 
-    //29 deal with location which has no label"省""市"
-    public Boolean changeLocationFormat(String tableName, String columnName){
-        //1.取mysql中的地址数据，一个是省地址，一个是市地址，分别存到list中
-
-        //2.对hbase中对应地址数据中文分词
-
-        //3.判断，并返回完整的地址
-        return true;
-    }
 }

@@ -1,5 +1,6 @@
 package com.sicdlib.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,6 +14,26 @@ public class WebsiteEntity {
     private String websiteTypeId;
     /** 一个网站对应多个文章 */
     private Set<ArticleEntity> articles;
+    /** 一个网站对应多个数据源表 */
+    private Set<DataSourceEntity> dataSources;
+    /** 一个网站对应多个作者 */
+    private Set<AuthorEntity> authors = new HashSet<>();
+
+    public Set<AuthorEntity> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<AuthorEntity> authors) {
+        this.authors = authors;
+    }
+
+    public Set<DataSourceEntity> getDataSources() {
+        return dataSources;
+    }
+
+    public void setDataSources(Set<DataSourceEntity> dataSources) {
+        this.dataSources = dataSources;
+    }
 
     public Set<ArticleEntity> getArticles() {
         return articles;

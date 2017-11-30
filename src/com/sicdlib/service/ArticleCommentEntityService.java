@@ -36,4 +36,15 @@ public class ArticleCommentEntityService extends DefaultEntityManager<ArticleCom
         }
         return null;
     }
+
+    /**
+     * @ wlw
+     * 根据author拼接的属性和值 插入数据
+     * @param keyStr 属性
+     * @param objStr 值
+     */
+    public void insertCommentByPropAndValue(String keyStr, String objStr){
+        String sql = "INSERT INTO article_comment("+keyStr+") values ("+ objStr +")";
+        getEntityDao().getSession().createSQLQuery(sql).executeUpdate();
+    }
 }

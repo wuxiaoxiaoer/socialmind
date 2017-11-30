@@ -4,12 +4,13 @@ import com.sicdlib.entity.ArticleEntity;
 import com.sicdlib.entity.WebsiteEntity;
 import com.sicdlib.util.DBUtil;
 import edu.xjtsoft.base.orm.support.Page;
-
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,28 @@ import java.util.Map;
 @Service
 @Transactional
 public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
+
+    /**
+     * @ wlw
+     *查询article表结构
+     */
+    public boolean getArticleTbStruct(String tableName, String columnName){
+        String sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_NAME = '" + tableName + "'\n" +
+                "AND COLUMN_NAME = '" + columnName + "'";
+        getEntityDao().getSession().createSQLQuery(sql).list();
+        return true;
+    }
+
+    /**
+     * @ wlw
+     * 从hbase获得数据插入mysql ArticleEntity中
+     * @param keyStr
+     * @param objStr
+     */
+    public void insertArticleByPropAndValue(String keyStr, String objStr){
+        String sql = "INSERT INTO article("+keyStr+") values ("+ objStr +")";
+        getEntityDao().getSession().createSQLQuery(sql).executeUpdate();
+    }
 
     public Page<ArticleEntity> getConditionArticles(Map<String, Object> map){
         String hql = "from ArticleEntity a where a.objectEntity.objectId = '"+map.get("objectId")+"'";

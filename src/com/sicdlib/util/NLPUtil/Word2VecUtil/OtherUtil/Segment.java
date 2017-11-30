@@ -1,13 +1,14 @@
 package com.sicdlib.util.NLPUtil.Word2VecUtil.OtherUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.sicdlib.util.ToolkitUtil.ReadFileToList;
 import org.ansj.domain.Result;
 import org.ansj.domain.Term;
 import org.ansj.library.UserDefineLibrary;
 import org.ansj.recognition.impl.FilterRecognition;
 import org.ansj.splitWord.analysis.ToAnalysis;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Segment {
 
@@ -31,6 +32,10 @@ public class Segment {
 		FilterRecognition filter = new FilterRecognition();
 		//过滤标点符号
 		filter.insertStopWord(",", " ", ".", "，", "。", ":", "：", "'", "‘", "’", "　", "“", "”", "《", "》", "[", "]", "-");
+		//添加去除停用词
+		String filePath = "D:\\project\\spidersManager\\data\\stopWordsData\\stop_words.txt";
+		List<String> stopWordsList = ReadFileToList.readFileToList(filePath);
+		filter.insertStopWord(stopWordsList.toArray(new String[stopWordsList.size()]));
 		//增加用户自定义词库,格式为：“自定义词,词性,数字”。
 		UserDefineLibrary.insertWord("一带一路", "n", 1000);
 		return ToAnalysis.parse(sentence).recognition(filter).getTerms();
@@ -49,6 +54,7 @@ public class Segment {
 		}
 		return wordList;
 	}
+
 	/**
 	 * 获取词性列表
 	 * @param sentence 带分词的句子
@@ -75,6 +81,24 @@ public class Segment {
 			case 'n':
 			case 'v':weightVector[i] = 1;break;
 			default:weightVector[i] = (float) 0.8;break;
+			}
+		}
+		return weightVector;
+	}
+
+	/**
+	 * 获取 NER 数组
+	 * @param nerList 词性列表
+	 * @return 词性列表对应的权值数组
+	 */
+	public static float[] getNERWeightArray(List<String> nerList) {
+		float[] weightVector = new float[nerList.size()];
+		for (int i = 0; i < weightVector.length; i++) {
+			String POS = nerList.get(i);
+			switch(POS.charAt(0)) {
+				case 'n':
+				case 'v': weightVector[i] = 1;break;
+				default: weightVector[i] = (float) 0.8;break;
 			}
 		}
 		return weightVector;

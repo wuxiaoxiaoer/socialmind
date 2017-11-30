@@ -7,6 +7,27 @@ public class DataSourceEntity {
     private String tableNameId;
     private String tableName;
     private String websiteId;
+    private String count;
+    /** 一个数据源表对应一个网站 */
+    private WebsiteEntity websiteEntity;
+//    /** 一个数据源表对应多个文章 */
+//    private Set<AuthorEntity> authors = new HashSet<>();
+    public WebsiteEntity getWebsiteEntity() {
+        return websiteEntity;
+    }
+
+    public void setWebsiteEntity(WebsiteEntity websiteEntity) {
+        this.websiteEntity = websiteEntity;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
 
     public String getTableNameId() {
         return tableNameId;

@@ -1,20 +1,9 @@
 package com.sicdlib.service;
 
 
-import com.eharmony.pho.api.DataStoreApi;
-import com.eharmony.pho.query.builder.QueryBuilder;
-import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-
-
-import com.sicdlib.util.PhoenixUtil.MapToJson;
 import com.sicdlib.util.PhoenixUtil.PhoenixUtil;
 import com.sicdlib.util.PhoenixUtil.SpecialPhoenixUtil;
 import org.apache.hadoop.hbase.snapshot.CreateSnapshot;
-import org.hibernate.sql.Select;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -400,13 +389,13 @@ public class DataCleanService {
 //                break;
 //            }
             //地址统一为陕西省西安市
-            case "29":{
-                Boolean state=util.changeLocationFormat(currentTable,currentColumn);
-                if(state==false){
-                    return false;
-                }
-                break;
-            }
+//            case "29":{
+//                Boolean state=util.changeLocationFormat(currentTable,currentColumn);
+//                if(state==false){
+//                    return false;
+//                }
+//                break;
+//            }
         //该列重置
             case "resetColumn":
             {

@@ -42,8 +42,8 @@
 								<h5>新增舆情对象</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form action="#" method="get" class="form-horizontal">
-									<div class="control-group">
+								<form action="similarity" method="post" class="form-horizontal">
+									<%--<div class="control-group">
 										<label class="control-label">主题名称：</label>
 										<div class="controls ">
 											<div class="select2-container" id="s2id_autogen1">
@@ -77,16 +77,16 @@
 												<option>实体</option>
 											</select>
 										</div>
-									</div>
+									</div>--%>
                                     <div class="control-group">
 										<label class="control-label">舆情对象名称：</label>
-										<div class="controls"><input type="text" class="span20" placeholder="Last name" /></div>
+										<div class="controls"><input type="text" name="eventKeywords" class="span20" placeholder="Last name" /></div>
 									</div>
 									
 									<div class="control-group">
 										<label class="control-label">舆情对象描述：</label>
 										<div class="controls">
-											<textarea class="span20" >为更好的抽取舆情对象相关的文章....</textarea>
+											<textarea name="eventName" class="span20">为更好的抽取舆情对象相关的文章....</textarea>
 										</div>
 									</div>
 									<div class="form-actions">
