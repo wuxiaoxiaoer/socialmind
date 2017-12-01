@@ -1,6 +1,5 @@
 package com.sicdlib.service;
 
-import com.sicdlib.entity.ArticleEntity;
 import com.sicdlib.entity.AuthorEntity;
 import com.sicdlib.util.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
@@ -12,9 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Transactional
@@ -43,5 +40,16 @@ public class AuthorEntityService extends DefaultEntityManager<AuthorEntity> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * @ wlw
+     * 根据author拼接的属性和值 插入数据
+     * @param keyStr 属性
+     * @param objStr 值
+     */
+    public void insertAuthorByPropAndValue(String keyStr, String objStr){
+        String sql = "INSERT INTO author("+keyStr+") values ("+ objStr +")";
+        getEntityDao().getSession().createSQLQuery(sql).executeUpdate();
     }
 }

@@ -7,5 +7,7 @@
     <class name="com.sicdlib.entity.KeywordRelatedDegreeEntity" table="keyword_related_degree" schema="socialmind">
         <id name="keywordDegreeId" column="keywordDegreeID"/>
         <property name="relatedDegree" column="relatedDegree"/>
+        <many-to-one name="keywordEntityOne" column="keywordOneID"></many-to-one>
+        <many-to-one name="keywordEntityTwo" column="keywordTwoID"></many-to-one>
     </class>
 </hibernate-mapping>

@@ -5,7 +5,10 @@ package com.sicdlib.entity;
  */
 public class ArticleSimilarEntity {
     private String articleSimilarId;
-    private String similarDegree;
+    private double similarDegree;
+    /*表之间的映射*/
+    private ArticleEntity articleEntityOne;
+    private ArticleEntity articleEntityTwo;
 
     public String getArticleSimilarId() {
         return articleSimilarId;
@@ -15,12 +18,28 @@ public class ArticleSimilarEntity {
         this.articleSimilarId = articleSimilarId;
     }
 
-    public String getSimilarDegree() {
+    public double getSimilarDegree() {
         return similarDegree;
     }
 
-    public void setSimilarDegree(String similarDegree) {
+    public void setSimilarDegree(double similarDegree) {
         this.similarDegree = similarDegree;
+    }
+
+    public ArticleEntity getArticleEntityOne() {
+        return articleEntityOne;
+    }
+
+    public void setArticleEntityOne(ArticleEntity articleEntityOne) {
+        this.articleEntityOne = articleEntityOne;
+    }
+
+    public ArticleEntity getArticleEntityTwo() {
+        return articleEntityTwo;
+    }
+
+    public void setArticleEntityTwo(ArticleEntity articleEntityTwo) {
+        this.articleEntityTwo = articleEntityTwo;
     }
 
     @Override
@@ -30,18 +49,23 @@ public class ArticleSimilarEntity {
 
         ArticleSimilarEntity that = (ArticleSimilarEntity) o;
 
+        if (Double.compare(that.similarDegree, similarDegree) != 0) return false;
         if (articleSimilarId != null ? !articleSimilarId.equals(that.articleSimilarId) : that.articleSimilarId != null)
             return false;
-        if (similarDegree != null ? !similarDegree.equals(that.similarDegree) : that.similarDegree != null)
+        if (articleEntityOne != null ? !articleEntityOne.equals(that.articleEntityOne) : that.articleEntityOne != null)
             return false;
-
-        return true;
+        return articleEntityTwo != null ? articleEntityTwo.equals(that.articleEntityTwo) : that.articleEntityTwo == null;
     }
 
     @Override
     public int hashCode() {
-        int result = articleSimilarId != null ? articleSimilarId.hashCode() : 0;
-        result = 31 * result + (similarDegree != null ? similarDegree.hashCode() : 0);
+        int result;
+        long temp;
+        result = articleSimilarId != null ? articleSimilarId.hashCode() : 0;
+        temp = Double.doubleToLongBits(similarDegree);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (articleEntityOne != null ? articleEntityOne.hashCode() : 0);
+        result = 31 * result + (articleEntityTwo != null ? articleEntityTwo.hashCode() : 0);
         return result;
     }
 }

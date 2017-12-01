@@ -7,5 +7,7 @@
     <class name="com.sicdlib.entity.ArticleSimilarEntity" table="article_similar" schema="socialmind">
         <id name="articleSimilarId" column="articleSimilarID"/>
         <property name="similarDegree" column="similarDegree"/>
+        <many-to-one name="articleEntityOne" column="articleOneID"></many-to-one>
+        <many-to-one name="articleEntityTwo" column="articleTwoID"></many-to-one>
     </class>
 </hibernate-mapping>

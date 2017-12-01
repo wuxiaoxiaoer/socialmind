@@ -27,6 +27,7 @@ public class CommmonUtil {
      * 输入该事件名,得到该事件的词性,然后对该事件的动词进行扩充
      */
     public static List<String> getKeywordsPOS(String eventName, Word2Vec vec1, Integer num){
+        //获得带有<词性>的list
         List<String> termPoss = Segment.getPOS(eventName);
         List<String> eventWords = Segment.getWords(eventName);
         List<String> keyWords = new ArrayList<String>();
@@ -42,10 +43,10 @@ public class CommmonUtil {
         for (int i = 0; i<termPoss.size(); i++){
             if (termPoss.get(i).equals("v")) {
                 Set<WordEntry> similarWords = vec1.getSimilarWords(eventWords.get(i), num);
-                System.out.println("与 "+eventWords.get(i)+" 语义相似的词语:"+similarWords.size());
-                for (WordEntry word : similarWords) {
-                    System.out.println(word.name + " : " + word.score);
-                }
+//                System.out.println("与 "+eventWords.get(i)+" 语义相似的词语:"+similarWords.size());
+//                for (WordEntry word : similarWords) {
+//                    System.out.println(word.name + " : " + word.score);
+//                }
                 eventWord_similarWords.addAll(similarWords);
             }
         }
