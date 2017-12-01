@@ -491,9 +491,10 @@
                       <a href="javascript:display('bbs_sohu_fans')" class="btn btn-success tipSag" original-title="Lorem ipsum dolar sit amed">bbs_sohu_fans</a>
                     </div>
                     <div id="btn_bbs_tianya">
-                      <a href="javascript:display('bbs_tianya_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_tianya_author</a>
-                      <a href="javascript:display('bbs_tianya_fans')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_tianya_fans</a>
-                      <a href="javascript:display('bbs_tianya_post')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_tianya_post</a>
+                      <a href="javascript:display('bbs_tianya_author_copy')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_tianya_author</a>
+                      <a href="javascript:display('bbs_tianya_comment_copy')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">bbs_tianya_comment</a>
+                      <a href="javascript:display('bbs_tianya_fans_copy')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_tianya_fans</a>
+                      <a href="javascript:display('bbs_tianya_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">bbs_tianya_post</a>
                     </div>
                     <div id="btn_bbs_xici">
                       <a href="javascript:display('bbs_xici_comment')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">bbs_xici_comment</a>
@@ -534,6 +535,9 @@
                     <%--测试用表--%>
                     <div id="test">
                       <a href="javascript:display('test')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test</a>
+                    </div>
+                    <div id="test3">
+                      <a href="javascript:display('test3')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">test3</a>
                     </div>
                     <%--<div id="btn_sanqin">--%>
                     <%--<a href="javascript:display('news_sanqin')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">news_sanqin</a>--%>

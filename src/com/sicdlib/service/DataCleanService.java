@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 
 
+import com.sicdlib.util.PhoenixUtil.ChushulingException;
 import com.sicdlib.util.PhoenixUtil.MapToJson;
 import com.sicdlib.util.PhoenixUtil.PhoenixUtil;
 import com.sicdlib.util.PhoenixUtil.SpecialPhoenixUtil;
@@ -214,7 +215,7 @@ public class DataCleanService {
             tableName=tableName.replaceAll("'","");
 //            String sql ="select"+"\""+columnName+"\""+","+"count(*)"+"from "+"\""+tableName+"\""+"GROUP BY"+"\""+columnName+"\""+"ORDER BY "+"count(*)"+"DESC"+"limit 10";
 
-            String sql ="select"+"\""+columnName+"\""+",count(1) "+"from "+"\""+tableName+"\""+"GROUP BY "+"\""+columnName+"\""+" ORDER BY count(*) DESC limit 5";
+            String sql ="select"+"\""+columnName+"\""+",count(1) "+"from "+"\""+tableName+"\""+"GROUP BY "+"\""+columnName+"\""+" ORDER BY count(*) DESC limit 10";
 
 //            String sql="select \"author_id\", count(*) from (\"bbs_china_comment\") group by \"author_id\" order by count(*) desc limit 20";
             PreparedStatement ps =conn.prepareStatement(sql);
@@ -222,7 +223,20 @@ public class DataCleanService {
 //            int col = rs.getMetaData().getColumnCount();
             LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
             while (rs.next()){
-                result.put(rs.getString(1), rs.getInt(2));
+                String key ="";
+                try{
+                    key=rs.getString(1);
+                    //传回前台的json中键不允许空，因此将null展示为null value,并非数据库中值为null value
+                    if(rs.getString(1)==null){
+                       key ="null value";
+                    }
+                }catch (SQLException e){
+                    key="null value";
+                    e.printStackTrace();
+                }finally {
+                    result.put(key, rs.getInt(2));
+                }
+
             }
 //
             return result;
@@ -385,20 +399,20 @@ public class DataCleanService {
             }
             //时间统一为xxxx-xx-xx xx:xx:xx
             case "27":{
-                Boolean state=util.changeTimeFormat(currentTable,currentColumn);
+                Boolean state=util.changeTimeFormat(currentTable,currentColumn,"27");
                 if(state==false){
                     return false;
                 }
                 break;
             }
             //时间统一为xxxx年xx月xx日 xx:xx:xx
-//            case "27":{
-//                Boolean state=util.changeTimeFormat2(currentTable,currentColumn);
-//                if(state==false){
-//                    return false;
-//                }
-//                break;
-//            }
+            case "28":{
+                Boolean state=util.changeTimeFormat(currentTable,currentColumn,"28");
+                if(state==false){
+                    return false;
+                }
+                break;
+            }
             //地址统一为陕西省西安市
             case "29":{
                 Boolean state=util.changeLocationFormat(currentTable,currentColumn);

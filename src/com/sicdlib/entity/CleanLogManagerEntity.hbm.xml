@@ -7,7 +7,8 @@
     <class name="com.sicdlib.entity.CleanLogManagerEntity" table="clean_log_manager" schema="socialmind">
         <id name="cleanLogId" column="cleanLogID"/>
         <property name="userId" column="userID"/>
-        <property name="selfDefiningValue" column="self_defining_value"/>
+        <property name="userDefineNewValue" column="user_define_new_value"/>
+        <property name="userDefineOldValue" column="user_define_old_value"/>
         <property name="cleanTime" column="cleanTime"/>
         <property name="cleanStategyId" column="cleanStategyID"/>
         <property name="cleanLocationId" column="cleanLocationID"/>
