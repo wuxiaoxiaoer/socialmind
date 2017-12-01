@@ -51,6 +51,35 @@ public class PhoenixUtil{
 //
 //
 //    }
+@org.junit.Test
+public void test01(){
+    //数据源表与website建立关系
+    String sql = "select * from \"bbs_china_post_copy\" limit 10 offset 1";
+    List<Map<String, Object>> result = selectHbaseBySql(sql);
+//        List<Map<String, Object>> result = Select("bbs_china_post_copy", 10);
+    System.out.println("结果：" + result.size());
+
+}
+
+    //查询
+    public static List<Map<String, Object>> selectHbaseBySql(String sql){
+        PhoenixUtil util =new PhoenixUtil();
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+        Connection conn =util.GetConnection();
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            GetList getList=new GetList();
+            result = getList.getListFromRs(rs);
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     //phoenix的查询方法
     public List<Map<String, Object>> Select(String tableName,int limits){
         PhoenixUtil util =new PhoenixUtil();
