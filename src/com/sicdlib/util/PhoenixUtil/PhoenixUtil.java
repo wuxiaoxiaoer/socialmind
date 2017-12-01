@@ -222,8 +222,61 @@ public void test01(){
         }
         return true;
     }
+    //替换空值
+    public Boolean upsertNullColumn(String tableName,String columnName,String newValue) {
+        PhoenixUtil util =new PhoenixUtil();
+        Connection conn = null;
+        try {
+            // get connection
+            conn = util.GetConnection();
 
-    //替换一列,可选择某个值来填充所有空
+            // check connection
+            if (conn == null) {
+                System.out.println("conn is null...");
+                return false;
+            }
+            String count="SELECT COUNT(*) FROM \""+tableName+"\"";
+            PreparedStatement ps = conn.prepareStatement(count);
+            ResultSet result=ps.executeQuery();
+            conn.commit();
+            int totleRow=0;
+            while(result.next()){
+                totleRow=result.getInt(1);
+            }
+            //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
+
+            for (int i=0;i<totleRow;i+=400000){
+//                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
+//                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
+                String sql ="upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",\'"+newValue+"\' FROM \""+tableName+"\" WHERE \"info\".\""+columnName+"\" is null LIMIT 400000 OFFSET "+i;
+                PreparedStatement ps2 = conn.prepareStatement(sql);
+
+                // execute upsert
+                String msg = ps2.executeUpdate() > 0 ? "insert success..."
+                        : "insert fail...";
+                if(msg =="insert fail..."){
+                    return false;
+                }
+                // you must commit
+                conn.commit();
+                System.out.println(msg);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return true;
+    }
+    //替换一列
     public Boolean upsertColumn(String tableName,String columnName,String oldValue,String newValue) {
         PhoenixUtil util =new PhoenixUtil();
         Connection conn = null;
@@ -612,6 +665,7 @@ public void test01(){
         PreparedStatement pstmt2 = null;
         ResultSet rs = null;
         ResultSet rs2 = null;
+        PhoenixUtil util = new PhoenixUtil();
         try {
             conn.setAutoCommit(false);
             pstmt = conn.prepareStatement(sql1);
@@ -652,11 +706,22 @@ public void test01(){
         //3.对hbase中对应地址数据中文分词
         //3.1首先在表中读出PK和对应的地址值，存到map中，每一行是一个map(两个键值对，键是列名),然后放到一个list里
         SpecialPhoenixUtil specialPhoenixUtil = new SpecialPhoenixUtil();
-        int rowCount = specialPhoenixUtil.getRowCount(conn, tableName);
+
+        Connection connPhoenix = null;
+        // get connection
+        connPhoenix = util.GetConnection();
+
+        // check connection
+        if (connPhoenix == null) {
+            System.out.println("conn is null...");
+            return false;
+        }
+        int rowCount = specialPhoenixUtil.getRowCount(connPhoenix, tableName);
         //每次最多处理5000条数据，避免内存溢出
+
         for (int i = 0; i < rowCount;i+=5000) {
 
-            List<Map<String, Object>> oldValueList = SelectPKAndOneColumn(conn, tableName, columnName, i);
+            List<Map<String, Object>> oldValueList = SelectPKAndOneColumn(connPhoenix, tableName, columnName, i);
             List oldResult = new ArrayList(oldValueList.size());
             //存成键值对，将主键和地址名对应起来
 //        Map<String, String> mapResult = new HashMap<String, String>();
@@ -672,6 +737,7 @@ public void test01(){
             }
             // 3.2然后对list中的所有值分词处理，与地址表分别对比并补全,然后将主键和地址名的分词结果对应起来存到map里
             Map<String, String> splitResult = new HashMap<String, String>();
+
             for (int j = 0; j < oldResult.size(); ) {
                 int k = j + 1;
                 String key = oldResult.get(j).toString();
@@ -706,17 +772,10 @@ public void test01(){
             }
             //4.插入回原phoenix表
             Iterator<Map.Entry<String, String>> entries = splitResult.entrySet().iterator();
-            PhoenixUtil util = new PhoenixUtil();
-            Connection connPhoenix = null;
-            try {
-                // get connection
-                connPhoenix = util.GetConnection();
 
-                // check connection
-                if (connPhoenix == null) {
-                    System.out.println("conn is null...");
-                    return false;
-                }
+
+            try {
+
                 while (entries.hasNext()) {
                     Map.Entry<String, String> entry = entries.next();
 //            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
@@ -724,17 +783,16 @@ public void test01(){
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                if (connPhoenix != null) {
-                    try {
-                        connPhoenix.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-
-                }
             }
         }
+        if (connPhoenix != null) {
+            try {
+                connPhoenix.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+                }
+
         return true;
     }
 }

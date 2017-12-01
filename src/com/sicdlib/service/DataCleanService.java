@@ -226,9 +226,12 @@ public class DataCleanService {
                 String key ="";
                 try{
                     key=rs.getString(1);
+                    System.out.println(key);
                     //传回前台的json中键不允许空，因此将null展示为null value,并非数据库中值为null value
-                    if(rs.getString(1)==null){
+                    if(key==null || key.isEmpty()){
                        key ="null value";
+                    }else if(key=="null"|| "".equals(key)||key==""||"null".equals(key)){
+                        key ="null value";
                     }
                 }catch (SQLException e){
                     key="null value";
@@ -259,7 +262,7 @@ public class DataCleanService {
             //填充空字符串为o
             case "11":
             {
-                Boolean state=util.upsertColumn(currentTable,currentColumn,"","0");
+                Boolean state=util.upsertNullColumn(currentTable,currentColumn,"0");
                 if(state==false){
                     return false;
                 }
@@ -270,7 +273,7 @@ public class DataCleanService {
             {
                 String avg=specialPhoenixUtil.getAverage(currentTable,currentColumn);
                 System.out.println("平均值是:"+avg);
-                Boolean state=util.upsertColumn(currentTable,currentColumn,"",avg);
+                Boolean state=util.upsertNullColumn(currentTable,currentColumn,avg);
                 if(state==false){
                     return false;
                 }
@@ -283,7 +286,7 @@ public class DataCleanService {
                 LinkedHashMap<String,Integer> frequentValue =getOrder(currentTable,currentColumn);
                 String value =frequentValue.entrySet().iterator().next().getKey().toString();
 //                System.out.println("最频繁值是:"+value);
-                Boolean state=util.upsertColumn(currentTable,currentColumn,"",value);
+                Boolean state=util.upsertNullColumn(currentTable,currentColumn,value);
                 if(state==false){
                     return false;
                 }
@@ -293,7 +296,7 @@ public class DataCleanService {
             case "14":{
                 String maxNum =specialPhoenixUtil.getMaxNum(currentTable,currentColumn);
 //                System.out.println("最大值是:"+maxNum);
-                Boolean state=util.upsertColumn(currentTable,currentColumn,"",maxNum);
+                Boolean state=util.upsertNullColumn(currentTable,currentColumn,maxNum);
                 if(state==false){
                     return false;
                 }
@@ -303,14 +306,14 @@ public class DataCleanService {
             case "15":{
                 String minNum =specialPhoenixUtil.getMinNum(currentTable,currentColumn);
 //                System.out.println("最小值是:"+minNum);
-                Boolean state=util.upsertColumn(currentTable,currentColumn,"",minNum);
+                Boolean state=util.upsertNullColumn(currentTable,currentColumn,minNum);
                 if(state==false){
                     return false;
                 }
                 break;
             }
             case "16":{
-                Boolean state=util.upsertColumn(currentTable,currentColumn,"",newValue);
+                Boolean state=util.upsertNullColumn(currentTable,currentColumn,newValue);
                 if(state==false){
                     return false;
                 }
