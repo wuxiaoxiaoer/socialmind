@@ -7,6 +7,7 @@
     <class name="com.sicdlib.entity.ArticleEntity" table="article" schema="socialmind">
         <id name="articleId" column="articleID"/>
         <property name="sourceArticleId" column="sourceArticleID"/>
+        <property name="sourceAuthorId" column="sourceAuthorID"/>
         <property name="title" column="title"/>
         <property name="keyWords" column="keyWords"/>
         <property name="content" column="content"/>

@@ -8,6 +8,7 @@ import java.util.Set;
  */
 public class AuthorEntity {
     private String authorId;
+    private String sourceAuthorId;
     private String name;
     private String sex;
     private String birthday;
@@ -46,9 +47,27 @@ public class AuthorEntity {
     private Set<ArticleEntity> articles = new HashSet<>();
     /** 一个作者包含多个评论*/
     private Set<ArticleCommentEntity> articleComments = new HashSet<>();
+    /** 一个作者属于一个网站*/
+    private WebsiteEntity websiteEntity;
+
+    public WebsiteEntity getWebsiteEntity() {
+        return websiteEntity;
+    }
+
+    public void setWebsiteEntity(WebsiteEntity websiteEntity) {
+        this.websiteEntity = websiteEntity;
+    }
 
     public Set<ArticleCommentEntity> getArticleComments() {
         return articleComments;
+    }
+
+    public String getSourceAuthorId() {
+        return sourceAuthorId;
+    }
+
+    public void setSourceAuthorId(String sourceAuthorId) {
+        this.sourceAuthorId = sourceAuthorId;
     }
 
     public void setArticleComments(Set<ArticleCommentEntity> articleComments) {

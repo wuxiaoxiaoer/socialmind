@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,12 @@ public class EventAction {
     private ArticleCommentEntityService articleCommentEntityService;
     @Autowired
     private CommentEntityService commentEntityService;
+    @Autowired
+    private KeywordRelatedDegreeService keywordRelatedDegreeService;
+    @Autowired
+    private DataDictionaryEntityService dataDictionaryEntityService;
+    @Autowired
+    private KeywordEntityService keywordEntityService;
     @Autowired
     private AuthorEntityService authorEntityService;
     @Autowired
@@ -67,59 +74,77 @@ public class EventAction {
     @RequestMapping("eventInfo")
     public String findEventInfo(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
         String objectId = req.getParameter("objectId");
-        String time = "";
+
         List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
         List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
-        List<Map> keywords = articleEntityService.findKeywords(objectId);
+        List<Map> keywords = keywordEntityService.findKeywords(objectId);
+        List listkey = new ArrayList();
+        List<Map> keywordRelated = keywordRelatedDegreeService.findKeywordRelated(objectId);
+
+        String target = "";
+        for(int a = 0 ; a < keywordRelated.size() ; a++) {
+            for (int b = 0; b < keywords.size(); b++) {
+                if(keywordRelated.get(a).get("target").equals(keywords.get(b).get("keywordId"))){
+                    target = keywords.get(b).get("name").toString();
+                }
+            }
+        }
+        for(int a = 0 ; a < keywordRelated.size() ; a++) {
+            for (int b = 0; b < keywords.size(); b++) {
+                if(keywords.get(b).get("keywordId").equals(keywordRelated.get(a).get("source"))){
+                    Map maps = new HashMap();
+                    maps.put("target",target);
+                    maps.put("source",keywords.get(b).get("name"));
+                    maps.put("weight",keywordRelated.get(a).get("weight"));
+                    listkey.add(maps);
+                }
+            }
+
+        }
+
+        List keywordList = new ArrayList();
+        for(int m = 0 ; m < keywords.size() ; m++) {
+            Map map = new HashMap();
+            if (m==0){
+                map.put("category",0);
+            }else {
+                map.put("category",1);
+            }
+            map.put("name",keywords.get(m).get("name"));
+            map.put("value",keywords.get(m).get("value"));
+            keywordList.add(map);
+
+        }
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
         List<AuthorEntity> hotAuthor = authorEntityService.findHotAuthor(objectId);
-
+        List<Map> mediaSource = websiteEntityService.findMediaSource(objectId);
+        List<DataDictionaryEntity> allMedias = dataDictionaryEntityService.findAllMedias();
+        List transferNum = articleEntityService.findTransferNum(objectId);
+        List areaSource = indicatorValueEntityService.getObjectArea(objectId);
+        List<IndicatorValueEntity> reliablity = indicatorValueEntityService.getObjectReliablity(objectId);
         List<ArticleCommentEntity> articleCommentList = articleCommentEntityService.findArticleComment(hotAuthor.get(0).getAuthorId());
-        List<CommentEntity> comment = commentEntityService.findPeopleComment(objectId);
-
-
         List periodList = articleEntityService.findPeriod(objectId);
         List hotInformation = articleEntityService.findHotInformation(objectId);
         List<WebsiteEntity> webs = websiteEntityService.findWebsite();
-       /* List websiteStatistic = new ArrayList();
-        for(int i = 0 ; i < webs.size() ; i++) {
-            List list = new ArrayList();
-            for(int j = 0 ; j < periodList.size() ; j++) {
-                time = periodList.get(j).toString();
-                List<Map> websiteList = articleEntityService.findWebsites(objectId,time);
-                List list1 = new ArrayList();
-                for(int z = 0 ; z < websiteList.size() ; z++) {
-                    list1.add(websiteList.get(z).get("websiteNum").toString());
-                }
-                System.out.println(list1.toString());
-                list.add(list1);
-            }
-            websiteStatistic.add(list);
-        }*/
-
-
-        //网站统计。。。。。开始
+        List webs_store = new ArrayList();
         List websiteStatistic = new ArrayList();
-        for(int j = 0 ; j < periodList.size() ; j++) {
-            time = periodList.get(j).toString();
-            List<Map> websiteList = articleEntityService.findWebsites(objectId,time);
-            List list1 = new ArrayList();
-            for(int z = 0 ; z < websiteList.size() ; z++) {
-                list1.add(websiteList.get(z).get("websiteNum").toString());
-            }
-            websiteStatistic.add(list1);
-        }
-        String[] array = new String[websiteStatistic.size()];
-        // List转换成数组
-        String[] newArray = {};
-        for (int i = 0; i < websiteStatistic.size(); i++) {
-            array[i] = websiteStatistic.get(i).toString();
-            System.out.println("3:"+array[i]);
-        }
-
-        //网站统计。。。。。结束
-
         List event = new ArrayList();
+
+        List firstWebsite = websiteEntityService.findFirstWeb(objectId);
+        for(int i = 0 ; i < webs.size() ; i++) {
+            webs_store.add(webs.get(i).getWebsiteName());
+        }
+        for(int i = 0 ; i < webs.size() ; i++) {
+            String websiteID = webs.get(i).getWebsiteId();
+            String websiteName = webs.get(i).getWebsiteName();
+            List<Map> websiteList = articleEntityService.findWebsites(objectId,websiteID,websiteName);
+            Map map = new HashMap();
+            map.put("name",websiteName);
+            map.put("type","line");
+            map.put("stack","发布文章的数量");
+            map.put("data",websiteList);
+            websiteStatistic.add(map);
+        }
         for(int i = 0 ; i < objectInfo.size() ; i++) {
             for(int j = 0 ; j < eventInfo.size() ; j++) {
                 if (objectInfo.get(i).getObjectId().equals(eventInfo.get(j).getObjectId())){
@@ -131,21 +156,27 @@ public class EventAction {
             }
         }
 
-        List mediaSource = websiteEntityService.findMediaSource(objectId);
-        List areaSource = indicatorValueEntityService.getObjectArea(objectId);
-        List<IndicatorValueEntity> reliablity = indicatorValueEntityService.getObjectReliablity(objectId);
+        List mediaList = new ArrayList();
+        for(int i = 0 ; i < allMedias.size() ; i++) {
+            mediaList.add(allMedias.get(i).getAttributeValue());
+        }
 
+        mode.addAttribute("transferNum", JSON.toJSON(transferNum));
+        mode.addAttribute("firstWebsite", JSON.toJSON(firstWebsite));
+        mode.addAttribute("mediaList", JSON.toJSON(mediaList));
         mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
         mode.addAttribute("areaSource", JSON.toJSON(areaSource));
         mode.addAttribute("periodList", JSON.toJSON(periodList));
-        mode.addAttribute("webs",JSON.toJSON(webs));
-        mode.addAttribute("websiteStatistic",websiteStatistic);
+        mode.addAttribute("webs",JSON.toJSON(webs_store));
+        mode.addAttribute("websiteStatistic",JSON.toJSON(websiteStatistic));
         mode.addAttribute("artileList", artileList);
         mode.addAttribute("hotInformation", hotInformation);
         mode.addAttribute("hotAuthor", hotAuthor);
         mode.addAttribute("articleCommentList", articleCommentList);
-        mode.addAttribute("comment", comment);
         mode.addAttribute("keywords", JSON.toJSON(keywords).toString());
+        mode.addAttribute("keywordRelated", JSON.toJSON(keywordRelated).toString());
+        mode.addAttribute("keywordList", JSON.toJSON(keywordList).toString());
+        mode.addAttribute("listkey", JSON.toJSON(listkey).toString());
         mode.addAttribute("event", event);
         mode.addAttribute("reliablity", reliablity);
         return "/WEB-INF/foreground/eventInfo";

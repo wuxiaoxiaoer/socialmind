@@ -226,4 +226,23 @@ public class SpecialPhoenixUtil {
         }
         return true;
     }
+
+    public int getRowCount(Connection conn,String tableName){
+        String count="SELECT COUNT(1) FROM \""+tableName+"\"";
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(count);
+            ResultSet result=ps.executeQuery();
+            conn.commit();
+            int totleRow=0;
+            while(result.next()){
+                totleRow=result.getInt(1);
+            }
+            return totleRow;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
 }

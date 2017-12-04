@@ -6,6 +6,7 @@
     <class name="com.sicdlib.entity.DataSourceEntity" table="data_source" schema="socialmind">
         <id name="tableNameId" column="tableNameID"/>
         <property name="tableName" column="tableName"/>
-        <property name="websiteId" column="websiteID"/>
+        <property name="count" column="count"/>
+        <many-to-one name="websiteEntity" column="websiteID"></many-to-one>
     </class>
 </hibernate-mapping>

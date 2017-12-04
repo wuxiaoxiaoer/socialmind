@@ -1,11 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.KeywordRelatedDegreeEntity" table="keyword_related_degree" schema="socialmind">
         <id name="keywordDegreeId" column="keywordDegreeID"/>
         <property name="relatedDegree" column="relatedDegree"/>
+        <many-to-one name="keywordEntityOne" column="keywordOneID"></many-to-one>
+        <many-to-one name="keywordEntityTwo" column="keywordTwoID"></many-to-one>
     </class>
 </hibernate-mapping>

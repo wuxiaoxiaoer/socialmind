@@ -6,7 +6,8 @@ package com.sicdlib.entity;
 public class CleanLogManagerEntity {
     private String cleanLogId;
     private String userId;
-    private String selfDefiningValue;
+    private String userDefineOldValue;
+    private String userDefineNewValue;
     private String cleanTime;
     private String cleanStategyId;
     private String cleanLocationId;
@@ -27,12 +28,20 @@ public class CleanLogManagerEntity {
         this.userId = userId;
     }
 
-    public String getSelfDefiningValue() {
-        return selfDefiningValue;
+    public String getUserDefineNewValue() {
+        return userDefineNewValue;
     }
 
-    public void setSelfDefiningValue(String selfDefiningValue) {
-        this.selfDefiningValue = selfDefiningValue;
+    public void setUserDefineNewValue(String userDefineNewValue) {
+        this.userDefineNewValue = userDefineNewValue;
+    }
+
+    public String getUserDefineOldValue() {
+        return userDefineOldValue;
+    }
+
+    public void setUserDefineOldValue(String selfDefiningValue) {
+        this.userDefineOldValue = selfDefiningValue;
     }
 
     public String getCleanTime() {
@@ -58,7 +67,6 @@ public class CleanLogManagerEntity {
     public void setCleanLocationId(String cleanLocationId) {
         this.cleanLocationId = cleanLocationId;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,22 +76,22 @@ public class CleanLogManagerEntity {
 
         if (cleanLogId != null ? !cleanLogId.equals(that.cleanLogId) : that.cleanLogId != null) return false;
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (selfDefiningValue != null ? !selfDefiningValue.equals(that.selfDefiningValue) : that.selfDefiningValue != null)
+        if (userDefineOldValue != null ? !userDefineOldValue.equals(that.userDefineOldValue) : that.userDefineOldValue != null)
+            return false;
+        if (userDefineNewValue != null ? !userDefineNewValue.equals(that.userDefineNewValue) : that.userDefineNewValue != null)
             return false;
         if (cleanTime != null ? !cleanTime.equals(that.cleanTime) : that.cleanTime != null) return false;
         if (cleanStategyId != null ? !cleanStategyId.equals(that.cleanStategyId) : that.cleanStategyId != null)
             return false;
-        if (cleanLocationId != null ? !cleanLocationId.equals(that.cleanLocationId) : that.cleanLocationId != null)
-            return false;
-
-        return true;
+        return cleanLocationId != null ? cleanLocationId.equals(that.cleanLocationId) : that.cleanLocationId == null;
     }
 
     @Override
     public int hashCode() {
         int result = cleanLogId != null ? cleanLogId.hashCode() : 0;
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (selfDefiningValue != null ? selfDefiningValue.hashCode() : 0);
+        result = 31 * result + (userDefineOldValue != null ? userDefineOldValue.hashCode() : 0);
+        result = 31 * result + (userDefineNewValue != null ? userDefineNewValue.hashCode() : 0);
         result = 31 * result + (cleanTime != null ? cleanTime.hashCode() : 0);
         result = 31 * result + (cleanStategyId != null ? cleanStategyId.hashCode() : 0);
         result = 31 * result + (cleanLocationId != null ? cleanLocationId.hashCode() : 0);

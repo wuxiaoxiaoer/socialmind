@@ -45,5 +45,3 @@
                                     <INPUT TYPE="button" value="置底" onclick="moveBottom(document.getElementById('right'));">
                             </tr>
                         </table>
-
-

@@ -5,6 +5,7 @@
 <hibernate-mapping>
     <class name="com.sicdlib.entity.AuthorEntity" table="author" schema="socialmind">
         <id name="authorId" column="authorID"/>
+        <property name="sourceAuthorId" column="sourceAuthorID"/>
         <property name="name" column="name"/>
         <property name="sex" column="sex"/>
         <property name="birthday" column="birthday"/>
@@ -47,5 +48,6 @@
             <key column="authorId"></key>
             <one-to-many class="com.sicdlib.entity.ArticleCommentEntity"></one-to-many>
         </set>
+        <many-to-one name="websiteEntity" column="websiteID"></many-to-one>
     </class>
 </hibernate-mapping>
