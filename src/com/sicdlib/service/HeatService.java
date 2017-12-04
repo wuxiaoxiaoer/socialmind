@@ -24,8 +24,6 @@ public class HeatService extends DefaultEntityManager<IndicatorValueEntity> {
         return heatList;
 
     }
-
-
     public List<IndicatorValueEntity> getHeatListInSex(String objectId,String sex){
 
         String hql = "select i  from IndicatorValueEntity i where i.objectEntity.objectId ='" +objectId+ "' and i.dimensionName='sex'  " +" and i.dimensionValue='"+ sex +"'  and i.indexName='热度'  Order By i.startTime";
@@ -34,10 +32,9 @@ public class HeatService extends DefaultEntityManager<IndicatorValueEntity> {
         return heatList;
 
     }
-
     public List<IndicatorValueEntity> getHeatListInProfession(String objectId,String profession){
 
-        String hql = "select i  from IndicatorValueEntity i where i.objectEntity.objectId ='" +objectId+ "' and i.dimensionName='sex'  " +"  and i.dimensionValue='"+ profession +"'  and i.indexName='热度'  Order By i.startTime";
+        String hql = "select i  from IndicatorValueEntity i where i.objectEntity.objectId ='" +objectId+ "' and i.dimensionName='profession'  " +"  and i.dimensionValue='"+ profession +"'  and i.indexName='热度'  Order By i.startTime";
 
         List<IndicatorValueEntity> heatList = getEntityDao().find(hql);
         return heatList;
@@ -46,7 +43,17 @@ public class HeatService extends DefaultEntityManager<IndicatorValueEntity> {
 
     public List<IndicatorValueEntity> getHeatListInAge(String objectId,String age){
 
-        String hql = "select i  from IndicatorValueEntity i where i.objectEntity.objectId ='" +objectId+ "' and i.dimensionName='sex'  " +" and i.dimensionValue='"+ age +"'  and i.indexName='热度'  Order By i.startTime";
+        String hql = "select i  from IndicatorValueEntity i where i.objectEntity.objectId ='" +objectId+ "' and i.dimensionName='age'  " +" and i.dimensionValue='"+ age +"'  and i.indexName='热度'  Order By i.startTime";
+
+        List<IndicatorValueEntity> heatList = getEntityDao().find(hql);
+        return heatList;
+
+    }
+
+
+    public List<IndicatorValueEntity> getHeatListInDomain(String objectId,String dimensionName){
+
+        String hql = "select i  from IndicatorValueEntity i where i.objectEntity.objectId ='" +objectId+ "' and i.dimensionName='"+ dimensionName +"'  and i.indexName='热度'  Order By i.startTime";
 
         List<IndicatorValueEntity> heatList = getEntityDao().find(hql);
         return heatList;

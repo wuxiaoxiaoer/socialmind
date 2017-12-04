@@ -31,11 +31,7 @@
     <h1>爬虫监控</h1>
   </div>
   
-  
-  
-  
-  
-  
+
   
   
   <div class="container-fluid">
@@ -298,7 +294,6 @@
 
 <!-- 引入后台尾部模板 -->
 <jsp:include page="/static/admin_footer.jsp"></jsp:include>
-
 
 <script src="admin/js/jquery.min.js"></script>
 <script src="admin/js/jquery.ui.custom.js"></script>
