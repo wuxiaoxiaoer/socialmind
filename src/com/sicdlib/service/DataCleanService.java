@@ -11,6 +11,8 @@ import com.sicdlib.util.PhoenixUtil.ChushulingException;
 import com.sicdlib.util.PhoenixUtil.MapToJson;
 import com.sicdlib.util.PhoenixUtil.PhoenixUtil;
 import com.sicdlib.util.PhoenixUtil.SpecialPhoenixUtil;
+import com.sicdlib.util.aop.DataCleanLog;
+//import com.sicdlib.util.aop2.SystemLog;
 import org.apache.hadoop.hbase.snapshot.CreateSnapshot;
 import org.hibernate.sql.Select;
 
@@ -98,13 +100,13 @@ public class DataCleanService {
 //    }
     public List getTbody(String tablename){
 //        String entityname = getEntity(tablename);
-            List<Map<String, Object>> bodyMap=queryResult(tablename,500);
+            List<Map<String, Object>> bodyMap=queryResult(tablename,50);
 
 //            for(int i=0;i<bodyMap.size();i++) {
 //                System.out.println("bodyjson:"+bodyMap.get(i));
 //            }
 
-            List bodyResult = new ArrayList(500);
+            List bodyResult = new ArrayList(50);
             //获得表头
             List headResult=new ArrayList();
             try{
@@ -254,6 +256,8 @@ public class DataCleanService {
     }
 
     //清洗方法执行,12,14,15这三个方法仅仅sql不同，可考虑抽象出一个公共函数
+//    @SystemLog(module = "数据清洗",methods = "doClean")
+//    @DataCleanLog(currentTable="myTable")
     public Boolean doClean(String currentTable, String  currentColumn, String strategyID, String oldValue, String newValue){
         String sourceTable=currentTable+"_reset";
         switch (strategyID)

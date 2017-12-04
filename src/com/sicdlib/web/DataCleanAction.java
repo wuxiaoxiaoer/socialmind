@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.sicdlib.entity.CleanStrategyEntity;
 import com.sicdlib.service.CleanStrategyService;
 import com.sicdlib.service.DataCleanService;
+import com.sicdlib.util.aop.DataCleanLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -92,6 +93,7 @@ public class DataCleanAction {
     }
 
     @RequestMapping("/admin/cleanProcessAction")
+    @DataCleanLog(currentTable="myTable")
     public void cleanProcess(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");

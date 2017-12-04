@@ -12,5 +12,6 @@
         <property name="cleanTime" column="cleanTime"/>
         <property name="cleanStategyId" column="cleanStategyID"/>
         <property name="cleanLocationId" column="cleanLocationID"/>
+        <property name="resultState" column="resultState"/>
     </class>
 </hibernate-mapping>
