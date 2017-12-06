@@ -11,7 +11,7 @@ import com.sicdlib.util.PhoenixUtil.ChushulingException;
 import com.sicdlib.util.PhoenixUtil.MapToJson;
 import com.sicdlib.util.PhoenixUtil.PhoenixUtil;
 import com.sicdlib.util.PhoenixUtil.SpecialPhoenixUtil;
-import com.sicdlib.util.aop.DataCleanLog;
+import com.sicdlib.util.aop.ForService;
 //import com.sicdlib.util.aop2.SystemLog;
 import org.apache.hadoop.hbase.snapshot.CreateSnapshot;
 import org.hibernate.sql.Select;
@@ -19,11 +19,12 @@ import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.*;
 
-@Repository("dataCleanService")
+@Service("dataCleanService")
 public class DataCleanService {
     PhoenixUtil util =new PhoenixUtil();
     SpecialPhoenixUtil specialPhoenixUtil=new SpecialPhoenixUtil();
@@ -98,6 +99,7 @@ public class DataCleanService {
 //        }
 //        return sb.toString().toLowerCase();
 //    }
+@ForService(description = "getBody")
     public List getTbody(String tablename){
 //        String entityname = getEntity(tablename);
             List<Map<String, Object>> bodyMap=queryResult(tablename,50);
@@ -258,6 +260,7 @@ public class DataCleanService {
     //清洗方法执行,12,14,15这三个方法仅仅sql不同，可考虑抽象出一个公共函数
 //    @SystemLog(module = "数据清洗",methods = "doClean")
 //    @DataCleanLog(currentTable="myTable")
+//    @DataCleanLog(lala="myTable")
     public Boolean doClean(String currentTable, String  currentColumn, String strategyID, String oldValue, String newValue){
         String sourceTable=currentTable+"_reset";
         switch (strategyID)

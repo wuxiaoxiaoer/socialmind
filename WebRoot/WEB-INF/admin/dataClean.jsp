@@ -675,7 +675,7 @@
                     </tr>
                     <tr>
                       <td>要替换的子字符串（字符串错误\行操作）</td>
-                      <td><input id="oldValue" type="text" class="form-control autocomplete" placeholder="要替换掉的子字符串\正则表达式"/></td>
+                      <td><input id="oldValue" type="text" class="form-control autocomplete" data-source="etldemodata/autocomplete.json" placeholder="要替换掉的子字符串\正则表达式"/></td>
                     </tr>
                     <tr>
                       <td>替换为（缺失值\字符串错误）</td>
