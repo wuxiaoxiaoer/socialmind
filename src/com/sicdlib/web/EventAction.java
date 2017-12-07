@@ -77,30 +77,34 @@ public class EventAction {
 
         List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
         List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
+        boolean isHaveKeywords = keywordEntityService.findHaveKeywords(objectId);
+        if (!isHaveKeywords){
+            List findKeywords = articleEntityService.findKeywords(objectId);
+        }
         List<Map> keywords = keywordEntityService.findKeywords(objectId);
         List listkey = new ArrayList();
-        List<Map> keywordRelated = keywordRelatedDegreeService.findKeywordRelated(objectId);
+//        List<Map> keywordRelated = keywordRelatedDegreeService.findKeywordRelated(objectId);
 
-        String target = "";
-        for(int a = 0 ; a < keywordRelated.size() ; a++) {
-            for (int b = 0; b < keywords.size(); b++) {
-                if(keywordRelated.get(a).get("target").equals(keywords.get(b).get("keywordId"))){
-                    target = keywords.get(b).get("name").toString();
-                }
-            }
-        }
-        for(int a = 0 ; a < keywordRelated.size() ; a++) {
-            for (int b = 0; b < keywords.size(); b++) {
-                if(keywords.get(b).get("keywordId").equals(keywordRelated.get(a).get("source"))){
-                    Map maps = new HashMap();
-                    maps.put("target",target);
-                    maps.put("source",keywords.get(b).get("name"));
-                    maps.put("weight",keywordRelated.get(a).get("weight"));
-                    listkey.add(maps);
-                }
-            }
-
-        }
+//        String target = "";
+//        for(int a = 0 ; a < keywordRelated.size() ; a++) {
+//            for (int b = 0; b < keywords.size(); b++) {
+//                if(keywordRelated.get(a).get("target").equals(keywords.get(b).get("keywordId"))){
+//                    target = keywords.get(b).get("name").toString();
+//                }
+//            }
+//        }
+//        for(int a = 0 ; a < keywordRelated.size() ; a++) {
+//            for (int b = 0; b < keywords.size(); b++) {
+//                if(keywords.get(b).get("keywordId").equals(keywordRelated.get(a).get("source"))){
+//                    Map maps = new HashMap();
+//                    maps.put("target",target);
+//                    maps.put("source",keywords.get(b).get("name"));
+//                    maps.put("weight",keywordRelated.get(a).get("weight"));
+//                    listkey.add(maps);
+//                }
+//            }
+//
+//        }
 
         List keywordList = new ArrayList();
         for(int m = 0 ; m < keywords.size() ; m++) {
@@ -118,10 +122,12 @@ public class EventAction {
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
         List<AuthorEntity> hotAuthor = authorEntityService.findHotAuthor(objectId);
         List<Map> mediaSource = websiteEntityService.findMediaSource(objectId);
+
         List<DataDictionaryEntity> allMedias = dataDictionaryEntityService.findAllMedias();
+
         List transferNum = articleEntityService.findTransferNum(objectId);
         List areaSource = indicatorValueEntityService.getObjectArea(objectId);
-        List<IndicatorValueEntity> reliablity = indicatorValueEntityService.getObjectReliablity(objectId);
+//        List<IndicatorValueEntity> reliablity = indicatorValueEntityService.getObjectReliablity(objectId);
         List<ArticleCommentEntity> articleCommentList = articleCommentEntityService.findArticleComment(hotAuthor.get(0).getAuthorId());
         List periodList = articleEntityService.findPeriod(objectId);
         List hotInformation = articleEntityService.findHotInformation(objectId);
@@ -159,6 +165,15 @@ public class EventAction {
         List mediaList = new ArrayList();
         for(int i = 0 ; i < allMedias.size() ; i++) {
             mediaList.add(allMedias.get(i).getAttributeValue());
+            Map map = new HashMap();
+            for (int j = 0; j< mediaSource.size();j++){
+                if (!mediaSource.get(j).get("name").equals(allMedias.get(i).getAttributeValue())){
+                    map.put("name",allMedias.get(i).getAttributeValue());
+                    map.put("value",0);
+                    mediaSource.add(map);
+                }
+            }
+
         }
 
         mode.addAttribute("transferNum", JSON.toJSON(transferNum));
@@ -174,11 +189,11 @@ public class EventAction {
         mode.addAttribute("hotAuthor", hotAuthor);
         mode.addAttribute("articleCommentList", articleCommentList);
         mode.addAttribute("keywords", JSON.toJSON(keywords).toString());
-        mode.addAttribute("keywordRelated", JSON.toJSON(keywordRelated).toString());
+//        mode.addAttribute("keywordRelated", JSON.toJSON(keywordRelated).toString());
         mode.addAttribute("keywordList", JSON.toJSON(keywordList).toString());
         mode.addAttribute("listkey", JSON.toJSON(listkey).toString());
         mode.addAttribute("event", event);
-        mode.addAttribute("reliablity", reliablity);
+//        mode.addAttribute("reliablity", reliablity);
         return "/WEB-INF/foreground/eventInfo";
     }
 }
