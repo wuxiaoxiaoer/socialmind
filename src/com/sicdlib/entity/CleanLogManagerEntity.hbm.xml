@@ -3,7 +3,6 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.CleanLogManagerEntity" table="clean_log_manager" schema="socialmind">
         <id name="cleanLogId" column="cleanLogID"/>
         <property name="userId" column="userID"/>
@@ -12,5 +11,6 @@
         <property name="cleanTime" column="cleanTime"/>
         <property name="cleanStategyId" column="cleanStategyID"/>
         <property name="cleanLocationId" column="cleanLocationID"/>
+        <property name="resultState" column="resultState"/>
     </class>
 </hibernate-mapping>

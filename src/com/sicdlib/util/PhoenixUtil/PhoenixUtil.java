@@ -12,7 +12,6 @@ import java.util.*;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-
 public class PhoenixUtil{
 
     //连接phoniex
@@ -20,7 +19,6 @@ public class PhoenixUtil{
         Connection cc = null;
         String driver = "org.apache.phoenix.jdbc.PhoenixDriver";
         String url = "jdbc:phoenix:192.168.100.201:2181";
-
         try {
             Class.forName(driver);
             cc = DriverManager.getConnection(url);
@@ -60,7 +58,6 @@ public void test01(){
     System.out.println("结果：" + result.size());
 
 }
-
     //查询
     public static List<Map<String, Object>> selectHbaseBySql(String sql){
         PhoenixUtil util =new PhoenixUtil();
@@ -79,7 +76,6 @@ public void test01(){
         }
         return result;
     }
-
     //phoenix的查询方法
     public List<Map<String, Object>> Select(String tableName,int limits){
         PhoenixUtil util =new PhoenixUtil();
@@ -87,7 +83,6 @@ public void test01(){
         try{
             Connection conn =util.GetConnection();
             String sql="Select * FROM \""+tableName+"\" limit "+limits;
-
             //将一列的字符串中的<>及其中内容删掉
 //            int col = rs.getMetaData().getColumnCount();
             Statement stmt =conn.createStatement();
@@ -124,7 +119,6 @@ public void test01(){
             conn.commit();
             stmt.close();
             conn.close();
-
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -147,13 +141,11 @@ public void test01(){
             conn.commit();
             stmt.close();
             conn.close();
-
         }catch (SQLException e) {
             e.printStackTrace();
         }
         return true;
     }
-
     //根据某列的值去掉重复的行
     public Boolean deleteRepeatRow(String tableName,String columnName){
         PhoenixUtil util =new PhoenixUtil();
@@ -171,14 +163,11 @@ public void test01(){
             conn.commit();
             stmt.close();
             conn.close();
-
         }catch (SQLException e) {
             e.printStackTrace();
         }
         return true;
     }
-
-
     //删除一列
     public Boolean deleteColumn(String tableName,String columnName) {
         PhoenixUtil util =new PhoenixUtil();
@@ -186,18 +175,14 @@ public void test01(){
         try {
             // get connection
             conn = util.GetConnection();
-
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
                 return false;
             }
-
             // 默认所有列族都是info
             String sql = "ALTER TABLE \""+tableName+"\" DROP COLUMN \"info\".\""+columnName+"\"";
-
             PreparedStatement ps = conn.prepareStatement(sql);
-
             // execute upsert
             String msg = ps.executeUpdate() > 0 ? "delete success..."
                     : "delete fail...";
@@ -207,7 +192,6 @@ public void test01(){
             // you must commit
             conn.commit();
             System.out.println(msg);
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -218,7 +202,6 @@ public void test01(){
                     e.printStackTrace();
                 }
             }
-
         }
         return true;
     }
@@ -229,7 +212,6 @@ public void test01(){
         try {
             // get connection
             conn = util.GetConnection();
-
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
@@ -244,13 +226,11 @@ public void test01(){
                 totleRow=result.getInt(1);
             }
             //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
-
             for (int i=0;i<totleRow;i+=400000){
 //                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
 //                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
                 String sql ="upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",\'"+newValue+"\' FROM \""+tableName+"\" WHERE \"info\".\""+columnName+"\" is null LIMIT 400000 OFFSET "+i;
                 PreparedStatement ps2 = conn.prepareStatement(sql);
-
                 // execute upsert
                 String msg = ps2.executeUpdate() > 0 ? "insert success..."
                         : "insert fail...";
@@ -261,7 +241,6 @@ public void test01(){
                 conn.commit();
                 System.out.println(msg);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -271,7 +250,6 @@ public void test01(){
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
             }
         }
         return true;
@@ -298,13 +276,11 @@ public void test01(){
                 totleRow=result.getInt(1);
             }
             //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
-
                 for (int i=0;i<totleRow;i+=400000){
 //                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
 //                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
                     String sql ="upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",\'"+newValue+"\' FROM \""+tableName+"\" WHERE \"info\".\""+columnName+"\" =\'"+oldValue+"\' LIMIT 400000 OFFSET "+i;
                     PreparedStatement ps2 = conn.prepareStatement(sql);
-
                     // execute upsert
                     String msg = ps2.executeUpdate() > 0 ? "insert success..."
                             : "insert fail...";
@@ -315,7 +291,6 @@ public void test01(){
                     conn.commit();
                     System.out.println(msg);
                 }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -337,7 +312,6 @@ public void test01(){
         try {
             // get connection
             conn = util.GetConnection();
-
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
@@ -352,7 +326,6 @@ public void test01(){
                 totleRow=result.getInt(1);
             }
             //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
-
                 for (int i=0;i<totleRow;i+=400000){
 //                    String sql = "upsert into \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\" ) SELECT \"PK\",REGEXP_REPLACE(\""+columnName+"\",\'"+replaceRegex+"\'+\'"+replaceTo+"\') FROM \""+tableName+"\" ";
 //                    String sql ="UPSERT INTO \"test2\"(\"PK\",\"info\".\"comment_id\") SELECT \"PK\",REGEXP_REPLACE(\"info\".\"comment_id\", '[0-9]+', '111') FROM \"test2\" OFFSET DECODE(\'"+i+"\','HEX')";
@@ -370,7 +343,6 @@ public void test01(){
                         return false;
                     }
                 }
-
         } catch (SQLException e) {
             //报错未必不执行，如socket超时，因此不在这里retrun false
             e.printStackTrace();
@@ -393,7 +365,6 @@ public void test01(){
         try {
             // get connection
             conn = util.GetConnection();
-
             // check connection
             if (conn == null) {
                 System.out.println("conn is null...");
@@ -514,9 +485,6 @@ public void test01(){
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
             }
             if (connPhoenix != null) {
                 try {
@@ -524,7 +492,6 @@ public void test01(){
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
             }
 
             /*
@@ -538,11 +505,8 @@ public void test01(){
             }
             //一次提交的限制是50万，这里一次提交40万,循环来完成所有的清洗
             //When we use the judge sentence case, when it maches the first case, it won't execute else.so we match which has detail time first and then maches which doesn't have detail time.
-
             for (int i=0;i<totleRow;i+=400000){
-
                 String sql ="";
-
 
                 //直接用sql的方法，部分日期无法解析
                 String sql ="UPSERT INTO \""+tableName+"\"(\"PK\",\"info\".\""+columnName+"\") SELECT \"PK\",CASE " +
@@ -581,7 +545,6 @@ public void test01(){
                     return false;
                 }
             }
-
         } catch (SQLException e) {
             //报错未必不执行，如socket超时，因此不在这里retrun false
             e.printStackTrace();             */
@@ -596,7 +559,6 @@ public void test01(){
                     }
                 }
             }
-
         return true;
     }
     //get PK and address in a table, to serve for the next function
@@ -604,7 +566,6 @@ public void test01(){
             List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
             try {
                 String sql = "Select \"PK\",\"" + columnName + "\" FROM \"" + tableName + "\" LIMIT 5000 OFFSET "+i;
-
                 //将一列的字符串中的<>及其中内容删掉
 //            int col = rs.getMetaData().getColumnCount();
                 Statement stmt = conn.createStatement();
@@ -622,17 +583,14 @@ public void test01(){
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         return result;
     }
     //upsert table with rowkey and name
     public Boolean upsertOneColumn(Connection conn, String tableName, String columnName, String rowkey, String newValue) {
 
         try {
-
             String sql = "upsert into \"" + tableName + "\"(\"PK\",\"info\".\"" + columnName + "\" ) SELECT \"PK\",\'" + newValue + "\' FROM \"" + tableName + "\" WHERE \"PK\" =\'" + rowkey + "\'";
             PreparedStatement ps2 = conn.prepareStatement(sql);
-
             // execute upsert
             String msg = ps2.executeUpdate() > 0 ? "insert success..."
                     : "insert fail...";
@@ -645,7 +603,6 @@ public void test01(){
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return true;
     }
     //29 deal with location which has no label"省""市"
@@ -706,11 +663,9 @@ public void test01(){
         //3.对hbase中对应地址数据中文分词
         //3.1首先在表中读出PK和对应的地址值，存到map中，每一行是一个map(两个键值对，键是列名),然后放到一个list里
         SpecialPhoenixUtil specialPhoenixUtil = new SpecialPhoenixUtil();
-
         Connection connPhoenix = null;
         // get connection
         connPhoenix = util.GetConnection();
-
         // check connection
         if (connPhoenix == null) {
             System.out.println("conn is null...");
@@ -718,9 +673,7 @@ public void test01(){
         }
         int rowCount = specialPhoenixUtil.getRowCount(connPhoenix, tableName);
         //每次最多处理5000条数据，避免内存溢出
-
         for (int i = 0; i < rowCount;i+=5000) {
-
             List<Map<String, Object>> oldValueList = SelectPKAndOneColumn(connPhoenix, tableName, columnName, i);
             List oldResult = new ArrayList(oldValueList.size());
             //存成键值对，将主键和地址名对应起来
@@ -737,7 +690,6 @@ public void test01(){
             }
             // 3.2然后对list中的所有值分词处理，与地址表分别对比并补全,然后将主键和地址名的分词结果对应起来存到map里
             Map<String, String> splitResult = new HashMap<String, String>();
-
             for (int j = 0; j < oldResult.size(); ) {
                 int k = j + 1;
                 String key = oldResult.get(j).toString();
@@ -772,8 +724,6 @@ public void test01(){
             }
             //4.插入回原phoenix表
             Iterator<Map.Entry<String, String>> entries = splitResult.entrySet().iterator();
-
-
             try {
 
                 while (entries.hasNext()) {
@@ -792,7 +742,6 @@ public void test01(){
                 e.printStackTrace();
             }
                 }
-
         return true;
     }
 }

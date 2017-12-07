@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.sicdlib.entity.CleanStrategyEntity;
 import com.sicdlib.service.CleanStrategyService;
 import com.sicdlib.service.DataCleanService;
+import com.sicdlib.util.aop.ForController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ public class DataCleanAction {
         return "/WEB-INF/admin/dataClean";
     }
 // tbForm函数中的第四个参数currentTable是自己加的，用于PhoenixUtil调用本函数
+@ForController(description="tbForm")
     @RequestMapping("/admin/TableServlet")
     public void tbForm(HttpServletRequest request, HttpServletResponse response, Model model, String currentTable) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
@@ -90,8 +92,8 @@ public class DataCleanAction {
             return;
         }
     }
-
     @RequestMapping("/admin/cleanProcessAction")
+
     public void cleanProcess(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         request.setCharacterEncoding("UTF-8");//传值编码
         response.setCharacterEncoding("UTF-8");

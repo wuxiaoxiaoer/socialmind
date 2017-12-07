@@ -193,8 +193,8 @@
                         </div>
                         <div class="block-content collapse in">
                             <div class="span12">
-                                <div style="width:100%;height:250px">
-                                    <img src="foreground/images/职业.png" >
+                                <div id="professionHeatChangeChart" style="width:100%;height:300px">
+
                                 </div>
                             </div>
                         </div>
@@ -209,8 +209,8 @@
                         </div>
                         <div class="block-content collapse in">
                             <div class="span12">
-                                <div style="width:100%;height:250px">
-                                    <img src="foreground/images/职业.png" >
+                                <div  id="ageHeatChangeChart" STYLE="width:100%;height:300px">
+
                                 </div>
                             </div>
                         </div>
@@ -229,7 +229,7 @@
                         </div>
                         <div class="block-content collapse in">
                             <div class="span12">
-                                <div id="sexHeatChangeChart" style="width:100%;height:250px">
+                                <div id="sexHeatChangeChart" style="width:100%;height:300px">
 
                                 </div>
                             </div>
@@ -245,7 +245,7 @@
                         </div>
                         <div class="block-content collapse in">
                             <div class="span12">
-                                <div id="piechart2" style="width:100%;height:250px">
+                                <div id="piechart2" style="width:100%;height:300px">
                                     <img src="foreground/images/来源.png" >
                                 </div>
                             </div>
@@ -254,8 +254,6 @@
                     <!-- /block -->
                 </div>
             </div>
-
-
 
 
 
@@ -317,32 +315,8 @@
 <script>
 
     var heatChangeChart = echarts.init(document.getElementById('heatChangeChart'));
-
-//    var date = [];
-//    var data = [];
-
     var date = JSON.parse('${date}');
     var data = JSON.parse('${heat}');
-//
-//    for (var c_num = 0; c_num < category.length;  c_num++) {
-//        categories[c_num] = {
-//            name: category[c_num]
-//        }
-//    }
-
-
-
-//    var base = +new Date(1968, 9, 3);
-//    var oneDay = 24 * 3600 * 1000;
-//    var date = [];
-//    var data = [Math.random() * 300];
-//
-//    for (var i = 1; i < 20000; i++) {
-//        var now = new Date(base += oneDay);
-//        date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-//        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-//    }
-
 
     option = {
         tooltip: {
@@ -423,18 +397,16 @@
 
 <script>
 
+
+
     var sexHeatChangeChart = echarts.init(document.getElementById('sexHeatChangeChart'));
-
-
     var sexdate = JSON.parse('${sexdate}');
     var mheat = JSON.parse('${mheat}');
     var fheat = JSON.parse('${fheat}');
 
-
-    Image : {show: true}
     option = {
         title : {
-            text: '各性别中的热度变化',
+            text: '在各性别中的热度',
             subtext: ''
         },
         tooltip : {
@@ -450,7 +422,7 @@
                 dataView : {show: true, readOnly: false},
                 magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
                 restore : {show: true},
-                saveAs : {show: true}
+                saveAsImage : {show: true}
             }
         },
         calculable : true,
@@ -458,7 +430,11 @@
             {
                 type : 'category',
                 boundaryGap : false,
-                data : sexdate
+                data : sexdate,
+
+
+                axisLabel : {
+                    interval: 0}
             }
         ],
         yAxis : [
@@ -468,26 +444,228 @@
         ],
         series : [
             {
-                name:'女',
-                type:'line',
-                smooth:true,
-                itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                data:fheat
-            },
-
-            {
                 name:'男',
                 type:'line',
                 smooth:true,
                 itemStyle: {normal: {areaStyle: {type: 'default'}}},
                 data:mheat
+            },
+            {
+                name:'女',
+                type:'line',
+                smooth:true,
+                itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                data:fheat
             }
+
         ]
     };
 
     sexHeatChangeChart.setOption(option);
+</script>
+
+<script>
+    var professionHeatChangeChart = echarts.init(document.getElementById('professionHeatChangeChart'));
+    var professiondate = JSON.parse('${professiondate}');
+    var sheat = JSON.parse('${sheat}');
+    var theat = JSON.parse('${theat}');
+
+    option = {
+        title : {
+            text: '在各职业中的热度',
+            subtext: ''
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['学生','教师']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : professiondate
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLabel : {
+                    formatter: '{value}'
+                }
+            }
+        ],
+        series : [
+            {
+                name:'学生',
+                type:'line',
+                data:sheat,
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'教师',
+                type:'line',
+                data: theat,
+                markPoint : {
+                    data : [
+                        {name : '最低', value : -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    professionHeatChangeChart.setOption(option);
+</script>
+
+<script>
+    var ageHeatChangeChart = echarts.init(document.getElementById('ageHeatChangeChart'));
+    var agedate = JSON.parse('${professiondate}');
+    var heat1 = JSON.parse('${heat1}');
+    var heat2 = JSON.parse('${heat2}');
+    var heat3 = JSON.parse('${heat3}');
+    var heat4 = JSON.parse('${heat4}');
+
+    option = {
+        title : {
+            text: '在各年龄段中的热度',
+            subtext: ''
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['18-25','25-35','35-45','45以上']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : agedate
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLabel : {
+                    formatter: '{value}'
+                }
+            }
+        ],
+        series : [
+            {
+                name:'18-25',
+                type:'line',
+                data:heat1,
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'25-35',
+                type:'line',
+                data: heat2,
+                markPoint : {
+                    data : [
+                        {name : '最低', value : -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'35-45',
+                type:'line',
+                data: heat3,
+                markPoint : {
+                    data : [
+                        {name : '最低', value : -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'45以上',
+                type:'line',
+                data: heat4,
+                markPoint : {
+                    data : [
+                        {name : '最低', value : -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    ageHeatChangeChart.setOption(option);
 
 </script>
+
+<script>
+
+
+</script>
+
+
+
 </body>
 
 </html>
