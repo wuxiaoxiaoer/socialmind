@@ -26,7 +26,7 @@
     <![endif]-->
     <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
-<body>
+<body style="overflow: hidden">
 <!-- 引入头模板 -->
 <jsp:include page="/static/fore_header.jsp"/>
 <div class="container-fluid">
@@ -71,7 +71,7 @@
         <!--/span-->
         <c:forEach items="${event}" var="e" varStatus="sts">
         <input type="hidden" value="${e.object.objectId}">
-        <div class="span9" id="content">
+        <div class="span9" id="content" style="height:90%; overflow-y:auto">
             <!-- morris stacked chart -->
             <div class="row-fluid">
                 <!-- block -->
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="block-content collapse in">
-                        <div class="block-content collapse in">
+                        <div class="block-content collapse in" style="height:40%;overflow-y:auto">
                             <div>
 
                                 <strong>开始</strong>
@@ -141,22 +141,23 @@
                         </div>
                     </div>
                     <div class="block-content collapse in">
-                        <div class="span6 chart">
+                        <%--<div class="span6 chart">
                             <h5>媒体活跃度</h5>
-                            <div id="mediaType" style="width:80%;height: 250px;"></div>
-                        </div>
+                            <div id="hero-bar" style="height: 250px;"></div>
+                        </div>--%>
+                            <div class="span6 chart">
+                                <h5>境内外分布</h5>
+                                <div id="area" style="width:60%;height:250px"></div>
+                            </div>
                         <div class="span5 chart">
                             <h5>媒体来源比</h5>
                             <div id="media" style="width:100%;height:250px"></div>
                         </div>
-                        <div class="span6 chart">
-                            <h5>境内外分布</h5>
-                            <div id="area" style="width:60%;height:250px"></div>
-                        </div>
-                        <div class="span5 chart">
+
+                        <%--<div class="span5 chart">
                             <h5>敏感分析</h5>
                             <div id="sensitive" style="width:60%;height: 250px;"></div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
                 <!-- /block -->
@@ -278,7 +279,7 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="keyword_related" style="width:1000px;height: 400px;"></div>
+                            <div id="keyword_related" style="width:1000px;height: 600px;"></div>
                         </div>
                     </div>
                 </div>
@@ -341,7 +342,6 @@
 <script src="vendors/jquery-1.9.1.min.js"></script>
 <script src="vendors/jquery.knob.js"></script>
 <script src="vendors/raphael-min.js"></script>
-<script src="vendors/morris/morris.min.js"></script>
 
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="vendors/flot/jquery.flot.js"></script>
@@ -351,7 +351,7 @@
 <script src="vendors/flot/jquery.flot.stack.js"></script>
 <script src="vendors/flot/jquery.flot.resize.js"></script>
 <script src="assets/scripts.js"></script>
-<script src="vendors/echarts-wordcloud.min.js"></script>
+<%--<script src="vendors/echarts-wordcloud.min.js"></script>--%>
 
 <script type="text/javascript" src="vendors/flot/jquery.js"></script>
 
@@ -360,44 +360,78 @@
 
 <script  type="text/javascript">
 
-    var keyword = ${keywords};
+    var keyWords = JSON.parse('${keywords}');
+
     //基于准备好的dom,初始化echarts实例
     var myChart = echarts.init(document.getElementById('keywords'));
+    //指定图表的配置项和数据
+    var  option = {
+        title: {
+            text: '',
+            link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
+            x: 'center',
+            textStyle: {
+                fontSize: 23
+            }
 
-    var option = {
-        tooltip : {},
-        series : [ {
-            type : 'wordCloud',
-            shape:'smooth',
-            gridSize : 2,
-            sizeRange : [ 50, 100 ],
-            rotationRange : [ 46, 80 ],
-            textStyle : {
-                normal : {
-                    color: function(params) {
-                        // build a color map as your need.
-                        var colorList = [
-                            '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-                            /*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
-                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*/
-                        ];
-                        return colorList[params.dataIndex]
-                    },
+        },
+        backgroundColor: '#F7F7F7',
+        tooltip: {
+            show: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {
+                    iconStyle: {
+                        normal: {
+                            color: '#FFFFFF'
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: '热点分析',
+            type: 'wordCloud',
+            //size: ['9%', '99%'],
+            sizeRange: [6, 66],
+            //textRotation: [0, 45, 90, -45],
+            rotationRange: [-45, 90],
+            //shape: 'circle',
+            textPadding: 0,
+            autoSize: {
+                enable: true,
+                minSize: 6
+            },
+            textStyle: {
+                normal: {
+                    color: function() {
+                        return 'rgb(' + [
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160),
+                            Math.round(Math.random() * 160)
+                        ].join(',') + ')';
+                    }
                 },
-                emphasis : {
-                    shadowBlur : 10,
-                    shadowColor : ''
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowColor: '#333'
                 }
             },
-            data : keyword
-        } ]
+            data: []
+        }]
     };
-    // 为echarts对象加载数据
+
+
+    option.series[0].data = keyWords;
+
     myChart.setOption(option);
     myChart.on('click', function (params) {
+        alert((params.name));
         window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
 
     });
+
 </script>
 <input type="hidden" value="${webs}">
 
@@ -618,7 +652,7 @@
             {
                 type: 'category',
                 show: false,
-                data: ${mediaList}
+                data: ['博客', '新闻','政府', '论坛', '社交媒体']
             }
         ],
         yAxis: [
@@ -661,17 +695,12 @@
                         }
                     },
                     data: [
-                        {xAxis:0, y: 350, name:'Line', symbolSize:20, symbol: ''},
-                        {xAxis:1, y: 350, name:'Bar', symbolSize:20, symbol: ''},
-                        {xAxis:2, y: 350, name:'Scatter', symbolSize:20, symbol: ''},
-                        {xAxis:3, y: 350, name:'K', symbolSize:20, symbol: ''},
-                        {xAxis:4, y: 350, name:'Pie', symbolSize:20, symbol: ''},
-                        {xAxis:5, y: 350, name:'Radar', symbolSize:20, symbol: ''},
-                        {xAxis:6, y: 350, name:'Chord', symbolSize:20, symbol: ''},
-                        {xAxis:7, y: 350, name:'Force', symbolSize:20, symbol: ''},
-                        {xAxis:8, y: 350, name:'Map', symbolSize:20, symbol: ''},
-                        {xAxis:9, y: 350, name:'Gauge', symbolSize:20, symbol: ''},
-                        {xAxis:10, y: 350, name:'Funnel', symbolSize:20, symbol: ''},
+
+                        {xAxis:0, y: 350, name:'Chord', symbolSize:20, symbol: ''},
+                        {xAxis:1, y: 350, name:'Force', symbolSize:20, symbol: ''},
+                        {xAxis:2, y: 350, name:'Map', symbolSize:20, symbol: ''},
+                        {xAxis:3, y: 350, name:'Gauge', symbolSize:20, symbol: ''},
+                        {xAxis:4, y: 350, name:'Funnel', symbolSize:20, symbol: ''},
                     ]
                 }
             }
@@ -779,7 +808,7 @@
 </script>
 <input type="hidden" value="${event}">
 <script>
-    var myChart6 = echarts.init(document.getElementById('transfer'));
+    /*var myChart6 = echarts.init(document.getElementById('transfer'));
     var option6 = {
         title : {
             text: '',
@@ -850,7 +879,7 @@
                         children: [
                             {
                                 name: '转发',
-                                value: ${transferNum},
+                                value: 6,
                                 symbol: 'circle',
                                 symbolSize: 40,
                                 itemStyle: {
@@ -862,28 +891,6 @@
                                     }
                                 },
                                 children: [
-                                    /*{
-                                        name: ${mediaList},
-                                        symbol: 'circle',
-                                        symbolSize: 20,
-                                        value: 4,
-                                        itemStyle: {
-                                            normal: {
-                                                color: '#fa6900',
-                                                label: {
-                                                    show: true,
-                                                    position: 'right'
-                                                },
-
-                                            },
-                                            emphasis: {
-                                                label: {
-                                                    show: false
-                                                },
-                                                borderWidth: 0
-                                            }
-                                        }
-                                    },*/
                                     {
                                         name: '新闻',
                                         value: 4,
@@ -941,7 +948,7 @@
                                         }
                                     }
                                 },
-                                value: ${firstWebsite}
+                                value: 0
                             }
                         ]
                     }
@@ -950,7 +957,7 @@
         ]
     };
 
-    myChart6.setOption(option6);
+    myChart6.setOption(option6);*/
 </script>
 <script>
     var myChart7 = echarts.init(document.getElementById('opinion'));
@@ -1087,207 +1094,7 @@
     // 为echarts对象加载数据
     myChart8.setOption(option8);
 </script>
-<script>
-    $(function() {
-        var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
 
-//        $.plot("#catchart", [ data ], {
-//            series: {
-//                bars: {
-//                    show: true,
-//                    barWidth: 0.6,
-//                    align: "center"
-//                }
-//            },
-//            xaxis: {
-//                mode: "categories",
-//                tickLength: 0
-//            }
-//        });
-
-        var data = [],
-            series = Math.floor(Math.random() * 6) + 3;
-
-        for (var i = 0; i < series; i++) {
-            data[i] = {
-                label: "Series" + (i + 1),
-                data: Math.floor(Math.random() * 100) + 1
-            }
-        }
-
-        /*$.plot('#piechart1', data, {
-            series: {
-                pie: {
-                    show: true,
-                    radius: 1,
-                    label: {
-                        show: true,
-                        radius: 3/4,
-                        formatter: labelFormatter,
-                        background: {
-                            opacity: 0.5,
-                            color: '#000'
-                        }
-                    }
-                }
-            },
-            legend: {
-                show: false
-            }
-        });
-
-        $.plot('#piechart2', data, {
-            series: {
-                pie: {
-                    show: true,
-                    radius: 1,
-                    tilt: 0.5,
-                    label: {
-                        show: true,
-                        radius: 1,
-                        formatter: labelFormatter,
-                        background: {
-                            opacity: 0.8
-                        }
-                    },
-                    combine: {
-                        color: '#999',
-                        threshold: 0.1
-                    }
-                }
-            },
-            legend: {
-                show: false
-            }
-        });
-*/
-
-        function euroFormatter(v, axis) {
-            return v.toFixed(axis.tickDecimals) + "€";
-        }
-
-        /*function doPlot(position) {
-            $.plot("#timechart", [
-                { data: oilprices, label: "Oil price ($)" },
-                { data: exchangerates, label: "USD/EUR exchange rate", yaxis: 2 }
-            ], {
-                xaxes: [ { mode: "time" } ],
-                yaxes: [ { min: 0 }, {
-                    // align if we are to the right
-                    alignTicksWithAxis: position == "right" ? 1 : null,
-                    position: position,
-                    tickFormatter: euroFormatter
-                } ],
-                legend: { position: "sw" }
-            });
-        }
-
-        doPlot("right");*/
-
-    });
-
-    // Morris Bar Chart
-    Morris.Bar({
-        element: 'hero-bar',
-        data: [
-            {device: '政府', sells: 25452},
-            {device: '新闻', sells: 3549},
-            {device: '博客', sells: 938},
-            {device: '论坛', sells: 768},
-            {device: '社交媒体', sells: 255},
-
-        ],
-        xkey: 'device',
-        ykeys: ['sells'],
-        labels: ['Sells'],
-        barRatio: 0.4,
-        xLabelMargin: 10,
-        hideHover: 'auto',
-        barColors: ["#3d88ba"]
-    });
-
-    // Morris Donut Chart
-    Morris.Donut({
-        element: 'hero-donut',
-        data: [
-            {label: '敏感', value: 93.82 },
-            {label: '非敏感', value: 6.18 },
-            {label: 'Search engines', value: 0 },
-            {label: 'Unique visitors', value: 0 }
-        ],
-        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
-        formatter: function (y) { return y + "%" }
-    });
-
-    Morris.Donut({
-        element: 'in-out',
-        data: [
-            {label: '境内', value: 99 },
-            {label: '境外', value: 1 },
-            {label: 'Search engines', value: 0 },
-            {label: 'Unique visitors', value: 0 }
-        ],
-        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
-        formatter: function (y) { return y + "%" }
-    });
-
-
-    // Morris Line Chart
-    var tax_data = [
-        {"period": "2013-04", "visits": 2407, "signups": 660},
-        {"period": "2013-03", "visits": 3351, "signups": 729},
-        {"period": "2013-02", "visits": 2469, "signups": 1318},
-        {"period": "2013-01", "visits": 2246, "signups": 461},
-        {"period": "2012-12", "visits": 3171, "signups": 1676},
-        {"period": "2012-11", "visits": 2155, "signups": 681},
-        {"period": "2012-10", "visits": 1226, "signups": 620},
-        {"period": "2012-09", "visits": 2245, "signups": 500}
-    ];
-    /*var tax_data = JSON.stringify('');*/
-    Morris.Line({
-        element: 'hero-graph',
-        data: tax_data,
-        xkey: 'period',
-        xLabels: "时间",
-        ykeys: ['visits', 'signups'],
-        labels: ['网站类型', '数量']
-    });
-
-
-
-    // Morris Area Chart
-    Morris.Area({
-        element: 'hero-area',
-        data: [
-            {period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647},
-            {period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441},
-            {period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501},
-            {period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689},
-            {period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293},
-            {period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881},
-            {period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588},
-            {period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175},
-            {period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028},
-            {period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791}
-        ],
-        xkey: 'period',
-        ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['iPhone', 'iPad', 'iPod Touch'],
-        lineWidth: 2,
-        hideHover: 'auto',
-        lineColors: ["#81d5d9", "#a6e182", "#67bdf8"]
-    });
-
-
-
-    // Build jQuery Knobs
-    $(".knob").knob();
-
-    function labelFormatter(label, series) {
-        return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
-    }
-
-</script>
 </body>
 
 </html>
