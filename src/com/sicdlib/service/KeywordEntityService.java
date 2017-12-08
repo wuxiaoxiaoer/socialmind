@@ -22,7 +22,7 @@ public class KeywordEntityService extends DefaultEntityManager<KeywordEntity> {
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select keyword,weight,keywordId from keyword k where k.objectID = "+objectId+" ORDER BY weight DESC";
+            String sql = "select keyword,weight,keywordId from keyword k where k.objectID = '"+objectId+"' ORDER BY weight DESC";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -38,4 +38,25 @@ public class KeywordEntityService extends DefaultEntityManager<KeywordEntity> {
         }
         return null;
     }
+
+    //在关键词表中查询事件是否已经抽取了关键词
+    public boolean findHaveKeywords(String objectId){
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select keyword from keyword k where k.objectID = '"+objectId+"'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                new DBUtil().closeConn(rs,psmt,conn);
+                return true;
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+
+        }catch (Exception e){
+        }
+        return false;
+    }
+
+
 }
