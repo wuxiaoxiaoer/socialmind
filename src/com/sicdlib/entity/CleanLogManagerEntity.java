@@ -10,9 +10,14 @@ public class CleanLogManagerEntity {
     private String userDefineNewValue;
     private String cleanTime;
     private String cleanStategyId;
-    private String cleanLocationId;
+    private String tableName;
+    private String culumnName;
     private String responseTime;
     private String resultState;
+    private String errorMessage;
+    private String IP;
+    private String errorCode;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,10 +34,13 @@ public class CleanLogManagerEntity {
         if (cleanTime != null ? !cleanTime.equals(that.cleanTime) : that.cleanTime != null) return false;
         if (cleanStategyId != null ? !cleanStategyId.equals(that.cleanStategyId) : that.cleanStategyId != null)
             return false;
-        if (cleanLocationId != null ? !cleanLocationId.equals(that.cleanLocationId) : that.cleanLocationId != null)
-            return false;
+        if (tableName != null ? !tableName.equals(that.tableName) : that.tableName != null) return false;
+        if (culumnName != null ? !culumnName.equals(that.culumnName) : that.culumnName != null) return false;
         if (responseTime != null ? !responseTime.equals(that.responseTime) : that.responseTime != null) return false;
-        return resultState != null ? resultState.equals(that.resultState) : that.resultState == null;
+        if (resultState != null ? !resultState.equals(that.resultState) : that.resultState != null) return false;
+        if (errorMessage != null ? !errorMessage.equals(that.errorMessage) : that.errorMessage != null) return false;
+        if (IP != null ? !IP.equals(that.IP) : that.IP != null) return false;
+        return errorCode != null ? errorCode.equals(that.errorCode) : that.errorCode == null;
     }
 
     @Override
@@ -43,9 +51,13 @@ public class CleanLogManagerEntity {
         result = 31 * result + (userDefineNewValue != null ? userDefineNewValue.hashCode() : 0);
         result = 31 * result + (cleanTime != null ? cleanTime.hashCode() : 0);
         result = 31 * result + (cleanStategyId != null ? cleanStategyId.hashCode() : 0);
-        result = 31 * result + (cleanLocationId != null ? cleanLocationId.hashCode() : 0);
+        result = 31 * result + (tableName != null ? tableName.hashCode() : 0);
+        result = 31 * result + (culumnName != null ? culumnName.hashCode() : 0);
         result = 31 * result + (responseTime != null ? responseTime.hashCode() : 0);
         result = 31 * result + (resultState != null ? resultState.hashCode() : 0);
+        result = 31 * result + (errorMessage != null ? errorMessage.hashCode() : 0);
+        result = 31 * result + (IP != null ? IP.hashCode() : 0);
+        result = 31 * result + (errorCode != null ? errorCode.hashCode() : 0);
         return result;
     }
 
@@ -99,12 +111,12 @@ public class CleanLogManagerEntity {
         this.cleanStategyId = cleanStategyId;
     }
 
-    public String getCleanLocationId() {
-        return cleanLocationId;
+    public String getTableName() {
+        return tableName;
     }
 
-    public void setCleanLocationId(String cleanLocationId) {
-        this.cleanLocationId = cleanLocationId;
+    public void setTableName(String cleanLocationId) {
+        this.tableName = cleanLocationId;
     }
     public String getResultState() {
         return resultState;
@@ -122,4 +134,35 @@ public class CleanLogManagerEntity {
         this.responseTime = responseTime;
     }
 
+    public String getCulumnName() {
+        return culumnName;
+    }
+
+    public void setCulumnName(String culumnName) {
+        this.culumnName = culumnName;
+    }
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getIP() {
+        return IP;
+    }
+
+    public void setIP(String userIP) {
+        this.IP = userIP;
+    }
 }
