@@ -308,7 +308,6 @@ public class UserAnalysisAction {
             }
         }
 
-
         agesNum = Arrays.asList(new Integer[] {age18, age30, age40, age50, age60, age70, age80, age80plus});
         //性别
         mode.addAttribute("menNum",menNum);
