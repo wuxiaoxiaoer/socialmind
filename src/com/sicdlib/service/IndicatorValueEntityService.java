@@ -2,7 +2,7 @@ package com.sicdlib.service;
 
 import com.sicdlib.entity.IndicatorValueEntity;
 import com.sicdlib.entity.UserEntity;
-import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.DBUtil.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

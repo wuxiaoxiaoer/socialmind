@@ -12,7 +12,7 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		Word2Vec vec = new Word2Vec();
 		try {
-			vec.loadGoogleModel("D:\\project\\wiki_chinese_word2vec(Google).model");
+			vec.loadGoogleModel("E:\\wiki_chinese_word2vec(Google).model");
 //			vec.loadJavaModel("data/wikichinese.model");
 		} catch (IOException e) {
 			e.printStackTrace();
