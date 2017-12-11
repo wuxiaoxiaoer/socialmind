@@ -3,7 +3,6 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.sicdlib.entity.CleanLocationEntity" table="clean_location" schema="socialmind">
         <id name="cleanLocationId" column="cleanLocationID"/>
         <property name="tableId" column="tableID"/>

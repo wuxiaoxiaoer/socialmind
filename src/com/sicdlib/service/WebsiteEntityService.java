@@ -46,7 +46,7 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select d.attributeValue,IFNULL(COUNT(w.websiteTypeID),0) from website w,data_dictionary d " +
+            String sql = "select d.attributeValue,IFNULL(COUNT(a.websiteID),0) from website w,data_dictionary d,article a " +
                     "WHERE w.websiteID in (select a.websiteID from article a where a.objectID='" +objectId+"' GROUP BY a.websiteID) " +
                     "AND w.websiteTypeID=d.dataDictionaryID GROUP BY d.attributeValue";
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -77,6 +77,29 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
                 list.add(rs.getString(1));
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+
+        }
+        return null;
+    }
+
+    //查找事件下的所有媒体的信息量
+    public List<Map> findAllMediaSource(String media){
+
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("name",rs.getString(1));
+                map.put("value",rs.getInt(2));
+                list.add(map);
             }
             new DBUtil().closeConn(rs,psmt,conn);
             return list;

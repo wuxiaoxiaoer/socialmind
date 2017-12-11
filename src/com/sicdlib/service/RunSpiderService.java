@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * Created by YH on 2017/5/9.
+ * Created by zcx on 2017/11/20.
  */
 @Service()
 public class RunSpiderService {
@@ -63,7 +63,7 @@ public class RunSpiderService {
         //在爬虫目录中创建文件，写入配置ID
         String catCommand = "echo \"" + resultJSON + "\" > " + spiderSource + "config\n";
         String mkdirCommand = "mkdir -p " + spiderConfig.getLogPath() + " " + spiderConfig.getFilePath() + "\n";
-        String runCommand = "python3 " + spiderSource + "run.py > log.log 2>&1 & \n";
+        String runCommand = "cd " + spiderSource + "; python3 " + spiderSource + "run.py > log.log 2>&1 & \n";
         String catResult = "";
         String result;
         try {

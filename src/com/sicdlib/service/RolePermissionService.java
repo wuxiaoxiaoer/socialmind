@@ -1,6 +1,5 @@
 package com.sicdlib.service;
 
-import com.sicdlib.entity.PermissionEntity;
 import com.sicdlib.entity.RolePermissionEntity;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;

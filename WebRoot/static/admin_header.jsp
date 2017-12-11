@@ -58,7 +58,7 @@
                 <li><a href="data_stats.html">清洗数据统计</a></li>
                 <li><a href="<%=basePath%>dataCleanConf">数据清洗策略配置</a></li>
                 <li><a href="<%=basePath%>dataClean">数据清洗</a></li>
-                <li><a href="dataClean_diary.html">数据清洗日志管理</a></li>
+                <li><a href="<%=basePath%>dataCleanDiary">数据清洗日志管理</a></li>
             </ul>
         </li>
         <li> <a href="widgets.html"><i class="icon icon-inbox"></i> <span>舆情对象管理</span><span class="label">1</span></a>

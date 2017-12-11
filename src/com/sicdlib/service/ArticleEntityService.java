@@ -3,6 +3,7 @@ package com.sicdlib.service;
 import com.sicdlib.entity.ArticleEntity;
 import com.sicdlib.entity.WebsiteEntity;
 import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.UUIDUtil.UUIDUtil;
 import edu.xjtsoft.base.orm.support.Page;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
@@ -91,7 +92,7 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
             String sql = "select a.postTime,a.title,w.websiteName from article a,website w " +
-                    "where a.websiteID = w.websiteID and a.objectID = '" +objectId+"' order by a.postTime ";
+                    "where a.websiteID = w.websiteID and a.objectID = '" +objectId+"' order by a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -114,17 +115,51 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
 
     //查找事件的关键词
     public List<Map> findKeywords(String objectId){
-        String hql = "select keyWords from ArticleEntity a where a.objectEntity = '" +objectId+"'";
-        List<ArticleEntity> keywords = getEntityDao().find(hql);
-        System.out.println(keywords);
-        List<Map> list = new ArrayList();
-        for(int i = 0 ; i < keywords.size() ; i++) {
-            Map<String,Object> map = new HashMap<String, Object>();
-            map.put("name",keywords.get(i));
-            map.put("value",2500);
-            list.add(map);
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select a.keyWords from article a where a.objectId = '" +objectId+"'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                String origin = rs.getString(1);
+                String[] a = origin.split(",");
+                for (int i=0; i<a.length;i++){
+                    String sql1 = "SELECT k.weight from keyword k where k.objectID = '" +objectId+"' and k.keyword = '" +a[i]+"'";
+                    PreparedStatement psmt1 = conn.prepareStatement(sql1);
+                    ResultSet rs1 = psmt1.executeQuery(sql1);
+                    boolean isExist = false;
+                    while (rs1.next()){
+                        System.out.println(rs1.getString(1));
+                        isExist = true;
+                        //keyword表中修改对象的关键词的权重信息
+                        String sql3 = "UPDATE keyword set weight = ? where objectID = ? and keyword = ?";
+                        PreparedStatement psmt3 = conn.prepareStatement(sql3);
+                        psmt3.setDouble(1,rs1.getDouble(1)+1);
+                        psmt3.setString(2,objectId);
+                        psmt3.setString(3,a[i]);
+                        psmt3.executeUpdate();
+                    }
+                    if (isExist == false){
+                        //keyword表中新增对象，关键词，权重信息
+                        String sql2 = "INSERT INTO keyword (keywordID,objectID,keyword,weight) VALUES (?,?,?,?);";
+                        PreparedStatement psmt2 = conn.prepareStatement(sql2);
+                        psmt2.setString(1, UUIDUtil.getUUID());
+                        psmt2.setString(2,objectId);
+                        psmt2.setString(3,a[i]);
+                        psmt2.setInt(4,1);
+                        int result = psmt2.executeUpdate();
+                        System.out.println(result);
+                    }
+                }
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+
         }
-        return list;
+        return null;
+
     }
 
     //查事件的事件段
@@ -140,7 +175,7 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             List coutList = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
             String sql = "SELECT c.postTime,IFNULL(t.m,0) FROM article c LEFT OUTER JOIN (SELECT postTime,COUNT(a.articleID) m " +
-                    "FROM article a,website w WHERE a.websiteID = w.websiteID AND a.objectID = " +objectId+" " +
+                    "FROM article a,website w WHERE a.websiteID = w.websiteID AND a.objectID = '" +objectId+" '" +
                     "AND a.websiteID = "+websiteId+" GROUP BY a.postTime) t on c.postTime = t.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
@@ -161,7 +196,7 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             Connection conn = new DBUtil().GetConnection();
 
             String sql = "select a.title,w.websiteName,a.postTime,a.recommendNumber from " +
-                    "article a,website w where a.objectID = 1 and a.websiteID = w.websiteID " +
+                    "article a,website w where a.objectID = '" +objectId+" ' and a.websiteID = w.websiteID " +
                     "ORDER BY a.recommendNumber desc LIMIT 4";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);

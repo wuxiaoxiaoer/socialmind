@@ -7,10 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GetList {
 
@@ -20,7 +17,8 @@ public class GetList {
         int i;
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         while(rs.next()){
-            Map<String, Object> map = new HashMap<String, Object>();
+            //这里使用linkedhashmap来保证表中列的顺序
+            Map<String, Object> map = new LinkedHashMap<String, Object>();
             for(i = 0; i < columns; i++){
                 map.put(md.getColumnName(i + 1), getValueByType(rs, md.getColumnType(i + 1), md.getColumnName(i + 1)));
             }
