@@ -2,7 +2,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.KeywordEntity" table="keyword" schema="socialmind">
@@ -10,6 +9,5 @@
         <property name="keyword" column="keyword"/>
         <property name="weight" column="weight"/>
         <many-to-one name="objectEntity" column="objectID"></many-to-one>
-
     </class>
 </hibernate-mapping>

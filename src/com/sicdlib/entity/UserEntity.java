@@ -12,6 +12,7 @@ public class UserEntity {
     private String password;
     private String email;
     private String registrantId;
+    private String regTime;
     private String userType;
     private String isAuthenticated;
     private String address;
@@ -21,6 +22,24 @@ public class UserEntity {
     private Set<UserOperaEntity> userOperas = new HashSet<>();
     /** 一个用户包含对个系统评论 */
     private Set<CommentEntity> comments = new HashSet<>();
+    /** 一个用户包含多个日志 */
+    private Set<LogEntity> logs = new HashSet<>();
+
+    public String getRegTime() {
+        return regTime;
+    }
+
+    public void setRegTime(String regTime) {
+        this.regTime = regTime;
+    }
+
+    public Set<LogEntity> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(Set<LogEntity> logs) {
+        this.logs = logs;
+    }
 
     public Set<CommentEntity> getComments() {
         return comments;

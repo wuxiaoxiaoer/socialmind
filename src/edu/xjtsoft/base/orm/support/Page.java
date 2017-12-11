@@ -116,7 +116,7 @@ public class Page<T> {
 	/**
 	 * 获得排序方向,默认为asc,仅在Criterion查询时有效.
 	 * 
-	 * @param order 可选值为desc或asc,多个排序字段时用','分隔.
+//	 * @param order 可选值为desc或asc,多个排序字段时用','分隔.
 	 */
 	public String getOrder() {
 		return order;

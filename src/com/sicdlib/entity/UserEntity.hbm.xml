@@ -10,6 +10,7 @@
         <property name="password" column="password"/>
         <property name="email" column="email"/>
         <property name="registrantId" column="registrantID"/>
+        <property name="regTime" column="registrantTime"/>
         <property name="userType" column="userType"/>
         <property name="isAuthenticated" column="isAuthenticated"/>
         <property name="address" column="address"/>
@@ -22,6 +23,10 @@
         <set name="comments">
             <key column="userID"></key>
             <one-to-many class="com.sicdlib.entity.CommentEntity"></one-to-many>
+        </set>
+        <set name="logs">
+            <key column="userID"></key>
+            <one-to-many class="com.sicdlib.entity.LogEntity"></one-to-many>
         </set>
     </class>
 </hibernate-mapping>

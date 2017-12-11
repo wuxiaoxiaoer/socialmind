@@ -2,9 +2,11 @@ package com.sicdlib.web;
 
 
 import com.google.gson.Gson;
+import com.sicdlib.entity.CleanLogManagerEntity;
 import com.sicdlib.entity.CleanStrategyEntity;
 import com.sicdlib.service.CleanStrategyService;
 import com.sicdlib.service.DataCleanService;
+import com.sicdlib.util.aop.AopLogService;
 import com.sicdlib.util.aop.ForController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +30,9 @@ public class DataCleanAction {
     private DataCleanService dataCleanService;
     @Autowired
     private CleanStrategyService cleanStrategyService;
+    @Autowired
+    private AopLogService aopLogService;
+
     @RequestMapping("dataClean")
     public String dataClean(HttpServletRequest req, HttpServletResponse response, Model model){
         List<List<CleanStrategyEntity>> strategyList =cleanStrategyService.getStrategies();
@@ -106,4 +111,6 @@ public class DataCleanAction {
 //        System.out.println("currentTable:"+currentTable+"\n"+"currentColumn:"+currentColumn+"\n"+"strategyID"+strategyID);
         Boolean cleanResult =dataCleanService.doClean(currentTable,currentColumn,strategyID,oldValue,newValue);
     }
+
+
 }

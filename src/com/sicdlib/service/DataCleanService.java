@@ -99,7 +99,7 @@ public class DataCleanService {
 //        }
 //        return sb.toString().toLowerCase();
 //    }
-@ForService(description = "getBody")
+
     public List getTbody(String tablename){
 //        String entityname = getEntity(tablename);
             List<Map<String, Object>> bodyMap=queryResult(tablename,50);
@@ -230,7 +230,7 @@ public class DataCleanService {
                 String key ="";
                 try{
                     key=rs.getString(1);
-                    System.out.println(key);
+//                    System.out.println(key);
                     //传回前台的json中键不允许空，因此将null展示为null value,并非数据库中值为null value
                     if(key==null || key.isEmpty()){
                        key ="null value";
@@ -260,7 +260,7 @@ public class DataCleanService {
     //清洗方法执行,12,14,15这三个方法仅仅sql不同，可考虑抽象出一个公共函数
 //    @SystemLog(module = "数据清洗",methods = "doClean")
 //    @DataCleanLog(currentTable="myTable")
-//    @DataCleanLog(lala="myTable")
+    @ForService(description = "doClean")
     public Boolean doClean(String currentTable, String  currentColumn, String strategyID, String oldValue, String newValue){
         String sourceTable=currentTable+"_reset";
         switch (strategyID)
