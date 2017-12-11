@@ -1,8 +1,10 @@
 package com.sicdlib.service;
 
 import com.sicdlib.entity.ArticleEntity;
+import com.sicdlib.entity.ArticleSimilarEntity;
 import com.sicdlib.entity.WebsiteEntity;
-import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.DBUtil.DBUtil;
+import com.sicdlib.util.SNAUtil.SNAUtil;
 import com.sicdlib.util.UUIDUtil.UUIDUtil;
 import edu.xjtsoft.base.orm.support.Page;
 import edu.xjtsoft.base.service.DefaultEntityManager;
@@ -12,10 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @Transactional
@@ -91,8 +92,10 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select a.postTime,a.title,w.websiteName from article a,website w " +
-                    "where a.websiteID = w.websiteID and a.objectID = '" +objectId+"' order by a.postTime";
+            String sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content from article a,website w " +
+                    "where a.websiteID = w.websiteID and a.objectID = '" +objectId+"' and " +
+                    "a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
+                    "order by a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -102,6 +105,8 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 WebsiteEntity web = new WebsiteEntity();
                 web.setWebsiteId(rs.getString(3));
                 a.setWebsiteEntity(web);
+                a.setArticleId(rs.getString(4));
+                a.setContent(rs.getString(5));
                 list.add(a);
             }
             new DBUtil().closeConn(rs,psmt,conn);
@@ -149,7 +154,7 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                         psmt2.setString(3,a[i]);
                         psmt2.setInt(4,1);
                         int result = psmt2.executeUpdate();
-                        System.out.println(result);
+
                     }
                 }
             }
@@ -195,9 +200,10 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
 
-            String sql = "select a.title,w.websiteName,a.postTime,a.recommendNumber from " +
-                    "article a,website w where a.objectID = '" +objectId+" ' and a.websiteID = w.websiteID " +
-                    "ORDER BY a.recommendNumber desc LIMIT 4";
+            String sql = "select a.title,w.websiteName,a.postTime,a.recommendNumber,a.scanNumber, " +
+                    "IFNULL(0.3*a.commentNumber,0)+IFNULL(0.2*a.replyNumber,0)+IFNULL(0.15*a.scanNumber,0)+IFNULL(0.05*a.participationNumber,0)+IFNULL(0.03*a.recommendNumber,0)+IFNULL(0.03*a.collectNumber,0)+IFNULL(0.03*a.likeNumber,0) as summary " +
+                    "from article a,website w where a.objectID = '" +objectId+" ' and a.websiteID = w.websiteID " +
+                    "ORDER BY summary DESC LIMIT 4";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -217,23 +223,56 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
         return null;
     }
 
-    //事件的媒体转发数
-    //查事件的事件段
-    public List findTransferNum(String objectId){
+
+    //获取文章标题
+    public String findTitle(String articleId,String objectId){
         try {
-            List list = new ArrayList();
+            String result = null;
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select COUNT(a.articleID) from article a where a.objectID ="+objectId+"";
+            String sql = "select DISTINCT (a.title) from article a where a.objectID = '"+objectId+"' and a.articleID = '"+articleId+"'";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
-                list.add(rs.getString(1));
+                result = rs.getString(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
+    //获取不同媒体下的5条热门观点
+    public List finfHotOpinion(String media,String objectId){
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+
+            String sql = "select a.title,w.websiteName,au.`name`, " +
+                    "IFNULL(a.commentNumber,0)+IFNULL(a.replyNumber,0) as summary " +
+                    "from article a,website w,data_dictionary d,author au " +
+                    "where a.objectID ='"+objectId+"' and a.websiteID = w.websiteID " +
+                    "and w.websiteTypeID = d.dataDictionaryID and d.attributeValue='"+media+"' " +
+                    "and a.authorID = au.authorID ORDER BY summary DESC LIMIT 3";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                ArticleEntity article = new ArticleEntity();
+                article.setTitle(rs.getString(1));
+                article.setArticleId(rs.getString(2));
+                /*WebsiteEntity web = new WebsiteEntity();
+                web.setWebsiteId(rs.getString(2));
+                article.setWebsiteEntity(web);*/
+                article.setContent(rs.getString(3));
+                article.setPostTime(media);
+                list.add(article);
             }
             new DBUtil().closeConn(rs,psmt,conn);
             return list;
         }catch (Exception e){
         }
         return null;
+
     }
 
 }

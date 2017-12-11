@@ -1,8 +1,9 @@
 package com.sicdlib.service;
 
 import com.sicdlib.entity.CommentEntity;
-import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.DBUtil.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
+import org.hibernate.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,5 +35,30 @@ public class CommentEntityService extends DefaultEntityManager<CommentEntity> {
 
         }
         return null;
+    }
+    /**
+     * @ wlw
+     * 获得某个时间节点之后的评论
+     */
+    public List<CommentEntity> getComments(String time){
+        String hql = "SELECT c FROM CommentEntity c WHERE c.commentTime >= '" + time + "'";
+        List<CommentEntity> comments = getEntityDao().find(hql);
+        return comments;
+    }
+    public Long getCommentsCount(String time){
+        String hql = "SELECT COUNT(c.commentId) FROM CommentEntity c WHERE c.commentTime >= '" + time + "'";
+        if (time != null){
+            if (time.equals("ALL")){
+                hql = "SELECT COUNT(c.commentId) FROM CommentEntity c";
+            }
+            Query query = getEntityDao().getSession().createQuery(hql);
+            if (query.list().size() != 0){
+                return (Long)query.list().get(0);
+            }else {
+                return Long.valueOf(0);
+            }
+        }else {
+            return Long.valueOf(0);
+        }
     }
 }

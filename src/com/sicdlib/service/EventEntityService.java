@@ -1,15 +1,11 @@
 package com.sicdlib.service;
 
-import com.sicdlib.entity.ArticleEntity;
 import com.sicdlib.entity.EventEntity;
-import com.sicdlib.entity.ObjectEntity;
-import com.sicdlib.entity.WebsiteEntity;
-import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.DBUtil.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,9 +41,6 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
 
         }
         return null;
-//        String hql = "from EventEntity e";
-//        List<EventEntity> event = getEntityDao().find(hql);
-//        return event;
     }
 
     public List<EventEntity> findEventInfo(String objectId){

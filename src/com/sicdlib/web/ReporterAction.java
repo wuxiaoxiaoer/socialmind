@@ -33,6 +33,7 @@ public class ReporterAction {
     public String ReporterMaterial(HttpServletRequest req, Model mode){
         String style = req.getParameter("style");
         mode.addAttribute("style", style);
+
         return "/WEB-INF/foreground/ReporterMaterial";
     }
 
