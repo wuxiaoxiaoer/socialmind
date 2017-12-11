@@ -215,6 +215,7 @@
               function (data, status) {
                   //前台拿到的是一个字符串
 //                  data=data.replace(new RegExp("&","gm"),"null");
+
                   $('#YWaitTable').hide();
                   var headData = data.split("++")[0];
                   //bodyData得到的是中括号包含大括号的json
@@ -223,6 +224,7 @@
                   var headObj = eval('(' + headData + ')');
 //                  alert("head解析成json"+headObj);
                   var bodyData = data.split("++")[1];
+
 
                   bodyData ="("+bodyData+")";
 //                  alert("body解析前"+bodyData);
@@ -415,8 +417,8 @@
                       <option value="bbs_sohu">搜狐BBS</option><%--bbs_sohu--%>
                       <option value="bbs_tianya">天涯BBS</option><%--bbs_tianya--%>
                       <option value="bbs_xici">西祠胡同</option><%--bbs_xici--%>
-                      <option value="blog_163">博客163</option><%--blog_163-->
-                                            <option value="blog_sina">新浪微博</option><%--blog_sina--%>
+                      <option value="blog_163">博客163</option><%--blog_163--%>
+                      <option value="blog_sina">新浪博客</option><%--blog_sina--%>
                       <option value="blogchina">博客中国</option><%--blogchina--%>
                       <option value="douban">豆瓣</option><%--douban--%>
                       <option value="kdnet">凯迪网络</option><%--kdnet--%>
@@ -508,7 +510,7 @@
                     <div id="btn_blog_sina">
                       <a href="javascript:display('blog_sina_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">blog_sina_author</a>
                       <a href="javascript:display('blog_sina_comment')" class="btn btn-success tipAlt" original-title="Lorem ipsum dolar sit amed">blog_sina_comment</a>
-                      <a href="javascript:display('blog_sina_post')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">blog_sina_post</a>
+                      <a href="javascript:display('blog_sina_post_copy')" class="btn btn-success tipSol" original-title="Lorem ipsum dolar sit amed">blog_sina_post</a>
                     </div>
                     <div id="btn_blogchina">
                       <a href="javascript:display('blogchina_author')" class="btn btn-success tipUst" original-title="Lorem ipsum dolar sit amed">blogchina_author</a>
@@ -673,7 +675,7 @@
                     </tr>
                     <tr>
                       <td>要替换的子字符串（字符串错误\行操作）</td>
-                      <td><input id="oldValue" type="text" class="form-control autocomplete" placeholder="要替换掉的子字符串\正则表达式"/></td>
+                      <td><input id="oldValue" type="text" class="form-control autocomplete" data-source="etldemodata/autocomplete.json" placeholder="要替换掉的子字符串\正则表达式"/></td>
                     </tr>
                     <tr>
                       <td>替换为（缺失值\字符串错误）</td>

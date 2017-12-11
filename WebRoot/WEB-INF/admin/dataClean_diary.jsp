@@ -6,7 +6,7 @@
 %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	
 <head>
 	<base href="<%=basePath%>admin/"/>
@@ -18,6 +18,8 @@
 	<link rel="stylesheet" href="css/select2.css" />
 	<link rel="stylesheet" href="css/maruti-style.css" />
 	<link rel="stylesheet" href="css/maruti-media.css" class="skin-color" />
+	<script>src="js/etljs/jquery-3.2.1.js"</script>
+	<script src="js/etljs/jquery-3.2.1.min.js"></script>
 	</head>
 	<body>
 	<%--<!-- 引入后台头模板-->--%>
@@ -54,7 +56,7 @@
                                         从<input type="text" id="fromDate" class="form-control dpform" placeholder="2017-10-10" style="width:120px;"/>&nbsp&nbsp&nbsp到&nbsp&nbsp&nbsp<input type="text" id="toDate"class="form-control dpform"  placeholder="2017-10-10" style="width:120px;"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="submit" value="今天" class="btn btn-success"><input type="submit" value="近七天" class="btn btn-success"><input type="submit" value="近一个月" class="btn btn-success"><input type="submit" value="近三个月" class="btn btn-success">               										
                                     </div>
                                     <div style="margin-left:3%; margin-top:1%">                                                                               
-                                          操作类型：<input id="wlmsinput" name="maktMaktx" list="wlmslist" placeholder="修改"/>
+                                          操作类型：<input id="wlmsinput1" name="maktMaktx" list="wlmslist" placeholder="修改"/>
 										<datalist id="wlmslist">
 											<c:forEach var="wl" items="${wuliaocp}">
 												<option value="${wl.maktx }">修改</option>
@@ -84,39 +86,39 @@
 									<table class="table table-bordered table-striped">
 									  <thead>
 										<tr>
-										  <th>类型</th>
-										  <th>表</th>
-										  <th>表名</th>
-										  <th>管理员</th>
-										  <th>时间</th>
-										  <th>操作</th>
+											<th>日志ID</th>
+										    <th>管理员ID</th>
+										    <th>表名</th>
+										    <th>字段名</th>
+										    <th>填入旧值</th>
+										    <th>填入新值</th>
+										    <th>清洗时间</th>
+											<th>清洗策略ID</th>
+											<th>清洗结果</th>
+											<th>响应时间</th>
+											<th>管理员IP</th>
+											<th>错误代码</th>
+											<th>错误信息</th>
 										</tr>
 									  </thead>
 									  <tbody>
-										<tr class="odd gradeX">
-										  <td>修改</td>
-										  <td>bbs_china_author</td>
-										  <td>博客中国作者表</td>
-										  <td class="center"> Manager1</td>
-										  <td class="center">2017-10-23 2:43</td>
-										  <td><a href="#">查看详细</a></td>
-										</tr>
-										<tr class="even gradeC">
-										  <td>修改</td>
-										  <td>bbs_china_comment</td>
-										  <td>博客中国评论表</td>
-										  <td class="center">Manager1</td>
-										  <td class="center">2017-10-23 2:44</td>
-										  <td><a href="#">查看详细</a></td>
-										</tr>
-										<tr class="odd gradeA">
-										  <td>修改</td>
-										  <td>bbs_mop_author</td>
-										  <td>猫扑作者表</td>
-										  <td class="center">Manager1</td>
-										  <td class="center">2017-10-23 2:45</td>
-										  <td><a href="#">查看详细</a></td>
-										</tr>
+											<c:forEach  items="${cleanLogList}" var="v">
+												<tr class="odd gradeX">
+													<td>${v.cleanLogId}</td>
+													<td>${v.userId}</td>
+													<td>${v.tableName}</td>
+													<td>${v.culumnName}</td>
+													<td>${v.userDefineOldValue}</td>
+													<td>${v.userDefineNewValue}</td>
+													<td>${v.cleanTime}</td>
+													<td>${v.cleanStategyId}</td>
+													<td>${v.resultState}</td>
+													<td>${v.responseTime}</td>
+													<td>${v.IP}</td>
+													<td>${v.errorCode}</td>
+													<td>${v.errorMessage}</td>
+												</tr>
+											</c:forEach>
 									  </tbody>
 									</table>
 								  </div>
