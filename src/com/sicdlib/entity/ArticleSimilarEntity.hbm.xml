@@ -1,21 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-<<<<<<< HEAD
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-=======
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
->>>>>>> liuyan
 <hibernate-mapping>
 
     <class name="com.sicdlib.entity.ArticleSimilarEntity" table="article_similar" schema="socialmind">
         <id name="articleSimilarId" column="articleSimilarID"/>
         <property name="similarDegree" column="similarDegree"/>
-<<<<<<< HEAD
-=======
         <many-to-one name="articleEntityOne" column="articleOneID"></many-to-one>
         <many-to-one name="articleEntityTwo" column="articleTwoID"></many-to-one>
->>>>>>> liuyan
     </class>
+
 </hibernate-mapping>

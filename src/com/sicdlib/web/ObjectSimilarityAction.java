@@ -64,6 +64,7 @@ public class ObjectSimilarityAction {
 
 	/**
 	 * 根据事件名称及描述从hbase中搜索相关文章存入mysql数据库
+	 * 已跑代码：bbs_news_post_copy、bbs_mop_post_copy、bbs_china_post_copy、bbs_tianya_post_copy、
 	 */
 	@RequestMapping(value="similarity")
 	public String similarity(HttpServletRequest req) throws Exception {
@@ -115,14 +116,20 @@ public class ObjectSimilarityAction {
 			//2.2.2 从datasources中获得带有_post形式的文章表datasouece
 			// 后面新增：以_news结尾datasource.getTableName().endsWith("_news")
 			if (datasource.getTableName().contains("_post")){
-				int NUM = Integer.parseInt(datasource.getCount()) / 100;
-				for (int i = 0; i< NUM; i++){
-					int start = i*100;
+				int per = 100;
+				int NUM = Integer.parseInt(datasource.getCount()) / per;
+				int i = 0;
+				if (datasource.getTableName().equals("bbs_people_post_copy")){
+					i = 925; //tianya: i = 382383;走不过去
+				}
+				for (; i< NUM; i++){
+					int start = i * per;
 					//2.2.3 根据datasouece中的count属性获得hbase文章表的总条数，从hbase中分批获得得到result
-					//获得所有的hbase表:先使用bbs_china_post_copy
-					String sql = "select * from \""+ datasource.getTableName() + "\" limit 100 offset " + (start+1);
+					//获得所有的hbase表:先使用 bbs_china_post_copy
+					String sql = "SELECT * FROM \""+datasource.getTableName()+"\" AS a INNER JOIN (SELECT \"info\".\"post_id\" FROM \""+datasource.getTableName()+"\" LIMIT "+ per +" OFFSET "+start+") AS b ON a.\"post_id\" = b.\"post_id\"";
+//					String sql = "select * from \""+ datasource.getTableName() + "\" limit "+ per +" offset " + (start+1);
 					result = PhoenixUtil.selectHbaseBySql(sql);
-					System.out.println("第  "+ start + "  条数");
+					System.out.println("第  "+ start + "  条数 : " + result.size());
 					//保存article文件
 					for (Map<String, Object> row : result){
 						//生成articleID
@@ -148,7 +155,6 @@ public class ObjectSimilarityAction {
 						float[] weightArray2 = Segment.getPOSWeightArray(Segment.getPOS(content+title));
 						Double simiCompare = Double.parseDouble(vec.sentenceSimilarity(wordList1, wordList2, weightArray1, weightArray2)+"");
 						System.out.println("相似度：" + simiCompare + " : " + (simiCompare >= simi));
-
 						if (simiCompare >= simi){
 							System.out.println("标题和内容：" + title+content);
 							articleEntityService.insertArticleByPropAndValue(keyObjsMap.get("keyStr").get(0), keyObjsMap.get("objStr").get(0));
@@ -298,7 +304,7 @@ public class ObjectSimilarityAction {
 	 */
 	public List<DataSourceEntity> getSetupDataSources(List<DataSourceEntity> datasources){
 		List<DataSourceEntity> setupDsList = new ArrayList<>();
-		String []setupDsNames = new String[]{"bbs_tianya_post_copy"};
+		String []setupDsNames = new String[]{"bbs_people_post_copy"};
 		List<String> dsNamesList = Arrays.asList(setupDsNames);
 		for (DataSourceEntity ds : datasources){
 			if (dsNamesList.contains(ds.getTableName())){
@@ -390,8 +396,22 @@ public class ObjectSimilarityAction {
 				if (key.contains("_num")){
 					objList.add(obj);
 					objStr += obj + ", ";
-				}else {
+				}
+				else if (key.contains("content") || key.contains("title")){
 					objList.add(obj);
+					//将内容中英文:转为：
+					if (obj != null){
+						obj = getContentEngToCn(obj);
+						obj = getESCStr(obj);
+					}
+					objStr += "'"+ obj + "', ";
+				}
+				else {
+					objList.add(obj);
+					if (obj != null){
+						//对值进行转义
+						obj = getESCStr(obj);
+					}
 					objStr += "'"+ obj + "', ";
 				}
 			}
@@ -407,6 +427,30 @@ public class ObjectSimilarityAction {
 		return articleKeyObj;
 	}
 
+	/**
+	 * 转义字符串： 将'or" 变为\'和\"
+	 */
+	public static String getESCStr(String str){
+		if (str.indexOf("\'") >= 0){
+			str = str.replaceAll("\'", "\\\\'");
+		}
+		if (str.indexOf("\"") >= 0){
+			str = str.replaceAll("\"", "\\\\\"");
+		}
+		if (str.indexOf("%") >= 0){
+			str = str.replaceAll("%", "\\\\%");
+		}
+		return str;
+	}
+	/**
+	 * 转义字符串： 将'or" 变为\'和\"
+	 */
+	public static String getContentEngToCn(String str){
+		if (str.indexOf(":") >= 0){
+			str = str.replaceAll(":", "：");
+		}
+		return str;
+	}
 	/**
 	 * 判断hbase数据字段是否存在于mysql字段中，存在,则返回mysql字段；不存在，则返回-1
 	 * @param hmcolumnsmapping

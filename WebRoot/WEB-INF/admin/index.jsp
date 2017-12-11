@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -56,7 +57,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="widget-title"><span class="icon"><i class="icon-file"></i></span>
                     <h5>指标统计 共计76项</h5>
                     </div>
-
+		  <c:set var="perNum" value="0"/>
+		  <c:set var="comNum" value="0"/>
+		  <c:set var="insNum" value="0"/>
+		  <c:set var="govNum" value="0"/>
+		  <c:set var="adminNum" value="0"/>
+		<c:forEach items="${users}" var="u">
+			<c:if test="${u.role.roleName == '个人'}">
+				<c:set var="perNum" value="${perNum + 1}"/>
+			</c:if>
+			<c:if test="${u.role.roleName == '企业'}">
+				<c:set var="comNum" value="${comNum + 1}"/>
+			</c:if>
+			<c:if test="${u.role.roleName == '事业单位'}">
+				<c:set var="insNum" value="${insNum + 1}"/>
+			</c:if>
+			<c:if test="${u.role.roleName == '政府'}">
+				<c:set var="govNum" value="${govNum + 1}"/>
+			</c:if>
+			<c:if test="${u.role.roleName == '管理员'}">
+				<c:set var="adminNum" value="${adminNum + 1}"/>
+			</c:if>
+		</c:forEach>
         <div class="row-fluid">
 		
               <div class="span6">
@@ -65,24 +87,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <h5>系统统计 共18项</h5>
                   </div>
                   <ul class="quick-actions">
-					  <li> <a href="#"> <i class="icon-book"></i> 昨日新增用户数 </a> </li>
-					  <li> <a href="#"> <i class="icon-cabinet"></i> 用户增长速率</a> </li>
-					  <li> <a href="#"> <i class="icon-calendar"></i> 昨日新增个人用户数 </a> </li>
-					  <li> <a href="#"> <i class="icon-client"></i> 昨日新增企业用户数</a> </li>
-					  <li> <a href="#"> <i class="icon-database"></i> 昨日新增事业单位用户数 </a> </li>
-					  <li> <a href="#"> <i class="icon-database"></i> 昨日新增政府用户数 </a> </li>
-					  <li> <a href="#"> <i class="icon-download"></i> 总个人用户数 </a> </li>
-					  <li> <a href="#"> <i class="icon-graph"></i> 总用户数 </a> </li>
-					  <li> <a href="#"> <i class="icon-graph"></i> 总个人数 </a> </li>
-					  <li> <a href="#"> <i class="icon-home"></i>总企业数 </a> </li>
-					  <li> <a href="#"> <i class="icon-lock"></i> 总事业单位数</a> </li>
-					  <li> <a href="#"> <i class="icon-mail"></i>总政府数 </a> </li>
-					  <li> <a href="#"> <i class="icon-pdf"></i> 昨日系统点击量 </a> </li>
-					  <li> <a href="#"> <i class="icon-people"></i> 总系统点击量 </a> </li>
-					  <li> <a href="#"> <i class="icon-piechart"></i> 昨日系统留言量 </a> </li>
-					  <li> <a href="#"> <i class="icon-search"></i> 总留言量 </a> </li>
-					  <li> <a href="#"> <i class="icon-shopping-bag"></i>昨日系统日志生成量 </a> </li>
-					  <li> <a href="#"> <i class="icon-survey"></i> 昨日系统日志生成量 </a> </li>
+					  <li> <a href="<%=basePath%>sysusersAnalysis?unit=week&times=7"> <span style="font-size: 20px;"><c:out value="${fn:length(users)}"></c:out>/${counts[0]}</span> <br>新增用户数/总用户数 </a> </li>
+					  <li> <a href="#"> <span style="font-size: 20px;">${perNum}/${counts[5]}</span> <br>新增个人用户数/总个人数</a> </li>
+					  <li> <a href="#"> <span style="font-size: 20px;">${comNum}/${counts[4]}</span> <br>新增企业用户数/总企业数</a> </li>
+					  <li> <a href="#"> <span style="font-size: 20px;">${insNum}/${counts[3]}</span> <br>新增事业单位数/总事业单位数 </a> </li>
+					  <li> <a href="#"> <span style="font-size: 20px;">${govNum}/${counts[2]}</span> <br>新增政府用户数/总政府数 </a> </li>
+					  <li> <a href="#"> <span style="font-size: 20px;">${adminNum}/${counts[1]}</span> <br>新增管理员数/总管理员数 </a> </li>
+					  <li> <a href="#"> <span style="font-size: 20px;">${latestCommentsCount}/${allCommentsCount}</span> <br>新增系统留言量/总留言量 </a> </li>
+					  <li> <a href="#"> <span style="font-size: 20px;">${latestLogsCount}/${allLogsCount}</span> <br>新增日志生成量/总日志生成量 </a> </li>
 					</ul>
                 </div>
               </div>

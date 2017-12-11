@@ -50,10 +50,14 @@ public class PhoenixUtil{
     @org.junit.Test
     public void test01(){
         //数据源表与website建立关系
-        String sql = "select * from \"bbs_china_post_copy\" limit 10 offset 1";
-        List<Map<String, Object>> result = selectHbaseBySql(sql);
-//        List<Map<String, Object>> result = Select("bbs_china_post_copy", 10);
-        System.out.println("结果：" + result.size());
+//         String sql = "SELECT * FROM \"bbs_tianya_post_copy\" AS tya INNER JOIN (SELECT 'post_id' FROM \"bbs_tianya_post_copy\" LIMIT 2 OFFSET 10) AS tyb ON tya.\'post_id\' = tyb.\'post_id\'";
+        //从10开始,查询2条
+//        String sql = "SELECT * FROM \"bbs_tianya_post_copy\" AS a INNER JOIN (SELECT \"info\".\"post_id\" FROM \"bbs_tianya_post_copy\" LIMIT 2 OFFSET 10) AS b ON a.\"post_id\" = b.\"post_id\"";
+         String sql = "select 'post_id' from \"bbs_tianya_post_copy\" limit 5 offset 382384";
+//        String sql = "select 'post_id' from \"bbs_china_post_copy\" where 'post_id' = '123'";
+        System.out.println(sql);
+//        List<Map<String, Object>> result = selectHbaseBySql(sql);
+//        System.out.println("结果：" + result.size());
 
     }
 

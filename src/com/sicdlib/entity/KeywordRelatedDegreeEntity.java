@@ -5,12 +5,26 @@ package com.sicdlib.entity;
  */
 public class KeywordRelatedDegreeEntity {
     private String keywordDegreeId;
-    private String relatedDegree;
-<<<<<<< HEAD
-=======
+    private Double relatedDegree;
     /*表之间映射*/
     private KeywordEntity keywordEntityOne;
     private KeywordEntity keywordEntityTwo;
+
+    public String getKeywordDegreeId() {
+        return keywordDegreeId;
+    }
+
+    public void setKeywordDegreeId(String keywordDegreeId) {
+        this.keywordDegreeId = keywordDegreeId;
+    }
+
+    public Double getRelatedDegree() {
+        return relatedDegree;
+    }
+
+    public void setRelatedDegree(Double relatedDegree) {
+        this.relatedDegree = relatedDegree;
+    }
 
     public KeywordEntity getKeywordEntityOne() {
         return keywordEntityOne;
@@ -27,23 +41,6 @@ public class KeywordRelatedDegreeEntity {
     public void setKeywordEntityTwo(KeywordEntity keywordEntityTwo) {
         this.keywordEntityTwo = keywordEntityTwo;
     }
->>>>>>> liuyan
-
-    public String getKeywordDegreeId() {
-        return keywordDegreeId;
-    }
-
-    public void setKeywordDegreeId(String keywordDegreeId) {
-        this.keywordDegreeId = keywordDegreeId;
-    }
-
-    public String getRelatedDegree() {
-        return relatedDegree;
-    }
-
-    public void setRelatedDegree(String relatedDegree) {
-        this.relatedDegree = relatedDegree;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,26 +53,17 @@ public class KeywordRelatedDegreeEntity {
             return false;
         if (relatedDegree != null ? !relatedDegree.equals(that.relatedDegree) : that.relatedDegree != null)
             return false;
-<<<<<<< HEAD
-=======
         if (keywordEntityOne != null ? !keywordEntityOne.equals(that.keywordEntityOne) : that.keywordEntityOne != null)
             return false;
-        if (keywordEntityTwo != null ? !keywordEntityTwo.equals(that.keywordEntityTwo) : that.keywordEntityTwo != null)
-            return false;
->>>>>>> liuyan
-
-        return true;
+        return keywordEntityTwo != null ? keywordEntityTwo.equals(that.keywordEntityTwo) : that.keywordEntityTwo == null;
     }
 
     @Override
     public int hashCode() {
         int result = keywordDegreeId != null ? keywordDegreeId.hashCode() : 0;
         result = 31 * result + (relatedDegree != null ? relatedDegree.hashCode() : 0);
-<<<<<<< HEAD
-=======
         result = 31 * result + (keywordEntityOne != null ? keywordEntityOne.hashCode() : 0);
         result = 31 * result + (keywordEntityTwo != null ? keywordEntityTwo.hashCode() : 0);
->>>>>>> liuyan
         return result;
     }
 }

@@ -5,7 +5,6 @@ package com.sicdlib.entity;
  */
 public class LogEntity {
     private String logId;
-    private String userId;
     private String ip;
     private String logTime;
     private String methodLogicName;
@@ -14,6 +13,16 @@ public class LogEntity {
     private String sourcePage;
     private String targetPage;
     private String stayTime;
+    /** 一个日志属于一个用户 */
+    private UserEntity userEntity;
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
 
     public String getLogId() {
         return logId;
@@ -21,14 +30,6 @@ public class LogEntity {
 
     public void setLogId(String logId) {
         this.logId = logId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getIp() {
@@ -103,7 +104,6 @@ public class LogEntity {
         LogEntity logEntity = (LogEntity) o;
 
         if (logId != null ? !logId.equals(logEntity.logId) : logEntity.logId != null) return false;
-        if (userId != null ? !userId.equals(logEntity.userId) : logEntity.userId != null) return false;
         if (ip != null ? !ip.equals(logEntity.ip) : logEntity.ip != null) return false;
         if (logTime != null ? !logTime.equals(logEntity.logTime) : logEntity.logTime != null) return false;
         if (methodLogicName != null ? !methodLogicName.equals(logEntity.methodLogicName) : logEntity.methodLogicName != null)
@@ -113,14 +113,12 @@ public class LogEntity {
         if (sourcePage != null ? !sourcePage.equals(logEntity.sourcePage) : logEntity.sourcePage != null) return false;
         if (targetPage != null ? !targetPage.equals(logEntity.targetPage) : logEntity.targetPage != null) return false;
         if (stayTime != null ? !stayTime.equals(logEntity.stayTime) : logEntity.stayTime != null) return false;
-
-        return true;
+        return userEntity != null ? userEntity.equals(logEntity.userEntity) : logEntity.userEntity == null;
     }
 
     @Override
     public int hashCode() {
         int result = logId != null ? logId.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (ip != null ? ip.hashCode() : 0);
         result = 31 * result + (logTime != null ? logTime.hashCode() : 0);
         result = 31 * result + (methodLogicName != null ? methodLogicName.hashCode() : 0);
@@ -129,6 +127,7 @@ public class LogEntity {
         result = 31 * result + (sourcePage != null ? sourcePage.hashCode() : 0);
         result = 31 * result + (targetPage != null ? targetPage.hashCode() : 0);
         result = 31 * result + (stayTime != null ? stayTime.hashCode() : 0);
+        result = 31 * result + (userEntity != null ? userEntity.hashCode() : 0);
         return result;
     }
 }
