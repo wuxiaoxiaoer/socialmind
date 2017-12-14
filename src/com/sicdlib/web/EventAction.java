@@ -81,16 +81,20 @@ public class EventAction {
     public String findEventInfo(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
 
         String objectId = req.getParameter("objectId");
-        //文章传播
-        List<String> categoryName = websiteEntityService.findWebsitesByEvent(objectId);
-        Map<String, List> nodesAndEdges = getNodeAndEdgeAttributes(objectId);
-        List<Object> SNAList = getSNA(nodesAndEdges.get("nodes"),nodesAndEdges.get("edges"));
-        //查找事件关键词
-        List<Map> keywords = findKeywords(objectId);
         //查找事件下所有文章列表
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
         //查找事件下文章的相似度
         findEventSimilar(objectId,artileList);
+        //查找事件关键词
+        List<Map> keywords = findKeywords(objectId);
+        //查找事件关键词之间的相关度
+        List<Map> keywordRelatedList = keywordRelated(objectId,keywords);
+        String coreWord = keywords.get(0).get("name").toString();
+        //文章传播
+        List<String> categoryName = websiteEntityService.findWebsitesByEvent(objectId);
+        Map<String, List> nodesAndEdges = getNodeAndEdgeAttributes(objectId);
+        List<Object> SNAList = getSNA(nodesAndEdges.get("nodes"),nodesAndEdges.get("edges"));
+
         //查找事件下媒体来源信息
         List<Map> mediaSource = websiteEntityService.findMediaSource(objectId);
 
@@ -141,7 +145,7 @@ public class EventAction {
         mode.addAttribute("SNAList", JSON.toJSONString(SNAList, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
         //mode.addAttribute("listkey", JSON.toJSON(listkey).toString());
         //mode.addAttribute("articleCommentList", articleCommentList);
-        //mode.addAttribute("keywordRelated", JSON.toJSON(keywordRelated).toString());
+        mode.addAttribute("keywordRelated", JSON.toJSON(keywordRelatedList).toString());
 //        mode.addAttribute("reliablity", reliablity);
         return "/WEB-INF/foreground/eventInfo";
     }
@@ -221,7 +225,7 @@ public class EventAction {
     public List<ArticleSimilarEntity> findEventSimilar(String objectId,List<ArticleEntity> artileList){
 
         List<ArticleSimilarEntity> findEventSimilar = articleSimilarityService.findEventSimilar(objectId);
-        if(findEventSimilar==null){
+        if(findEventSimilar==null||findEventSimilar.size()==0){
             Word2Vec vec = new Word2Vec();
             try {
                 vec.loadGoogleModel("E:\\wiki_chinese_word2vec(Google).model");
@@ -258,12 +262,27 @@ public class EventAction {
     public List<Map> findKeywords(String objectId){
         boolean isHaveKeywords = keywordEntityService.findHaveKeywords(objectId);//查找关键词表中是否已经进行该事件关键词的抽取
         if (!isHaveKeywords){
-            articleEntityService.findKeywords(objectId);//查找文章表中每天文章的关键词
+            articleEntityService.findKeywords(objectId);//查找文章表中每篇文章的关键词
         }
-        return keywordEntityService.findKeywords(objectId);//在关键词表中查找已经抽取好的事件关键词
+        List<Map> list = new ArrayList<>();
+        List<Map> keywords = keywordEntityService.findKeywords(objectId);//在关键词表中查找已经抽取好的事件关键词
+
+        for (int i = 0;i<keywords.size();i++){
+            Map map = new HashMap();
+            map.put("name",keywords.get(i).get("name"));
+            map.put("value",keywords.get(i).get("value"));
+            map.put("draggable",keywords.get(i).get("draggable"));
+            if (i==0){
+                map.put("category","核心");
+            }else {
+                map.put("category", "非核心");
+            }
+            list.add(map);
+        }
+        return list;
     }
 
-    //生成关键词列表
+    //前台生成关键词列表
     public List keywordList(List<Map> keywords){
         List keywordList = new ArrayList();
         for(int m = 0 ; m < keywords.size() ; m++) {
@@ -287,9 +306,6 @@ public class EventAction {
 //        double simi = 0.35;
         //找见该事件下所有相似文章的相似度
         List<ArticleSimilarEntity> articleSimiList = articleSimilarityService.findEventSimilar(objectId);
-        for (int i=0;i<articleSimiList.size();i++){
-            System.out.println("33333333333333333333articleSimiList::::"+articleSimiList.get(i).getArticleSimilarId());
-        }
 
         //存放在不同相似度情况下每个节点的大小
         Map<String, Vector<Integer>> articleSimiNumMap = new ConcurrentHashMap<>();
@@ -415,30 +431,72 @@ public class EventAction {
     }
 
     //关键词的关联度
-    public void keywordRelated(){
-//        List listkey = new ArrayList();
-//        List<Map> keywordRelated = keywordRelatedDegreeService.findKeywordRelated(objectId);
+    //计算关键词的关联度：采用互信息的计算方法
+    /**
+     * 先计算出第一个关键词出现的文章数Nx，第二个关键词出现的文章数Ny,两个关键词都出现的文章数Nxy,所有的文章数N
+     * 根据公式 corr(x,y)=Math.log10(N/Nx)*Math.log10(N/Ny)*Nxy/(Nx+Ny-Nxy)
+     */
+    public List keywordRelated(String objectId,List<Map> keywords){
 
-//        String target = "";
-//        for(int a = 0 ; a < keywordRelated.size() ; a++) {
-//            for (int b = 0; b < keywords.size(); b++) {
-//                if(keywordRelated.get(a).get("target").equals(keywords.get(b).get("keywordId"))){
-//                    target = keywords.get(b).get("name").toString();
-//                }
-//            }
-//        }
-//        for(int a = 0 ; a < keywordRelated.size() ; a++) {
-//            for (int b = 0; b < keywords.size(); b++) {
-//                if(keywords.get(b).get("keywordId").equals(keywordRelated.get(a).get("source"))){
-//                    Map maps = new HashMap();
-//                    maps.put("target",target);
-//                    maps.put("source",keywords.get(b).get("name"));
-//                    maps.put("weight",keywordRelated.get(a).get("weight"));
-//                    listkey.add(maps);
-//                }
-//            }
-//
-//        }
+        String coreKeyword = " ";
+        //事件是否已经生成关联度
+        List<KeywordRelatedDegreeEntity> keywordRelatedList = keywordRelatedDegreeService.findKeywordRelated(objectId);
+
+        if (keywordRelatedList==null||keywordRelatedList.size()==0){
+            //否，生成关联度，再进行查询
+            List<KeywordRelatedDegreeEntity> list = new ArrayList<>();
+            //查找某事件下所有文章的总数
+            double allArticleNum = Double.parseDouble(articleEntityService.findArticleSumNum(objectId));
+            //查找含有第一个关键词的文章的数量
+            coreKeyword = keywords.get(0).get("name").toString();
+            String coreKeywordId =  keywords.get(0).get("keywordId").toString();
+            double coreKeywordArticleNum = Double.parseDouble(articleEntityService.findOneKeywordArticleNum(objectId,coreKeyword));
+            //查找含有第二个关键词的文章数量
+            for (int i = 1;i<keywords.size();i++){
+                String secondKeyword = keywords.get(i).get("name").toString();
+                String secondKeywordId = keywords.get(i).get("keywordId").toString();
+                double secongKeywordArticleNum = Double.parseDouble(articleEntityService.findOneKeywordArticleNum(objectId,secondKeyword));
+                double twoKeywordArticleNum = Double.parseDouble(articleEntityService.findTwoKeywordArticleNum(objectId,coreKeyword,secondKeyword));
+                double correlated = Math.log10(allArticleNum/coreKeywordArticleNum)*Math.log10(allArticleNum/secongKeywordArticleNum)*allArticleNum/(coreKeywordArticleNum+secongKeywordArticleNum-twoKeywordArticleNum);
+                KeywordRelatedDegreeEntity keywordRelatedDegreeEntity = new KeywordRelatedDegreeEntity();
+                KeywordEntity keywordEntityOne = new KeywordEntity();
+                keywordEntityOne.setKeywordId(coreKeywordId);
+                keywordEntityOne.setKeyword(coreKeyword);
+                KeywordEntity keywordEntityTwo = new KeywordEntity();
+                keywordEntityTwo.setKeywordId(secondKeywordId);
+                keywordEntityTwo.setKeyword(secondKeyword);
+                keywordRelatedDegreeEntity.setKeywordDegreeId(UUIDUtil.getUUID());
+                keywordRelatedDegreeEntity.setKeywordEntityOne(keywordEntityOne);
+                keywordRelatedDegreeEntity.setKeywordEntityTwo(keywordEntityTwo);
+                keywordRelatedDegreeEntity.setRelatedDegree(correlated);
+                //向关联度表中添加数据，调用方法
+                int insert = keywordRelatedDegreeService.insertKeywordRelated(keywordRelatedDegreeEntity);
+                System.out.println("000000000000000000insert:::"+insert);
+
+            }
+        }
+        //
+        List<KeywordRelatedDegreeEntity> keywordRelated = keywordRelatedDegreeService.findKeywordRelated(objectId);
+        List listkey = new ArrayList();
+
+        for(int a = 0 ; a < keywordRelated.size() ; a++) {
+            List list1 = new ArrayList();
+            if (a==0){
+                list1.add(50);
+                list1.add(50);
+                list1.add(keywords.get(0).get("name"));
+            }else {
+                double r = Double.parseDouble(keywordRelated.get(a).getRelatedDegree().toString())*100*3;
+                double x = Math.random()*(3*r+10)+50-r*3;
+                double z = Math.sqrt(r*r-(x-50)*(x-50));
+                double y = Math.random()*(3*z+10)+50-z*3;
+                list1.add(x);
+                list1.add(y);
+                list1.add(keywordRelated.get(a).getKeywordEntityOne().getKeyword());
+            }
+            listkey.add(list1);
+        }
+        return listkey;
     }
 
     //统计事件的可信度

@@ -258,19 +258,20 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="008">传播路径</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
+                        <div class="pull-right"><span class="badge badge-warning"></span>
                         </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="transfer" style="width:1000px;height: 500px;"></div>
+                            <div id="transfer" style="width:900px;height: 500px;float: left"></div>
+                            <div id="graph" style="width:200px;height: 500px;float: right"></div>
                         </div>
                     </div>
                 </div>
                 <!-- /block -->
             </div>
 
-            <%--<div class="row-fluid">
+            <div class="row-fluid">
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
@@ -286,7 +287,7 @@
                     </div>
                 </div>
                 <!-- /block -->
-            </div>--%>
+            </div>
 
             <div class="row-fluid">
                 <!-- block -->
@@ -368,6 +369,7 @@
 <!--/.fluid-container-->
 <link rel="stylesheet" href="vendors/morris/morris.css">
 <script src="vendors/flot/echarts.min.js"></script>
+<%--<script src="vendors/flot/echarts-all.js"></script>--%>
 <script src="vendors/jquery-1.9.1.min.js"></script>
 <script src="vendors/jquery.knob.js"></script>
 <script src="vendors/raphael-min.js"></script>
@@ -903,7 +905,6 @@
     //基于准备好的dom,初始化echarts实例
     var myChart9 = echarts.init(document.getElementById("transfer"));
     //指定图表的配置项和数据
-
     var category = JSON.parse('${category}');
     var categories = [];
 
@@ -994,31 +995,11 @@
     }
 
     var timeLineData = [];
-
     for(var s = 0; s <= 1; s += 0.1) {
         timeLineData.push(s.toFixed(1))
     }
 
-    //图的参数
-    /*var graph = document.getElementById("graph");
-    var graphIndex = echarts.select("graph")
-        .append("div")
-        . style("position","absolute")
-        . style("z-index","10")
-        . style("background","rgba(0, 0, 0, 0.8)")
-        . style("color","#fff")
-        . style("visibility","visible")
-        . style(" padding","30px");
 
-    graphIndex.html(" 度数中心势  "+graphSNA['degreeCentralization']+"<br />"
-        +" 接近中心势  "+graphSNA['closeCentralization']+"<br />"
-        +" 图规模  "+graphSNA['scale']+"<br />"
-        +" 图密度  "+graphSNA['density']+"<br />"
-        +" 直径  "+graphSNA['diameter']+"<br />"
-        +" 平均长度  "+graphSNA['averageength']+"<br />"
-        +" 关联度  "+graphSNA['correlationDegree']+"<br />"
-        +" 等级度  "+graphSNA['rankDegree']+"<br />"
-    )*/
     var tip1 = graphSNA['degreeCentralization'];
     var tip2 = graphSNA['closeCentralization'];
     var tip3 = graphSNA['scale'];
@@ -1033,25 +1014,10 @@
             timeline: {
                 data: timeLineData,
                 axisType: 'category',
-                currentIndex: 4
-            },
-            title: {
-
-                text: ' 度数中心势  ' +tip1+
-                ' 接近中心势 ' + tip2+
-                '  图规模 ' + tip3+
-                '  图密度' + tip4+
-                ' 直径' +tip5+
-                '  平均长度' + tip6+
-                ' 关联度' + tip7+
-                ' 等级度'+tip8,
-
-                x: 'center',
-                textStyle: {
-                    fontSize: 16
-                }
+                currentIndex: 4,
 
             },
+
             visualMap: {
                 left: 'right',
                 top: '10%',
@@ -1107,7 +1073,7 @@
 
                         $.ajax({
                             type: "post",
-                            url: "tooltipContent",
+//                            url: "tooltipContent",
                             data: {'table': tableMap.get(id), 'articleID': id},
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             success: function (msg) {
@@ -1165,7 +1131,7 @@
             animationDuration: 1500,
             animationEasingUpdate: 'quinticInOut',
             series: [{
-                //            name: '媒体',
+//                name: '媒体',
                 type: 'graph',
 //                layout: 'force',
 
@@ -1205,10 +1171,394 @@
                 }
             }]
         },
-
-        options:edgeOptions
+        options:edgeOptions,
     };
-    myChart9.setOption(option9)
+
+    myChart9.setOption(option9);
+</script>
+<script>
+    var myChart10 = echarts.init(document.getElementById("graph"));
+
+    var option10 = {
+        series: [
+            {
+                type: 'scatter',
+                data: [[0,0]],
+                symbolSize: 1,
+                label: {
+                    normal: {
+                        show: true,
+                        formatter: [
+                            '            {term|图说}',
+                            ' 度数中心势  ：' +tip1,
+                            ' 接近中心势  ：' + tip2,
+                            ' 图规模 ：' + tip3,
+                            ' 图密度 ：' + tip4,
+                            ' 直径 ：' +tip5,
+                            ' 平均长度 ：' + tip6,
+                            ' 关联度 ：' + tip7,
+                            ' 等级度 ：'+tip8,
+                        ].join('\n'),
+                        backgroundColor: '#eee',
+                        // borderColor: '#333',
+                        borderColor: 'rgb(199,86,83)',
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        padding: 10,
+                        color: '#000',
+                        fontSize: 14,
+                        shadowBlur: 3,
+                        shadowColor: '#888',
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 3,
+                        lineHeight: 30,
+                        rich: {
+                            term: {
+                                fontSize: 18,
+                                color: 'rgb(199,86,83)'
+                            },
+                            fregment1: {
+                                backgroundColor: '#000',
+                                color: 'yellow',
+                                padding: 5
+                            },
+                            fregment2: {
+                                backgroundColor: '#339911',
+                                color: '#fff',
+                                borderRadius: 15,
+                                padding: 5
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        xAxis: {
+            axisLabel: {show: false},
+            axisLine: {show: false},
+            splitLine: {show: false},
+            axisTick: {show: false},
+            min: -1,
+            max: 1
+        },
+        yAxis: {
+            axisLabel: {show: false},
+            axisLine: {show: false},
+            splitLine: {show: false},
+            axisTick: {show: false},
+            min: -1,
+            max: 1
+        }
+    };
+    myChart10.setOption(option10);
+
+</script>
+<%--<script>
+    var myChart11 = echarts.init(document.getElementById("keyword_related"));
+    var option11 = {
+        backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+            offset: 0,
+            color: '#FFFFFF'
+        }, {
+            offset: 1,
+            color: '#FFFFFF'
+        }]),
+
+        tooltip: {},
+        legend: [{
+            formatter: function (name) {
+                return echarts.format.truncateText(name, 40, '14px Microsoft Yahei', '…');
+            },
+            tooltip: {
+                show: true
+            },
+            selectedMode: 'false',
+            bottom: 20,
+            data: ['核心', '非核心']
+        }],
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: true},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        animationDuration: 3000,
+        animationEasingUpdate: 'quinticInOut',
+        series: [{
+            name: '关键词',
+            type: 'graph',
+            layout: 'force',
+            force: {
+                repulsion: 50
+            },
+            data: ${keywords},
+            links: ${keywordRelated},
+            categories: [{
+                'name': '核心'
+            }, {
+                'name': '非核心'
+            }],
+            focusNodeAdjacency: true,
+            roam: true,
+            label: {
+                normal: {
+
+                    show: true,
+                    position: 'top',
+
+                }
+            },
+            lineStyle: {
+                normal: {
+                    color: 'source',
+                    curveness: 0,
+                    type: "solid"
+                }
+            }
+        }]
+    };
+    myChart11.setOption(option11);
+</script>--%>
+<script>
+    var myChart12 = echarts.init(document.getElementById("keyword_related"));
+    var markLineOpt = {};
+
+    var option12 = {
+        backgroundColor: '',
+        title: {
+            text: '',
+            x: '35%',
+            y: 0
+        },
+        xAxis: [{
+            gridIndex: 0,
+            type: 'value',
+            show: false,
+            min: 0,
+            max: 100,
+            name: '市场需求指数',
+            nameLocation: 'middle',
+            nameGap: 30,
+
+        }, ],
+        yAxis: [{
+            gridIndex: 0,
+            min: 0,
+            show: false,
+            max: 100,
+            name: '竞争强度指数',
+            nameLocation: 'middle',
+            nameGap: 30,
+        }, ],
+        series: [{
+            name: '强相关',
+            type: 'scatter',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            symbol: 'circle',
+            symbolSize: 40,
+            label: {
+                normal: {
+                    show: true,
+                    formatter: function(param) {
+                        return param.data[2];
+                    },
+                },
+
+            },
+            itemStyle: {
+                normal: {
+                    color: '#5aa8ee',
+                    shadowColor: 'rgba(0,0,139, 0.8)',
+                    shadowBlur: 15,
+
+                    shadowOffsetX: 5,
+                    shadowOffsetY: 5,
+                    opacity: 0.9
+
+                },
+
+            },
+
+            data: ${keywordRelated},
+
+        },
+
+             {
+                name: '访问来源',
+                type: 'pie',
+                radius: ['0', '38%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#E3E3FF'
+                        }, {
+                            offset: 0.25,
+                            color: '#DFDFFF'
+                        }, {
+                            offset: 0.50,
+                            color: '#DFDFFF'
+                        }, {
+                            offset: 0.75,
+                            color: '#DFDFFF'
+                        },
+
+
+                            {
+                                offset: 1,
+                                color: '#E3E3FF'
+                            }
+                        ], false),
+                    },
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    value: 335,
+                    name: '直接访问'
+                },
+
+                ]
+            },
+
+            {
+                name: '相关背景',
+                type: 'pie',
+                radius: ['38%', '77%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#FFFFFF'
+                        }, {
+                            offset: 0.10,
+                            color: '#FFFFFF'
+                        }, {
+                            offset: 0.45,
+                            color: '#DFDFFF'
+                        }, {
+                            offset: 0.55,
+                            color: '#DFDFFF'
+                        }, {
+                            offset: 0.90,
+                            color: '#FFFFFF'
+                        },
+
+                            {
+                                offset: 1,
+                                color: '#FFFFFF'
+                            }
+                        ], false),
+                    },
+                },
+
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    value: 3235,
+                    name: '直接访问'
+                },
+
+
+                ]
+            }, {
+                name: '相关背景',
+                type: 'pie',
+                radius: ['76%', '100%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: false,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#FFFFFF'
+                        },
+
+                            {
+                                offset: 0.30,
+                                color: '#E3E3FF'
+                            }, {
+                                offset: 0.50,
+                                color: '#E3E3FF'
+                            }, {
+                                offset: 0.70,
+                                color: '#E3E3FF'
+                            },
+
+                            {
+                                offset: 1,
+                                color: '#FFFFFF'
+                            }
+                        ], false),
+                    },
+                },
+
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    value: 3235,
+                    name: '直接访问'
+                },
+
+
+                ]
+            }
+
+        ]
+    };
+    myChart12.setOption(option12);
 </script>
 
 </body>
