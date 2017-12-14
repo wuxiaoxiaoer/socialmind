@@ -30,6 +30,7 @@ public class KeywordEntityService extends DefaultEntityManager<KeywordEntity> {
                 map.put("name",rs.getString(1));
                 map.put("value",rs.getString(2));
                 map.put("keywordId",rs.getString(3));
+                map.put("draggable","true");
                 list.add(map);
             }
             new DBUtil().closeConn(rs,psmt,conn);
@@ -42,7 +43,7 @@ public class KeywordEntityService extends DefaultEntityManager<KeywordEntity> {
     //在关键词表中查询事件是否已经抽取了关键词
     public boolean findHaveKeywords(String objectId){
         try {
-            List list = new ArrayList();
+
             Connection conn = new DBUtil().GetConnection();
             String sql = "select keyword from keyword k where k.objectID = '"+objectId+"'";
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -52,11 +53,38 @@ public class KeywordEntityService extends DefaultEntityManager<KeywordEntity> {
                 return true;
             }
             new DBUtil().closeConn(rs,psmt,conn);
-
         }catch (Exception e){
         }
         return false;
     }
+
+
+    //查找事件下权重最大的关键词
+    /*public List<KeywordEntity> maxKeyword(String objectId){
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT MAX(k.weight),k.keyword,k.keywordID from keyword k where k.objectID = '"+objectId+"'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                KeywordEntity keywordEntity = new KeywordEntity();
+                keywordEntity.setWeight(rs.getDouble(1));
+                keywordEntity.setKeyword(rs.getString(2));
+                keywordEntity.setKeywordId(rs.getString(3));
+                list.add(keywordEntity);
+                *//*KeywordEntity keywordEntity = new KeywordEntity();
+                keywordEntity.setWeight(rs.getDouble(1));
+                keywordEntity.setKeyword(rs.getString(2));
+                keywordEntity.setKeywordId(rs.getString(3));
+                list.add(keywordEntity);*//*
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+        }
+        return null;
+    }*/
 
 
 }

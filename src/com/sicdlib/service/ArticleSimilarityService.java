@@ -60,7 +60,6 @@ public class ArticleSimilarityService  extends DefaultEntityManager<ArticleSimil
                 similarEntity.setArticleEntityTwo(articleEntity2);
                 similarEntity.setSimilarDegree(rs.getDouble(4));
                 list.add(similarEntity);
-
             }
 
             new DBUtil().closeConn(rs,psmt,conn);
@@ -70,21 +69,5 @@ public class ArticleSimilarityService  extends DefaultEntityManager<ArticleSimil
         return null;
     }
 
-    //查找某事件下的文章相似度
-    public List findTransferNum(String objectId){
-        try {
-            List list = new ArrayList();
-            Connection conn = new DBUtil().GetConnection();
-            String sql = "select COUNT(a.articleID) from article a where a.objectID ="+objectId+"";
-            PreparedStatement psmt = conn.prepareStatement(sql);
-            ResultSet rs = psmt.executeQuery(sql);
-            while (rs.next()){
-                list.add(rs.getString(1));
-            }
-            new DBUtil().closeConn(rs,psmt,conn);
-            return list;
-        }catch (Exception e){
-        }
-        return null;
-    }
+
 }

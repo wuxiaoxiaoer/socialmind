@@ -274,5 +274,61 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
         return null;
 
     }
+    //查找某事件下的文章数量
+    public String findArticleSumNum(String objectId){
+        try {
+            String result = "";
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select COUNT(a.articleID) from article a where a.objectID ='"+objectId+"'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                result = rs.getString(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
+    //查找某事件下含有某一关键词的文章数量
+    public String findOneKeywordArticleNum(String objectId,String keyword){
+        try {
+            String result = "";
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT COUNT(aa.articleID) from article aa where aa.objectID ='"+objectId+"' and aa.keyWords like '%"+keyword+"%'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                result = rs.getString(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return null;
+
+    }
+
+    //查找某事件下含有两个关键词的文章数量
+    public String findTwoKeywordArticleNum(String objectId,String keywordOne,String keywordTwo){
+        try {
+            String result = "";
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT COUNT(aa.articleID) from article aa where aa.objectID ='"+objectId+"' " +
+                    "and aa.keyWords like '%"+keywordOne+"%' and aa.keyWords like '%"+keywordTwo+"%'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                result = rs.getString(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return null;
+
+    }
 
 }
