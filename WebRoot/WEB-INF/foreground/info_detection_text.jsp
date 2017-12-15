@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    	<!--title-->
 					<h3 align="center">信息检测</h3>
 					<div align="left">
-                        <button class="btn btn-large"><a href="info_dectection_info_text.jsp" style="text-decoration:none">信息列表</a></button>
+                        <button class="btn btn-large"><a href="info_detection_text.jsp" style="text-decoration:none">信息列表</a></button>
                         <button class="btn btn-large"><a href="info_dectection_info_graph.html" style="text-decoration:none">图表分析</a></button>
                         
                         

@@ -40,6 +40,29 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
         return webs*/
     }
 
+    //查找事件的网站来源比
+    public List<Map> findWebsiteSource(String objectId){
+
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT DISTINCT(w.websiteName),COUNT(a.websiteID) from article a,website w " +
+                    "where a.objectID = '"+objectId+"' and a.websiteID = w.websiteID  GROUP BY a.websiteID";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("name",rs.getString(1));
+                map.put("value",rs.getInt(2));
+                list.add(map);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+
+        }
+        return null;
+    }
     //查找事件的媒体来源比
     public List<Map> findMediaSource(String objectId){
 
