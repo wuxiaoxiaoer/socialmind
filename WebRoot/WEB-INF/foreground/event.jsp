@@ -46,10 +46,12 @@
         <div class="span9" id="content">
             <!--title-->
             <h3 align="center">全网事件分析</h3>
-            <div align="center"><input type="text" name="name" data-required="1" class="span5 m-wrap" placeholder="实体、事件关键词">
-                <a href="" style="padding-top:-4px;"><button class="btn btn-success" style="margin:-11px 0 0 20px;">搜索</button></a>
-            </div>
-            
+            <form action="<%=basePath%>event">
+                <input type="hidden" name="type" value="input"/>
+                <div align="center"><input type="text" name="objectId" data-required="1" class="span5 m-wrap" placeholder="实体、事件关键词">
+                    <a style="padding-top:-4px;"><button class="btn btn-success" style="margin:-11px 0 0 20px;">搜索</button></a>
+                </div>
+            </form>
             <!--map-->
             <div class="row-fluid">
                 <!-- block -->
@@ -65,7 +67,7 @@
                             <tbody>
                             <tr style="height: 30%">
                                 <td width="25%" height="20%"><img src=" images/logo.jpg" class="img-responsive img-circle" width="70%"/></td>
-                                <td style="color: grey" align="left"><strong><a href="<%=basePath%>event/eventInfo?objectId=${e.object.objectId}">${e.object.name}</a></strong></td>
+                                <td style="color: grey" align="left"><strong><a href="<%=basePath%>event/eventInfo?type=view&&objectId=${e.object.objectId}">${e.object.name}</a></strong></td>
                             </tr>
                             <tr>
                                 <%----%>

@@ -24,7 +24,7 @@ public class Index {
 	//信息监测
 	@RequestMapping(value="infodetection", method = RequestMethod.GET)
 	public String infodetection(){
-		return "/WEB-INF/foreground/info_dectection";
+		return "WEB-INF/foreground/info_detection";
 	}
 
 	/*//全网事件分析

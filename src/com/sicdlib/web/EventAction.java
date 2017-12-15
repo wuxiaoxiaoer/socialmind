@@ -271,6 +271,7 @@ public class EventAction {
             Map map = new HashMap();
             map.put("name",keywords.get(i).get("name"));
             map.put("value",keywords.get(i).get("value"));
+            map.put("keywordId",keywords.get(i).get("keywordId"));
             map.put("draggable",keywords.get(i).get("draggable"));
             if (i==0){
                 map.put("category","核心");
