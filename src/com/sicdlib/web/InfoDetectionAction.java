@@ -68,9 +68,26 @@ public class InfoDetectionAction {
 				}
 			}
 		}
-
 		mode.addAttribute("event",event);
 		return "/WEB-INF/foreground/info_detection";
+	}
+
+	//获取事件的全部信息
+	public List event(String objectId){
+		List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
+		List<EventEntity> eventInfo = eventEntityService.findEventInfo(objectId);
+		List event = new ArrayList();
+		for(int i = 0 ; i < objectInfo.size() ; i++) {
+			for(int j = 0 ; j < eventInfo.size() ; j++) {
+				if (objectInfo.get(i).getObjectId().equals(eventInfo.get(j).getObjectId())){
+					DynamicObject dy = new DynamicObject();
+					dy.setObject(objectInfo.get(i));
+					dy.setEvent(eventInfo.get(j));
+					event.add(dy);
+				}
+			}
+		}
+		return event;
 	}
 
 	@RequestMapping("graph")
@@ -95,10 +112,30 @@ public class InfoDetectionAction {
 		for (ProvinceEntity province:provinceEntities) {
 			System.out.println(province.getName());
 		}
+		String[] province = {"北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
+				"上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南",
+				"重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "台湾", "香港", "澳门"};
+		int[] provincenum = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		List<Map> provinceList = new ArrayList<>();
+		for (int i=0;i<province.length;i++){
+			Map map = new HashMap();
+			map.put("name",province[i]);
+			for (ArticleEntity articles:articleList) {
+				if(articles.getContent().contains(province[i])){
+					map.put("value",++provincenum[i]);
+				}else {
+					map.put("value",provincenum[i]);
+				}
+			}
+			provinceList.add(map);
+		}
+
+		mode.addAttribute("event", event(objectId));
 		mode.addAttribute("articleNum", articleList.size());
 		mode.addAttribute("sensitiveCount", JSON.toJSON(sensitiveCount(list.size(),articleList.size()-list.size())));
 		mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
 		mode.addAttribute("sensilist", JSON.toJSON(sensitiveType(list)));
+		mode.addAttribute("provinceList", JSON.toJSON(provinceList));
 		mode.addAttribute("websiteSource", JSON.toJSON(websiteSource));
 		mode.addAttribute("websites", JSON.toJSON(websites));
 		mode.addAttribute("webs", JSON.toJSON(getWebsiteName()));

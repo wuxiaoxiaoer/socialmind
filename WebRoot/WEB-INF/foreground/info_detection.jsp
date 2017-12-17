@@ -54,7 +54,7 @@
                                 <div align="center"><input type="text" name="object" data-required="1" class="span5 m-wrap" placeholder="请输入关键词">
                                     <button type="submit" class="btn btn-success" style="margin: -10px 0 0 10px;">搜索</button>
                                 </div>
-                                <div align="center">
+                                <%--<div align="center">
                                     <h3>可选择以下标签:</h3>
                                 <p>
                                     <button class="btn btn-danger">热点</button>
@@ -65,7 +65,7 @@
                                     <button class="btn btn-warning">金融</button>
                                     <button class="btn btn-inverse">Button</button>
                                 </p>
-                                </div>
+                                </div>--%>
                             </div>
                         </form>
                     </div>
