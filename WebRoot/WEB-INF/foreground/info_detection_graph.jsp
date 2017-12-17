@@ -59,9 +59,10 @@
             <!--title-->
             <h3 align="center">信息检测</h3>
             <div align="left">
+                <c:forEach items="${event}" var="e" varStatus="sts">
                 <button class="btn btn-large"><a href="info_dectection_info_text.html" style="text-decoration:none">信息列表</a></button>
-                <button class="btn btn-large"><a href="info_dectection_info_graph.html" style="text-decoration:none">图表分析</a></button>
-
+                <button class="btn btn-large"><a href="<%=basePath%>infodetection/graph?objectId=${e.object.objectId}">图表分析</a></button>
+                </c:forEach>
 
             </div>
             <!-- morris stacked chart -->
@@ -95,7 +96,7 @@
                                 <div class="muted pull-left">媒体活跃度统计</div>
                             </div>
                             <div class="block-content collapse in">
-                                <div class="span12">
+                                <div class="span12" style="height: 300px">
                                     <div id="website_source" style="width:100%;height:250px"></div>
 
                                 </div>
@@ -110,9 +111,9 @@
                                 <div class="muted pull-left">来源类型统计图</div>
                             </div>
                             <div class="block-content collapse in">
-                                <div class="span12">
+                                <div class="span12" style="height: 300px">
                                     <div id="website" style="width:100%;height:250px"></div>
-
+                                    <div align="center"><b>各媒体信息总数为<font color="orange">${articleNum}</font>条</b></div>
                                 </div>
                             </div>
                         </div>
@@ -130,12 +131,12 @@
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="website_statistic" style="width:1000px;height: 400px;"></div>
+                            <div id="website_statistic" style="width:1200px;height: 400px;"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row-fluid">
+                <%--<div class="row-fluid">
                     <div class="block">
                         <div class="navbar navbar-inner block-header" id="003">
                             <div class="muted pull-left" >信息属性走势图</div>
@@ -150,34 +151,42 @@
                         </div>
                     </div>
                     <!-- /block -->
-                </div>
+                </div>--%>
 
 
 
-                <!-- morris bar & donut charts -->
-                <div class="row-fluid section">
-                    <!-- block -->
-                    <div class="block">
-                        <div class="navbar navbar-inner block-header" id="004">
-                            <div class="muted pull-left" >数据类型</div>
-                            <div class="pull-right"><span class="badge badge-warning">View More</span>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header" id="004">
+                                <div class="muted pull-left">敏感信息</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div id="mingan" style="width:100%;height:250px"></div>
 
+                                </div>
                             </div>
                         </div>
-                        <div class="block-content collapse in">
-
-                            <div class="span5 chart">
-                                <h5>敏感信息</h5>
-                                <div id="hero-donut" style="height: 250px;"></div>
-                            </div>
-                            <div class="span6 chart">
-                                <h5>全部信息</h5>
-                                <div id="in-out" style="height: 250px;"></div>
-                            </div>
-
-                        </div>
+                        <!-- /block -->
                     </div>
-                    <!-- /block -->
+
+                    <div class="span6">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">敏感类型统计</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div id="sensitive" style="width:100%;height:250px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+
                 </div>
 
 
@@ -191,7 +200,7 @@
                         </div>
                         <div class="block-content collapse in">
                             <div class="span12">
-                                <div id="map" style="width:1000px;height: 400px;"></div>
+                                <div id="map" style="width:1000px;height: 900px;"></div>
                             </div>
                         </div>
                     </div>
@@ -214,7 +223,7 @@
 <script src="vendors/jquery-1.9.1.min.js"></script>
 <script src="vendors/jquery.knob.js"></script>
 <script src="vendors/raphael-min.js"></script>
-
+<script src="vendors/china.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="vendors/flot/jquery.flot.js"></script>
 <script src="vendors/flot/jquery.flot.categories.js"></script>
@@ -367,7 +376,7 @@
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
-    var myChart3 = echarts.init(document.getElementById('infoAttribute'));
+   /* var myChart3 = echarts.init(document.getElementById('infoAttribute'));
     var option3 = {
 
         tooltip: {
@@ -412,159 +421,259 @@
     };
 
     // 为echarts对象加载数据
-    myChart3.setOption(option3);
+    myChart3.setOption(option3);*/
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
     var myChart4 = echarts.init(document.getElementById('map'));
-//
-//
-//
-//    var option4 ={
-//        "tooltip": {
-//            "show": true,
-//            "padding": 0,
-//            "backgroundColor": "rgba(255,255,255,0)"
-//        },
-//        "series": [
-//            {
-//                "name": "中国",
-//                "type": "map",
-//                "mapType": "china",
-//                "zoom": 1.2,
-//                "selectedMode": false,
-//                "itemStyle": {
-//                    "normal": {
-//                        "areaColor": "#103a65",
-//                        "borderWidth": 1.5,
-//                        "borderColor": "#1f5c94",
-//                        "label": {
-//                            "show": true
-//                        }
-//                    },
-//                    "emphasis": {
-//                        "areaColor": "#74c0ed",
-//                        "label": {
-//                            "show": true
-//                        }
-//                    }
-//                },
-//                "label": {
-//                    "normal": {
-//                        "show": false
-//                    },
-//                    "emphasis": {
-//                        "show": false
-//                    }
-//                },
-//                "data": [
-//                    {
-//                        "value": 100,
-//                        "name": "湖南",
-//                        "itemStyle": {
-//                            "normal": {
-//                                "color": "#8985d2",
-//                                "label": {
-//                                    "show": true,
-//                                    "textStyle": {
-//                                        "color": "#000",
-//                                        "fontSize": 12
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    {
-//                        "value": 200,
-//                        "name": "江西",
-//                        "itemStyle": {
-//                            "normal": {
-//                                "color": "#9baded",
-//                                "label": {
-//                                    "show": true,
-//                                    "textStyle": {
-//                                        "color": "#000",
-//                                        "fontSize": 12
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    {
-//                        "value": 100,
-//                        "name": "湖北",
-//                        "itemStyle": {
-//                            "normal": {
-//                                "color": "#88d2df",
-//                                "label": {
-//                                    "show": true,
-//                                    "textStyle": {
-//                                        "color": "#000",
-//                                        "fontSize": 12
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    {
-//                        "value": 133,
-//                        "name": "河南",
-//                        "itemStyle": {
-//                            "normal": {
-//                                "color": "#7ccaa2",
-//                                "label": {
-//                                    "show": true,
-//                                    "textStyle": {
-//                                        "color": "#000",
-//                                        "fontSize": 12
-//
-//
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    {
-//                        "value": 133,
-//                        "name": "浙江",
-//                        "itemStyle": {
-//                            "normal": {
-//                                "color": "#7caaa2",
-//                                "label": {
-//                                    "show": true,
-//                                    "textStyle": {
-//                                        "color": "#000",
-//                                        "fontSize": 12
-//
-//
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                ],
-//                "markPoint": {
-//                    "symbol": "pin",
-//                    "symbolSize": 80,
-//                    "label": {
-//                        "normal": {
-//                            "show": true
-//                        }
-//                    },
-//                    "data": [
-//                        {
-//                            "name": "杭州",
-//                            "coord": [
-//                                120.245697,30
-//                            ]
-//                        }
-//                    ]
-//                }
-//            }
-//        ]
-//    }
-    // 为echarts对象加载数据
+
+//    var areaInfo = echarts.init(document.getElementById('areaInfo'));
+    // 随机0-1000的数
+    function randomData() {
+        return Math.round(Math.random()*1000);
+    }
+
+    function getDatas(maps) {
+        var jsonObj = maps;
+        var length = 0;
+        //获得json大小
+        for (var k in jsonObj){
+            length ++;
+        }
+//        var jsonObj = eval(adminJson);
+        var objArr = new Array(length);
+        var i = 0;
+        for (var k in jsonObj){
+            var rowobj = {};
+            rowobj.name = k;
+            rowobj.value = jsonObj[k];
+//            console.log(rowobj);
+            objArr[i] = rowobj;
+            i = i + 1;
+        }
+        console.log(objArr);
+//        console.log(objArr);
+        return objArr;
+    }
+    // legend内容
+    var legendData=['管理员','政府','事业单位','企业', '个人'];
+    // legend自定义颜色 不设置有默认色
+    var legendColor=['blue','gray','#000','cyan', 'red'];
+    // 映射颜色  不设置有默认色
+    var visColor=["#ffffff","#e8192f","#d6664d","#B9044E","#f0ba2e","#d3ce2b","#169A7f","#0b6573","#1BB3c8"];
+    // seriesData Array [{name:'',type:'map',mapType:'china',
+    //           label: { normal: {show: true},emphasis: { show: true}},data:[{name:'',value:''},...]},{...}]
+
+    var seriseData=[
+        {
+            name: '管理员',
+            type: 'map',
+            mapType: 'china',
+            label: { normal: {show: true},emphasis: { show: true}},
+            <%--data:getDatas(${adminJson})--%>
+//            data:[{name:'山东',value:1}]
+        },
+        {
+            name: '政府',
+            type: 'map',
+            mapType: 'china',
+            label: { normal: {show: true},emphasis: { show: true}},
+            <%--data: getDatas(${govJson})--%>
+        },
+        {
+            name: '事业单位',
+            type: 'map',
+            mapType: 'china',
+            label: { normal: {show: true},emphasis: { show: true}},
+            <%--data: getDatas(${insJson})--%>
+        },
+        {
+            name: '企业',
+            type: 'map',
+            mapType: 'china',
+            label: { normal: {show: true},emphasis: { show: true}},
+            <%--data:getDatas(${comJson})--%>
+        },
+        {
+            name: '个人',
+            type: 'map',
+            mapType: 'china',
+            label: { normal: {show: true},emphasis: { show: true}},
+            <%--data:getDatas(${perJson})--%>
+        }
+    ]
+
+    var option4 = {
+        title: {
+            text: '用户地区分布',
+            left: 'left'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            right: '3%',
+            bottom:'3%',
+            data:legendData
+        },
+        color:legendColor,
+        visualMap: {
+            min:
+            <%--${minNum}--%>
+            ,
+            max:
+            <%--${maxNum}--%>
+            ,
+            left: 'left',
+            bottom: '3%',
+            text: ['高','低'], // 文本，默认为数值文本
+            calculable: true,
+            color:visColor
+        },
+        toolbox: {
+            show: true,
+            right: '3%',
+            feature: {
+                dataView: {readOnly: false},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: seriseData
+    };
+    //地区分布 - 设置显示
     myChart4.setOption(option4);
+</script>
+
+<script>
+    //基于准备好的dom,初始化echarts实例
+    var myChart5 = echarts.init(document.getElementById('mingan'));
+    var option5 = {
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient : 'horizontal',
+            y : 'top',
+            data:['敏感','非敏感']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : ['50%', '70%','70%','70%','70%'],
+                itemStyle : {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                            '#F3A43B','#FE8463','#9BCA63','#FAD860','#60C0DD',
+                            /*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
+                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*/
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    normal : {
+                        label : {
+                            show : false
+                        },
+                        labelLine : {
+                            show : false
+                        }
+                    },
+                    emphasis : {
+                        label : {
+                            show : true,
+                            position : 'center',
+                            textStyle : {
+                                fontSize : '30',
+                                fontWeight : 'bold'
+                            }
+                        }
+                    }
+                },
+                data:${sensitiveCount}
+
+            }
+        ]
+    };
+    // 为echarts对象加载数据
+    myChart5.setOption(option5);
+</script>
+<script>
+    //基于准备好的dom,初始化echarts实例
+    var myChart6 = echarts.init(document.getElementById('sensitive'));
+    var option6 = {
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient : 'horizontal',
+            y : 'top',
+            data:['色情','反动','贪腐','暴恐','民生','其他']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : ['50%', '70%','70%','70%','70%'],
+                itemStyle : {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                            '#F3A43B','#FE8463','#9BCA63','#FAD860','#60C0DD',
+                            /*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
+                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*/
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    normal : {
+                        label : {
+                            show : false
+                        },
+                        labelLine : {
+                            show : false
+                        }
+                    },
+                    emphasis : {
+                        label : {
+                            show : true,
+                            position : 'center',
+                            textStyle : {
+                                fontSize : '30',
+                                fontWeight : 'bold'
+                            }
+                        }
+                    }
+                },
+                data:${sensilist}
+
+            }
+        ]
+    };
+
+    // 为echarts对象加载数据
+    myChart6.setOption(option6);
 </script>
 </body>
 
