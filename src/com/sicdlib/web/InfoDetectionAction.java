@@ -3,9 +3,6 @@ package com.sicdlib.web;
 import com.alibaba.fastjson.JSON;
 import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
-import edu.xjtsoft.base.orm.support.MatchType;
-import edu.xjtsoft.base.orm.support.PropertyFilter;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //信息监测模块
 @Controller
@@ -129,7 +123,14 @@ public class InfoDetectionAction {
 			}
 			provinceList.add(map);
 		}
+		List coutlist = new ArrayList();
+		for (int i = 0;i<provinceList.size();i++){
+			coutlist.add(provinceList.get(i).get("value"));
+		}
+		String maxcount = Collections.max(coutlist).toString();
 
+		mode.addAttribute("objectId",objectId);
+		mode.addAttribute("count", maxcount);
 		mode.addAttribute("event", event(objectId));
 		mode.addAttribute("articleNum", articleList.size());
 		mode.addAttribute("sensitiveCount", JSON.toJSON(sensitiveCount(list.size(),articleList.size()-list.size())));
@@ -142,6 +143,42 @@ public class InfoDetectionAction {
 		mode.addAttribute("periodList", JSON.toJSON(findPeriod(objectId)));
 		mode.addAttribute("websiteStatistic",JSON.toJSON(websiteStatistic(objectId)));
 		return "/WEB-INF/foreground/info_detection_graph";
+	}
+
+	//页面的点击事件
+	@RequestMapping("click")
+	public String findEventArticle(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
+
+		String object = req.getParameter("object");
+		String objectId = req.getParameter("objectId");
+
+		//点击敏感事件
+		List<DynamicSensitiveArticle> sensitiveList = new ArrayList<>();
+		String[] sensitiveType= {"色情","暴恐","反动","贪腐","民生","其他"};
+		if ("敏感".equals(object)){
+			sensitiveList = sensitive(objectId);
+			mode.addAttribute("sensitiveList", sensitiveList);
+		}else if("不敏感".equals(object)){
+
+		}
+		//点击敏感的详细类型
+		List<DynamicSensitiveArticle> sensitiveInfoList = new ArrayList<>();
+		for (int i=0;i<sensitiveType.length;i++){
+			if (sensitiveType[i].equals(object)){
+				sensitiveList = sensitive(objectId);
+				for (int j=0;j<sensitiveList.size();j++) {
+					if (object.equals(sensitiveList.get(j).getSensitiveType())){
+						DynamicSensitiveArticle dy = new DynamicSensitiveArticle();
+						dy.setSensitiveType(object);
+						dy.setArticle(sensitiveList.get(j).getArticle());
+						dy.setSensitiveWord(sensitiveList.get(j).getSensitiveWord());
+						sensitiveInfoList.add(dy);
+					}
+				}
+			}
+		}
+		mode.addAttribute("sensitiveInfo", sensitiveInfoList);
+		return "/WEB-INF/foreground/infodetail";
 	}
 
 	//统计敏感与不敏感数量
@@ -291,16 +328,8 @@ public class InfoDetectionAction {
 				}
 			}
 		}
-
 		return list;
 
-	}
-
-	
-	public void area(){
-		//查询省名
-		List list = new ArrayList();
-		
 	}
 
 	}

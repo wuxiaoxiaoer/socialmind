@@ -54,13 +54,14 @@
         </div>
         <!--/span-->
 
+        <input type="hidden" value="${objectId}" name="objectId">
         <div class="span9" id="content" style="height:90%; overflow-y:auto">
 
             <!--title-->
             <h3 align="center">信息检测</h3>
             <div align="left">
                 <c:forEach items="${event}" var="e" varStatus="sts">
-                <button class="btn btn-large"><a href="<%=basePath%>retrivalResults?flag=all&name=${e.object.name}" style="text-decoration:none">信息列表</a></button>
+                <button class="btn btn-large"><a href="<%=basePath%>retrivalResults?flag=all&turn=detection&name=${e.object.name}" style="text-decoration:none">信息列表</a></button>
                 <button class="btn btn-large"><a href="<%=basePath%>infodetection/graph?objectId=${e.object.objectId}">图表分析</a></button>
                 </c:forEach>
 
@@ -267,6 +268,10 @@
     }
     // 为echarts对象加载数据
     myChart.setOption(option);
+    myChart.on('click', function (params) {
+        alert((params.name));
+        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+    });
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -307,7 +312,6 @@
     };
     // 为echarts对象加载数据
     myChart1.setOption(option1);
-
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -373,6 +377,10 @@
 
     // 为echarts对象加载数据
     myChart2.setOption(option2);
+    myChart2.on('click', function (params) {
+        alert((params.name));
+        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+    });
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -430,14 +438,14 @@
     // legend内容
     var legendData=['信息量'];
     // legend自定义颜色 不设置有默认色
-    var legendColor=['#FFFFCC'];
+    var legendColor=['blue','gray','#000','cyan', 'red'];
     // 映射颜色  不设置有默认色
-    var visColor=["#ffffff","#e8192f","#d6664d","#B9044E","#f0ba2e","#d3ce2b","#169A7f","#333366","#1BB3c8"];
+    var visColor=["#ffffff","#e8192f","#d6664d","#B9044E","#f0ba2e","#d3ce2b","#169A7f","#0b6573","#1BB3c8"];
     // seriesData Array [{name:'',type:'map',mapType:'china',
     //           label: { normal: {show: true},emphasis: { show: true}},data:[{name:'',value:''},...]},{...}]
     var seriseData=[
         {
-            name: '空调',
+            name: '',
             type: 'map',
             mapType: 'china',
             label: { normal: {show: true},emphasis: { show: true}},
@@ -463,7 +471,7 @@
         color:legendColor,
         visualMap: {
             min: 0,
-            max: 2500,
+            max: ${count},
             left: 'left',
             bottom: '3%',
             text: ['高','低'],           // 文本，默认为数值文本
@@ -482,142 +490,11 @@
         series: seriseData
     };
     myChart4.setOption(option4);
-    /*var data =
-    <%--${provinceList};--%>
-    var resultdata0 = [];
-    var sum0 = 0;
-    var titledata = [];
-    for (var i = 0; i < data.length; i++) {
-        var d0 = {
-            name: data[i].name,
-            value: data[i].value
-        };
-        titledata.push(data[i].name)
-        resultdata0.push(d0);
-        sum0 += data[i].value;
-    }
+    myChart4.on('click', function (params) {
+        alert((params.name));
+        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+    });
 
-    function NumDescSort(a,b){
-        return a.value-b.value;
-    }
-    resultdata0.sort(NumDescSort);
-
-    var option4 = {
-        title: [{
-            text: '信息量统计',
-            left: 'center'
-        },{
-            text: '全部: ' +sum0,
-            right: 120,
-            top: 40,
-            width: 100,
-            textStyle: {
-                color: '#fff',
-                fontSize: 16
-            }
-        },],
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['全部'],
-            selectedMode: 'single',
-        },
-        visualMap: {
-            min: 0,
-            max: 2500,
-            left: 'left',
-            top: 'bottom',
-            text: ['高', '低'],
-            calculable: true,
-            colorLightness: [0.2, 100],
-            color: ['#c05050','#e5cf0d','#5ab1ef'],
-            dimension: 0
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-                dataView: {
-                    readOnly: false
-                },
-                restore: {},
-                saveAsImage: {}
-            }
-        },
-        grid: {
-            right: 40,
-            top: 100,
-            bottom: 40,
-            width: '30%'
-        },
-        xAxis: [{
-            position: 'top',
-            type: 'value',
-            boundaryGap: false,
-            splitLine: {
-                show: false
-            },
-            axisLine: {
-                show: false
-            },
-            axisTick: {
-                show: false
-            },
-        }],
-        yAxis: [{
-            type: 'category',
-            data: titledata,
-            axisTick: {
-                alignWithLabel: true
-            }
-        }],
-        series: [{
-            z: 1,
-            name: '全部',
-            type: 'map',
-            map: 'china',
-            left: '10',
-            right: '35%',
-            top: 100,
-            bottom: "35%",
-            zoom: 0.75,
-            label: {
-                normal: {
-                    show: true
-                },
-                emphasis: {
-                    show: true
-                }
-            },
-            //roam: true,
-            data: resultdata0
-        },  {
-            name: '全部',
-            z: 2,
-            type: 'bar',
-            label: {
-                normal: {
-                    show: true
-                },
-                emphasis: {
-                    show: true,
-                }
-            },
-            itemStyle: {
-                emphasis: {
-                    color: "rgb(254,153,78)"
-                }
-            },
-            data: resultdata0
-        }]
-    };
-    //地区分布 - 设置显示
-    myChart4.setOption(option4);*/
 </script>
 
 <script>
@@ -683,6 +560,10 @@
     };
     // 为echarts对象加载数据
     myChart5.setOption(option5);
+    myChart5.on('click', function (params) {
+        alert((params.name));
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+    });
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -748,6 +629,10 @@
 
     // 为echarts对象加载数据
     myChart6.setOption(option6);
+    myChart6.on('click', function (params) {
+        alert((params.name));
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+    });
 </script>
 </body>
 

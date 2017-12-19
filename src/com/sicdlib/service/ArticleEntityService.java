@@ -2,6 +2,7 @@ package com.sicdlib.service;
 
 import com.sicdlib.entity.ArticleEntity;
 import com.sicdlib.entity.ArticleSimilarEntity;
+import com.sicdlib.entity.AuthorEntity;
 import com.sicdlib.entity.WebsiteEntity;
 import com.sicdlib.util.DBUtil.DBUtil;
 import com.sicdlib.util.SNAUtil.SNAUtil;
@@ -92,8 +93,11 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content from article a,website w " +
-                    "where a.websiteID = w.websiteID and a.objectID = '" +objectId+"' and " +
+            String sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content, " +
+                    "a.scanNumber,a.participationNumber,a.likeNumber,a.recommendNumber, " +
+                    "a.collectNumber,a.similarDegree,au.authorID,au.name " +
+                    "from article a,website w,author au " +
+                    "where a.websiteID = w.websiteID and a.authorID = au.authorID and a.objectID = '" +objectId+"' and " +
                     "a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
                     "order by a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -103,10 +107,21 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 a.setPostTime(rs.getString(1));
                 a.setTitle(rs.getString(2));
                 WebsiteEntity web = new WebsiteEntity();
-                web.setWebsiteId(rs.getString(3));
+                web.setWebsiteName(rs.getString(3));
+//                web.setWebsiteId(rs.getString(3));
                 a.setWebsiteEntity(web);
                 a.setArticleId(rs.getString(4));
                 a.setContent(rs.getString(5));
+                a.setScanNumber(rs.getInt(6));
+                a.setParticipationNumber(rs.getInt(7));
+                a.setLikeNumber(rs.getInt(8));
+                a.setRecommendNumber(rs.getInt(9));
+                a.setCollectNumber(rs.getInt(10));
+                a.setSimilarDegree(rs.getDouble(11));
+                AuthorEntity authorEntity = new AuthorEntity();
+                authorEntity.setAuthorId(rs.getString(12));
+                authorEntity.setName(rs.getString(13));
+                a.setAuthorEntity(authorEntity);
                 list.add(a);
             }
             new DBUtil().closeConn(rs,psmt,conn);

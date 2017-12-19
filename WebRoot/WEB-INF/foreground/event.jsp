@@ -31,12 +31,8 @@
         <div class="span3" id="sidebar">
             <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
                 <li>
-                    <a href=""><i class="icon-chevron-right"></i> 推荐事件</a>
+                    <a><i class="icon-chevron-right"></i> 推荐事件</a>
                 </li>
-                <li class="active">
-                    <a href=""><i class="icon-chevron-right"></i>全网事件分析</a>
-                </li>
-
             </ul>
         </div>
 

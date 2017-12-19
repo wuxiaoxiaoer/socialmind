@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: admin
+  Date: 2017/12/18
+  Time: 12:47
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -10,7 +17,7 @@
 <html class="no-js">
 
 <head>
-    <title>信息监测 - socialmind大平台</title>
+    <title>全文检索 - socialmind大平台</title>
     <base href="<%=basePath%>foreground/"/>
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -117,26 +124,16 @@
 <div class="span3" id="sidebar" style="margin:4em 0em">
     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
         <li>
-            <a><i class="icon-chevron-right"></i>信息监测</a>
+            <a href="index.html"><i class="icon-chevron-right"></i> 详细信息</a>
         </li>
-
     </ul>
 </div>
 <div class="container-fluid" style="margin-top: 4%;">
     <div class="row-fluid">
         <!--/span-->
-        <h3 align="center">信息检测</h3>
-        <div align="left">
-            <button class="btn btn-large"><a href="<%=basePath%>retrivalResults?flag=all&turn=detection&name=${object.name}" style="text-decoration:none">信息列表</a></button>
-            <button class="btn btn-large"><a href="<%=basePath%>infodetection/graph?objectId=${object.objectId}">图表分析</a></button>
-
-
-        </div>
-        <!-- morris stacked chart -->
-        <br/>
         <div class="span9" id="content">
 
-            <form action="<%=basePath%>retrivalResults" method="post">
+            <%--<form action="<%=basePath%>retrivalResults" method="post">
                 <!-- 判别条件检索 -->
                 <input type="hidden" name="flag" value="condition"/>
                 <input type="hidden" name="objectId" value="${object.objectId}" id="objId"/>
@@ -255,7 +252,7 @@
                         <script type="text/javascript" src="js/shaixuan.js"></script>
                     </div>
                 </div>
-            </form>
+            </form>--%>
             <div class="row-fluid">
                 <!-- block -->
                 <div class="block">
@@ -265,20 +262,22 @@
                     <div class="block-content collapse in">
                         <div class="span12">
                             <div id="example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                                <div class="row"><div class="span6"><div id="example_length" class="dataTables_length">
+                                <%--<div class="row"><div class="span6"><div id="example_length" class="dataTables_length">
                                     <label>
                                         <select size="1" name="example_length" aria-controls="example"  style="margin-left:40px; width: 60px;">
                                             <option value="10" selected="selected">10</option>
                                             <option value="25">25</option><option value="50">50</option>
-                                            <option value="100">100</option></select> records per page</label>
-                                </div>
-                                </div>
-                                    <div class="span6">
+                                            <option value="100">100</option>
+                                        </select> records per page
+                                    </label>
+                                </div>--%>
+                            </div>
+                            <div class="span6">
 
-                                        <div class="dataTables_filter" id="example_filter">
-                                            <label>Search: <input type="text" aria-controls="example"></label>
-                                        </div>
-                                    </div>
+                                        <%--<div class="dataTables_filter" id="example_filter">--%>
+                                            <%--<label>Search: <input type="text" aria-controls="example"></label>--%>
+                                        <%--</div>--%>
+                            </div>
                                 </div>
                                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="example" aria-describedby="example_info">
                                     <thead>
@@ -289,58 +288,86 @@
                                     </thead>
 
                                     <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                    <c:forEach items="${articles}" var="a" varStatus="sts">
+                                    <c:forEach items="${sensitiveList}" var="a" varStatus="sts">
                                         <tr class="gradeA odd">
-                                            <td class="">
-                                                <a href="<%=basePath%>authorInfo?authorId=${a.authorEntity.authorId}" target="_blank"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${a.authorEntity.name}</span></a><br>
-                                                <b><a href="${a.newsResource}" target="_blank">${a.title}</a></b>
+
+                                           <td class="">
+
+                                                   <a href="<%=basePath%>authorInfo?authorId=${a.article.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${a.article.authorEntity.name}</span></a>
+                                                   <span class="badge badge-info" style="background-color: #FFFFFF;float: right"><font color="red">敏感类型：${a.sensitiveType}</font></span><br>
+                                                <b>
+                                                    <%--<a href="${a.newsResource}" target="_blank">--%>
+                                                    <a>${a.article.title}</a></b>
+
                                                 <div class="pull-right">
-                                                    <span class="badge badge-info" style="background-color: #f89406">${a.similarDegree}</span>
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${a.article.similarDegree}</span>
                                                 </div>
-                                                <div id="content${sts.index}" class="text" style="">${a.content}</div>
+                                                <div id="content${sts.index}" class="text" style="">${a.article.content}</div>
                                                 <br/>
-                                                    ${a.postTime}
+                                                    ${a.article.postTime}
                                                 <div style="float: right">
-                                                    来自于:${a.websiteEntity.websiteName}
+                                                    来自于:${a.article.websiteEntity.websiteName}
                                                 </div>
                                                 <br/>
-                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${a.commentNumber}</span>
-                                                浏览量:${a.scanNumber}
-                                                参与量:${a.participationNumber}
-                                                喜欢量:${a.likeNumber}
-                                                推荐量:${a.recommendNumber}
-                                                收藏量:${a.collectNumber}
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${a.article.commentNumber}</span>
+                                                浏览量:${a.article.scanNumber}
+                                                参与量:${a.article.participationNumber}
+                                                喜欢量:${a.article.likeNumber}
+                                                推荐量:${a.article.recommendNumber}
+                                                收藏量:${a.article.collectNumber}
                                             </td>
                                         </tr>
-                                        <tr class="alert alert-info alert-block" style="color: #3a87ad;">
-                                            <td>
-                                                <div id="comment${sts.index}" style="display: none">
-                                                    <c:forEach items="${a.articleComments}" var="c">
-                                                        <c:if test="${c.fatherCommentId == null}">
-                                                            <a href="<%=basePath%>authorInfo?authorId=${c.authorEntity.authorId}" target="_blank"><b class="badge badge-info">${c.authorEntity.name}</b></a>  <br/>
-                                                            ${c.content} <br/>
-                                                            ${c.commentTime}<br/>
-                                                        </c:if>
-                                                        <c:forEach items="${a.articleComments}" var="c2">
-                                                            <c:if test="${c2.fatherCommentId == c.articleCommentId}">
-                                                                <div style="margin-left: 3%">
-                                                                    <a href="<%=basePath%>authorInfo?authorId=${c2.authorEntity.authorId}" target="_blank"><b class="badge badge-info">${c2.authorEntity.name}</b></a> <br/>
-                                                                    <span style="color: #7b14ed;;">@${c.authorEntity.name}</span>
-                                                                        ${c2.content} <br/>
-                                                                    点赞量: ${c2.likeNumber}
-                                                                    回复量: ${c2.replayNumber}
-                                                                    <span style="margin-left: 10px;">${c2.commentTime}</span><br/>
-                                                                </div>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </c:forEach>
+                                    </c:forEach>
+                                    <c:forEach items="${sensitiveInfo}" var="a" varStatus="sts">
+                                        <tr class="gradeA odd">
+
+                                            <td class="">
+
+                                                <a href="<%=basePath%>authorInfo?authorId=${a.article.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${a.article.authorEntity.name}</span></a>
+                                                <span class="badge badge-info" style="background-color: #FFFFFF;float: right"><font color="red">敏感类型：${a.sensitiveType}</font></span><br>
+                                                <b>
+                                                        <%--<a href="${a.newsResource}" target="_blank">--%>
+                                                    <a>${a.article.title}</a></b>
+
+                                                <div class="pull-right">
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${a.article.similarDegree}</span>
                                                 </div>
+                                                <div id="content${sts.index}" class="text" style="">${a.article.content}</div>
+                                                <br/>
+                                                    ${a.article.postTime}
+                                                <div style="float: right">
+                                                    来自于:${a.article.websiteEntity.websiteName}
+                                                </div>
+                                                <br/>
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${a.article.commentNumber}</span>
+                                                浏览量:${a.article.scanNumber}
+                                                参与量:${a.article.participationNumber}
+                                                喜欢量:${a.article.likeNumber}
+                                                推荐量:${a.article.recommendNumber}
+                                                收藏量:${a.article.collectNumber}
                                             </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
-                                <div class="row"><div class="span6"></div><div class="span6"><div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="#">← Previous</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a></li><li class="next"><a href="#">Next → </a></li></ul></div></div></div></div>
+                               <%-- <div class="row">
+                                    <div class="span6"></div>
+                                    <div class="span6">
+                                        <div class="dataTables_paginate paging_bootstrap pagination">
+                                            <ul>
+                                                <li class="prev disabled"><a href="#">← Previous</a></li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li class="next"><a href="#">Next → </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>--%>
+
+                            </div>
                         </div>
                     </div>
                 </div>
