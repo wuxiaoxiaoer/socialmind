@@ -13,7 +13,7 @@
 %>
 
 <hr>
-<footer style="text-align: center">
+<footer style="position: fixed;bottom: 0;align-content: center" >
     <p>&copy; sicdpLab 2017 社会智能与复杂数据处理实验室 </p>
 </footer>
 

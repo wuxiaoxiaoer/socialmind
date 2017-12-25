@@ -85,11 +85,7 @@
                 <div class="block" >
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="002">事件走势</div>
-                        <div class="pull-right">
-                            <span class="badge badge-warning">
-                                view more
-                            </span>
-                        </div>
+
                     </div>
 
                     <div class="block-content collapse in">
@@ -100,8 +96,8 @@
                                 <br/>
                                 <c:forEach items="${artileList}" var="al" varStatus="sts">
 
-                                    <img src="./images/11.png"  width="20px"></img>[${al.postTime}] ${al.title}
-                                    【 ${al.websiteEntity.websiteId}】
+                                    <img src="./images/11.png"  width="20px"></img>[${al.postTime}] <a href="<%=basePath%>event/articleInfo?articleId=${al.articleId}">${al.title}</a>
+                                    <a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${al.websiteEntity.websiteName}">【${al.websiteEntity.websiteName}】</a>
                                     <br/>
 
                                 </c:forEach>
@@ -115,13 +111,11 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="003">网站统计</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
 
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="website_statistic" style="width:1000px;height: 400px;"></div>
+                            <div id="website_statistic" style="width:1200px;height: 400px;"></div>
                         </div>
                     </div>
                 </div>
@@ -135,9 +129,6 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="004">数据类型</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
-
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <%--<div class="span6 chart">
@@ -173,9 +164,9 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="005">关键词云</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
+                        <%--<div class="pull-right"><span class="badge badge-warning">View More</span>
 
-                        </div>
+                        </div>--%>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -206,8 +197,10 @@
                                 <tbody>
                                 <c:forEach items="${hotInformation}" var="h" varStatus="sts">
                                     <tr>
-                                        <td>${h.title}</td>
-                                        <td>${h.websiteEntity.websiteId}</td>
+                                        <%--<a href="<%=basePath%>event/articleInfo?articleId=${h.articleId}">--%>
+                                            <%--<a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${h.websiteEntity.websiteName}">--%>
+                                            <td><a href="<%=basePath%>event/articleInfo?articleId=${h.articleId}">${h.title}</a></td>
+                                            <td><a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${h.websiteEntity.websiteId}">${h.websiteEntity.websiteId}</a></td>
                                         <td>${h.postTime}</td>
                                         <td>${h.recommendNumber}</td>
                                     </tr>
@@ -227,9 +220,7 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="007" >热点网民</div>
-                        <div class="pull-right">
 
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="block-content collapse in">
@@ -258,12 +249,10 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="008">传播路径</div>
-                        <div class="pull-right"><span class="badge badge-warning"></span>
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="transfer" style="width:900px;height: 500px;float: left"></div>
+                            <div id="transfer" style="width:900px;height: 600px;float: left"></div>
                             <div id="graph" style="width:200px;height: 500px;float: right"></div>
                         </div>
                     </div>
@@ -276,9 +265,6 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="009">关联词</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
-
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -296,9 +282,7 @@
                         <div class="muted pull-left" id="010">网民观点</div>
                     </div>
                     <div class="block-content collapse in">
-                        <div class="span12">
 
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -395,7 +379,7 @@
     //指定图表的配置项和数据
     var  option = {
         title: {
-            text: '热点词分析',
+            text: '',
             link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
             x: 'center',
             textStyle: {
@@ -419,7 +403,7 @@
             }
         },
         series: [{
-            name: '热点分析',
+            name: '',
             type: 'wordCloud',
             //size: ['9%', '99%'],
             sizeRange: [6, 66],
@@ -431,31 +415,40 @@
                 enable: true,
                 minSize: 6
             },
+            roam: true, //禁止用鼠标滚轮缩小放大效果
             textStyle: {
                 normal: {
-                    color: function() {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                            '#F3A43B','#FE8463','#9BCA63','#FAD860','#60C0DD',
+                            /*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
+                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*/
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    /*color: function() {
                         return 'rgb(' + [
                             Math.round(Math.random() * 160),
                             Math.round(Math.random() * 160),
                             Math.round(Math.random() * 160)
                         ].join(',') + ')';
-                    }
+                    }*/
                 },
                 emphasis: {
                     shadowBlur: 10,
                     shadowColor: '#333'
                 }
             },
-            data: []
+            data: keyWords
         }]
     };
 
 
-    option.series[0].data = keyWords;
+//    option.series[0].data = keyWords;
 
     myChart.setOption(option);
     myChart.on('click', function (params) {
-        alert((params.name));
         window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
 
     });
@@ -566,6 +559,9 @@
 
     // 为echarts对象加载数据
     myChart2.setOption(option2);
+    myChart2.on('click', function (params) {
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+    });
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -644,6 +640,9 @@
 
     // 为echarts对象加载数据
     myChart3.setOption(option3);
+    myChart3.on('click', function (params) {
+        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+    });
 </script>
 
 <script  type="text/javascript">
@@ -822,6 +821,9 @@
         ]
     };
     myChart7.setOption(option7);
+    myChart7.on('click', function (params) {
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+    });
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -1174,6 +1176,7 @@
         options:edgeOptions,
     };
 
+
     myChart9.setOption(option9);
 </script>
 <script>
@@ -1253,312 +1256,329 @@
     myChart10.setOption(option10);
 
 </script>
-<%--<script>
-    var myChart11 = echarts.init(document.getElementById("keyword_related"));
-    var option11 = {
-        backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-            offset: 0,
-            color: '#FFFFFF'
-        }, {
-            offset: 1,
-            color: '#FFFFFF'
-        }]),
 
-        tooltip: {},
-        legend: [{
-            formatter: function (name) {
-                return echarts.format.truncateText(name, 40, '14px Microsoft Yahei', '…');
-            },
-            tooltip: {
-                show: true
-            },
-            selectedMode: 'false',
-            bottom: 20,
-            data: ['核心', '非核心']
-        }],
-        toolbox: {
-            show : true,
-            feature : {
-                dataView : {show: true, readOnly: true},
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        animationDuration: 3000,
-        animationEasingUpdate: 'quinticInOut',
-        series: [{
-            name: '关键词',
-            type: 'graph',
-            layout: 'force',
-            force: {
-                repulsion: 50
-            },
-            data: ${keywords},
-            links: ${keywordRelated},
-            categories: [{
-                'name': '核心'
-            }, {
-                'name': '非核心'
-            }],
-            focusNodeAdjacency: true,
-            roam: true,
-            label: {
-                normal: {
-
-                    show: true,
-                    position: 'top',
-
-                }
-            },
-            lineStyle: {
-                normal: {
-                    color: 'source',
-                    curveness: 0,
-                    type: "solid"
-                }
-            }
-        }]
-    };
-    myChart11.setOption(option11);
-</script>--%>
 <script>
     var myChart12 = echarts.init(document.getElementById("keyword_related"));
-    var markLineOpt = {};
 
-    var option12 = {
-        backgroundColor: '',
-        title: {
-            text: '',
-            x: '35%',
-            y: 0
-        },
-        xAxis: [{
-            gridIndex: 0,
-            type: 'value',
-            show: false,
-            min: 0,
-            max: 100,
-            name: '市场需求指数',
-            nameLocation: 'middle',
-            nameGap: 30,
-
-        }, ],
-        yAxis: [{
-            gridIndex: 0,
-            min: 0,
-            show: false,
-            max: 100,
-            name: '竞争强度指数',
-            nameLocation: 'middle',
-            nameGap: 30,
-        }, ],
-        series: [{
-            name: '强相关',
-            type: 'scatter',
-            xAxisIndex: 0,
-            yAxisIndex: 0,
-            symbol: 'circle',
-            symbolSize: 40,
+    /*var  option12 = {
+    title: {
+        text: '网络拓扑信息',
+    },
+    tooltip:{},
+    animationDurationUpdate: 1500,
+    animationEasingUpdate: 'quinticInOut',
+    series : [
+        {
+            type: 'graph',
+            layout: 'none',
+            symbolSize: 50,//图形的大小（示例中的圆的大小）
+            roam: true,//鼠标缩放及平移
+            focusNodeAdjacency:true,//是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点
             label: {
                 normal: {
-                    show: true,
-                    formatter: function(param) {
-                        return param.data[2];
-                    },
-                },
-
+                    show: true ,  //控制非高亮时节点名称是否显示
+                    position:'top',
+                    fontSize:20
+                }
             },
-            itemStyle: {
+
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [1, 10],    //箭头的大小
+            edgeLabel: {
+                normal:{
+                    show:false
+                },
+                emphasis: {
+                    textStyle: {
+                        fontSize: 20  //边节点显示的字体大小
+                    }
+                }
+            },
+
+//节点信息
+
+            data:
+            <%--${keywordRelated}--%>
+                /!*[
+                    {
+                        name:'h1',
+                        value:'10.108.50.101',
+                        isnode:true,
+                        x:100,
+                        y:300,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h2',
+                        value:'10.108.50.102',
+                        isnode:true,
+                        x:200,
+                        y:470,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h3',
+                        value:'10.108.50.103',
+                        isnode:true,
+                        x:400,
+                        y:470,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h4',
+                        value:'10.108.50.104',
+                        isnode:true,
+                        x:500,
+                        y:300,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h5',
+                        value:'10.108.50.105',
+                        isnode:true,
+                        x:400,
+                        y:130,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h6',
+                        value:'10.108.50.106',
+                        isnode:true,
+                        x:200,
+                        y:130,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h7',
+                        value:'10.108.50.107',
+                        isnode:true,
+                        x:300,
+                        y:300,
+                        // symbol:'image://服务器-20.png',
+                    },
+
+                ]*!/,
+
+            links:
+            <%--${keywordRelated}--%>
+                [
+                    {
+                        source:'天涯博客',
+                        target:'米花糖糖',
+                        islink:"true",
+                        name:'链路1',
+//                        bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+//                        timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                        PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                    },
+                    {
+                        source:'h2',
+                        target:'h3',
+                        islink:true,
+                        name:'链路2',
+                        bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                        timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                        PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                    },{
+                    source:'h3',
+                    target:'h4',
+                    islink:true,
+                    name:'链路3',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h4',
+                    target:'h5',
+                    islink:true,
+                    name:'链路4',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h5',
+                    target:'h6',
+                    islink:true,
+                    name:'链路5',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h6',
+                    target:'h1',
+                    islink:true,
+                    name:'链路6',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h1',
+                    target:'h7',
+                    islink:true,
+                    name:'链路7',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h2',
+                    target:'h7',
+                    islink:true,
+                    name:'链路8',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h3',
+                    target:'h7',
+                    islink:true,
+                    name:'链路9',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h7',
+                    target:'h5',
+                    islink:true,
+                    name:'链路10',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },
+                ],
+            lineStyle: {
                 normal: {
-                    color: '#5aa8ee',
-                    shadowColor: 'rgba(0,0,139, 0.8)',
-                    shadowBlur: 15,
+                    show:true,
+                    color:
+                        {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [
+                                {
+                                    offset: 0, color: 'red' // 0% 处的颜色
+                                }
+                                ,{
+                                    offset: 1, color: 'blue' // 100% 处的颜色
+                                }],
+                            globalCoord: false // 缺省为 false
+                        },
 
-                    shadowOffsetX: 5,
-                    shadowOffsetY: 5,
-                    opacity: 0.9
+                    // curveness: 0.2
 
                 },
+                emphasis:{
+                    color:'red',
+                    width:3,
+                    type:'dashed',//虚线
 
+                }
             },
 
-            data: ${keywordRelated},
+            tooltip:
+                {
+                    position:'bottom',//悬浮时显示的位置
+                    backgroundColor:'green',
+                    textStyle:{fontSize:18,
 
+                    },
+
+                    formatter:function(params){//悬浮提示框显示的内容
+                        if (params.data.islink) {return '带宽：&nbsp'+params.data.bandwith+'<br />'+'时延：&nbsp'+params.data.timeout+'<br />'+'丢包率：'+params.data.PacketLossRate;}
+                        else if (params.data.isnode) {return params.data.value;}
+                    }
+                },//悬浮时的提示框，不设置时是随鼠标移动
+
+        }
+    ]
+};*/
+
+//    var dom = document.getElementById('chart-panel');
+//    dom.style.width = 780 + 'px';
+//    dom.style.height = 600 + 'px';
+    var option12 = {
+        tooltip: {
+            show: false
         },
-
-             {
-                name: '访问来源',
-                type: 'pie',
-                radius: ['0', '38%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: false,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
+        legend: {
+            x: "center",
+            data: ["核心", "非核心"]
+        },
+        animation: false,
+        series: [{
+            categories: [{
+                name: '核心',
                 itemStyle: {
                     normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#E3E3FF'
-                        }, {
-                            offset: 0.25,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.50,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.75,
-                            color: '#DFDFFF'
-                        },
-
-
-                            {
-                                offset: 1,
-                                color: '#E3E3FF'
-                            }
-                        ], false),
-                    },
-                },
-                labelLine: {
-                    normal: {
-                        show: false
+                        color: "#b90c25",
                     }
-                },
-                data: [{
-                    value: 335,
-                    name: '直接访问'
-                },
-
-                ]
-            },
-
-            {
-                name: '相关背景',
-                type: 'pie',
-                radius: ['38%', '77%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: false,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#FFFFFF'
-                        }, {
-                            offset: 0.10,
-                            color: '#FFFFFF'
-                        }, {
-                            offset: 0.45,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.55,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.90,
-                            color: '#FFFFFF'
-                        },
-
-                            {
-                                offset: 1,
-                                color: '#FFFFFF'
-                            }
-                        ], false),
-                    },
-                },
-
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data: [{
-                    value: 3235,
-                    name: '直接访问'
-                },
-
-
-                ]
+                }
             }, {
-                name: '相关背景',
-                type: 'pie',
-                radius: ['76%', '100%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: false,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
+                name: '非核心',
                 itemStyle: {
                     normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#FFFFFF'
-                        },
-
-                            {
-                                offset: 0.30,
-                                color: '#E3E3FF'
-                            }, {
-                                offset: 0.50,
-                                color: '#E3E3FF'
-                            }, {
-                                offset: 0.70,
-                                color: '#E3E3FF'
-                            },
-
-                            {
-                                offset: 1,
-                                color: '#FFFFFF'
-                            }
-                        ], false),
-                    },
-                },
-
-                labelLine: {
-                    normal: {
-                        show: false
+                        color: "#4592FF",
                     }
-                },
-                data: [{
-                    value: 3235,
-                    name: '直接访问'
-                },
+                }
+            }],
+            type: 'graph',
+            layout: 'force',
+            symbol: "circle",
+            symbolSize: 40,
+            roam: true, //禁止用鼠标滚轮缩小放大效果
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [0, 10],
+            // 连接线上的文字
+            focusNodeAdjacency: true, //划过只显示对应关系
+            edgeLabel: {
+                normal: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 20
+                    },
+                    formatter: "{c}"
+                }
+            },
+            categories: [{
+                name: '核心',
+                itemStyle: {
+                    normal: {
+                        color: "#b90c25",
+                    }
+                }
+            }, {
+                name: '非核心',
+                itemStyle: {
+                    normal: {
+                        color: "#4592FF",
+                    }
+                }
+            }],
+            lineStyle: {
+                normal: {
+                    opacity: 1,
+                    width: 2,
+                    curveness: 0
+                }
+            },
+            // 圆圈内的文字
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            force: {
+                repulsion: 300
+            },
+            data: ${keywordList},
 
+            links: ${keywordRelateds}
 
-                ]
-            }
-
-        ]
+        }]
     };
     myChart12.setOption(option12);
+
 </script>
 
 </body>

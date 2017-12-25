@@ -89,7 +89,16 @@ public class EventAction {
         List<Map> keywords = findKeywords(objectId);
         //查找事件关键词之间的相关度
         List<Map> keywordRelatedList = keywordRelated(objectId,keywords);
-        String coreWord = keywords.get(0).get("name").toString();
+
+        List<Map> keywordRelated = new ArrayList<>();
+        for (int i =1 ;i<keywordRelatedList.size();i++){
+            Map keyrelatedMap = new HashMap();
+            keyrelatedMap.put("source",keywordRelatedList.get(0).get("name").toString());
+            keyrelatedMap.put("target",keywordRelatedList.get(i).get("name").toString());
+            keyrelatedMap.put("value",keywordRelatedList.get(i).get("value"));
+            keywordRelated.add(keyrelatedMap);
+        }
+
         //文章传播
         List<String> categoryName = websiteEntityService.findWebsitesByEvent(objectId);
         Map<String, List> nodesAndEdges = getNodeAndEdgeAttributes(objectId);
@@ -126,7 +135,9 @@ public class EventAction {
             hotOpinionList.add(hotOpinion);
         }
 
+        mode.addAttribute("objectId", objectId);
         mode.addAttribute("hotOpinionList", JSON.toJSON(hotOpinionList));
+        mode.addAttribute("keywordRelateds", JSON.toJSON(keywordRelated));
         mode.addAttribute("mediaList", JSON.toJSON(mediaList));
         mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
         mode.addAttribute("opinionSource", JSON.toJSON(opinionSource));
@@ -145,7 +156,7 @@ public class EventAction {
         mode.addAttribute("SNAList", JSON.toJSONString(SNAList, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
         //mode.addAttribute("listkey", JSON.toJSON(listkey).toString());
         //mode.addAttribute("articleCommentList", articleCommentList);
-        mode.addAttribute("keywordRelated", JSON.toJSON(keywordRelatedList).toString());
+        mode.addAttribute("keywordRelatedList", JSON.toJSON(keywordRelatedList).toString());
 //        mode.addAttribute("reliablity", reliablity);
         return "/WEB-INF/foreground/eventInfo";
     }
@@ -166,6 +177,16 @@ public class EventAction {
             }
         }
         return event;
+    }
+
+    //点击文章标题获取文章信息
+    @RequestMapping("articleInfo")
+    public String findArticleInfo(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
+        String articleId = req.getParameter("articleId");
+        //点击文章标题
+        List<ArticleEntity> articleInfo = articleEntityService.findArticleInfo(articleId);
+        mode.addAttribute("articleInfo", articleInfo);
+        return "/WEB-INF/foreground/infodetail";
     }
     //统计事件的国内国外信息
     public List areaSource(String objectId){
@@ -271,13 +292,13 @@ public class EventAction {
             Map map = new HashMap();
             map.put("name",keywords.get(i).get("name"));
             map.put("value",keywords.get(i).get("value"));
-            map.put("keywordId",keywords.get(i).get("keywordId"));
+            /*map.put("keywordId",keywords.get(i).get("keywordId"));
             map.put("draggable",keywords.get(i).get("draggable"));
             if (i==0){
                 map.put("category","核心");
             }else {
                 map.put("category", "非核心");
-            }
+            }*/
             list.add(map);
         }
         return list;
@@ -294,7 +315,8 @@ public class EventAction {
                 map.put("category",1);
             }
             map.put("name",keywords.get(m).get("name"));
-            map.put("value",keywords.get(m).get("value"));
+//            map.put("value",keywords.get(m).get("value"));
+            map.put("draggable",true);
             keywordList.add(map);
         }
         return keywordList;
@@ -437,7 +459,7 @@ public class EventAction {
      * 先计算出第一个关键词出现的文章数Nx，第二个关键词出现的文章数Ny,两个关键词都出现的文章数Nxy,所有的文章数N
      * 根据公式 corr(x,y)=Math.log10(N/Nx)*Math.log10(N/Ny)*Nxy/(Nx+Ny-Nxy)
      */
-    public List keywordRelated(String objectId,List<Map> keywords){
+    public List<Map> keywordRelated(String objectId,List<Map> keywords){
 
         String coreKeyword = " ";
         //事件是否已经生成关联度
@@ -478,24 +500,41 @@ public class EventAction {
         }
         //
         List<KeywordRelatedDegreeEntity> keywordRelated = keywordRelatedDegreeService.findKeywordRelated(objectId);
-        List listkey = new ArrayList();
+        List<Map> listkey = new ArrayList();
 
         for(int a = 0 ; a < keywordRelated.size() ; a++) {
-            List list1 = new ArrayList();
+//            List list1 = new ArrayList();
             if (a==0){
-                list1.add(50);
-                list1.add(50);
-                list1.add(keywords.get(0).get("name"));
+                Map map = new HashMap();
+                map.put("name",keywords.get(0).get("name"));
+                map.put("value",keywordRelated.get(0).getRelatedDegree());
+//                map.put("isnode","true");
+                map.put("draggable","true");
+//                map.put("x",300);
+//                map.put("y",300);
+                listkey.add(map);
             }else {
-                double r = Double.parseDouble(keywordRelated.get(a).getRelatedDegree().toString())*100*3;
-                double x = Math.random()*(3*r+10)+50-r*3;
-                double z = Math.sqrt(r*r-(x-50)*(x-50));
-                double y = Math.random()*(3*z+10)+50-z*3;
-                list1.add(x);
-                list1.add(y);
-                list1.add(keywordRelated.get(a).getKeywordEntityOne().getKeyword());
+                double r = 200;
+//                        Double.parseDouble(keywordRelated.get(a).getRelatedDegree().toString())*100*3;
+                double x = Math.random()*400+100;
+                double z = Math.sqrt(r*r-(x-300)*(x-300));
+                double[] y = {300-z,300+z};
+                int index=(int)(Math.random()*y.length);
+//                        Math.random()*400+100;
+//                        Math.random()*(2*z)+300-z;
+//                list1.add(x);
+//                list1.add(y);
+//                list1.add(keywordRelated.get(a).getKeywordEntityOne().getKeyword());
+                Map map = new HashMap();
+                map.put("name",keywordRelated.get(a).getKeywordEntityOne().getKeyword());
+                map.put("value",keywordRelated.get(a).getRelatedDegree());
+//                map.put("isnode","true");
+                map.put("draggable","true");
+//                map.put("x",x);
+//                map.put("y",y[index]);
+                listkey.add(map);
             }
-            listkey.add(list1);
+//            listkey.add(list1);
         }
         return listkey;
     }

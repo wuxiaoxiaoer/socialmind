@@ -158,8 +158,10 @@ public class InfoDetectionAction {
 		if ("敏感".equals(object)){
 			sensitiveList = sensitive(objectId);
 			mode.addAttribute("sensitiveList", sensitiveList);
-		}else if("不敏感".equals(object)){
-
+		}else if("非敏感".equals(object)){
+			sensitiveList = sensitive(objectId);
+			List nosensitive = articleEntityService.findEventNoSensitive(sensitiveList);
+			mode.addAttribute("nosensitive", nosensitive);
 		}
 		//点击敏感的详细类型
 		List<DynamicSensitiveArticle> sensitiveInfoList = new ArrayList<>();
@@ -177,6 +179,39 @@ public class InfoDetectionAction {
 				}
 			}
 		}
+
+		//点击媒体类型
+		List<ArticleEntity> mediaList = new ArrayList<>();
+		String[] mediaType= {"政府","论坛","博客","新闻","社交媒体"};
+		for (int i=0;i<mediaType.length;i++){
+			if(mediaType[i].equals(object)){
+				mediaList = websiteEntityService.findMediaList(objectId,object);
+				break;
+			}
+		}
+
+		//点击网站类型
+		List<ArticleEntity> websiteList = new ArrayList<>();
+		List<WebsiteEntity> websiteName= websiteEntityService.findWebsite();
+		for (int j=0; j<websiteName.size();j++){
+			if(websiteName.get(j).getWebsiteName().equals(object)){
+				websiteList = websiteEntityService.findWebsiteList(objectId,object);
+				break;
+			}
+		}
+
+		//点击地点
+		List<ArticleEntity> articleList = articleEntityService.findArticleList(objectId);
+		List<List> arealist = new ArrayList();
+		for (ArticleEntity articles : articleList) {
+			if (articles.getContent().contains(object)){
+				List<ArticleEntity> areaInfo = articleEntityService.findArticleInfo(articles.getArticleId());
+				arealist.add(areaInfo);
+			}
+		}
+		mode.addAttribute("arealist", arealist);
+		mode.addAttribute("websiteList", websiteList);
+		mode.addAttribute("mediaList", mediaList);
 		mode.addAttribute("sensitiveInfo", sensitiveInfoList);
 		return "/WEB-INF/foreground/infodetail";
 	}

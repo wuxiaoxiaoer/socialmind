@@ -54,8 +54,6 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left">热点关注事件</div>
-                        <div class="pull-right"><span class="badge badge-warning">刷新</span>
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <c:forEach items="${event}" var="e" varStatus="sts">
