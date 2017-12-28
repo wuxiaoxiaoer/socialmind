@@ -312,7 +312,7 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
             String sql = "select a.title,w.websiteName,a.postTime,a.recommendNumber,a.scanNumber,a.articleID, " +
                     "IFNULL(0.3*a.commentNumber,0)+IFNULL(0.2*a.replyNumber,0)+IFNULL(0.15*a.scanNumber,0)+IFNULL(0.05*a.participationNumber,0)+IFNULL(0.03*a.recommendNumber,0)+IFNULL(0.03*a.collectNumber,0)+IFNULL(0.03*a.likeNumber,0) as summary " +
                     "from article a,website w where a.objectID = '" +objectId+" ' and a.websiteID = w.websiteID " +
-                    "ORDER BY summary DESC LIMIT 4";
+                    "ORDER BY summary DESC LIMIT 1";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){

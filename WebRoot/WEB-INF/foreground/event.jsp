@@ -42,12 +42,12 @@
         <div class="span9" id="content">
             <!--title-->
             <h3 align="center">全网事件分析</h3>
-            <form action="<%=basePath%>event">
+            <%--<form action="<%=basePath%>event">--%>
                 <input type="hidden" name="type" value="input"/>
                 <div align="center"><input type="text" name="objectId" data-required="1" class="span5 m-wrap" placeholder="实体、事件关键词">
                     <a style="padding-top:-4px;"><button class="btn btn-success" style="margin:-11px 0 0 20px;">搜索</button></a>
                 </div>
-            </form>
+           <%-- </form>--%>
             <!--map-->
             <div class="row-fluid">
                 <!-- block -->

@@ -1,5 +1,6 @@
 package com.sicdlib.web;
 
+import Jama.Matrix;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sicdlib.entity.*;
@@ -8,6 +9,7 @@ import com.sicdlib.util.NLPUtil.Word2VecUtil.OtherUtil.Segment;
 import com.sicdlib.util.NLPUtil.Word2VecUtil.Test.Word2Vec;
 import com.sicdlib.util.SNAUtil.SNAUtil;
 import com.sicdlib.util.UUIDUtil.UUIDUtil;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,7 +91,7 @@ public class EventAction {
         List<Map> keywords = findKeywords(objectId);
         //查找事件关键词之间的相关度
         List<Map> keywordRelatedList = keywordRelated(objectId,keywords);
-
+        //事件关键词的关联度
         List<Map> keywordRelated = new ArrayList<>();
         for (int i =1 ;i<keywordRelatedList.size();i++){
             Map keyrelatedMap = new HashMap();
@@ -135,6 +137,9 @@ public class EventAction {
             hotOpinionList.add(hotOpinion);
         }
 
+        //统计事件下所有时间下的网站上数据最多的信息
+
+
         mode.addAttribute("objectId", objectId);
         mode.addAttribute("hotOpinionList", JSON.toJSON(hotOpinionList));
         mode.addAttribute("keywordRelateds", JSON.toJSON(keywordRelated));
@@ -146,8 +151,6 @@ public class EventAction {
         mode.addAttribute("webs",JSON.toJSON(getWebsiteName()));
         mode.addAttribute("websiteStatistic",JSON.toJSON(websiteStatistic(objectId)));
         mode.addAttribute("artileList", artileList);
-        mode.addAttribute("hotInformation", hotInformation(objectId));
-        mode.addAttribute("hotAuthor", hotAuthor(objectId));
         mode.addAttribute("keywords", JSON.toJSON(keywords).toString());
         mode.addAttribute("keywordList", JSON.toJSON(keywordList(keywords)).toString());
         mode.addAttribute("event", event(objectId));
@@ -161,6 +164,12 @@ public class EventAction {
         return "/WEB-INF/foreground/eventInfo";
     }
 
+    @Test
+    public void test(){
+        double[][] a = {{0,3,2},{5,6,4},{7,8,9}};
+        Matrix matrix = new Matrix(a);
+        matrix.print(4,0);
+    }
     //获取事件的全部信息
     public List event(String objectId){
         List<ObjectEntity> objectInfo = objectEntityService.findObjectInfo(objectId);
@@ -203,14 +212,16 @@ public class EventAction {
         return articleEntityService.findPeriod(objectId);
     }
 
-    //统计事件下热门信息
+
+
+    /*//统计事件下热门信息
     public List hotInformation(String objectId){
         return articleEntityService.findHotInformation(objectId);
     }
     //统计事件下热门作者
     public List<AuthorEntity> hotAuthor(String objectId){
         return authorEntityService.findHotAuthor(objectId);
-    }
+    }*/
     //统计所有网站
     public List<WebsiteEntity> webs(){
         return websiteEntityService.findWebsite();

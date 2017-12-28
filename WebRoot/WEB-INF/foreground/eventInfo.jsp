@@ -45,15 +45,15 @@
                 <li>
                     <a onclick="document.getElementById('004').scrollIntoView();"><i class="icon-chevron-right"></i>数据类型</a>
                 </li>
-                <li>
+                <%--<li>
                     <a onclick="document.getElementById('005').scrollIntoView();"><i class="icon-chevron-right"></i>关键词云</a>
-                </li>
-                <li>
+                </li>--%>
+                <%--<li>
                     <a onclick="document.getElementById('006').scrollIntoView();"><i class="icon-chevron-right"></i>热门信息</a>
                 </li>
                 <li>
                     <a onclick="document.getElementById('007').scrollIntoView();"><i class="icon-chevron-right"></i>热点网民</a>
-                </li>
+                </li>--%>
                 <li>
                     <a onclick="document.getElementById('008').scrollIntoView();"><i class="icon-chevron-right"></i> 传播路径</a>
                 </li>
@@ -117,6 +117,10 @@
                         <div class="span12">
                             <div id="website_statistic" style="width:1200px;height: 400px;"></div>
                         </div>
+                        <div class="span5 chart">
+                            <h5>媒体来源比</h5>
+                            <div id="media" style="width:100%;height:250px"></div>
+                        </div>
                     </div>
                 </div>
                 <!-- /block -->
@@ -124,49 +128,46 @@
 
 
             <!-- morris bar & donut charts -->
-            <div class="row-fluid section">
+            <%--<div class="row-fluid section">
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="004">数据类型</div>
                     </div>
                     <div class="block-content collapse in">
-                        <%--<div class="span6 chart">
+                        &lt;%&ndash;<div class="span6 chart">
                             <h5>媒体活跃度</h5>
                             <div id="hero-bar" style="height: 250px;"></div>
-                        </div>--%>
-                            <div class="span6 chart">
+                        </div>&ndash;%&gt;
+                            &lt;%&ndash;div class="span6 chart">
                                 <h5>境内外分布</h5>
                                 <div id="area" style="width:60%;height:250px"></div>
-                            </div>
-                        <div class="span5 chart">
-                            <h5>媒体来源比</h5>
-                            <div id="media" style="width:100%;height:250px"></div>
-                        </div>
+                            </div>&ndash;%&gt;
 
-                            <%--<div class="span6 chart">
+
+                            &lt;%&ndash;<div class="span6 chart">
                                 <h5>境内外分布</h5>
                                 <div id="mediaType" style="width:60%;height:250px"></div>
-                            </div>--%>
-                        <%--<div class="span5 chart">
+                            </div>&ndash;%&gt;
+                        &lt;%&ndash;<div class="span5 chart">
                             <h5>敏感分析</h5>
                             <div id="sensitive" style="width:60%;height: 250px;"></div>
-                        </div>--%>
+                        </div>&ndash;%&gt;
                     </div>
                 </div>
                 <!-- /block -->
-            </div>
+            </div>--%>
 
 
 
-            <div class="row-fluid">
+            <%--<div class="row-fluid">
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="005">关键词云</div>
-                        <%--<div class="pull-right"><span class="badge badge-warning">View More</span>
+                        &lt;%&ndash;<div class="pull-right"><span class="badge badge-warning">View More</span>
 
-                        </div>--%>
+                        </div>&ndash;%&gt;
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -175,9 +176,9 @@
                     </div>
                 </div>
                 <!-- /block -->
-            </div>
+            </div>--%>
 
-            <div class="row-fluid">
+            <%--<div class="row-fluid">
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
@@ -197,8 +198,8 @@
                                 <tbody>
                                 <c:forEach items="${hotInformation}" var="h" varStatus="sts">
                                     <tr>
-                                        <%--<a href="<%=basePath%>event/articleInfo?articleId=${h.articleId}">--%>
-                                            <%--<a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${h.websiteEntity.websiteName}">--%>
+                                        &lt;%&ndash;<a href="<%=basePath%>event/articleInfo?articleId=${h.articleId}">&ndash;%&gt;
+                                            &lt;%&ndash;<a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${h.websiteEntity.websiteName}">&ndash;%&gt;
                                             <td><a href="<%=basePath%>event/articleInfo?articleId=${h.articleId}">${h.title}</a></td>
                                             <td><a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${h.websiteEntity.websiteId}">${h.websiteEntity.websiteId}</a></td>
                                         <td>${h.postTime}</td>
@@ -212,10 +213,10 @@
                     </div>
                 </div>
                 <!-- /block -->
-            </div>
+            </div>--%>
 
             <!-- morris graph chart -->
-            <div class="row-fluid section">
+            <%--<div class="row-fluid section">
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
@@ -240,7 +241,7 @@
                     </div>
                 </div>
                 <!-- /block -->
-            </div>
+            </div>--%>
 
 
 
@@ -370,7 +371,7 @@
 
 <script type="text/javascript" src="vendors/flot/jquery.js"></script>
 
-<script  type="text/javascript">
+<%--<script  type="text/javascript">
 
     var keyWords = JSON.parse('${keywords}');
 
@@ -452,7 +453,7 @@
         window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
 
     });
-</script>
+</script>--%>
 <script>
     //基于准备好的dom,初始化echarts实例
     var myChart1 = echarts.init(document.getElementById('website_statistic'));
@@ -563,7 +564,7 @@
         window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
     });
 </script>
-<script>
+<%--<script>
     //基于准备好的dom,初始化echarts实例
     var myChart3 = echarts.init(document.getElementById('area'));
     var option3 = {
@@ -641,9 +642,9 @@
     // 为echarts对象加载数据
     myChart3.setOption(option3);
     myChart3.on('click', function (params) {
-        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+        &lt;%&ndash;window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);&ndash;%&gt;
     });
-</script>
+</script>--%>
 
 <script  type="text/javascript">
     /*var myChart4 = echarts.init(document.getElementById('mediaType'));
