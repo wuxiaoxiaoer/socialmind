@@ -377,9 +377,9 @@
                                         </c:forEach>
                                     </c:forEach>
                                     </c:if>
-                                    <c:if test="${empty arealist}">
-                                        <div align="center">暂无数据</div>
-                                    </c:if>
+                                    <%--<c:if test="${empty arealist}">--%>
+                                        <%--<div align="center">暂无数据</div>--%>
+                                    <%--</c:if>--%>
                                     </tbody>
                                 </table>
                                <%-- <div class="row">

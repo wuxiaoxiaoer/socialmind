@@ -68,6 +68,7 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
         }
         return null;
     }
+
     //查找事件的媒体来源比
     public List<Map> findMediaSource(String objectId){
 
@@ -195,7 +196,9 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
             String sql = "SELECT DISTINCT(w.websiteName) from article a,website w " +
-                    "where a.objectID = '" +objectId+"' and a.websiteID = w.websiteID";
+                    "where a.objectID = '" +objectId+"' " +
+                    "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
+                    "and a.websiteID = w.websiteID ORDER BY a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -229,4 +232,6 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
         }
         return null;
     }
+
+    //根据文章时间找文章的来源
 }
