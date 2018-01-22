@@ -133,126 +133,6 @@
         <!--/span-->
         <div class="span9" id="content">
 
-            <%--<form action="<%=basePath%>retrivalResults" method="post">
-                <!-- 判别条件检索 -->
-                <input type="hidden" name="flag" value="condition"/>
-                <input type="hidden" name="objectId" value="${object.objectId}" id="objId"/>
-                <input type="hidden" name="name" value="${object.name}" id="objName"/>
-                <input type="hidden" value="<%=basePath%>" id="basePath"/>
-                <input type="hidden" value="" id="support"/>
-                <input type="hidden" value="" id="collect"/>
-                <input type="hidden" value="" id="isTrue"/>
-                <div class="w1200">
-                    <div class="list-screen">
-                        <div class="screen-top" style="position:relative;">
-                            <input type="submit" value="搜索" id="submit-btn" style="border: 0;"/>
-                        </div>
-                        <div style="padding:10px 30px 10px 10px;"><div class="screen-address">
-                            <div class="list-tab">
-                                <div id="demo1" class="clearfix">
-                                    <div class="jiud-name">网站类型</div>
-                                    <div class="ui-tab-container">
-                                        <ul class="clearfix ui-tab-list">
-                                            <c:forEach items="${dataDictionarys}" var="d">
-                                                <li class="">${d.attributeValue}</li>
-                                            </c:forEach>
-                                        </ul>
-                                        <div class="ui-tab-bd">
-                                            <c:forEach items="${dataDictionarys}" var="d">
-                                                <div class="ui-tab-content clearfix" style="display: none;">
-                                                    <c:forEach items="${websites}" var="web">
-                                                        <c:if test="${web.websiteTypeId == d.dataDictionaryId}">
-                                                            <p>
-                                                                <label>
-                                                                    <input name="websiteId" type="checkbox" value="${web.websiteId}" />
-                                                                        ${web.websiteName}</label>
-                                                            </p>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            <div class="screen-term">
-                                <div class="selectNumberScreen">
-                                    <div id="selectList" class="screenBox screenBackground">
-                                        <dl class="listIndex" attr="时间">
-                                            <dt>时间</dt>
-                                            <dd>
-                                                <label><a href="javascript:;" values2="" values1="" attrval="不限">不限</a></label>
-                                                <label>
-                                                    <input name="time" type="radio" value="day1" />
-                                                    <a href="javascript:;" values2="99" values1="1" attrval="1-99">最近一天</a></label>
-                                                <label>
-                                                    <input name="time" type="radio" value="week1" />
-                                                    <a href="javascript:;" values2="300" values1="100" attrval="100-300">最近一周 </a></label>
-                                                <label>
-                                                    <input name="time" type="radio" value="month1" />
-                                                    <a href="javascript:;" values2="600" values1="300" attrval="300-600">最近一月</a></label>
-                                                <label>
-                                                    <input name="time" type="radio" value="year1" />
-                                                    <a href="javascript:;" values2="1500" values1="600" attrval="5000以上">最近一年</a></label>
-
-                                            </dd>
-                                        </dl>
-                                        <dl class=" listIndex" attr="terminal_os_s">
-                                            <dt>相似度</dt>
-                                            <dd>
-                                                <label><a href="javascript:;" values2="" values1="" attrval="不限">不限</a></label>
-                                                <label>
-                                                    <input name="similarDegree" type="radio" value="40" />
-                                                    <a href="javascript:;" values2="99" values1="" attrval="1-99">大于0.4</a></label>
-                                                <label>
-                                                    <input name="similarDegree" type="radio" value="60" />
-                                                    <a href="javascript:;" values2="300" values1="" attrval="100-300">大于0.6</a></label>
-                                                <label>
-                                                    <input name="similarDegree" type="radio" value="70" />
-                                                    <a href="javascript:;" values2="600" values1="" attrval="300-600">大于0.7</a></label>
-                                                <label>
-                                                    <input name="similarDegree" type="radio" value="80" />
-                                                    <a href="javascript:;" values2="1500" values1="" attrval="5000以上">大于0.8</a></label>
-                                            </dd>
-                                        </dl>
-                                        <dl class=" listIndex" attr="terminal_os_s">
-                                            <dt>参与度>50</dt>
-                                            <dd data-more=true>
-                                                <label><a href="javascript:;" values2="" values1="" attrval="不限">不限</a></label>
-                                                <label>
-                                                    <input name="partQltyCbx" type="checkbox" value="scanNumber" autocomplete="off"/>
-                                                    <a href="javascript:;" values2="" values1="" attrval="小米">浏览量</a></label>
-                                                <label>
-                                                    <input name="partQltyCbx" type="checkbox" value="likeNumber" autocomplete="off"/>
-                                                    <a href="javascript:;" values2="" values1="" attrval="华为">点赞量</a> </label>
-                                                <label>
-                                                    <input name="partQltyCbx" type="checkbox" value="commentNumber" autocomplete="off"/>
-                                                    <a href="javascript:;" values2="" values1="" attrval="华为">评论量</a> </label>
-                                                <label>
-                                                    <input name="partQltyCbx" type="checkbox" value="collectNumber" autocomplete="off"/>
-                                                    <a href="javascript:;" values2="" values1="" attrval="华为">收藏量</a> </label>
-                                            </dd>
-                                        </dl>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="hasBeenSelected clearfix">
-                            <div style="float:right;" class="eliminateCriteria">【清空全部】 </div>
-                            <dl>
-                                <dt>已选条件：</dt>
-                                <dd style="DISPLAY: none" class=clearDd>
-                                    <div class=clearList style="height: 50px; font-size: 12px;"></div>
-                            </dl>
-                        </div>
-                        <script type="text/javascript" src="js/shaixuan.js"></script>
-                    </div>
-                </div>
-            </form>--%>
             <div class="row-fluid">
                 <!-- block -->
                 <div class="block">
@@ -280,41 +160,35 @@
                             </div>
                                 </div>
                                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="example" aria-describedby="example_info">
-                                    <thead>
-                                    <tr role="row">
-                                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 206px;">
-                                            标题</th>
-                                    </tr>
-                                    </thead>
 
                                     <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                    <c:forEach items="${sensitiveList}" var="a" varStatus="sts">
+                                    <c:forEach items="${sensitiveList}" var="s" varStatus="sts">
                                         <tr class="gradeA odd">
 
                                            <td class="">
 
-                                                   <a href="<%=basePath%>authorInfo?authorId=${a.article.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${a.article.authorEntity.name}</span></a>
-                                                   <span class="badge badge-info" style="background-color: #FFFFFF;float: right"><font color="red">敏感类型：${a.sensitiveType}</font></span><br>
+                                                   <a href="<%=basePath%>authorInfo?authorId=${s.article.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${s.article.authorEntity.name}</span></a>
+                                                   <span class="badge badge-info" style="background-color: #FFFFFF;float: right"><font color="red">敏感类型：${s.sensitiveType}</font></span><br>
                                                 <b>
                                                     <%--<a href="${a.newsResource}" target="_blank">--%>
-                                                    <a>${a.article.title}</a></b>
+                                                    <a>${s.article.title}</a></b>
 
                                                 <div class="pull-right">
-                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${a.article.similarDegree}</span>
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${s.article.similarDegree}</span>
                                                 </div>
-                                                <div id="content${sts.index}" class="text" style="">${a.article.content}</div>
+                                                <div id="content${sts.index}" class="text" style="">${s.article.content}</div>
                                                 <br/>
-                                                    ${a.article.postTime}
+                                                    ${s.article.postTime}
                                                 <div style="float: right">
-                                                    来自于:${a.article.websiteEntity.websiteName}
+                                                    来自于:${s.article.websiteEntity.websiteName}
                                                 </div>
                                                 <br/>
-                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${a.article.commentNumber}</span>
-                                                浏览量:${a.article.scanNumber}
-                                                参与量:${a.article.participationNumber}
-                                                喜欢量:${a.article.likeNumber}
-                                                推荐量:${a.article.recommendNumber}
-                                                收藏量:${a.article.collectNumber}
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${s.article.commentNumber}</span>
+                                                浏览量:${s.article.scanNumber}
+                                                参与量:${s.article.participationNumber}
+                                                喜欢量:${s.article.likeNumber}
+                                                推荐量:${s.article.recommendNumber}
+                                                收藏量:${s.article.collectNumber}
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -348,6 +222,164 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    <c:forEach items="${mediaList}" var="m" varStatus="sts">
+                                        <tr class="gradeA odd">
+
+                                            <td class="">
+
+                                                <a href="<%=basePath%>authorInfo?authorId=${m.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${m.authorEntity.name}</span></a>
+                                                <span class="badge badge-info" style="background-color: #FFFFFF;float: right"><font color="red">媒体类型：${m.websiteEntity.websiteUrl}</font></span><br>
+                                                <b>
+                                                        <%--<a href="${a.newsResource}" target="_blank">--%>
+                                                    <a>${m.title}</a></b>
+
+                                                <div class="pull-right">
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${m.similarDegree}</span>
+                                                </div>
+                                                <div id="content${sts.index}" class="text" style="">${m.content}</div>
+                                                <br/>
+                                                    ${m.postTime}
+                                                <div style="float: right">
+                                                    来自于:${m.websiteEntity.websiteName}
+                                                </div>
+                                                <br/>
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${m.commentNumber}</span>
+                                                浏览量:${m.scanNumber}
+                                                参与量:${m.participationNumber}
+                                                喜欢量:${m.likeNumber}
+                                                推荐量:${m.recommendNumber}
+                                                收藏量:${m.collectNumber}
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    <c:forEach items="${websiteList}" var="w" varStatus="sts">
+                                        <tr class="gradeA odd">
+
+                                            <td class="">
+
+                                                <a href="<%=basePath%>authorInfo?authorId=${w.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${w.authorEntity.name}</span></a>
+                                                <span class="badge badge-info" style="background-color: #FFFFFF;float: right"><font color="red">网站类型：${w.websiteEntity.websiteName}</font></span><br>
+                                                <b>
+                                                        <%--<a href="${a.newsResource}" target="_blank">--%>
+                                                    <a>${w.title}</a></b>
+
+                                                <div class="pull-right">
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${w.similarDegree}</span>
+                                                </div>
+                                                <div id="content${sts.index}" class="text" style="">${w.content}</div>
+                                                <br/>
+                                                    ${w.postTime}
+                                                <div style="float: right">
+                                                    来自于:${w.websiteEntity.websiteName}
+                                                </div>
+                                                <br/>
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${w.commentNumber}</span>
+                                                浏览量:${w.scanNumber}
+                                                参与量:${w.participationNumber}
+                                                喜欢量:${w.likeNumber}
+                                                推荐量:${w.recommendNumber}
+                                                收藏量:${w.collectNumber}
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    <c:forEach items="${articleInfo}" var="w" varStatus="sts">
+                                        <tr class="gradeA odd">
+
+                                            <td class="">
+
+                                                <a href="<%=basePath%>authorInfo?authorId=${w.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${w.authorEntity.name}</span></a>
+                                                <br>
+                                                <b>
+                                                        <%--<a href="${a.newsResource}" target="_blank">--%>
+                                                    <a>${w.title}</a></b>
+
+                                                <div class="pull-right">
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${w.similarDegree}</span>
+                                                </div>
+                                                <div id="content${sts.index}" class="text" style="">${w.content}</div>
+                                                <br/>
+                                                    ${w.postTime}
+                                                <div style="float: right">
+                                                    来自于:${w.websiteEntity.websiteName}
+                                                </div>
+                                                <br/>
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${w.commentNumber}</span>
+                                                浏览量:${w.scanNumber}
+                                                参与量:${w.participationNumber}
+                                                喜欢量:${w.likeNumber}
+                                                推荐量:${w.recommendNumber}
+                                                收藏量:${w.collectNumber}
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    <c:forEach items="${nosensitive}" var="w" varStatus="sts">
+                                        <tr class="gradeA odd">
+
+                                            <td class="">
+
+                                                <a href="<%=basePath%>authorInfo?authorId=${w.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${w.authorEntity.name}</span></a>
+                                                <br>
+                                                <span class="badge badge-info" style="background-color: #FFFFFF;float: right"><font color="red">数据类型：非敏感</font></span><br>
+                                                <b>
+                                                        <%--<a href="${a.newsResource}" target="_blank">--%>
+                                                    <a>${w.title}</a></b>
+
+                                                <div class="pull-right">
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${w.similarDegree}</span>
+                                                </div>
+                                                <div id="content${sts.index}" class="text" style="">${w.content}</div>
+                                                <br/>
+                                                    ${w.postTime}
+                                                <div style="float: right">
+                                                    来自于:${w.websiteEntity.websiteName}
+                                                </div>
+                                                <br/>
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${w.commentNumber}</span>
+                                                浏览量:${w.scanNumber}
+                                                参与量:${w.participationNumber}
+                                                喜欢量:${w.likeNumber}
+                                                推荐量:${w.recommendNumber}
+                                                收藏量:${w.collectNumber}
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    <c:if test="${!empty arealist}">
+                                    <c:forEach items="${arealist}" var="area" varStatus="sts">
+                                        <c:forEach items="${area}" var="w">
+                                        <tr class="gradeA odd">
+
+                                            <td class="">
+
+                                                <a href="<%=basePath%>authorInfo?authorId=${w.articleId}"><span class="badge badge-info" style="background-color: #118ecc; float: left;">${w.authorEntity.name}</span></a>
+                                                <br>
+                                                <b>
+                                                        <%--<a href="${a.newsResource}" target="_blank">--%>
+                                                    <a>${w.title}</a></b>
+
+                                                <div class="pull-right">
+                                                    <span class="badge badge-info" style="background-color: #f89406">相似度：${w.similarDegree}</span>
+                                                </div>
+                                                <div id="content${sts.index}" class="text" style="">${w.content}</div>
+                                                <br/>
+                                                    ${w.postTime}
+                                                <div style="float: right">
+                                                    来自于:${w.websiteEntity.websiteName}
+                                                </div>
+                                                <br/>
+                                                <span class="badge badge-info" style="background-color: #ee5f5b; float: left; color:white;" onclick="commentShow(${sts.index});">评论量:${w.commentNumber}</span>
+                                                浏览量:${w.scanNumber}
+                                                参与量:${w.participationNumber}
+                                                喜欢量:${w.likeNumber}
+                                                推荐量:${w.recommendNumber}
+                                                收藏量:${w.collectNumber}
+                                            </td>
+                                        </tr>
+                                        </c:forEach>
+                                    </c:forEach>
+                                    </c:if>
+                                    <%--<c:if test="${empty arealist}">--%>
+                                        <%--<div align="center">暂无数据</div>--%>
+                                    <%--</c:if>--%>
                                     </tbody>
                                 </table>
                                <%-- <div class="row">

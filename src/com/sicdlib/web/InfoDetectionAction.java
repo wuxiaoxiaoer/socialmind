@@ -1,8 +1,11 @@
 package com.sicdlib.web;
 
 import com.alibaba.fastjson.JSON;
+import com.kenai.jaffl.annotations.In;
 import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
+import com.sicdlib.util.NLPUtil.HanLPUtil.HanLPUtil;
+import com.sicdlib.util.NLPUtil.Word2VecUtil.Test.Word2Vec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,36 +104,11 @@ public class InfoDetectionAction {
 		List<DynamicSensitiveArticle> list = sensitive(objectId);
 
 		//查找事件中文章和作者的地域分布
-//		area();
-		List<ProvinceEntity> provinceEntities = provinceService.getProvinces();
-		for (ProvinceEntity province:provinceEntities) {
-			System.out.println(province.getName());
-		}
-		String[] province = {"北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
-				"上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南",
-				"重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "台湾", "香港", "澳门"};
-		int[] provincenum = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-		List<Map> provinceList = new ArrayList<>();
-		for (int i=0;i<province.length;i++){
-			Map map = new HashMap();
-			map.put("name",province[i]);
-			for (ArticleEntity articles:articleList) {
-				if(articles.getContent().contains(province[i])){
-					map.put("value",++provincenum[i]);
-				}else {
-					map.put("value",provincenum[i]);
-				}
-			}
-			provinceList.add(map);
-		}
-		List coutlist = new ArrayList();
-		for (int i = 0;i<provinceList.size();i++){
-			coutlist.add(provinceList.get(i).get("value"));
-		}
-		String maxcount = Collections.max(coutlist).toString();
+//		List<ProvinceEntity> provinceEntities = provinceService.getProvinces();
+		List<Map> provinceList = provinceList(articleList);
 
 		mode.addAttribute("objectId",objectId);
-		mode.addAttribute("count", maxcount);
+		mode.addAttribute("count", maxcount(provinceList));
 		mode.addAttribute("event", event(objectId));
 		mode.addAttribute("articleNum", articleList.size());
 		mode.addAttribute("sensitiveCount", JSON.toJSON(sensitiveCount(list.size(),articleList.size()-list.size())));
@@ -143,6 +121,66 @@ public class InfoDetectionAction {
 		mode.addAttribute("periodList", JSON.toJSON(findPeriod(objectId)));
 		mode.addAttribute("websiteStatistic",JSON.toJSON(websiteStatistic(objectId)));
 		return "/WEB-INF/foreground/info_detection_graph";
+	}
+
+	//地图信息展示
+	public List<Map> provinceList(List<ArticleEntity> articleList){
+		String[] province = {"北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
+				"上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南",
+				"重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "台湾", "香港", "澳门"};
+		int[] provincenum = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		List<Map> provinceList = new ArrayList<>();
+		for (int i=0;i<province.length;i++){
+			Map map = new HashMap();
+			map.put("name",province[i]);
+			map.put("value",0);
+			provinceList.add(map);
+		}
+		if(articleList!=null||articleList.size()!=0){
+			Word2Vec vec = new Word2Vec();
+			try {
+				vec.loadGoogleModel("E:\\wiki_chinese_word2vec(Google).model");
+//			vec.loadJavaModel("data/wikichinese.model");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			for (ArticleEntity articles:articleList) {
+				HashMap<String, String> places = HanLPUtil.getNERPlacesMap(articles.getContent());
+				for (String place : places.keySet()) {
+					for (int i=0;i<province.length;i++){
+						if (place.toString().equals(province[i])) {
+							for (int j=0;j<provinceList.size();j++) {
+								if (place.toString().equals(provinceList.get(j).get("name"))){
+									provinceList.get(j).put("value",++provincenum[j]);
+								}
+							}
+						}else{
+							//查找市所在的省份
+							String provinceName = provinceService.findProvinceOfCity(place);
+							if (provinceName!=null&&provinceName.contains(province[i])){
+								for (int z=0;z<provinceList.size();z++) {
+									if (province[i].equals(provinceList.get(z).get("name"))){
+										provinceList.get(z).put("value",++provincenum[i]);
+									}
+								}
+							}
+						}
+					}
+					break;
+				}
+
+			}
+		}
+		return provinceList;
+	}
+
+	//地图上的最大信息量
+	public String maxcount(List<Map> provinceList){
+		List coutlist = new ArrayList();
+		for (int i = 0;i<provinceList.size();i++){
+			coutlist.add(provinceList.get(i).get("value"));
+		}
+		return Collections.max(coutlist).toString();
 	}
 
 	//页面的点击事件
@@ -158,8 +196,10 @@ public class InfoDetectionAction {
 		if ("敏感".equals(object)){
 			sensitiveList = sensitive(objectId);
 			mode.addAttribute("sensitiveList", sensitiveList);
-		}else if("不敏感".equals(object)){
-
+		}else if("非敏感".equals(object)){
+			sensitiveList = sensitive(objectId);
+			List nosensitive = articleEntityService.findEventNoSensitive(sensitiveList);
+			mode.addAttribute("nosensitive", nosensitive);
 		}
 		//点击敏感的详细类型
 		List<DynamicSensitiveArticle> sensitiveInfoList = new ArrayList<>();
@@ -177,10 +217,44 @@ public class InfoDetectionAction {
 				}
 			}
 		}
+
+		//点击媒体类型
+		List<ArticleEntity> mediaList = new ArrayList<>();
+		String[] mediaType= {"政府","论坛","博客","新闻","社交媒体"};
+		for (int i=0;i<mediaType.length;i++){
+			if(mediaType[i].equals(object)){
+				mediaList = websiteEntityService.findMediaList(objectId,object);
+				break;
+			}
+		}
+
+		//点击网站类型
+		List<ArticleEntity> websiteList = new ArrayList<>();
+		List<WebsiteEntity> websiteName= websiteEntityService.findWebsite();
+		for (int j=0; j<websiteName.size();j++){
+			if(websiteName.get(j).getWebsiteName().equals(object)){
+				websiteList = websiteEntityService.findWebsiteList(objectId,object);
+				break;
+			}
+		}
+
+		//点击地点
+		List<ArticleEntity> articleList = articleEntityService.findArticleList(objectId);
+		List<List> arealist = new ArrayList();
+		for (ArticleEntity articles : articleList) {
+			if (articles.getContent().contains(object)){
+				List<ArticleEntity> areaInfo = articleEntityService.findArticleInfo(articles.getArticleId());
+				arealist.add(areaInfo);
+			}
+		}
+		mode.addAttribute("arealist", arealist);
+		mode.addAttribute("websiteList", websiteList);
+		mode.addAttribute("mediaList", mediaList);
 		mode.addAttribute("sensitiveInfo", sensitiveInfoList);
 		return "/WEB-INF/foreground/infodetail";
 	}
 
+	//
 	//统计敏感与不敏感数量
 	public List<Map> sensitiveCount(int sensitive,int nonsensitive){
 		List<Map> sensitiveCount = new ArrayList<>();
@@ -270,7 +344,7 @@ public class InfoDetectionAction {
 		for(int i = 0 ; i < webs().size() ; i++) {
 			String websiteID = webs().get(i).getWebsiteId();
 			String websiteName = webs().get(i).getWebsiteName();
-			List<Map> websiteList = articleEntityService.findWebsites(objectId,websiteID,websiteName);
+			List<Map> websiteList = articleEntityService.findWebsites(objectId,websiteID);
 			Map map = new HashMap();
 			map.put("name",websiteName);
 			map.put("type","line");

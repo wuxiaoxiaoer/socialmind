@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="static com.hankcs.hanlp.corpus.tag.Nature.al" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -42,18 +44,18 @@
                 <li>
                     <a onclick="document.getElementById('003').scrollIntoView();"><i class="icon-chevron-right"></i> 网站统计</a>
                 </li>
-                <li>
+               <%-- <li>
                     <a onclick="document.getElementById('004').scrollIntoView();"><i class="icon-chevron-right"></i>数据类型</a>
-                </li>
-                <li>
+                </li>--%>
+                <%--<li>
                     <a onclick="document.getElementById('005').scrollIntoView();"><i class="icon-chevron-right"></i>关键词云</a>
-                </li>
-                <li>
+                </li>--%>
+                <%--<li>
                     <a onclick="document.getElementById('006').scrollIntoView();"><i class="icon-chevron-right"></i>热门信息</a>
                 </li>
                 <li>
                     <a onclick="document.getElementById('007').scrollIntoView();"><i class="icon-chevron-right"></i>热点网民</a>
-                </li>
+                </li>--%>
                 <li>
                     <a onclick="document.getElementById('008').scrollIntoView();"><i class="icon-chevron-right"></i> 传播路径</a>
                 </li>
@@ -79,17 +81,18 @@
                 </div>
                 <div class="alert alert-block">
                     <h1 class="alert-heading" id="001">事件简介</h1>
-                        ${e.event.introduction}
+                    本报告围绕<b>关键词</b>“${topkeywords}”，
+                    对${e.event.eventBeginTime}~${e.event.eventEndTime}期间，
+                    从${mediaList}上采集到的${artileSize}条信息进行了深入地分析。
+                    疑似源头的讯息于${e.event.eventBeginTime}发布在${firstWeb}上。
+                    总体来说，整个事件的发展趋势较为突出，详细报告如下。
+                        <%--${e.event.introduction}--%>
                 </div>
                 </c:forEach>
                 <div class="block" >
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="002">事件走势</div>
-                        <div class="pull-right">
-                            <span class="badge badge-warning">
-                                view more
-                            </span>
-                        </div>
+
                     </div>
 
                     <div class="block-content collapse in">
@@ -98,12 +101,20 @@
 
                                 <strong>开始</strong>
                                 <br/>
-                                <c:forEach items="${artileList}" var="al" varStatus="sts">
-
-                                    <img src="./images/11.png"  width="20px"></img>[${al.postTime}] ${al.title}
-                                    【 ${al.websiteEntity.websiteId}】
+                                <c:forEach items="${maxArticleList}" var="maxArticle" varStatus="sts">
+                                <c:forEach items="${maxArticle}" var="al" varStatus="sts">
+                                    <img src="./images/11.png"  width="20px"></img>[${al.postTime}] <a href="<%=basePath%>event/articleInfo?articleId=${al.articleId}">
+                                    <c:if test="${fn:length(al.title)>50}">
+                                        ${fn:substring(al.title, 0, 50)}......
+                                    </c:if>
+                                    <c:if test="${fn:length(al.title)<=50}">
+                                        ${al.title}
+                                    </c:if>
+                                        <%--${al.title}--%>
+                                </a>
+                                    <a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${al.websiteEntity.websiteName}">【${al.websiteEntity.websiteName}】</a>
                                     <br/>
-
+                                </c:forEach>
                                 </c:forEach>
                                 <strong>待续</strong>
                             </div>
@@ -112,19 +123,32 @@
 
                 </div>
 
-                <div class="block">
+                <%--<div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="003">网站统计</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
 
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="website_statistic" style="width:1000px;height: 400px;"></div>
+                            <div id="website_statistic" style="width:100%;height: 400px;"></div>
                         </div>
+                        <div align="center" style="color: #EA5200">该图统计的是各时间段下全网的信息量</div>
                     </div>
                 </div>
+--%>
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left" id="000">全网统计</div>
+
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="webAndTimeCount" style="width:100%;height: 400px;"></div>
+                        </div>
+                        <div align="center" style="color: #EA5200">该图统计的是各时间段下全网的信息量</div>
+                    </div>
+                </div>
+
                 <!-- /block -->
             </div>
 
@@ -135,32 +159,19 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="004">数据类型</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
-
-                        </div>
                     </div>
                     <div class="block-content collapse in">
-                        <%--<div class="span6 chart">
-                            <h5>媒体活跃度</h5>
-                            <div id="hero-bar" style="height: 250px;"></div>
-                        </div>--%>
-                            <div class="span6 chart">
-                                <h5>境内外分布</h5>
-                                <div id="area" style="width:60%;height:250px"></div>
-                            </div>
                         <div class="span5 chart">
-                            <h5>媒体来源比</h5>
-                            <div id="media" style="width:100%;height:250px"></div>
+                            <%--<h5>媒体来源比</h5>--%>
+                            <div id="media" style="width:100%;height:250px"></div><br>
+                            <div align="center" style="color: #EA5200">该图统计的是各媒体的信息量</div>
+                        </div>
+                        <div class="span5">
+                            <div id="websiteArticle" style="width: 100%;height: 250px;" ></div>
+                            <br>
+                            <div align="center" style="color: #EA5200">该图统计的是全网的信息量</div>
                         </div>
 
-                            <%--<div class="span6 chart">
-                                <h5>境内外分布</h5>
-                                <div id="mediaType" style="width:60%;height:250px"></div>
-                            </div>--%>
-                        <%--<div class="span5 chart">
-                            <h5>敏感分析</h5>
-                            <div id="sensitive" style="width:60%;height: 250px;"></div>
-                        </div>--%>
                     </div>
                 </div>
                 <!-- /block -->
@@ -172,99 +183,47 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="005">关键词云</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
+                        <div class="muted pull-left" id="005">网站传播</div>
 
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="keywords" style="width: 1000px;height: 400px;" ></div>
+                            <div id="transfer_webs" style="width:95%;height: 400px;"></div>
                         </div>
+                        <div align="center" style="color: #EA5200">该图展示的是 全网的传播情况</div>
                     </div>
+
                 </div>
                 <!-- /block -->
             </div>
-
-            <div class="row-fluid">
-                <!-- block -->
-                <div class="block">
-                    <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="006">热门信息</div>
-                    </div>
-                    <div class="block-content collapse in">
-                        <div class="span12">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>标题</th>
-                                    <th>来源站点</th>
-                                    <th>时间</th>
-                                    <th>转发数</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${hotInformation}" var="h" varStatus="sts">
-                                    <tr>
-                                        <td>${h.title}</td>
-                                        <td>${h.websiteEntity.websiteId}</td>
-                                        <td>${h.postTime}</td>
-                                        <td>${h.recommendNumber}</td>
-                                    </tr>
-                                </c:forEach>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- /block -->
-            </div>
-
-            <!-- morris graph chart -->
-            <div class="row-fluid section">
-                <!-- block -->
-                <div class="block">
-                    <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="007" >热点网民</div>
-                        <div class="pull-right">
-
-                        </div>
-                    </div>
-                    <div class="block-content collapse in">
-                        <div class="block-content collapse in">
-                            <c:forEach items="${hotAuthor}" var="h" varStatus="sts">
-                            <div class="span3">
-                                <div class="chart" data-percent="73">
-                                    <ul>
-                                        <div><img src="./images/01.jpg" width="60px" height="60px"></img> </div>
-                                        <li><span class="label label-info"><a href="<%=basePath%>authorInfo?authorId=${h.authorId}">${h.name}</a></span></li>
-                                        <li><span class="label label-info">发帖数：${h.elitePostNumber}</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            </c:forEach>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /block -->
-            </div>
-
-
 
             <div class="row-fluid">
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="008">传播路径</div>
-                        <div class="pull-right"><span class="badge badge-warning"></span>
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="transfer" style="width:900px;height: 500px;float: left"></div>
+                            <div id="transfer" style="width:900px;height: 600px;float: left"></div>
                             <div id="graph" style="width:200px;height: 500px;float: right"></div>
+                        </div>
+                        <div align="center" style="color: #EA5200">该图展示的是 全网的传播情况</div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left" id="">网站传播持续时间</div>
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="timePeriodWeb" style="width:100%;height: 400px;float: left"></div>
+                            <div align="center" style="color: #EA5200">该图横轴表示的是事件中传播的网站，纵轴表示的是网站的关注时长（单位为天）</div>
                         </div>
                     </div>
                 </div>
@@ -276,13 +235,11 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="009">关联词</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
-
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
                             <div id="keyword_related" style="width:1000px;height: 600px;"></div>
+                            <div align="center" style="color: #EA5200">该图核心词汇与非核心词汇的关联度</div>
                         </div>
                     </div>
                 </div>
@@ -296,9 +253,7 @@
                         <div class="muted pull-left" id="010">网民观点</div>
                     </div>
                     <div class="block-content collapse in">
-                        <div class="span12">
 
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -353,6 +308,10 @@
                     </c:forEach>
                 </div>
             </div>
+            <div class="alert alert-block">
+                <div id="chart" style="float:left; margin:150px 0px 0px 40px "></div>
+
+            </div>
         </div>
 
     </div>
@@ -386,7 +345,78 @@
 
 <script type="text/javascript" src="vendors/flot/jquery.js"></script>
 
-<script  type="text/javascript">
+<script>
+
+    //基于准备好的dom,初始化echarts实例
+    var myChart = echarts.init(document.getElementById('webAndTimeCount'));
+    var option = {
+        xAxis: {
+            type: 'category',
+            data: ${time}
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: ${webAndTimeCount},
+            type: 'line',
+            smooth: true
+        }]
+    };
+    myChart.setOption(option);
+</script>
+<script>
+    var myChart2 = echarts.init(document.getElementById('websiteArticle'));
+    var option2 = {
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : ${webs},
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLabel: {
+                    formatter: '{value}条'
+                }
+            }
+        ],
+        series : [
+            {
+                name:'直接访问',
+                type:'bar',
+                barWidth: '60%',
+                data:${allWebsiteArticle}
+            }
+        ]
+    };
+    myChart2.setOption(option2);
+</script>
+<%--<script  type="text/javascript">
 
     var keyWords = JSON.parse('${keywords}');
 
@@ -395,7 +425,7 @@
     //指定图表的配置项和数据
     var  option = {
         title: {
-            text: '热点词分析',
+            text: '',
             link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
             x: 'center',
             textStyle: {
@@ -419,7 +449,7 @@
             }
         },
         series: [{
-            name: '热点分析',
+            name: '',
             type: 'wordCloud',
             //size: ['9%', '99%'],
             sizeRange: [6, 66],
@@ -431,36 +461,45 @@
                 enable: true,
                 minSize: 6
             },
+            roam: true, //禁止用鼠标滚轮缩小放大效果
             textStyle: {
                 normal: {
-                    color: function() {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                            '#F3A43B','#FE8463','#9BCA63','#FAD860','#60C0DD',
+                            /*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
+                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*/
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    /*color: function() {
                         return 'rgb(' + [
                             Math.round(Math.random() * 160),
                             Math.round(Math.random() * 160),
                             Math.round(Math.random() * 160)
                         ].join(',') + ')';
-                    }
+                    }*/
                 },
                 emphasis: {
                     shadowBlur: 10,
                     shadowColor: '#333'
                 }
             },
-            data: []
+            data: keyWords
         }]
     };
 
 
-    option.series[0].data = keyWords;
+//    option.series[0].data = keyWords;
 
     myChart.setOption(option);
     myChart.on('click', function (params) {
-        alert((params.name));
         window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
 
     });
-</script>
-<script>
+</script>--%>
+<%--<script>
     //基于准备好的dom,初始化echarts实例
     var myChart1 = echarts.init(document.getElementById('website_statistic'));
     var option1 = {
@@ -472,13 +511,6 @@
         },
         toolbox: {
             show : true,
-            feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
         },
         calculable : true,
         xAxis : [
@@ -500,7 +532,7 @@
     // 为echarts对象加载数据
     myChart1.setOption(option1);
 
-</script>
+</script>--%>
 <input type="hidden" value="${hotOpinionList}">
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -518,7 +550,7 @@
         toolbox: {
             show: true,
             feature: {
-                dataView: {show: true, readOnly: false},
+                /*dataView: {show: true, readOnly: false},*/
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -566,94 +598,132 @@
 
     // 为echarts对象加载数据
     myChart2.setOption(option2);
+    myChart2.on('click', function (params) {
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+    });
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
-    var myChart3 = echarts.init(document.getElementById('area'));
+    var myChart3 = echarts.init(document.getElementById('transfer_webs'));
     var option3 = {
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        title: {
+            text: '全网传播图'
         },
-        legend: {
-            orient : 'vertical',
-            x : 'left',
-            data:['国内','国外']
-        },
-        toolbox: {
-            show : true,
-            feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType : {
-                    show: true,
-                    type: ['pie', 'funnel'],
-                    option: {
-                        funnel: {
-                            x: '25%',
-                            width: '50%',
-                            funnelAlign: 'center',
-                            max: 1548
-                        }
-                    }
-                },
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        calculable : true,
+        tooltip: {},
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
         series : [
             {
-                name:'访问来源',
-                type:'pie',
-                radius : ['50%', '70%'],
-                itemStyle : {
-                    color: function(params) {
-                        // build a color map as your need.
-                        var colorList = [
-                            '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-                            /*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
-                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*/
-                        ];
-                        return colorList[params.dataIndex]
-                    },
-                    normal : {
-                        label : {
-                            show : false
-                        },
-                        labelLine : {
-                            show : false
-                        }
-                    },
-                    emphasis : {
-                        label : {
-                            show : true,
-                            position : 'center',
-                            textStyle : {
-                                fontSize : '30',
-                                fontWeight : 'bold'
-                            }
+                type: 'graph',
+                layout: 'none',
+                symbolSize: 50,
+                roam: true,
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [4, 10],
+                edgeLabel: {
+                    normal: {
+                        textStyle: {
+                            fontSize: 20
                         }
                     }
                 },
-                data:${areaSource}
+                data:  ${transwebsList},
+//                    [{"name":"猫扑社区","x":300,"y":300},{"name":"天涯BBS","x": 800, "y": 300},{"name":"新华网","x": 550, "y": 100},{"name":"人民网BBS","x": 550, "y": 500}],
 
+                   /* [{
+                    name: '节点1',
+                    x: 300,
+                    y: 300
+                }, {
+                    name: '节点2',
+                    x: 800,
+                    y: 300
+                }, {
+                    name: '节点3',
+                    x: 550,
+                    y: 100
+                }, {
+                    name: '节点4',
+                    x: 550,
+                    y: 500
+                }],*/
+                // links: [],
+                links:${transferweb},
+                    /*[{
+                    source: 0,
+                    target: 1,
+                    symbolSize: [5, 20],
+                    label: {
+                        normal: {
+                            show: true
+                        }
+                    },
+                    lineStyle: {
+                        normal: {
+                            width: 5,
+                            curveness: 0.2
+                        }
+                    }
+                }, {
+                    source: '节点2',
+                    target: '节点1',
+                    label: {
+                        normal: {
+                            show: true
+                        }
+                    },
+                    lineStyle: {
+                        normal: { curveness: 0.2 }
+                    }
+                }, {
+                    source: '节点1',
+                    target: '节点3'
+                }, {
+                    source: '节点2',
+                    target: '节点3'
+                }, {
+                    source: '节点2',
+                    target: '节点4'
+                }, {
+                    source: '节点1',
+                    target: '节点4'
+                }],*/
+                lineStyle: {
+                    normal: {
+                        opacity: 0.9,
+                        width: 2,
+                        curveness: 0
+                    }
+                }
             }
         ]
     };
-
     // 为echarts对象加载数据
     myChart3.setOption(option3);
+    myChart3.on('click', function (params) {
+        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+    });
 </script>
-
-<script  type="text/javascript">
-    /*var myChart4 = echarts.init(document.getElementById('mediaType'));
+<script>
+    var myChart4 = echarts.init(document.getElementById('timePeriodWeb'));
     var option4 = {
         color: ['#3398DB'],
         tooltip : {
             trigger: 'axis',
             axisPointer : {            // 坐标轴指示器，坐标轴触发有效
                 type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                restore : {show: true},
+                saveAsImage : {show: true}
             }
         },
         grid: {
@@ -665,7 +735,7 @@
         xAxis : [
             {
                 type : 'category',
-                data : [mediaList],
+                data : ${category},
                 axisTick: {
                     alignWithLabel: true
                 }
@@ -673,7 +743,10 @@
         ],
         yAxis : [
             {
-                type : 'value'
+                type : 'value',
+                axisLabel: {
+                    formatter: '{value} 天'
+                }
             }
         ],
         series : [
@@ -681,95 +754,11 @@
                 name:'直接访问',
                 type:'bar',
                 barWidth: '60%',
-                data:[mediaSource]
+                data:${timePeriodWeb}
             }
         ]
     };
-
-    /!*var option4 = {
-        title: {
-            x: 'center',
-            text: '',
-            subtext: '',
-            link: 'http://echarts.baidu.com/doc/example.html'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-
-        toolbox: {
-            show: true,
-            feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        calculable: true,
-        grid: {
-            borderWidth: 0,
-            y: 80,
-            y2: 60
-        },
-        xAxis: [
-            {
-                type: 'category',
-                show: false,
-                data: ['博客', '新闻','政府', '论坛', '社交媒体']
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                show: false
-            }
-        ],
-        series: [
-            {
-                name: '媒体类型',
-                type: 'bar',
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            // build a color map as your need.
-                            var colorList = [
-                                '#FE8463','#60C0DD','#9BCA63','#FAD860','#F3A43B',
-                                /!*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
-                                '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*!/
-                            ];
-                            return colorList[params.dataIndex]
-                        },
-                        label: {
-                            show: true,
-                            position: 'top',
-                            formatter: '{b}\n{c}'
-                        }
-                    }
-                },
-                data:
-                markPoint: {
-                    tooltip: {
-                        trigger: 'item',
-                        backgroundColor: 'rgba(0,0,0,0)',
-                        formatter: function(params){
-                            return '<img src="'
-                                + params.data.symbol.replace('image://', '')
-                                + '"/>';
-                        }
-                    },
-                    data: [
-
-                        {xAxis:0, y: 350, name:'Chord', symbolSize:20, symbol: ''},
-                        {xAxis:1, y: 350, name:'Force', symbolSize:20, symbol: ''},
-                        {xAxis:2, y: 350, name:'Map', symbolSize:20, symbol: ''},
-                        {xAxis:3, y: 350, name:'Gauge', symbolSize:20, symbol: ''},
-                        {xAxis:4, y: 350, name:'Funnel', symbolSize:20, symbol: ''},
-                    ]
-                }
-            }
-        ]
-    };*!/
-    myChart4.setOption(option4);*/
+    myChart4.setOption(option4);
 </script>
 
 <script>
@@ -822,85 +811,93 @@
         ]
     };
     myChart7.setOption(option7);
+    myChart7.on('click', function (params) {
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+    });
 </script>
-<script>
-    //基于准备好的dom,初始化echarts实例
-    /*var myChart8 = echarts.init(document.getElementById('sensitive'));
-    var option8 = {
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient : 'vertical',
-            x : 'left',
-            data:['敏感','非敏感']
-        },
-        toolbox: {
-            show : true,
-            feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType : {
-                    show: true,
-                    type: ['pie', 'funnel'],
-                    option: {
-                        funnel: {
-                            x: '25%',
-                            width: '50%',
-                            funnelAlign: 'center',
-                            max: 1548
-                        }
-                    }
-                },
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        calculable : true,
-        series : [
-            {
-                name:'访问来源',
-                type:'pie',
-                radius : ['50%', '70%'],
-                itemStyle : {
-                    color: function(params) {
-                        // build a color map as your need.
-                        var colorList = [
-                            '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-                            /!*'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
-                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B'*!/
-                        ];
-                        return colorList[params.dataIndex]
-                    },
-                    normal : {
-                        label : {
-                            show : false
-                        },
-                        labelLine : {
-                            show : false
-                        }
-                    },
-                    emphasis : {
-                        label : {
-                            show : true,
-                            position : 'center',
-                            textStyle : {
-                                fontSize : '30',
-                                fontWeight : 'bold'
-                            }
-                        }
-                    }
-                },
-                data:
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
 
-            }
-        ]
-    };
+    circle {
+        fill: rgb(31, 119, 180);
+        fill-opacity: .25;
+        stroke: rgb(31, 119, 180);
+        stroke-width: 1px;
+    }
 
-    // 为echarts对象加载数据
-    myChart8.setOption(option8);*/
+    .leaf circle {
+        fill: #ff7f0e;
+        fill-opacity: 1;
+    }
+
+    text {
+        font: 10px sans-serif;
+        text-anchor: middle;
+    }
+
+</style>
+<script type="text/javascript">
+    var w = 960,
+        h = 500;
+
+    var vertices = d3.range(100).map(function(d) {
+        return [Math.random() * w, Math.random() * h];
+    });
+
+    var svg = d3.select("#chart")
+        .append("svg:svg")
+        .attr("width", w)
+        .attr("height", h);
+    var paths, points, clips;
+    clips = svg.append("svg:g").attr("id", "point-clips");
+    points = svg.append("svg:g").attr("id", "points");
+    paths = svg.append("svg:g").attr("id", "point-paths");
+
+    clips.selectAll("clipPath")
+        .data(vertices)
+        .enter().append("svg:clipPath")
+        .attr("id", function(d, i) { return "clip-"+i;})
+        .append("svg:circle")
+        .attr('cx', function(d) { return d[0]; })
+        .attr('cy', function(d) { return d[1]; })
+        .attr('r', 20);
+
+    paths.selectAll("path")
+        .data(d3.geom.voronoi(vertices))
+        .enter().append("svg:path")
+        .attr("d", function(d) { return "M" + d.join(",") + "Z"; })
+        .attr("id", function(d,i) {
+            return "path-"+i; })
+        .attr("clip-path", function(d,i) { return "url(#clip-"+i+")"; })
+        .style("fill", d3.rgb(230, 230, 230))
+        .style('fill-opacity', 0.4)
+        .style("stroke", d3.rgb(200,200,200));
+
+    paths.selectAll("path")
+        .on("mouseover", function(d, i) {
+            d3.select(this)
+                .style('fill', d3.rgb(31, 120, 180));
+            svg.select('circle#point-'+i)
+                .style('fill', d3.rgb(31, 120, 180))
+        })
+        .on("mouseout", function(d, i) {
+            d3.select(this)
+                .style("fill", d3.rgb(230, 230, 230));
+            svg.select('circle#point-'+i)
+                .style('fill', 'black')
+        });
+
+    points.selectAll("circle")
+        .data(vertices)
+        .enter().append("svg:circle")
+        .attr("id", function(d, i) {
+            return "point-"+i; })
+        .attr("transform", function(d) { return "translate(" + d + ")"; })
+        .attr("r", 2)
+        .attr('stroke', 'none');
+
 </script>
+
 <script type="text/javascript">
     //基于准备好的dom,初始化echarts实例
     var myChart9 = echarts.init(document.getElementById("transfer"));
@@ -998,7 +995,6 @@
     for(var s = 0; s <= 1; s += 0.1) {
         timeLineData.push(s.toFixed(1))
     }
-
 
     var tip1 = graphSNA['degreeCentralization'];
     var tip2 = graphSNA['closeCentralization'];
@@ -1173,7 +1169,6 @@
         },
         options:edgeOptions,
     };
-
     myChart9.setOption(option9);
 </script>
 <script>
@@ -1253,312 +1248,329 @@
     myChart10.setOption(option10);
 
 </script>
-<%--<script>
-    var myChart11 = echarts.init(document.getElementById("keyword_related"));
-    var option11 = {
-        backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-            offset: 0,
-            color: '#FFFFFF'
-        }, {
-            offset: 1,
-            color: '#FFFFFF'
-        }]),
 
-        tooltip: {},
-        legend: [{
-            formatter: function (name) {
-                return echarts.format.truncateText(name, 40, '14px Microsoft Yahei', '…');
-            },
-            tooltip: {
-                show: true
-            },
-            selectedMode: 'false',
-            bottom: 20,
-            data: ['核心', '非核心']
-        }],
-        toolbox: {
-            show : true,
-            feature : {
-                dataView : {show: true, readOnly: true},
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        animationDuration: 3000,
-        animationEasingUpdate: 'quinticInOut',
-        series: [{
-            name: '关键词',
-            type: 'graph',
-            layout: 'force',
-            force: {
-                repulsion: 50
-            },
-            data: ${keywords},
-            links: ${keywordRelated},
-            categories: [{
-                'name': '核心'
-            }, {
-                'name': '非核心'
-            }],
-            focusNodeAdjacency: true,
-            roam: true,
-            label: {
-                normal: {
-
-                    show: true,
-                    position: 'top',
-
-                }
-            },
-            lineStyle: {
-                normal: {
-                    color: 'source',
-                    curveness: 0,
-                    type: "solid"
-                }
-            }
-        }]
-    };
-    myChart11.setOption(option11);
-</script>--%>
 <script>
     var myChart12 = echarts.init(document.getElementById("keyword_related"));
-    var markLineOpt = {};
 
-    var option12 = {
-        backgroundColor: '',
-        title: {
-            text: '',
-            x: '35%',
-            y: 0
-        },
-        xAxis: [{
-            gridIndex: 0,
-            type: 'value',
-            show: false,
-            min: 0,
-            max: 100,
-            name: '市场需求指数',
-            nameLocation: 'middle',
-            nameGap: 30,
-
-        }, ],
-        yAxis: [{
-            gridIndex: 0,
-            min: 0,
-            show: false,
-            max: 100,
-            name: '竞争强度指数',
-            nameLocation: 'middle',
-            nameGap: 30,
-        }, ],
-        series: [{
-            name: '强相关',
-            type: 'scatter',
-            xAxisIndex: 0,
-            yAxisIndex: 0,
-            symbol: 'circle',
-            symbolSize: 40,
+    /*var  option12 = {
+    title: {
+        text: '网络拓扑信息',
+    },
+    tooltip:{},
+    animationDurationUpdate: 1500,
+    animationEasingUpdate: 'quinticInOut',
+    series : [
+        {
+            type: 'graph',
+            layout: 'none',
+            symbolSize: 50,//图形的大小（示例中的圆的大小）
+            roam: true,//鼠标缩放及平移
+            focusNodeAdjacency:true,//是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点
             label: {
                 normal: {
-                    show: true,
-                    formatter: function(param) {
-                        return param.data[2];
-                    },
-                },
-
+                    show: true ,  //控制非高亮时节点名称是否显示
+                    position:'top',
+                    fontSize:20
+                }
             },
-            itemStyle: {
+
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [1, 10],    //箭头的大小
+            edgeLabel: {
+                normal:{
+                    show:false
+                },
+                emphasis: {
+                    textStyle: {
+                        fontSize: 20  //边节点显示的字体大小
+                    }
+                }
+            },
+
+//节点信息
+
+            data:
+            <%--${keywordRelated}--%>
+                /!*[
+                    {
+                        name:'h1',
+                        value:'10.108.50.101',
+                        isnode:true,
+                        x:100,
+                        y:300,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h2',
+                        value:'10.108.50.102',
+                        isnode:true,
+                        x:200,
+                        y:470,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h3',
+                        value:'10.108.50.103',
+                        isnode:true,
+                        x:400,
+                        y:470,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h4',
+                        value:'10.108.50.104',
+                        isnode:true,
+                        x:500,
+                        y:300,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h5',
+                        value:'10.108.50.105',
+                        isnode:true,
+                        x:400,
+                        y:130,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h6',
+                        value:'10.108.50.106',
+                        isnode:true,
+                        x:200,
+                        y:130,
+                        // symbol:'image://服务器-20.png',
+                    },
+                    {
+                        name:'h7',
+                        value:'10.108.50.107',
+                        isnode:true,
+                        x:300,
+                        y:300,
+                        // symbol:'image://服务器-20.png',
+                    },
+
+                ]*!/,
+
+            links:
+            <%--${keywordRelated}--%>
+                [
+                    {
+                        source:'天涯博客',
+                        target:'米花糖糖',
+                        islink:"true",
+                        name:'链路1',
+//                        bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+//                        timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                        PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                    },
+                    {
+                        source:'h2',
+                        target:'h3',
+                        islink:true,
+                        name:'链路2',
+                        bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                        timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                        PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                    },{
+                    source:'h3',
+                    target:'h4',
+                    islink:true,
+                    name:'链路3',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h4',
+                    target:'h5',
+                    islink:true,
+                    name:'链路4',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h5',
+                    target:'h6',
+                    islink:true,
+                    name:'链路5',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h6',
+                    target:'h1',
+                    islink:true,
+                    name:'链路6',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h1',
+                    target:'h7',
+                    islink:true,
+                    name:'链路7',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h2',
+                    target:'h7',
+                    islink:true,
+                    name:'链路8',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h3',
+                    target:'h7',
+                    islink:true,
+                    name:'链路9',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },{
+                    source:'h7',
+                    target:'h5',
+                    islink:true,
+                    name:'链路10',
+                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
+                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
+                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
+                },
+                ],
+            lineStyle: {
                 normal: {
-                    color: '#5aa8ee',
-                    shadowColor: 'rgba(0,0,139, 0.8)',
-                    shadowBlur: 15,
+                    show:true,
+                    color:
+                        {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [
+                                {
+                                    offset: 0, color: 'red' // 0% 处的颜色
+                                }
+                                ,{
+                                    offset: 1, color: 'blue' // 100% 处的颜色
+                                }],
+                            globalCoord: false // 缺省为 false
+                        },
 
-                    shadowOffsetX: 5,
-                    shadowOffsetY: 5,
-                    opacity: 0.9
+                    // curveness: 0.2
 
                 },
+                emphasis:{
+                    color:'red',
+                    width:3,
+                    type:'dashed',//虚线
 
+                }
             },
 
-            data: ${keywordRelated},
+            tooltip:
+                {
+                    position:'bottom',//悬浮时显示的位置
+                    backgroundColor:'green',
+                    textStyle:{fontSize:18,
 
+                    },
+
+                    formatter:function(params){//悬浮提示框显示的内容
+                        if (params.data.islink) {return '带宽：&nbsp'+params.data.bandwith+'<br />'+'时延：&nbsp'+params.data.timeout+'<br />'+'丢包率：'+params.data.PacketLossRate;}
+                        else if (params.data.isnode) {return params.data.value;}
+                    }
+                },//悬浮时的提示框，不设置时是随鼠标移动
+
+        }
+    ]
+};*/
+
+//    var dom = document.getElementById('chart-panel');
+//    dom.style.width = 780 + 'px';
+//    dom.style.height = 600 + 'px';
+    var option12 = {
+        tooltip: {
+            show: false
         },
-
-             {
-                name: '访问来源',
-                type: 'pie',
-                radius: ['0', '38%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: false,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
+        legend: {
+            x: "center",
+            data: ["核心", "非核心"]
+        },
+        animation: false,
+        series: [{
+            categories: [{
+                name: '核心',
                 itemStyle: {
                     normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#E3E3FF'
-                        }, {
-                            offset: 0.25,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.50,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.75,
-                            color: '#DFDFFF'
-                        },
-
-
-                            {
-                                offset: 1,
-                                color: '#E3E3FF'
-                            }
-                        ], false),
-                    },
-                },
-                labelLine: {
-                    normal: {
-                        show: false
+                        color: "#b90c25",
                     }
-                },
-                data: [{
-                    value: 335,
-                    name: '直接访问'
-                },
-
-                ]
-            },
-
-            {
-                name: '相关背景',
-                type: 'pie',
-                radius: ['38%', '77%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: false,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#FFFFFF'
-                        }, {
-                            offset: 0.10,
-                            color: '#FFFFFF'
-                        }, {
-                            offset: 0.45,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.55,
-                            color: '#DFDFFF'
-                        }, {
-                            offset: 0.90,
-                            color: '#FFFFFF'
-                        },
-
-                            {
-                                offset: 1,
-                                color: '#FFFFFF'
-                            }
-                        ], false),
-                    },
-                },
-
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data: [{
-                    value: 3235,
-                    name: '直接访问'
-                },
-
-
-                ]
+                }
             }, {
-                name: '相关背景',
-                type: 'pie',
-                radius: ['76%', '100%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: false,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
+                name: '非核心',
                 itemStyle: {
                     normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#FFFFFF'
-                        },
-
-                            {
-                                offset: 0.30,
-                                color: '#E3E3FF'
-                            }, {
-                                offset: 0.50,
-                                color: '#E3E3FF'
-                            }, {
-                                offset: 0.70,
-                                color: '#E3E3FF'
-                            },
-
-                            {
-                                offset: 1,
-                                color: '#FFFFFF'
-                            }
-                        ], false),
-                    },
-                },
-
-                labelLine: {
-                    normal: {
-                        show: false
+                        color: "#4592FF",
                     }
-                },
-                data: [{
-                    value: 3235,
-                    name: '直接访问'
-                },
+                }
+            }],
+            type: 'graph',
+            layout: 'force',
+            symbol: "circle",
+            symbolSize: 40,
+            roam: true, //禁止用鼠标滚轮缩小放大效果
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [0, 10],
+            // 连接线上的文字
+            focusNodeAdjacency: true, //划过只显示对应关系
+            edgeLabel: {
+                normal: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 20
+                    },
+                    formatter: "{c}"
+                }
+            },
+            categories: [{
+                name: '核心',
+                itemStyle: {
+                    normal: {
+                        color: "#b90c25",
+                    }
+                }
+            }, {
+                name: '非核心',
+                itemStyle: {
+                    normal: {
+                        color: "#4592FF",
+                    }
+                }
+            }],
+            lineStyle: {
+                normal: {
+                    opacity: 1,
+                    width: 2,
+                    curveness: 0
+                }
+            },
+            // 圆圈内的文字
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            force: {
+                repulsion: 300
+            },
+            data: ${keywordList},
 
+            links: ${keywordRelateds}
 
-                ]
-            }
-
-        ]
+        }]
     };
     myChart12.setOption(option12);
+
 </script>
 
 </body>

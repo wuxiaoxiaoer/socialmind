@@ -24,7 +24,7 @@ public class KeywordRelatedDegreeService extends DefaultEntityManager<KeywordRel
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select k.keyword,kr.relatedDegree from keyword_related_degree kr,keyword k " +
+            String sql = "select k.keyword,kr.relatedDegree,k.weight from keyword_related_degree kr,keyword k " +
                     "where kr.keywordOneID IN (select k.keywordID from keyword k WHERE k.objectID ='"+objectId+"') " +
                     "and kr.keywordTwoID = k.keywordID";
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -33,8 +33,9 @@ public class KeywordRelatedDegreeService extends DefaultEntityManager<KeywordRel
                KeywordRelatedDegreeEntity keywordRelatedDegreeEntity = new KeywordRelatedDegreeEntity();
                KeywordEntity keywordEntity = new KeywordEntity();
                keywordEntity.setKeyword(rs.getString(1));
-               keywordRelatedDegreeEntity.setKeywordEntityOne(keywordEntity);
                keywordRelatedDegreeEntity.setRelatedDegree(rs.getDouble(2));
+               keywordEntity.setWeight(rs.getDouble(3));
+                keywordRelatedDegreeEntity.setKeywordEntityOne(keywordEntity);
                list.add(keywordRelatedDegreeEntity);
             }
             new DBUtil().closeConn(rs,psmt,conn);

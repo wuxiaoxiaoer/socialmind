@@ -1,9 +1,6 @@
 package com.sicdlib.service;
 
-import com.sicdlib.entity.ArticleEntity;
-import com.sicdlib.entity.ArticleSimilarEntity;
-import com.sicdlib.entity.AuthorEntity;
-import com.sicdlib.entity.WebsiteEntity;
+import com.sicdlib.entity.*;
 import com.sicdlib.util.DBUtil.DBUtil;
 import com.sicdlib.util.SNAUtil.SNAUtil;
 import com.sicdlib.util.UUIDUtil.UUIDUtil;
@@ -88,16 +85,18 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
     }
 
 
-    //查询事件的相关文章
+    //查询事件的相关文章相似度大于均值的
     public List<ArticleEntity> findArticleList(String objectId){
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
             String sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content, " +
                     "a.scanNumber,a.participationNumber,a.likeNumber,a.recommendNumber, " +
-                    "a.collectNumber,a.similarDegree,au.authorID,au.name " +
+                    "a.collectNumber,a.similarDegree " +
                     "from article a,website w,author au " +
-                    "where a.websiteID = w.websiteID and a.authorID = au.authorID and a.objectID = '" +objectId+"' and " +
+                    "where a.websiteID = w.websiteID " +
+//                    "and a.authorID = au.authorID " +
+                    "and a.objectID = '" +objectId+"' and " +
                     "a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
                     "order by a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -108,7 +107,6 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 a.setTitle(rs.getString(2));
                 WebsiteEntity web = new WebsiteEntity();
                 web.setWebsiteName(rs.getString(3));
-//                web.setWebsiteId(rs.getString(3));
                 a.setWebsiteEntity(web);
                 a.setArticleId(rs.getString(4));
                 a.setContent(rs.getString(5));
@@ -118,10 +116,11 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 a.setRecommendNumber(rs.getInt(9));
                 a.setCollectNumber(rs.getInt(10));
                 a.setSimilarDegree(rs.getDouble(11));
-                AuthorEntity authorEntity = new AuthorEntity();
+               /* AuthorEntity authorEntity = new AuthorEntity();
                 authorEntity.setAuthorId(rs.getString(12));
                 authorEntity.setName(rs.getString(13));
-                a.setAuthorEntity(authorEntity);
+                a.setAuthorEntity(authorEntity);*/
+               //,au.authorID,au.name
                 list.add(a);
             }
             new DBUtil().closeConn(rs,psmt,conn);
@@ -130,6 +129,149 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
 
         }
         return null;
+
+    }
+
+    //根据文章ID判断作者ID是否为空---true代表不空，false代表空
+    public boolean  authorIsNull(String articleId){
+        try {
+            boolean result = false;
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select ISNULL(a.authorID) from article a where a.articleID = '" +articleId+"'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                if ("0".equals(rs.getString(1))){
+                    result = true;
+                    break;
+                }
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+
+        }
+        return false;
+    }
+
+    //根据网站名称找最早时间
+    public String findFirstTimeByWeb(String webName,String objectId){
+        try {
+            String result = null;
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select a.postTime from article a,website w " +
+                    "where a.objectID = '"+objectId+"' " +
+                    "and a.websiteID = w.websiteID and w.websiteName = '"+webName+"' " +
+                    "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '"+objectId+"') " +
+                    "ORDER BY a.postTime";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                result = rs.getString(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
+    //根据网站名称找结束时间
+    public String findEndTimeByWeb(String webName,String objectId){
+        try {
+            String result = null;
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select a.postTime from article a,website w " +
+                    "where a.objectID = '"+objectId+"' " +
+                    "and a.websiteID = w.websiteID and w.websiteName = '"+webName+"' " +
+                    "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '"+objectId+"') " +
+                    "ORDER BY a.postTime desc";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                result = rs.getString(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
+    //根据文章ID查询文章详情
+    public List<ArticleEntity> findArticleInfo(String articleId){
+        List list = new ArrayList();
+        try {
+            boolean isAuthorNull = authorIsNull(articleId);
+
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "";
+            if(isAuthorNull){
+                sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content, " +
+                        "a.scanNumber,a.participationNumber,a.likeNumber,a.recommendNumber, " +
+                        "a.collectNumber,a.similarDegree,au.authorID,au.name " +
+                        "from article a,website w,author au " +
+                        "where a.websiteID = w.websiteID and a.authorID = au.authorID and a.articleID = '" +articleId+"'";
+                PreparedStatement psmt = conn.prepareStatement(sql);
+                ResultSet rs = psmt.executeQuery(sql);
+                while (rs.next()){
+                    ArticleEntity a = new ArticleEntity();
+                    a.setPostTime(rs.getString(1));
+                    a.setTitle(rs.getString(2));
+                    WebsiteEntity web = new WebsiteEntity();
+                    web.setWebsiteName(rs.getString(3));
+                    a.setWebsiteEntity(web);
+                    a.setArticleId(rs.getString(4));
+                    a.setContent(rs.getString(5));
+                    a.setScanNumber(rs.getInt(6));
+                    a.setParticipationNumber(rs.getInt(7));
+                    a.setLikeNumber(rs.getInt(8));
+                    a.setRecommendNumber(rs.getInt(9));
+                    a.setCollectNumber(rs.getInt(10));
+                    a.setSimilarDegree(rs.getDouble(11));
+                    AuthorEntity authorEntity = new AuthorEntity();
+                    authorEntity.setAuthorId(rs.getString(12));
+                    authorEntity.setName(rs.getString(13));
+                    a.setAuthorEntity(authorEntity);
+                    list.add(a);
+                    new DBUtil().closeConn(rs,psmt,conn);
+                }
+            }else {
+                sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content, " +
+                        "a.scanNumber,a.participationNumber,a.likeNumber,a.recommendNumber, " +
+                        "a.collectNumber,a.similarDegree " +
+                        "from article a,website w where a.websiteID = w.websiteID and a.articleID = '" +articleId+"'";
+                PreparedStatement psmt = conn.prepareStatement(sql);
+                ResultSet rs = psmt.executeQuery(sql);
+                while (rs.next()){
+                    ArticleEntity a = new ArticleEntity();
+                    a.setPostTime(rs.getString(1));
+                    a.setTitle(rs.getString(2));
+                    WebsiteEntity web = new WebsiteEntity();
+                    web.setWebsiteName(rs.getString(3));
+                    a.setWebsiteEntity(web);
+                    a.setArticleId(rs.getString(4));
+                    a.setContent(rs.getString(5));
+                    a.setScanNumber(rs.getInt(6));
+                    a.setParticipationNumber(rs.getInt(7));
+                    a.setLikeNumber(rs.getInt(8));
+                    a.setRecommendNumber(rs.getInt(9));
+                    a.setCollectNumber(rs.getInt(10));
+                    a.setSimilarDegree(rs.getDouble(11));
+                    AuthorEntity authorEntity = new AuthorEntity();
+                    authorEntity.setAuthorId(null);
+                    authorEntity.setName(null);
+                    a.setAuthorEntity(authorEntity);
+                    list.add(a);
+                }
+                new DBUtil().closeConn(rs,psmt,conn);
+            }
+
+
+        }catch (Exception e){
+
+        }
+        return list;
 
     }
 
@@ -145,6 +287,9 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 String origin = rs.getString(1);
                 String[] a = origin.split(",");
                 for (int i=0; i<a.length;i++){
+                    if ("".equals(a[i])||a[i]=="null"){
+                        break;
+                    }
                     String sql1 = "SELECT k.weight from keyword k where k.objectID = '" +objectId+"' and k.keyword = '" +a[i]+"'";
                     PreparedStatement psmt1 = conn.prepareStatement(sql1);
                     ResultSet rs1 = psmt1.executeQuery(sql1);
@@ -182,20 +327,115 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
 
     }
 
+    //查询不敏感事件
+    public List<ArticleEntity> findEventNoSensitive(List<DynamicSensitiveArticle> articles){
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String pinjie = "";
+            String sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content, " +
+                    "a.scanNumber,a.participationNumber,a.likeNumber,a.recommendNumber, " +
+                    "a.collectNumber,a.similarDegree,au.authorID,au.name " +
+                    "from article a,website w,author au " +
+                    "where a.websiteID = w.websiteID " +
+                    "and a.authorID = au.authorID and a.articleID not in "+pinjie+"";
+            if (articles.iterator().hasNext()){
+                for (int i = 0; i<articles.size();i++){
+                    if (i==0){
+                        pinjie += "('"+articles.get(i).getArticle().getArticleId()+"',";
+                    }else if (i<articles.size()-1){
+                        pinjie += "'"+articles.get(i).getArticle().getArticleId()+"',";
+                    }else{
+                        pinjie += "'"+articles.get(i).getArticle().getArticleId()+"')";
+                    }
+
+                }
+            }
+            sql = sql + pinjie;
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                ArticleEntity a = new ArticleEntity();
+                a.setPostTime(rs.getString(1));
+                a.setTitle(rs.getString(2));
+                WebsiteEntity web = new WebsiteEntity();
+                web.setWebsiteName(rs.getString(3));
+                a.setWebsiteEntity(web);
+                a.setArticleId(rs.getString(4));
+                a.setContent(rs.getString(5));
+                a.setScanNumber(rs.getInt(6));
+                a.setParticipationNumber(rs.getInt(7));
+                a.setLikeNumber(rs.getInt(8));
+                a.setRecommendNumber(rs.getInt(9));
+                a.setCollectNumber(rs.getInt(10));
+                a.setSimilarDegree(rs.getDouble(11));
+                AuthorEntity authorEntity = new AuthorEntity();
+                authorEntity.setAuthorId(rs.getString(12));
+                authorEntity.setName(rs.getString(13));
+                a.setAuthorEntity(authorEntity);
+                list.add(a);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+
+        }
+        return null;
+
+    }
+
     //查事件的事件段
     public List findPeriod(String objectId){
-        String hql = "select DISTINCT(substring(a.postTime,1,10)) from ArticleEntity a where a.objectEntity = '" +objectId+"' order by a.postTime";
-        List period = getEntityDao().find(hql);
-        return period;
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select DISTINCT(substring(a.postTime,1,10)) from article a where a.objectID = '"+objectId+"' " +
+                    "AND a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') "+
+                    "order by a.postTime";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                list.add(rs.getString(1));
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+        }
+        return null;
+
+    }
+
+    //统计事件下各个网站的信息量
+    public List<Map> findWebsiteArticle(String objectId,String websiteId){
+        try {
+            List<Map> coutList = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT w.websiteName,COUNT(a.articleID) from article a,website w " +
+                    "where a.objectID = '"+objectId+"' " +
+                    "and a.websiteID = w.websiteID and a.websiteID = '"+websiteId+"'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("webname",rs.getString(1));
+                map.put("count",rs.getString(2));
+                coutList.add(map);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return coutList;
+        }catch (Exception e){
+        }
+        return null;
     }
 
     //查找事件的网站统计
-    public List<Map> findWebsites(String objectId,String websiteId,String websiteName){
+    public List<Map> findWebsites(String objectId,String websiteId){
         try {
             List coutList = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
             String sql = "SELECT c.postTime,IFNULL(t.m,0) FROM article c LEFT OUTER JOIN (SELECT postTime,COUNT(a.articleID) m " +
                     "FROM article a,website w WHERE a.websiteID = w.websiteID AND a.objectID = '" +objectId+" '" +
+                    "AND a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') "+
                     "AND a.websiteID = "+websiteId+" GROUP BY a.postTime) t on c.postTime = t.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
@@ -209,16 +449,85 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
         return null;
     }
 
+    //事件的每天的各网站的信息量
+    public int findArticleNum(String objectId,String time){
+        try {
+            int result = 0;
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select count(a.articleID) from article a " +
+                    "where a.postTime LIKE '"+time+"%' and a.objectID = '"+objectId+"' " +
+                    "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"')";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+               result=rs.getInt(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return 0;
+    }
+
+    //事件的网站峰值的文章信息
+    public List findMaxArticle(String objectId,String time){
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select a.postTime,a.title,w.websiteName,a.articleID,a.content, " +
+                    "a.scanNumber,a.participationNumber,a.likeNumber,a.recommendNumber, " +
+                    "a.collectNumber,a.similarDegree,au.authorID,au.name, " +
+                    "IFNULL(0.3*a.commentNumber,0)+IFNULL(0.2*a.replyNumber,0)+IFNULL(0.15*a.scanNumber,0)+IFNULL(0.05*a.participationNumber,0)+IFNULL(0.03*a.recommendNumber,0)+IFNULL(0.03*a.collectNumber,0)+IFNULL(0.03*a.likeNumber,0) as summary " +
+                    "from article a,website w,author au " +
+                    "where a.websiteID = w.websiteID and a.objectID = '" +objectId+"' and " +
+                    "a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
+                    "and a.postTime like '"+time+"%'"+
+                    "order by summary DESC LIMIT 1";
+
+            /*String sql = "select a.title,w.websiteName,a.postTime,a.recommendNumber,a.scanNumber,a.articleID, " +
+                    "IFNULL(0.3*a.commentNumber,0)+IFNULL(0.2*a.replyNumber,0)+IFNULL(0.15*a.scanNumber,0)+IFNULL(0.05*a.participationNumber,0)+IFNULL(0.03*a.recommendNumber,0)+IFNULL(0.03*a.collectNumber,0)+IFNULL(0.03*a.likeNumber,0) as summary " +
+                    "from article a,website w where a.objectID = '" +objectId+" ' and a.websiteID = w.websiteID " +
+                    "ORDER BY summary DESC LIMIT 1";*/
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                ArticleEntity a = new ArticleEntity();
+                a.setPostTime(rs.getString(1));
+                a.setTitle(rs.getString(2));
+                WebsiteEntity web = new WebsiteEntity();
+                web.setWebsiteName(rs.getString(3));
+                a.setWebsiteEntity(web);
+                a.setArticleId(rs.getString(4));
+                a.setContent(rs.getString(5));
+                a.setScanNumber(rs.getInt(6));
+                a.setParticipationNumber(rs.getInt(7));
+                a.setLikeNumber(rs.getInt(8));
+                a.setRecommendNumber(rs.getInt(9));
+                a.setCollectNumber(rs.getInt(10));
+                a.setSimilarDegree(rs.getDouble(11));
+                AuthorEntity authorEntity = new AuthorEntity();
+                authorEntity.setAuthorId(rs.getString(12));
+                authorEntity.setName(rs.getString(13));
+                a.setAuthorEntity(authorEntity);
+                list.add(a);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
     //事件的热门信息推荐
     public List findHotInformation(String objectId){
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
 
-            String sql = "select a.title,w.websiteName,a.postTime,a.recommendNumber,a.scanNumber, " +
+            String sql = "select a.title,w.websiteName,a.postTime,a.recommendNumber,a.scanNumber,a.articleID, " +
                     "IFNULL(0.3*a.commentNumber,0)+IFNULL(0.2*a.replyNumber,0)+IFNULL(0.15*a.scanNumber,0)+IFNULL(0.05*a.participationNumber,0)+IFNULL(0.03*a.recommendNumber,0)+IFNULL(0.03*a.collectNumber,0)+IFNULL(0.03*a.likeNumber,0) as summary " +
                     "from article a,website w where a.objectID = '" +objectId+" ' and a.websiteID = w.websiteID " +
-                    "ORDER BY summary DESC LIMIT 4";
+                    "ORDER BY summary DESC LIMIT 1";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -229,6 +538,8 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 article.setWebsiteEntity(web);
                 article.setPostTime(rs.getString(3));
                 article.setRecommendNumber(rs.getInt(4));
+                article.setScanNumber(rs.getInt(5));
+                article.setArticleId(rs.getString(6));
                 list.add(article);
             }
             new DBUtil().closeConn(rs,psmt,conn);

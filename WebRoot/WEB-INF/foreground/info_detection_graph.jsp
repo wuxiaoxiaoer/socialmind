@@ -94,7 +94,7 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header" id="001">
-                                <div class="muted pull-left">媒体活跃度统计</div>
+                                <div class="muted pull-left">来源类型统计图</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" style="height: 300px">
@@ -109,7 +109,7 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">来源类型统计图</div>
+                                <div class="muted pull-left">媒体活跃度统计</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" style="height: 300px">
@@ -126,9 +126,7 @@
                 <div class="block">
                     <div class="navbar navbar-inner block-header" id="002">
                         <div class="muted pull-left" >信息走势图</div>
-                        <div class="pull-right"><span class="badge badge-warning">View More</span>
 
-                        </div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -153,8 +151,6 @@
                     </div>
                     <!-- /block -->
                 </div>--%>
-
-
 
                 <div class="row-fluid">
                     <div class="span6">
@@ -195,9 +191,7 @@
                     <div class="block">
                         <div class="navbar navbar-inner block-header" id="005">
                             <div class="muted pull-left">地域分布图</div>
-                            <div class="pull-right"><span class="badge badge-warning">View More</span>
 
-                            </div>
                         </div>
                         <div class="block-content collapse in">
                             <div class="span12">
@@ -270,7 +264,7 @@
     myChart.setOption(option);
     myChart.on('click', function (params) {
         alert((params.name));
-        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
     });
 </script>
 <script>
@@ -378,58 +372,8 @@
     // 为echarts对象加载数据
     myChart2.setOption(option2);
     myChart2.on('click', function (params) {
-        alert((params.name));
-        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
     });
-</script>
-<script>
-    //基于准备好的dom,初始化echarts实例
-   /* var myChart3 = echarts.init(document.getElementById('infoAttribute'));
-    var option3 = {
-
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['敏感','非敏感']
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        toolbox: {
-            feature: {
-                saveAsImage: {}
-            }
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ['周一','周二','周三','周四','周五','周六','周日']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name:'敏感',
-                type:'line',
-                stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name:'非敏感',
-                type:'line',
-                stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
-            }
-        ]
-    };
-
-    // 为echarts对象加载数据
-    myChart3.setOption(option3);*/
 </script>
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -491,8 +435,7 @@
     };
     myChart4.setOption(option4);
     myChart4.on('click', function (params) {
-        alert((params.name));
-        <%--window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);--%>
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
     });
 
 </script>
@@ -561,7 +504,6 @@
     // 为echarts对象加载数据
     myChart5.setOption(option5);
     myChart5.on('click', function (params) {
-        alert((params.name));
         window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
     });
 </script>
