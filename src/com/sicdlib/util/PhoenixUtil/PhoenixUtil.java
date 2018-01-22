@@ -1,10 +1,9 @@
 package com.sicdlib.util.PhoenixUtil;
 
-import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.DBUtil.DBUtil;
 import org.ansj.library.UserDefineLibrary;
 import org.ansj.splitWord.analysis.ToAnalysis;
 
-import javax.xml.stream.events.StartDocument;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -97,10 +97,10 @@ public class ConsineSimi {
 
     @Test
     public void test(){
-//        String text1 = "签约仪式前，秦光荣、李纪恒、李纪恒、李纪恒、仇和等一同会见了参加学习签约的企业家。";
-//        String text2 = "签约仪式前，秦光荣、李纪恒、李纪恒、李纪恒、李纪恒、仇和等一同会见了参加学习签约的企业家。";
-        String text1 = "上海女孩逃离江西农村";
-        String text2 = "上海女孩逃离江西农村";
+        String text1 = "签约仪式前，秦光荣、李纪恒、李纪恒、李纪恒、仇和等一同会见了参加学习签约的企业家。";
+        String text2 = "签约仪式前，秦光荣、李纪恒、李纪恒、李纪恒、李纪恒、仇和等一同会见了参加学习签约的企业家。";
+//        String text1 = "上海女孩逃离江西农村";
+//        String text2 = "上海女孩逃离江西农村";
         //获得NER
         List<NERNameValue> ners1 = HanLPUtil.getNERNameValuesMap(text1);
         //将NER，text传入获得所有分词并赋予权重

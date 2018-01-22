@@ -128,7 +128,6 @@ public class HeatController  {
         model.addAttribute("heat2", JSON.toJSONString(heat2));
         model.addAttribute("heat3", JSON.toJSONString(heat3));
         model.addAttribute("heat4", JSON.toJSONString(heat4));
-
         return "/WEB-INF/foreground/heatGraph";
     }
 

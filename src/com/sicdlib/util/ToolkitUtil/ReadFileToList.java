@@ -32,7 +32,7 @@ public class ReadFileToList {
 
     @Test
     public void getInfo(){
-        String filePath = "D:\\project\\spidersManager\\data\\stopWordsData\\stop_words.txt";
+        String filePath = "E:\\learn\\ideaproject\\socialmind\\data\\stopWordData\\stop_words.txt";
         List<String> list = readFileToList(filePath);
         System.out.println(list.size());
     }

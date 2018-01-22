@@ -2254,9 +2254,3 @@ com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
 2017-11-27 21:26:55,494 WARN [DICLOG] - init ambiguity  error :D:\yimingwang\socialMind\socialmind\library\ambiguity.dic because : not find that file or can not found!
 2017-11-27 21:26:55,897 INFO [DICLOG] - init core library ok use time :392
 2017-11-27 21:26:56,204 INFO [DICLOG] - init ngram ok use time :301
-2017-12-25 19:36:20,233 INFO [org.springframework.context.support.ClassPathXmlApplicationContext] - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3c0f93f1: startup date [Mon Dec 25 19:36:20 CST 2017]; root of context hierarchy
-2017-12-25 19:36:20,420 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [beans.xml]
-2017-12-25 19:36:21,130 INFO [org.springframework.context.annotation.ClassPathBeanDefinitionScanner] - JSR-330 'javax.inject.Named' annotation found and supported for component scanning
-2017-12-25 19:36:46,156 INFO [org.springframework.context.support.ClassPathXmlApplicationContext] - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3c0f93f1: startup date [Mon Dec 25 19:36:46 CST 2017]; root of context hierarchy
-2017-12-25 19:36:46,279 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [beans.xml]
-2017-12-25 19:36:46,868 INFO [org.springframework.context.annotation.ClassPathBeanDefinitionScanner] - JSR-330 'javax.inject.Named' annotation found and supported for component scanning

@@ -37,6 +37,13 @@ public class ObjectEntityService extends DefaultEntityManager<ObjectEntity> {
         return objectInfo;
     }
 
+    //前台根据关键字模糊查找对象
+    public List<ObjectEntity> findObject(String object){
+        String hql = "from ObjectEntity o where o.name like '%" +object+"%'";
+        List<ObjectEntity> objectInfo = getEntityDao().find(hql);
+        return objectInfo;
+    }
+
     /**
      * @ wlw
      * 获得相似的舆情对象

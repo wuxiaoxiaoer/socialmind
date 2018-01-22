@@ -1,7 +1,7 @@
 package com.sicdlib.service;
 
 import com.sicdlib.entity.CommentEntity;
-import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.DBUtil.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.hibernate.Query;
 import org.springframework.stereotype.Service;

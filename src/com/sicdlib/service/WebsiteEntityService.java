@@ -1,7 +1,7 @@
 package com.sicdlib.service;
 
 import com.sicdlib.entity.WebsiteEntity;
-import com.sicdlib.util.DBUtil;
+import com.sicdlib.util.DBUtil.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +40,29 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
         return webs*/
     }
 
+    //查找事件的网站来源比
+    public List<Map> findWebsiteSource(String objectId){
+
+        try {
+            List list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT DISTINCT(w.websiteName),COUNT(a.websiteID) from article a,website w " +
+                    "where a.objectID = '"+objectId+"' and a.websiteID = w.websiteID  GROUP BY a.websiteID";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("name",rs.getString(1));
+                map.put("value",rs.getInt(2));
+                list.add(map);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+
+        }
+        return null;
+    }
     //查找事件的媒体来源比
     public List<Map> findMediaSource(String objectId){
 
@@ -65,14 +88,15 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
         return null;
     }
 
-    //查找事件的首发媒体
-    public List findFirstWeb(String objectId){
+
+    //查找事件下的所有网站名称
+    public List<String> findWebsitesByEvent(String objectId){
 
         try {
             List list = new ArrayList();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select w.websiteName from article a,website w " +
-                    "where a.objectID = "+objectId+" and a.websiteID = w.websiteID order BY a.postTime limit 1";
+            String sql = "SELECT DISTINCT(w.websiteName) from article a,website w " +
+                    "where a.objectID = '" +objectId+"' and a.websiteID = w.websiteID";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -86,23 +110,21 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
         return null;
     }
 
-    //查找事件下的所有媒体的信息量
-    public List<Map> findAllMediaSource(String media){
+    //查找事件下某文章的来源网站
+    public String findWebsitesByArticle(String objectId,String articleId){
 
         try {
-            List list = new ArrayList();
+            String result = null;
             Connection conn = new DBUtil().GetConnection();
-            String sql = "";
+            String sql = "SELECT DISTINCT(w.websiteName) from article a,website w " +
+                    "where a.objectID = '" +objectId+"' and a.websiteID = w.websiteID and a.articleID = '" +articleId+"'";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
-                Map map = new HashMap();
-                map.put("name",rs.getString(1));
-                map.put("value",rs.getInt(2));
-                list.add(map);
+                result = rs.getString(1);
             }
             new DBUtil().closeConn(rs,psmt,conn);
-            return list;
+            return result;
         }catch (Exception e){
 
         }

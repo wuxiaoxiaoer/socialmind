@@ -52,6 +52,7 @@ public class FullRetrivalAction {
 		//1.1 关键词全文搜索
 		String name = req.getParameter("name");
 		String flag = req.getParameter("flag");
+		String turn = req.getParameter("turn");
 		PropertyFilter objFilter = new PropertyFilter("name", name);
 		ObjectEntity object = objectEntityService.search(objFilter).get(0);
 		mode.addAttribute("object", object);
@@ -116,7 +117,11 @@ public class FullRetrivalAction {
 		List<DataDictionaryEntity> dataDictionarys = dataDictionaryEntityService.search(filter);
 		mode.addAttribute("dataDictionarys", dataDictionarys);
 
-		return "WEB-INF/foreground/fullRetrivalResults";
+		if ("detection".equals(turn)){
+			return "WEB-INF/foreground/info_detection_text";
+		}else {
+			return "WEB-INF/foreground/fullRetrivalResults";
+		}
 	}
 
 	/** 作者信息 */

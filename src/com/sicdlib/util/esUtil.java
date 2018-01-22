@@ -43,11 +43,11 @@ public class esUtil {
         client.init();
         Map<String, List> peopleSpeedmap = client.querySpeed();
         Map levelMap=client.queryError();
-        Map sizeMap=client.querySize();
+//        Map sizeMap=client.querySize();
 
         map.put("peopleSpeedmap",peopleSpeedmap);
         map.put("levelMap",levelMap);
-        map.put("sizeMap",sizeMap);
+//        map.put("sizeMap",sizeMap);
 
         System.out.println(map.size());
         client.close();

@@ -1,4 +1,4 @@
-package com.sicdlib.util;
+package com.sicdlib.util.DBUtil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

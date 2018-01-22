@@ -34,7 +34,7 @@ public class Segment {
 		//过滤标点符号
 		filter.insertStopWord(",", " ", ".", "，", "。", ":", "：", "'", "‘", "’", "　", "“", "”", "《", "》", "[", "]", "-");
 		//添加去除停用词
-		String filePath = "D:\\project\\spidersManager\\data\\stopWordsData\\stop_words.txt";
+		String filePath = "E:\\learn\\ideaproject\\socialmind\\data\\stopWordData\\stop_words.txt";
 		List<String> stopWordsList = ReadFileToList.readFileToList(filePath);
 		filter.insertStopWord(stopWordsList.toArray(new String[stopWordsList.size()]));
 		//增加用户自定义词库,格式为：“自定义词,词性,数字”。
