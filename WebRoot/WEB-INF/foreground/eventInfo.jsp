@@ -123,7 +123,7 @@
 
                 </div>
 
-                <div class="block">
+                <%--<div class="block">
                     <div class="navbar navbar-inner block-header">
                         <div class="muted pull-left" id="003">网站统计</div>
 
@@ -131,6 +131,19 @@
                     <div class="block-content collapse in">
                         <div class="span12">
                             <div id="website_statistic" style="width:100%;height: 400px;"></div>
+                        </div>
+                        <div align="center" style="color: #EA5200">该图统计的是各时间段下全网的信息量</div>
+                    </div>
+                </div>
+--%>
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left" id="000">全网统计</div>
+
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div id="webAndTimeCount" style="width:100%;height: 400px;"></div>
                         </div>
                         <div align="center" style="color: #EA5200">该图统计的是各时间段下全网的信息量</div>
                     </div>
@@ -295,6 +308,10 @@
                     </c:forEach>
                 </div>
             </div>
+            <div class="alert alert-block">
+                <div id="chart" style="float:left; margin:150px 0px 0px 40px "></div>
+
+            </div>
         </div>
 
     </div>
@@ -329,203 +346,24 @@
 <script type="text/javascript" src="vendors/flot/jquery.js"></script>
 
 <script>
-    <%--var keyWords = JSON.parse('${keywords}');--%>
 
     //基于准备好的dom,初始化echarts实例
-    /*var myChart = echarts.init(document.getElementById('transfer_webs'));
+    var myChart = echarts.init(document.getElementById('webAndTimeCount'));
     var option = {
-        title : {
-
+        xAxis: {
+            type: 'category',
+            data: ${time}
         },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{b}: {c}"
+        yAxis: {
+            type: 'value'
         },
-        toolbox: {
-            show : true,
-            feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        calculable : false,
-
-        series : [
-            {
-                name:'树图',
-                type:'tree',
-                orient: 'horizontal',  // vertical horizontal
-                rootLocation: {x: 100, y: '60%'}, // 根节点位置  {x: 'center',y: 10}
-                nodePadding: 20,
-                symbol: 'circle',
-                symbolSize: 40,
-                itemStyle: {
-                    normal: {
-                        label: {
-                            show: true,
-                            position: 'inside',
-                            textStyle: {
-                                color: '#cc9999',
-                                fontSize: 15,
-                                fontWeight:  'bolder'
-                            }
-                        },
-                        lineStyle: {
-                            color: '#000',
-                            width: 1,
-                            type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
-                        }
-                    },
-                    emphasis: {
-                        label: {
-                            show: true
-                        }
-                    }
-                },
-                data: [
-                    {
-                        name: '手机',
-                        value: 6,
-                        symbolSize: [90, 70],
-                        symbol: '11',
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: false
-                                }
-                            }
-                        },
-                        children: [
-                            {
-                                name: '小米',
-                                value: 4,
-                                symbol: '22',
-                                itemStyle: {
-                                    normal: {
-                                        label: {
-                                            show: false
-                                        }
-                                    }
-                                },
-                                symbolSize: [60, 60],
-                                children: [
-                                    {
-                                        name: '小米1',
-                                        symbol: 'circle',
-                                        symbolSize: 20,
-                                        value: 4,
-                                        itemStyle: {
-                                            normal: {
-                                                color: '#fa6900',
-                                                label: {
-                                                    show: true,
-                                                    position: 'right'
-                                                },
-
-                                            },
-                                            emphasis: {
-                                                label: {
-                                                    show: false
-                                                },
-                                                borderWidth: 0
-                                            }
-                                        }
-                                    },
-                                    {
-                                        name: '小米2',
-                                        value: 4,
-                                        symbol: 'circle',
-                                        symbolSize: 20,
-                                        itemStyle: {
-                                            normal: {
-                                                label: {
-                                                    show: true,
-                                                    position: 'right',
-                                                    formatter: "{b}"
-                                                },
-                                                color: '#fa6900',
-                                                borderWidth: 2,
-                                                borderColor: '#cc66ff'
-
-                                            },
-                                            emphasis: {
-                                                borderWidth: 0
-                                            }
-                                        }
-                                    },
-                                    {
-                                        name: '小米3',
-                                        value: 2,
-                                        symbol: 'circle',
-                                        symbolSize: 20,
-                                        itemStyle: {
-                                            normal: {
-                                                label: {
-                                                    position: 'right'
-                                                },
-                                                color: '#fa6900',
-                                                brushType: 'stroke',
-                                                borderWidth: 1,
-                                                borderColor: '#999966',
-                                            },
-                                            emphasis: {
-                                                borderWidth: 0
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                name: '苹果',
-                                symbol: '33',
-                                symbolSize: [60, 60],
-                                itemStyle: {
-                                    normal: {
-                                        label: {
-                                            show: false
-                                        }
-
-                                    }
-                                },
-                                value: 4
-                            },
-                            {
-                                name: '华为',
-                                symbol: '44',
-                                symbolSize: [60, 60],
-                                itemStyle: {
-                                    normal: {
-                                        label: {
-                                            show: false
-                                        }
-
-                                    }
-                                },
-                                value: 2
-                            },
-                            {
-                                name: '联想',
-                                symbol: '55',
-                                symbolSize: [100, 40],
-                                itemStyle: {
-                                    normal: {
-                                        label: {
-                                            show: false
-                                        }
-
-                                    }
-                                },
-                                value: 2
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        series: [{
+            data: ${webAndTimeCount},
+            type: 'line',
+            smooth: true
+        }]
     };
-    myChart.setOption(option);*/
+    myChart.setOption(option);
 </script>
 <script>
     var myChart2 = echarts.init(document.getElementById('websiteArticle'));
@@ -661,7 +499,7 @@
 
     });
 </script>--%>
-<script>
+<%--<script>
     //基于准备好的dom,初始化echarts实例
     var myChart1 = echarts.init(document.getElementById('website_statistic'));
     var option1 = {
@@ -694,7 +532,7 @@
     // 为echarts对象加载数据
     myChart1.setOption(option1);
 
-</script>
+</script>--%>
 <input type="hidden" value="${hotOpinionList}">
 <script>
     //基于准备好的dom,初始化echarts实例
@@ -977,6 +815,88 @@
         window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
     });
 </script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
+
+    circle {
+        fill: rgb(31, 119, 180);
+        fill-opacity: .25;
+        stroke: rgb(31, 119, 180);
+        stroke-width: 1px;
+    }
+
+    .leaf circle {
+        fill: #ff7f0e;
+        fill-opacity: 1;
+    }
+
+    text {
+        font: 10px sans-serif;
+        text-anchor: middle;
+    }
+
+</style>
+<script type="text/javascript">
+    var w = 960,
+        h = 500;
+
+    var vertices = d3.range(100).map(function(d) {
+        return [Math.random() * w, Math.random() * h];
+    });
+
+    var svg = d3.select("#chart")
+        .append("svg:svg")
+        .attr("width", w)
+        .attr("height", h);
+    var paths, points, clips;
+    clips = svg.append("svg:g").attr("id", "point-clips");
+    points = svg.append("svg:g").attr("id", "points");
+    paths = svg.append("svg:g").attr("id", "point-paths");
+
+    clips.selectAll("clipPath")
+        .data(vertices)
+        .enter().append("svg:clipPath")
+        .attr("id", function(d, i) { return "clip-"+i;})
+        .append("svg:circle")
+        .attr('cx', function(d) { return d[0]; })
+        .attr('cy', function(d) { return d[1]; })
+        .attr('r', 20);
+
+    paths.selectAll("path")
+        .data(d3.geom.voronoi(vertices))
+        .enter().append("svg:path")
+        .attr("d", function(d) { return "M" + d.join(",") + "Z"; })
+        .attr("id", function(d,i) {
+            return "path-"+i; })
+        .attr("clip-path", function(d,i) { return "url(#clip-"+i+")"; })
+        .style("fill", d3.rgb(230, 230, 230))
+        .style('fill-opacity', 0.4)
+        .style("stroke", d3.rgb(200,200,200));
+
+    paths.selectAll("path")
+        .on("mouseover", function(d, i) {
+            d3.select(this)
+                .style('fill', d3.rgb(31, 120, 180));
+            svg.select('circle#point-'+i)
+                .style('fill', d3.rgb(31, 120, 180))
+        })
+        .on("mouseout", function(d, i) {
+            d3.select(this)
+                .style("fill", d3.rgb(230, 230, 230));
+            svg.select('circle#point-'+i)
+                .style('fill', 'black')
+        });
+
+    points.selectAll("circle")
+        .data(vertices)
+        .enter().append("svg:circle")
+        .attr("id", function(d, i) {
+            return "point-"+i; })
+        .attr("transform", function(d) { return "translate(" + d + ")"; })
+        .attr("r", 2)
+        .attr('stroke', 'none');
+
+</script>
 
 <script type="text/javascript">
     //基于准备好的dom,初始化echarts实例
@@ -1075,7 +995,6 @@
     for(var s = 0; s <= 1; s += 0.1) {
         timeLineData.push(s.toFixed(1))
     }
-
 
     var tip1 = graphSNA['degreeCentralization'];
     var tip2 = graphSNA['closeCentralization'];

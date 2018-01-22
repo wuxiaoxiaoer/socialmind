@@ -173,10 +173,17 @@ public class EventAction {
             }
         }
 
-
+        List<Map> data = new ArrayList<>();
+        Map datamap = new HashMap();
+        datamap.put("name","askdjfaklsdj");
+        datamap.put("size",16800);
+        data.add(datamap);
 //        mode.addAttribute("treeGraph", JSON.toJSON(treeGraph(objectId)));
 
         mode.addAttribute("objectId", objectId);
+        mode.addAttribute("data", JSON.toJSON(data));
+        mode.addAttribute("time", JSON.toJSON(time));
+        mode.addAttribute("webAndTimeCount", JSON.toJSON(timeList));
         mode.addAttribute("topkeywords", findTopKeywords(objectId));
         mode.addAttribute("firstWeb", categoryName.get(0).toString());
         mode.addAttribute("allWebsiteArticle", allWebsiteArticle(objectId));
