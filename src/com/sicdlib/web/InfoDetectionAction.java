@@ -1,7 +1,6 @@
 package com.sicdlib.web;
 
 import com.alibaba.fastjson.JSON;
-import com.kenai.jaffl.annotations.In;
 import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
 import com.sicdlib.util.NLPUtil.HanLPUtil.HanLPUtil;
@@ -105,7 +104,25 @@ public class InfoDetectionAction {
 
 		//查找事件中文章和作者的地域分布
 //		List<ProvinceEntity> provinceEntities = provinceService.getProvinces();
-		List<Map> provinceList = provinceList(articleList);
+
+		String[] province = {"北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
+				"上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南",
+				"重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "台湾", "香港", "澳门"};
+		int[] provincenum = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		List<Map> provinceList = new ArrayList<>();
+		for (int i=0;i<province.length;i++){
+			Map map = new HashMap();
+			map.put("name",province[i]);
+			for (ArticleEntity articles:articleList) {
+				if(articles.getContent().contains(province[i])){
+					map.put("value",++provincenum[i]);
+					}else {
+					map.put("value",provincenum[i]);
+					}
+				}
+			provinceList.add(map);
+		}
+//		List<Map> provinceList = provinceList(articleList);
 
 		mode.addAttribute("objectId",objectId);
 		mode.addAttribute("count", maxcount(provinceList));
@@ -124,7 +141,7 @@ public class InfoDetectionAction {
 	}
 
 	//地图信息展示
-	public List<Map> provinceList(List<ArticleEntity> articleList){
+	/*public List<Map> provinceList(List<ArticleEntity> articleList){
 		String[] province = {"北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
 				"上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南",
 				"重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "台湾", "香港", "澳门"};
@@ -172,7 +189,7 @@ public class InfoDetectionAction {
 			}
 		}
 		return provinceList;
-	}
+	}*/
 
 	//地图上的最大信息量
 	public String maxcount(List<Map> provinceList){

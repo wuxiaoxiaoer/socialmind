@@ -308,10 +308,7 @@
                     </c:forEach>
                 </div>
             </div>
-            <div class="alert alert-block">
-                <div id="chart" style="float:left; margin:150px 0px 0px 40px "></div>
 
-            </div>
         </div>
 
     </div>
