@@ -1,6 +1,8 @@
 package com.sicdlib.web;
 
-import com.sicdlib.service.UserService;
+import com.sicdlib.entity.EventEntity;
+import com.sicdlib.service.EventEntityService;
+import edu.xjtsoft.base.orm.support.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/*")
 public class ReporterAction {
 
-	@Autowired(required=true)
-	private UserService userService;
+	@Autowired
+    private EventEntityService eventEntityService;
 
 	//0. 制作模板首页
 	@RequestMapping(value="makeReporter")
@@ -33,6 +35,7 @@ public class ReporterAction {
     public String ReporterMaterial(HttpServletRequest req, Model mode){
         String style = req.getParameter("style");
         mode.addAttribute("style", style);
+        Page<EventEntity> page_event = new Page<>();
 
         return "/WEB-INF/foreground/ReporterMaterial";
     }

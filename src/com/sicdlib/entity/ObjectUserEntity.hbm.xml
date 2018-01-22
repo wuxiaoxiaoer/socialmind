@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.ObjectUserEntity" table="object_user" schema="socialmind">
+        <id name="id" column="id"/>
+        <property name="oType" column="oType"/>
+        <property name="keywords" column="keywords"/>
+        <many-to-one name="objectEntity" column="objectID" lazy="false"></many-to-one>
+        <many-to-one name="userEntity" column="userID" lazy="false"></many-to-one>  <!--fetch="join"-->
+    </class>
+</hibernate-mapping>

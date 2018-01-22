@@ -24,6 +24,16 @@ public class UserEntity {
     private Set<CommentEntity> comments = new HashSet<>();
     /** 一个用户包含多个日志 */
     private Set<LogEntity> logs = new HashSet<>();
+    /** 一个用户包含多个对象用户中间表 */
+    private Set<ObjectUserEntity> objectUsers = new HashSet<>();
+
+    public Set<ObjectUserEntity> getObjectUsers() {
+        return objectUsers;
+    }
+
+    public void setObjectUsers(Set<ObjectUserEntity> objectUsers) {
+        this.objectUsers = objectUsers;
+    }
 
     public String getRegTime() {
         return regTime;

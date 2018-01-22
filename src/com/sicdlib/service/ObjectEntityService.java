@@ -1,6 +1,5 @@
 package com.sicdlib.service;
 
-import com.sicdlib.entity.EventEntity;
 import com.sicdlib.entity.ObjectEntity;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
@@ -43,6 +42,16 @@ public class ObjectEntityService extends DefaultEntityManager<ObjectEntity> {
         String hql = "from ObjectEntity o where o.name like '%" +object+"%'";
         List<ObjectEntity> objectInfo = getEntityDao().find(hql);
         return objectInfo;
+    }
+
+    /**
+     * @ wlw
+     * 获得相似的舆情对象
+     */
+    public List<ObjectEntity> getObjectsLikeName(String name){
+        String hql = "from ObjectEntity o where o.name like '%" + name + "%'";
+        List<ObjectEntity> objects = getEntityDao().find(hql);
+        return objects;
     }
 
 }

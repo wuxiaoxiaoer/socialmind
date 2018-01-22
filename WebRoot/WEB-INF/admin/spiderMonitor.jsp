@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -43,10 +44,20 @@
 									<i class="icon-signal"></i>
 								</span>
 								<h5>爬虫速率</h5>
-								<select  name="roleID" id="roleID" onchange="permissionByrole()">
-							
-								<option value="123">新华网</option>
-							
+								<select  name="speed" id="speed" onchange="speedByWebsite();">
+
+									<option value="douban">豆瓣小组</option>
+									<option value="mop">猫扑</option>
+									<option value="bbs_sohu">搜狐BBS</option>
+									<option value="bbs_people">人民网BBS</option>
+									<option value="blog_163">163博客</option>
+									<option value="kdnet_spider">凯迪社区</option>
+									<option value="sina_blog">新浪博客</option>
+									<option value="sina_news">新浪新闻</option>
+									<option value="tianya_bbs">天涯论坛</option>
+									<option value="xici">西祠</option>
+									<option value="weibo_spider">微博</option>
+
 								</select>
 								&nbsp;&nbsp;&nbsp;
 								<%--<select  name="roleID" id="roleI" onchange="permissionByrole()">--%>
@@ -60,13 +71,7 @@
 
 								<div style="height:400px" id="speedChart">
 
-
-
-
-
-
 								</div>
-
 
 
 							</div>
@@ -117,20 +122,30 @@
         
 
 				
-                <div class="row-fluid">
-					<div class="span6">
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-								<h5>爬虫出错比</h5>
+	  <div class="row-fluid">
+		  <div class="span6">
+			  <div class="widget-box">
+				  <div class="widget-title">
+					  <span class="icon">
+						  <i class="icon-signal"></i>
+					  </span>
+					  <h5>爬虫出错比</h5>
 								
-								<select  name="roleID" id="1" onchange="permissionByrole()">
+					  <select  name="website1" id="website1" onchange="errorRate()">
 							
-							<option value="123">新华网</option>
-							
-						</select>
+						  <option value="douban">豆瓣小组</option>
+						  <option value="mop">猫扑</option>
+						  <option value="bbs_sohu">搜狐BBS</option>
+						  <option value="bbs_people">人民网BBS</option>
+						  <option value="blog_163">163博客</option>
+						  <option value="kdnet">凯迪社区</option>
+						  <option value="sina_blog">新浪博客</option>
+						  <option value="sina_news">新浪新闻</option>
+						  <option value="tianya_bbs">天涯论坛</option>
+						  <option value="xici">西祠</option>
+						  <option value="weibo">微博</option>
+
+					  </select>
 							&nbsp;&nbsp;&nbsp;
 								<%--<select  name="roleID" id="role" onchange="permissionByrole()">--%>
 								<%--<option value="123">今天</option>--%>
@@ -139,12 +154,12 @@
 
 								<%--</select>	--%>
 								<%----%>
-							</div>
-							<div class="widget-content">
-								<div class="bars" id="errorChart"></div>
-							</div>
-						</div>
-					</div>
+				  </div>
+				  <div class="widget-content">
+					  <div class="bars" id="errorChart"></div>
+				  </div>
+			  </div>
+		  </div>
 					
 			
                     <div class="span6">
@@ -233,7 +248,7 @@
             <h5>爬虫日志</h5>
           </div>
           <div class="widget-content nopadding">
-            <table class="table table-bordered data-table">
+            <table class="table table-bordered data-table" id="hidden-table-info">
               <thead>
                 <tr>
                   <th>时间</th>
@@ -241,35 +256,26 @@
                   <th>网址</th>
                   <th>错误的item</th>
 				  <th>错误详情</th>
+					<th style="display: none;"></th>
+					<th style="display: none;"></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr class="gradeX">
-                  <td>Trident</td>
-                  <td>Internet</td>
-                  <td>Win 95+</td>
-				  <td>Win 95+</td>
-                  <td>4</td>
-                </tr>
+				<tbody>
+				<c:forEach items="${errorDetailMap['douban']}" var="v">
 
-                
-                <tr class="gradeA">
-                  <td>Presto</td>
-                  <td>Opera 9.5</td>
-                  <td>Win 88+ / OSX.3+</td>
-				  <td>Win 95+</td>
-                  <td >-</td>
-                </tr>
-               
-                <tr class="gradeC">
-                  <td>Misc</td>
-                  <td>IE Mobile</td>
-				  <td>Win 95+</td>
-                  <td>Windows Mobile 6</td>
-                  <td >-</td>
-                </tr>
+					<tr class="gradeX">
+						<td>${v.logTime}</td>
+						<td>${v.website}</td>
+						<td>${v.url}</td>
+						<td>${fn:substring(v.errorItem, 0, 100)}</td>
+						<td>${fn:substring(v.errorDetail, 0, 100)}</td>
+						<td style="display: none;">${v.errorItem}</td>
+						<td style="display: none;">${v.errorDetail}</td>
+					</tr>
+				</c:forEach>
 
-              </tbody>
+				</tbody>
+
             </table>
           </div>
         </div>
@@ -287,7 +293,7 @@
 <script src="admin/js/jquery.ui.custom.js"></script>
 <script src="admin/js/bootstrap.min.js"></script>
 <script src="admin/js/jquery.uniform.js"></script>
-<script src="admin/js/select2.min.js"></script>
+<%--<script src="admin/js/select2.min.js"></script>--%>
 <script src="admin/js/jquery.dataTables.min.js"></script>
 <script src="admin/js/maruti.js"></script>
 <script src="admin/js/maruti.tables.js"></script>
@@ -295,15 +301,82 @@
 <script src="admin/js/echarts.min.js"></script>
 
 
+
+
+<%--详细信息显示--%>
+
+
+<script type="text/javascript">
+	/* Formating function for row details */
+    function fnFormatDetails ( oTable, nTr )
+    {
+        var aData = oTable.fnGetData( nTr );
+        var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+        sOut += '<tr><td>错误条目:</td><td>' + aData[5] + '</td></tr>';
+        sOut += '<tr><td>错误详情:</td><td>' + aData[6] + '</td></tr>';
+        sOut += '</table>'
+        return sOut;
+    }
+
+    $(document).ready(function() {
+		/*
+		 * Insert a 'details' column to the table
+		 */
+        var nCloneTh = document.createElement( 'th' );
+        var nCloneTd = document.createElement( 'td' );
+        nCloneTd.innerHTML = '<img src="<%=basePath %>/admin/img/details_open.png">';
+        nCloneTd.className = "center";
+
+        $('#hidden-table-info thead tr').each( function () {
+            this.insertBefore( nCloneTh, this.childNodes[0] );
+        } );
+
+        $('#hidden-table-info tbody tr').each( function () {
+            this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+        } );
+
+		/*
+		 * Initialse DataTables, with no sorting on the 'details' column
+		 */
+        var oTable = $('#hidden-table-info').dataTable( {
+            "aoColumnDefs": [
+                { "bSortable": false, "aTargets": [ 0 ] }
+            ],
+            "aaSorting": [[1, 'desc']]
+        });
+
+		/* Add event listener for opening and closing details
+		 * Note that the indicator for showing which row is open is not controlled by DataTables,
+		 * rather it is done here
+		 */
+        $('#hidden-table-info tbody td img').live('click', function () {
+            var nTr = $(this).parents('tr')[0];
+            if ( oTable.fnIsOpen(nTr) )
+            {
+				/* This row is already open - close it */
+                this.src = "<%=basePath %>/admin/img/details_open.png";
+                oTable.fnClose( nTr );
+            }
+            else
+            {
+				/* Open this row */
+                this.src = "<%=basePath %>/admin/img/details_close.png";
+                oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+            }
+        } );
+    } );
+</script>
+
+
+
+
 <script>
 
     var speedChart = echarts.init(document.getElementById('speedChart'));
-
     var map = JSON.parse('${map}');
 
-
-    var logtimeList =map['peopleSpeedmap']['logtimeList'];
-    var speedList =map['peopleSpeedmap']['speedList'];
+    var logtimeList =map['speedmap']['logtimeList'];
+    var speedList =map['speedmap']['speedList'];
 
    <%--var data = JSON.parse('${speed}');--%>
 
@@ -343,8 +416,8 @@
 
             axisLabel : {
                 formatter: '{value} pages/min'
-            },
-            splitNumber:5
+            }
+
 
         },
         dataZoom: [{
@@ -393,68 +466,188 @@
     };
 
     speedChart.setOption(option);
+
+
+
+
+
+</script>
+
+
+<script>
+    function speedByWebsite(){
+
+        var website = $("#speed").val();
+        var options = speedChart.getOption();
+
+//        通过Ajax获取数据
+        $.ajax({
+            async : false,
+            type : 'post',
+            url : 'speedByWebsite?website=' + website,
+            dataType:"json",
+            success:function(data) {
+                if (data) {
+
+                    options.series[0].data =eval(data).speedList;
+                    options.xAxis[0].data = eval(data).logtimeList;
+                    speedChart.hideLoading();
+                    speedChart.setOption(options);
+                }else {
+                    alert("无数据");
+                }
+            }
+        });
+
+
+
+    }
+
 </script>
 
 
 <script>
     var errorChart = echarts.init(document.getElementById('errorChart'));
 
+
     var map = JSON.parse('${map}');
+    var errorRateMap =map['errorRateMap'];
+    b("douban");
+    function b(s){
 
+        var infoNum =errorRateMap[s]['infoNum'];
+        var errorNum =errorRateMap[s]['errorNum'];
+        var debugNum =errorRateMap[s]['debugNum'];
 
-    var infoNum =map['levelMap']['infoNum'];
-    var errorNum =map['levelMap']['errorNum'];
-    var debugNum =map['levelMap']['debugNum'];
-
-    option = {
-        title : {
-            text: '爬虫出错比',
-            subtext: '',
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['info','error','debug']
-        },
-        series : [
-            {
-                name: '状态',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {value:infoNum, name:'info'},
-                    {value:errorNum, name:'error'},
-                    {value:debugNum, name:'debug'},
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+        option = {
+            title : {
+                text: '爬虫出错比',
+                subtext: '',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['info','error','debug']
+            },
+            series : [
+                {
+                    name: '状态',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:debugNum, name:'debug'},
+                        {value:errorNum, name:'error'},
+                        {value:infoNum, name:'info'},
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
                     }
                 }
+            ]
+        };
+        errorChart.setOption(option);
+	}
+
+
+    function errorRate(){
+        var website = $("#website1").val();
+
+        var data=[
+            {value:errorRateMap[website]['debugNum'], name:'debug'},
+            {value:errorRateMap[website]['errorNum'], name:'error'},
+            {value:errorRateMap[website]['infoNum'], name:'info'}
+        ];
+        var options = errorChart.getOption();
+        options.series[0].data = data;
+
+        errorChart.setOption(options);
+    }
+
+
+
+
+</script>
+<script>
+
+</script>
+
+<script>
+
+    var durationChart = echarts.init(document.getElementById('durationChart'));
+
+    var map = JSON.parse('${map}');
+    var durationMap =map['durationMap'];
+
+	var website=[];
+    var duration=[];
+
+
+
+    for(var key in durationMap)
+	{
+        website.push(key);
+        duration.push(durationMap[key]);
+
+    }
+
+//    durationMap.forEach(function (value, key, map) {
+//        website.push(key);
+//        duration.push(value);
+//    });
+
+
+    option = {
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+
+        xAxis : [
+            {
+                type : 'category',
+                data : website,
+                axisLabel:{
+                //X轴刻度配置
+                interval:0//0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+            }
+
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLabel : {
+                    formatter: '{value} h'
+                }
+            }
+        ],
+        series : [
+            {
+                name:'爬取时长',
+                type:'bar',
+                barWidth: '60%',
+                data:duration
             }
         ]
     };
-    errorChart.setOption(option);
+
+    durationChart.setOption(option);
+
+
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>

@@ -28,5 +28,9 @@
             <key column="userID"></key>
             <one-to-many class="com.sicdlib.entity.LogEntity"></one-to-many>
         </set>
+        <set name="objectUsers" fetch="join">
+            <key column="userID"></key>
+            <one-to-many class="com.sicdlib.entity.ObjectUserEntity"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

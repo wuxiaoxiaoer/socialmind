@@ -20,6 +20,29 @@ import java.util.concurrent.atomic.AtomicReference;
 @Transactional
 public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
 
+
+    /**
+     * @ wlw
+     * 查询网站名，对象名，数量
+     */
+    public List<Object[]> getWebsiteObjCount(){
+        String sql = "SELECT w.websiteName, o.name, o.credibility, count(a.articleID) FROM article a, object o, website w\n" +
+                "WHERE a.objectID = o.objectID AND w.websiteID = a.websiteID\n" +
+                "GROUP BY a.websiteID, a.objectID";
+        List<Object[]> objects = getEntityDao().getSession().createSQLQuery(sql).list();
+        return objects;
+    }
+
+    /**
+     * @ wlw
+     * 获得文章的数量
+     */
+    public Long getArticlesCount(){
+        String hql = "SELECT COUNT(articleId) FROM ArticleEntity a";
+        Long count = (Long) getEntityDao().createQuery(hql).list().get(0);
+        return count;
+    }
+
     /**
      * @ wlw
      *查询article表结构

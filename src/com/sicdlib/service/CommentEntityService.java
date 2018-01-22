@@ -36,6 +36,7 @@ public class CommentEntityService extends DefaultEntityManager<CommentEntity> {
         }
         return null;
     }
+
     /**
      * @ wlw
      * 获得某个时间节点之后的评论
@@ -60,5 +61,15 @@ public class CommentEntityService extends DefaultEntityManager<CommentEntity> {
         }else {
             return Long.valueOf(0);
         }
+    }
+
+    /**
+     * @ wlw
+     * 评论数量
+     */
+    public Long getCommentsCount(){
+        String hql = "SELECT COUNT(commentId) FROM CommentEntity c";
+        Long count = (Long) getEntityDao().createQuery(hql).list().get(0);
+        return count;
     }
 }

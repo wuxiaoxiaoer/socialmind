@@ -13,8 +13,8 @@
 %>
 
 <hr>
-<footer style="position: fixed;bottom: 0;align-content: center" >
-    <p>&copy; sicdpLab 2017 社会智能与复杂数据处理实验室 </p>
+<footer style="text-align: center">
+    <p>&copy; sicdpLab 2017 社会智能与复杂数据处理实验室 <a href="<%=basePath%>label/credibilityIndex" style="color: #0000FF"> 信息可信度标注系统</a> </p>
 </footer>
 
 
