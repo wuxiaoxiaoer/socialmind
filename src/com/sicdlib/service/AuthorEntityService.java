@@ -52,4 +52,14 @@ public class AuthorEntityService extends DefaultEntityManager<AuthorEntity> {
         String sql = "INSERT INTO author("+keyStr+") values ("+ objStr +")";
         getEntityDao().getSession().createSQLQuery(sql).executeUpdate();
     }
+
+    /**
+     * @ wlw
+     * 作者数量
+     */
+    public Long getAuthorsCount(){
+        String hql = "SELECT COUNT(authorId) FROM AuthorEntity a";
+        Long count = (Long) getEntityDao().createQuery(hql).list().get(0);
+        return count;
+    }
 }

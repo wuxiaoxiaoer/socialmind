@@ -4,13 +4,16 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost:3306/socialmind</property>
+    <property name="connection.url">jdbc:mysql://192.168.1.249:3306/socialmind</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
       <mapping resource="com/sicdlib/entity/ConfigConfigitemEntity.hbm.xml"/>
       <mapping resource="com/sicdlib/entity/ConfigitemEntity.hbm.xml"/>
       <mapping resource="com/sicdlib/entity/AreaEntity.hbm.xml"/>
       <mapping resource="com/sicdlib/entity/CityEntity.hbm.xml"/>
       <mapping resource="com/sicdlib/entity/ProvinceEntity.hbm.xml"/>
+      <mapping resource="com/sicdlib/entity/ObjectUserEntity.hbm.xml"/>
+      <mapping resource="com/sicdlib/entity/EventSeedsBaseEntity.hbm.xml"/>
+      <mapping resource="com/sicdlib/entity/ArticleLabeledEntity.hbm.xml"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

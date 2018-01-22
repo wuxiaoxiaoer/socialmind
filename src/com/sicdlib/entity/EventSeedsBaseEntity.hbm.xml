@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.sicdlib.entity.EventSeedsBaseEntity" table="event_seeds_base" schema="socialmind">
+        <id name="eventId" column="eventID"/>
+        <property name="eventName" column="eventName"/>
+        <property name="eventIntroduction" column="eventIntroduction"/>
+        <property name="startTime" column="startTime"/>
+        <property name="isTrue" column="isTrue"/>
+    </class>
+</hibernate-mapping>

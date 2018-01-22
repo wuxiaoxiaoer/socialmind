@@ -11,6 +11,8 @@
         <property name="trueNumber" column="trueNumber"/>
         <property name="falseNumber" column="falseNumber"/>
         <property name="name" column="name"/>
+        <property name="introduction" column="introduction"/>
+        <property name="credibility" column="credibility"/>
         <property name="addTime" column="addTime"/>
         <property name="place" column="place"/>
         <property name="objectType" column="objectType"/>
@@ -33,6 +35,10 @@
         <set name="comments">
             <key column="objectID"></key>
             <one-to-many class="com.sicdlib.entity.CommentEntity"></one-to-many>
+        </set>
+        <set name="objectUsers" fetch="join">
+            <key column="objectID"></key>
+            <one-to-many class="com.sicdlib.entity.ObjectUserEntity"></one-to-many>
         </set>
     </class>
 </hibernate-mapping>

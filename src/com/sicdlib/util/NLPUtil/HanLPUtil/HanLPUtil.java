@@ -234,5 +234,6 @@ public class HanLPUtil {
         HashMap<String, String> persons = getNERPersonsMap(text_per);
         HashMap<String, String> places = getNERPlacesMap(text_plc);
         HashMap<String, String> orgs = getNEROrganizationsMap(text_org);
+        System.out.println(places.toString());
     }
 }

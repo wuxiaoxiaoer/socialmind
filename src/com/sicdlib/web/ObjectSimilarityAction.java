@@ -37,6 +37,8 @@ public class ObjectSimilarityAction {
 	private AuthorEntityService authorEntityService;
 	@Autowired
 	private ArticleCommentEntityService articleCommentEntityService;
+	@Autowired
+	private EventSeedsBaseEntityService eventSeedsBaseEntityService;
 
 	//相似度测试
 	@RequestMapping(value="test01")
@@ -69,17 +71,28 @@ public class ObjectSimilarityAction {
 	@RequestMapping(value="similarity")
 	public String similarity(HttpServletRequest req) throws Exception {
 		Double simi = Double.parseDouble(req.getParameter("simi"));
-		String eventName = "春节前夕,上海女孩逃离江西农村,上海女孩，春节前去“男朋友”家乡江西过年，被第一顿饭“吓”而逃离江西,受不了男友家贫困，决定和男友分手并立即回上海";
-		String eventKeywords = "上海女逃离江西农村";
+		String eventName = req.getParameter("eventName");
+		//表名
+		String tableName = req.getParameter("tableName");
+		//从第几条开始跑
+		Integer startNum = Integer.valueOf(req.getParameter("startNum"));
+//		String eventIntroduction = "春节前夕,上海女孩逃离江西农村,上海女孩，春节前去“男朋友”家乡江西过年，被第一顿饭“吓”而逃离江西,受不了男友家贫困，决定和男友分手并立即回上海";
+//		String eventName = "上海女逃离江西农村";
+		String eventIntroduction = "";
+		PropertyFilter filter = new PropertyFilter("eventName", eventName);
+		List<EventSeedsBaseEntity> eventSeedsBases = eventSeedsBaseEntityService.search(filter);
+		if (eventSeedsBases.size() != 0){
+			eventIntroduction = eventSeedsBases.get(0).getEventIntroduction();
+		}
 		ObjectEntity object = new ObjectEntity();
-		PropertyFilter filterObjectEname = new PropertyFilter("name", eventKeywords);
+		PropertyFilter filterObjectEname = new PropertyFilter("name", eventName);
 		List<ObjectEntity> objectsEventKeyList = objectEntityService.search(filterObjectEname);
 		if (objectsEventKeyList.size() != 0){
 			object = objectsEventKeyList.get(0);
 		}else {
 			String objectID = UUID.randomUUID().toString();
 			object.setObjectId(objectID);
-			object.setName(eventKeywords);
+			object.setName(eventName);
 		}
 		objectEntityService.saveOrUpdate(object);
 		/**
@@ -91,8 +104,8 @@ public class ObjectSimilarityAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		List<String> wordList1 = Segment.getWords(eventName);
-		float[] weightArray1 = Segment.getPOSWeightArray(Segment.getPOS(eventName));
+		List<String> wordList1 = Segment.getWords(eventIntroduction);
+		float[] weightArray1 = Segment.getPOSWeightArray(Segment.getPOS(eventIntroduction));
 		/**
 		 * 2.1 得到mysql中article表需要的数据字段 hmcolumnsmapping
 		 * 2.2 根据hmcolumnsmapping从hbase中获得相关字段数据result
@@ -119,8 +132,8 @@ public class ObjectSimilarityAction {
 				int per = 100;
 				int NUM = Integer.parseInt(datasource.getCount()) / per;
 				int i = 0;
-				if (datasource.getTableName().equals("bbs_people_post_copy")){
-					i = 925; //tianya: i = 382383;走不过去
+				if (datasource.getTableName().equals(tableName)){
+					i = startNum; //tianya: i = 382383;走不过去
 				}
 				for (; i< NUM; i++){
 					int start = i * per;
@@ -304,7 +317,10 @@ public class ObjectSimilarityAction {
 	 */
 	public List<DataSourceEntity> getSetupDataSources(List<DataSourceEntity> datasources){
 		List<DataSourceEntity> setupDsList = new ArrayList<>();
-		String []setupDsNames = new String[]{"bbs_people_post_copy"};
+//		String []setupDsNames = new String[]{"bbs_news_post_copy", "bbs_tianya_post_copy", "bbs_people_post_copy",
+//				"bbs_china_post_copy", "bbs_mop_post_copy"};
+		//添加数据库dataSource, 改成多个事件同时跑，暂停
+		String []setupDsNames = new String[]{"bbs_news_post_copy"};
 		List<String> dsNamesList = Arrays.asList(setupDsNames);
 		for (DataSourceEntity ds : datasources){
 			if (dsNamesList.contains(ds.getTableName())){
@@ -412,10 +428,11 @@ public class ObjectSimilarityAction {
 						//对值进行转义
 						obj = getESCStr(obj);
 					}
-					objStr += "'"+ obj + "', ";
+					objStr += "'" + obj + "', ";
 				}
 			}
 		}
+
 		keyStr = keyStr.substring(0, keyStr.length()-2);
 		objStr = objStr.substring(0, objStr.length()-2);
 		keyStrList.add(keyStr);
@@ -451,6 +468,7 @@ public class ObjectSimilarityAction {
 		}
 		return str;
 	}
+
 	/**
 	 * 判断hbase数据字段是否存在于mysql字段中，存在,则返回mysql字段；不存在，则返回-1
 	 * @param hmcolumnsmapping
@@ -468,6 +486,30 @@ public class ObjectSimilarityAction {
 			}
 		}
 		return "-1";
+	}
+
+
+	/**
+	 * 设置文章（article）、作者（author）之前的关系
+	 * 1、获得所有object的列表，根据objectID获得所有文章(article)，再根据article中的sourceAuthorID与Author表建立联系。
+	 */
+	@RequestMapping("setArticleAndAuthorRelationship")
+	public void setArticleAndAuthorRelationship(){
+		List<ObjectEntity> objectEntities = objectEntityService.loadAll();
+		for (ObjectEntity objectEntity : objectEntities){
+			Set<ArticleEntity> articleEntitySet = objectEntity.getArticles();
+			Iterator<ArticleEntity> artiIterator = articleEntitySet.iterator();
+			while (artiIterator.hasNext()){
+				ArticleEntity article = artiIterator.next();
+				String sourceAuthorId = article.getSourceAuthorId();
+				PropertyFilter filterSourceAId = new PropertyFilter("sourceAuthorId", sourceAuthorId);
+				List<AuthorEntity> authorEntityList = authorEntityService.search(filterSourceAId);
+				if (authorEntityList.size() != 0){
+					article.setAuthorEntity(authorEntityList.get(0));
+				}
+				articleEntityService.saveOrUpdate(article);
+			}
+		}
 	}
 
 }

@@ -58,6 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <form action="<%=basePath%>retrivalResults">
                                 <!-- 判别全文检索 -->
                                 <input type="hidden" name="flag" value="all"/>
+                                <input type="hidden" name="turn" value="full"/>
                                 <div class="block-content collapse in">
                                 <div align="center"><input type="text" name="name" data-required="1" class="span5 m-wrap" placeholder="实体、事件关键词全文检索">
                                     <button type="submit" class="btn btn-success" style="margin: -10px 0 0 10px;">搜索</button>
