@@ -40,6 +40,7 @@ public class ObjectSimilarityAction {
 	@Autowired
 	private EventSeedsBaseEntityService eventSeedsBaseEntityService;
 
+
 	//相似度测试
 	@RequestMapping(value="test01")
 	public String test01(HttpServletRequest req) throws Exception {
