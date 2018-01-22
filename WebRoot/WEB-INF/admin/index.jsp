@@ -95,6 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  <li> <a href="#"> <span style="font-size: 20px;">${adminNum}/${counts[1]}</span> <br>新增管理员数/总管理员数 </a> </li>
 					  <li> <a href="#"> <span style="font-size: 20px;">${latestCommentsCount}/${allCommentsCount}</span> <br>新增系统留言量/总留言量 </a> </li>
 					  <li> <a href="#"> <span style="font-size: 20px;">${latestLogsCount}/${allLogsCount}</span> <br>新增日志生成量/总日志生成量 </a> </li>
+					  <li> <a href="<%=basePath%>eventStatisticsAnalysis"> <span style="font-size: 20px;">全部事件统计分析</span> </a> </li>
 					</ul>
                 </div>
               </div>
@@ -227,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/jquery.flot.min.js"></script> 
 <script src="js/jquery.flot.resize.min.js"></script> 
-<script src="js/jquery.peity.min.js"></script> 
+<script src="js/jquery.peity.min.js"></script>
 <script src="js/fullcalendar.min.js"></script> 
 <script src="js/maruti.js"></script> 
 <script src="js/maruti.dashboard.js"></script> 

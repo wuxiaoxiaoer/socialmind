@@ -51,6 +51,8 @@ public class UserAction {
     private LogService logService;
     @Autowired
     private CommentEntityService commentEntityService;
+    @Autowired
+    private ObjectUserEntityService objectUserEntityService;
 
 	
 	//登录模块
@@ -131,19 +133,7 @@ public class UserAction {
                         mode.addAttribute("allLogsCount", allLogsCount);
 						return "/WEB-INF/admin/index";
                     }else {
-                        if (user.getRole().getRoleName().equals("政府")) {
-                            GovUserEntity govUser = govUserEntityService.load(user.getUserId());
-                            session.setAttribute("user", govUser);
-                        } else if (user.getRole().getRoleName().equals("事业单位")) {
-                            InstitutionUserEntity institutionUser = institutionUserEntityService.load(user.getUserId());
-                            session.setAttribute("user", institutionUser);
-                        } else if (user.getRole().getRoleName().equals("企业")) {
-                            CompanyUserEntity companyUser = companyUserEntityService.load(user.getUserId());
-                            session.setAttribute("user", companyUser);
-                        } else if (user.getRole().getRoleName().equals("个人")) {
-                            PersonUserEntity personUser = personUserEntityService.load(user.getUserId());
-                            session.setAttribute("user", personUser);
-                        }
+
                         //获得不同角色用户与该对象相关的事件(包括热度)
                         session.setAttribute("commonUser", user);
                         Page<ObjectEntity> page = new Page<>(5);
@@ -169,7 +159,28 @@ public class UserAction {
                         //获得前5条
                         List<DynamicObjectIndexIndicator> top5DynamicAddressObjIndexs = getTop5DynamicObjIndexs(dynamicAddressObjIndexs);
                         mode.addAttribute("top5DynamicAddressObjIndexs", top5DynamicAddressObjIndexs);
-
+                        //获得领导动态 - leader
+                        List<ObjectUserEntity> objectUsersLeader = objectUserEntityService.getObjUsersByOTypeAndUser("leader", user.getUserId());
+                        mode.addAttribute("objectUsersLeader", objectUsersLeader);
+                        //获得机关部门动态 - department
+                        List<ObjectUserEntity> objectUsersDepartment = objectUserEntityService.getObjUsersByOTypeAndUser("department", user.getUserId());
+                        mode.addAttribute("objectUsersDepartment", objectUsersDepartment);
+                        //获得领域动态 - field
+                        List<ObjectUserEntity> objectUsersField = objectUserEntityService.getObjUsersByOTypeAndUser("field", user.getUserId());
+                        mode.addAttribute("objectUsersField", objectUsersField);
+                        if (user.getRole().getRoleName().equals("政府")) {
+                            GovUserEntity govUser = govUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", govUser);
+                        } else if (user.getRole().getRoleName().equals("事业单位")) {
+                            InstitutionUserEntity institutionUser = institutionUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", institutionUser);
+                        } else if (user.getRole().getRoleName().equals("企业")) {
+                            CompanyUserEntity companyUser = companyUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", companyUser);
+                        } else if (user.getRole().getRoleName().equals("个人")) {
+                            PersonUserEntity personUser = personUserEntityService.load(user.getUserId());
+                            session.setAttribute("user", personUser);
+                        }
                         return "/WEB-INF/foreground/index";
                     }
 				}

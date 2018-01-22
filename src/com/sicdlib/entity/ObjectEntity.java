@@ -14,19 +14,57 @@ public class ObjectEntity {
     private Integer trueNumber;
     private Integer falseNumber;
     private String name;
+    private String introduction;
+    private String credibility;
     private String addTime;
     private String place;
     private String objectType;
     private String objectFatherId;
     private Integer commentNumber;
+    private String startTime;
+    private String endTime;
     /** 一个舆情对象对应着多个指标值 */
     private Set<IndicatorValueEntity> indicatorValues = new HashSet<>();
     /** 一个对象对应着多个文章 */
     private Set<ArticleEntity> articles = new HashSet<>();
-    /** 一个对象包含对个用户操作*/
+    /** 一个对象包含对个用户操作 */
     private Set<UserOperaEntity> userOperas = new HashSet<>();
     /** 一个对象包含多个评论 */
     private Set<CommentEntity> comments = new HashSet<>();
+    /** 一个对象包含多个对象用户中间表 */
+    private Set<ObjectUserEntity> objectUsers = new HashSet<>();
+
+    public String getCredibility() {
+        return credibility;
+    }
+
+    public void setCredibility(String credibility) {
+        this.credibility = credibility;
+    }
+
+    public Set<ObjectUserEntity> getObjectUsers() {
+        return objectUsers;
+    }
+
+    public void setObjectUsers(Set<ObjectUserEntity> objectUsers) {
+        this.objectUsers = objectUsers;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public Set<CommentEntity> getComments() {
         return comments;
@@ -66,6 +104,14 @@ public class ObjectEntity {
 
     public void setObjectId(String objectId) {
         this.objectId = objectId;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     public Integer getScanNumber() {
