@@ -144,31 +144,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                   <div class="widget-content nopadding">
                     <ul class="quick-actions">
-					  <li> <a href="#"> <i class="icon-book"></i> 总事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-cabinet"></i> 昨日新增事件数</a> </li>
-					  <li> <a href="#"> <i class="icon-calendar"></i> 最近一周新增事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-client"></i> 最近一月新增事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-database"></i> 平均每周新增事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-book"></i> 总实体数 </a> </li>
-					  <li> <a href="#"> <i class="icon-cabinet"></i> 昨日新增实体数</a> </li>
-					  <li> <a href="#"> <i class="icon-calendar"></i> 最近一周新增实体数 </a> </li>
-					  <li> <a href="#"> <i class="icon-client"></i> 最近一月新增实体数 </a> </li>
-					  <li> <a href="#"> <i class="icon-database"></i> 平均每周新增实体数 </a> </li>
-					  <li> <a href="#"> <i class="icon-download"></i> 积极情感事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-graph"></i> 消极情感事件数 </a> </li>
-					  <li> <a href="#"> <i class="icon-home"></i>用户参与总人次 </a> </li>
-					  <li> <a href="#"> <i class="icon-lock"></i> 事件最长时间跨度</a> </li>
-					  <li> <a href="#"> <i class="icon-mail"></i>事件最短时间跨度 </a> </li>
-					  <li> <a href="#"> <i class="icon-pdf"></i> 最活跃的网站 </a> </li>
-					  <li> <a href="#"> <i class="icon-people"></i> 最近一年最活跃事件 </a> </li>
-					  <li> <a href="#"> <i class="icon-piechart"></i> 最近一月最活跃事件 </a> </li>
-					  <li> <a href="#"> <i class="icon-search"></i> 最近一周最活跃事件</a> </li>
-					  <li> <a href="#"> <i class="icon-shopping-bag"></i>该系统访问次数最多事件 </a> </li>
-					  <li> <a href="#"> <i class="icon-survey"></i> 该系统访问次数最多主题 </a> </li>
-					  <li> <a href="#"> <i class="icon-tag"></i> 包含事件最多的主题 </a> </li>
-					   <li> <a href="#"> <i class="icon-user"></i> 包含事件最少的主题</a> </li>
-					  <li> <a href="#"> <i class="icon-user"></i> 近月包含事件最多的主题</a> </li>
-					  <li> <a href="#"> <i class="icon-user"></i> 近月包含事件最少的主题</a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-book"></i> 总事件数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-cabinet"></i> 昨日新增事件数</a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-calendar"></i> 最近一周新增事件数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-client"></i> 最近一月新增事件数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-database"></i> 平均每周新增事件数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-book"></i> 总实体数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-cabinet"></i> 昨日新增实体数</a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-calendar"></i> 最近一周新增实体数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-client"></i> 最近一月新增实体数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-database"></i> 平均每周新增实体数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-download"></i> 积极情感事件数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-graph"></i> 消极情感事件数 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-home"></i>用户参与总人次 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-lock"></i> 事件最长时间跨度</a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-mail"></i>事件最短时间跨度 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-pdf"></i> 最活跃的网站 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-people"></i> 最近一年最活跃事件 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-piechart"></i> 最近一月最活跃事件 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-search"></i> 最近一周最活跃事件</a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-shopping-bag"></i>该系统访问次数最多事件 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-survey"></i> 该系统访问次数最多主题 </a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-tag"></i> 包含事件最多的主题 </a> </li>
+					   <li> <a href="<%=basePath%>eventAnalysis"><i class="icon-user"></i> 包含事件最少的主题</a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-user"></i> 近月包含事件最多的主题</a> </li>
+					  <li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-user"></i> 近月包含事件最少的主题</a> </li>
 					</ul>
                       
                     </ul> 
