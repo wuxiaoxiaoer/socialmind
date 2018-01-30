@@ -50,7 +50,6 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
             Connection conn = new DBUtil().GetConnection();
             String sql = "SELECT DISTINCT(w.websiteName),COUNT(a.websiteID) from article a,website w,author au " +
                     "where a.objectID = '"+objectId+"' and a.websiteID = w.websiteID  " +
-                    "and a.authorID = au.authorID "+
                     "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
                     "GROUP BY a.websiteID";
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -107,10 +106,9 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
                     "a.collectNumber,a.similarDegree,au.authorID,au.name "+
                     "from article a,website w,data_dictionary d,author au  " +
                     "where a.objectID = '"+objectId+"' "+
-                    "and a.authorID = au.authorID "+
                     "and a.websiteID = w.websiteID and w.websiteTypeID = d.dataDictionaryID " +
                     "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
-                    "and d.attributeValue ='"+object+"' and au.authorID = a.authorID";
+                    "and d.attributeValue ='"+object+"' GROUP BY a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -157,7 +155,7 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
                     "and a.websiteID = w.websiteID " +
                     "and w.websiteName ='"+object+"' " +
                     "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
-                    "and au.authorID = a.authorID";
+                    "GROUP BY a.postTime ";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){

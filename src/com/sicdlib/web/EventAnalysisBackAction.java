@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -28,11 +29,20 @@ public class EventAnalysisBackAction {
     @RequestMapping("eventAnalysis")
     public String eventAnalysis(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
 
-        //获取当前日期
-        /*Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH )+1;
-        int date = cal.get(Calendar.DATE);*/
+        //根据事件类型统计事件数量
+        List<Map> objectType = objectEntityService.objectType();
+        List<Map> objectList = new ArrayList<>();
+        List<String> objects = new ArrayList<>();
+        for (Map map:objectType) {
+            objects.add(map.get("name").toString());
+            Map map1 = new HashMap();
+            map1.put("name",map.get("name").toString());
+            map1.put("value",objectEntityService.objectNumofType(map.get("objectID").toString()));
+            objectList.add(map1);
+        }
+
+        //统计所有实体的数量
+        List<String> entityList = objectEntityService.findObjectList();
 
         //事件总数统计-按年统计
         List<Map> eventByYear = eventEntityService.eventByYear();
@@ -43,8 +53,28 @@ public class EventAnalysisBackAction {
             yearCount.add(map.get("count").toString());
         }
 
+        //事件访问量
+        List<Map> eventClickNum = eventEntityService.allClickNum();
+
+        //事件的持续时间
+        List<Map> periodEvent = eventEntityService.eventPeriod();
+        List<String> eventName = new ArrayList<>();
+        List<String> eventPeriod = new ArrayList<>();
+        for (Map map:periodEvent) {
+            eventName.add(map.get("name").toString());
+            eventPeriod.add(map.get("num").toString());
+        }
+
         mode.addAttribute("years", JSON.toJSON(years));
         mode.addAttribute("yearCount",JSON.toJSON(yearCount));
+        mode.addAttribute("eventClickNum",JSON.toJSON(eventClickNum));
+        mode.addAttribute("eventName", JSON.toJSON(eventName));
+        mode.addAttribute("eventPeriod", JSON.toJSON(eventPeriod));
+        mode.addAttribute("objectList", JSON.toJSON(objectList));
+        mode.addAttribute("allEvent", JSON.toJSON(objectList.size()));
+        mode.addAttribute("objects", JSON.toJSON(objects));
+        mode.addAttribute("entity", JSON.toJSON(entityList));
+        mode.addAttribute("entityNum", JSON.toJSON(entityList.size()));
 
         return "/WEB-INF/admin/eventAnalysis";
     }

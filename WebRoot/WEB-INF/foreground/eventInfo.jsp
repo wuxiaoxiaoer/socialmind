@@ -42,31 +42,31 @@
                     <a onclick="document.getElementById('002').scrollIntoView();"><i class="icon-chevron-right"></i>事件走势</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('003').scrollIntoView();"><i class="icon-chevron-right"></i> 网站统计</a>
+                    <a onclick="document.getElementById('003').scrollIntoView();"><i class="icon-chevron-right"></i>网站统计</a>
                 </li>
-               <%-- <li>
+                <li>
                     <a onclick="document.getElementById('004').scrollIntoView();"><i class="icon-chevron-right"></i>数据类型</a>
-                </li>--%>
-                <%--<li>
-                    <a onclick="document.getElementById('005').scrollIntoView();"><i class="icon-chevron-right"></i>关键词云</a>
-                </li>--%>
-                <%--<li>
-                    <a onclick="document.getElementById('006').scrollIntoView();"><i class="icon-chevron-right"></i>热门信息</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('007').scrollIntoView();"><i class="icon-chevron-right"></i>热点网民</a>
-                </li>--%>
-                <li>
-                    <a onclick="document.getElementById('008').scrollIntoView();"><i class="icon-chevron-right"></i> 传播路径</a>
+                    <a onclick="document.getElementById('005').scrollIntoView();"><i class="icon-chevron-right"></i>网站传播</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('009').scrollIntoView();"><i class="icon-chevron-right"></i>关联词</a>
+                    <a onclick="document.getElementById('006').scrollIntoView();"><i class="icon-chevron-right"></i>文章传播</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('010').scrollIntoView();"><i class="icon-chevron-right"></i>网民观点</a>
+                    <a onclick="document.getElementById('007').scrollIntoView();"><i class="icon-chevron-right"></i>关联词</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('011').scrollIntoView();"><i class="icon-chevron-right"></i> 舆情总结</a>
+                    <a onclick="document.getElementById('008').scrollIntoView();"><i class="icon-chevron-right"></i>媒体关注时间</a>
+                </li>
+                <li>
+                    <a onclick="document.getElementById('009').scrollIntoView();"><i class="icon-chevron-right"></i>网民观点</a>
+                </li>
+                <li>
+                    <a onclick="document.getElementById('010').scrollIntoView();"><i class="icon-chevron-right"></i>舆情总结</a>
+                </li>
+                <li>
+                    <a>当前页面的点击量：${clickNum}</a>
                 </li>
             </ul>
         </div>
@@ -102,19 +102,19 @@
                                 <strong>开始</strong>
                                 <br/>
                                 <c:forEach items="${maxArticleList}" var="maxArticle" varStatus="sts">
-                                <c:forEach items="${maxArticle}" var="al" varStatus="sts">
-                                    <img src="./images/11.png"  width="20px"></img>[${al.postTime}] <a href="<%=basePath%>event/articleInfo?articleId=${al.articleId}">
-                                    <c:if test="${fn:length(al.title)>50}">
-                                        ${fn:substring(al.title, 0, 50)}......
-                                    </c:if>
-                                    <c:if test="${fn:length(al.title)<=50}">
-                                        ${al.title}
-                                    </c:if>
-                                        <%--${al.title}--%>
-                                </a>
-                                    <a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=${al.websiteEntity.websiteName}">【${al.websiteEntity.websiteName}】</a>
-                                    <br/>
-                                </c:forEach>
+                                    <c:forEach items="${maxArticle}" var="al" varStatus="sts">
+                                        <img src="./images/11.png"  width="20px"></img>[${al.postTime}] <a href="<%=basePath%>event/articleInfo?articleId=${al.articleId}">
+                                        <c:if test="${fn:length(al.title)>50}">
+                                            ${fn:substring(al.title, 0, 50)}......
+                                        </c:if>
+                                        <c:if test="${fn:length(al.title)<=50}">
+                                            ${al.title}
+                                        </c:if>
+                                            <%--${al.title}--%>
+                                    </a>
+                                        <a href="http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=website&&object=${al.websiteEntity.websiteName}">【${al.websiteEntity.websiteName}】</a>
+                                        <br/>
+                                    </c:forEach>
                                 </c:forEach>
                                 <strong>待续</strong>
                             </div>
@@ -125,20 +125,46 @@
 
                 <%--<div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="003">网站统计</div>
+                        <div class="muted pull-left" id="">网站统计</div>
 
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
-                            <div id="website_statistic" style="width:100%;height: 400px;"></div>
+
+                            <c:if test="${direct!=null}">
+                                <c:forEach items="${direct}" var="w" varStatus="sts">
+                                    <tr class="gradeA odd">
+
+                                        <td class="">
+
+                                            <a ><span class="badge badge-info" style="background-color: #118ecc; float: left;">${w.article.name}</span></a>
+                                            <br>
+
+                                            <b>
+                                                    &lt;%&ndash;<a href="${a.newsResource}" target="_blank">&ndash;%&gt;
+                                                <a>${w.title}</a></b>
+
+                                            <div class="pull-right">
+                                                <span class="badge badge-info" style="background-color: #f89406">相似度：${w.article.similarDegree}</span>
+                                            </div>
+                                            <div id="content${sts.index}" class="text" style="">${w.article.content}</div>
+                                            <br/>
+                                                ${w.article.postTime}
+
+
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
                         </div>
-                        <div align="center" style="color: #EA5200">该图统计的是各时间段下全网的信息量</div>
+
                     </div>
-                </div>
---%>
+                </div>--%>
+
+
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="000">全网统计</div>
+                        <div class="muted pull-left" id="003">全网统计</div>
 
                     </div>
                     <div class="block-content collapse in">
@@ -201,7 +227,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="008">传播路径</div>
+                        <div class="muted pull-left" id="006">传播路径</div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -218,7 +244,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="">网站传播持续时间</div>
+                        <div class="muted pull-left" id="007">网站关注时间</div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -234,7 +260,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="009">关联词</div>
+                        <div class="muted pull-left" id="008">关联词</div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -250,7 +276,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="010">网民观点</div>
+                        <div class="muted pull-left" id="009">网民观点</div>
                     </div>
                     <div class="block-content collapse in">
 
@@ -258,13 +284,13 @@
                     <div class="block-content collapse in">
                         <div class="span12">
                             <div id="opinion" style="width:1000px;height: 250px;"></div>
-                            <c:forEach items="${hotOpinionList}" var="ac" varStatus="sts">
+                            <%--<c:forEach items="${hotOpinionList}" var="ac" varStatus="sts">
 
                                 <c:forEach items="${ac}" var="o" varStatus="sts">
 
                                     <c:if test="${o.postTime == '新闻' }">
                                         <div class="alert">
-                                        <h4 class="alert-heading">观点${sts.index+1}：${o.title} 【来自网友：${o.content}】 --${o.articleId} </h4>
+                                            <h4 class="alert-heading">观点${sts.index+1}：${o.title} 【来自网友：${o.content}】 --${o.articleId} </h4>
                                         </div>
                                     </c:if>
                                     <c:if test="${o.postTime == '论坛' }">
@@ -289,6 +315,12 @@
                                     </c:if>
                                 </c:forEach>
 
+                            </c:forEach>--%>
+
+                            <c:forEach items="${opinion}" var="op" varStatus="sts">
+                                <div class="alert alert-info">
+                                    <h4 class="alert-heading">观点${sts.index+1}：${op.content}。----【${op.websiteName}】</h4>
+                                </div>
                             </c:forEach>
 
                         </div>
@@ -299,14 +331,16 @@
 
             <div class="alert alert-block">
                 <c:forEach items="${event}" var="e">
-                <h4 class="alert-heading" id="011">舆情总结</h4>
+                    <h4 class="alert-heading" id="010">舆情总结</h4>
                     &nbsp;&nbsp;&nbsp;&nbsp;${e.event.eventSummary}
+
+                    <div class="alert alert-success">
+                            <%--<c:forEach items="${reliablity}" var="r">--%>
+                        综合信息可得，在[${e.object.name}]事件/话题中，各媒体的观点不一，事件的可信度较大，
+                        应深入挖掘网民意见和情感倾向，识别事件传播过程中的意见领袖和主要信息来源，预测或追踪舆论走向，以便对不良舆论进行疏导。
+                            <%--</c:forEach>--%>
+                    </div>
                 </c:forEach>
-                <div class="alert alert-success">
-                    <c:forEach items="${reliablity}" var="r">
-                    综合信息可得，该事件可信度为&nbsp;&nbsp;<strong>${r.indicatorValue}</strong>
-                    </c:forEach>
-                </div>
             </div>
 
         </div>
@@ -363,8 +397,8 @@
     myChart.setOption(option);
 </script>
 <script>
-    var myChart2 = echarts.init(document.getElementById('websiteArticle'));
-    var option2 = {
+    var myChart1 = echarts.init(document.getElementById('websiteArticle'));
+    var option1 = {
         color: ['#3398DB'],
         tooltip : {
             trigger: 'axis',
@@ -411,7 +445,10 @@
             }
         ]
     };
-    myChart2.setOption(option2);
+    myChart1.setOption(option1);
+    myChart1.on('click', function (params) {
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=website&&object=' + params.name);
+    });
 </script>
 <%--<script  type="text/javascript">
 
@@ -596,7 +633,7 @@
     // 为echarts对象加载数据
     myChart2.setOption(option2);
     myChart2.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=media&&object=' + params.name);
     });
 </script>
 <script>
@@ -632,64 +669,64 @@
                 data:  ${transwebsList},
 //                    [{"name":"猫扑社区","x":300,"y":300},{"name":"天涯BBS","x": 800, "y": 300},{"name":"新华网","x": 550, "y": 100},{"name":"人民网BBS","x": 550, "y": 500}],
 
-                   /* [{
-                    name: '节点1',
-                    x: 300,
-                    y: 300
-                }, {
-                    name: '节点2',
-                    x: 800,
-                    y: 300
-                }, {
-                    name: '节点3',
-                    x: 550,
-                    y: 100
-                }, {
-                    name: '节点4',
-                    x: 550,
-                    y: 500
-                }],*/
+                /* [{
+                 name: '节点1',
+                 x: 300,
+                 y: 300
+             }, {
+                 name: '节点2',
+                 x: 800,
+                 y: 300
+             }, {
+                 name: '节点3',
+                 x: 550,
+                 y: 100
+             }, {
+                 name: '节点4',
+                 x: 550,
+                 y: 500
+             }],*/
                 // links: [],
                 links:${transferweb},
-                    /*[{
-                    source: 0,
-                    target: 1,
-                    symbolSize: [5, 20],
-                    label: {
-                        normal: {
-                            show: true
-                        }
-                    },
-                    lineStyle: {
-                        normal: {
-                            width: 5,
-                            curveness: 0.2
-                        }
+                /*[{
+                source: 0,
+                target: 1,
+                symbolSize: [5, 20],
+                label: {
+                    normal: {
+                        show: true
                     }
-                }, {
-                    source: '节点2',
-                    target: '节点1',
-                    label: {
-                        normal: {
-                            show: true
-                        }
-                    },
-                    lineStyle: {
-                        normal: { curveness: 0.2 }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 5,
+                        curveness: 0.2
                     }
-                }, {
-                    source: '节点1',
-                    target: '节点3'
-                }, {
-                    source: '节点2',
-                    target: '节点3'
-                }, {
-                    source: '节点2',
-                    target: '节点4'
-                }, {
-                    source: '节点1',
-                    target: '节点4'
-                }],*/
+                }
+            }, {
+                source: '节点2',
+                target: '节点1',
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                lineStyle: {
+                    normal: { curveness: 0.2 }
+                }
+            }, {
+                source: '节点1',
+                target: '节点3'
+            }, {
+                source: '节点2',
+                target: '节点3'
+            }, {
+                source: '节点2',
+                target: '节点4'
+            }, {
+                source: '节点1',
+                target: '节点4'
+            }],*/
                 lineStyle: {
                     normal: {
                         opacity: 0.9,
@@ -756,6 +793,9 @@
         ]
     };
     myChart4.setOption(option4);
+    myChart4.on('click', function (params) {
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=website&&object=' + params.name);
+    });
 </script>
 
 <script>
@@ -809,7 +849,7 @@
     };
     myChart7.setOption(option7);
     myChart7.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=media&&object=' + params.name);
     });
 </script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -1483,9 +1523,9 @@
     ]
 };*/
 
-//    var dom = document.getElementById('chart-panel');
-//    dom.style.width = 780 + 'px';
-//    dom.style.height = 600 + 'px';
+    //    var dom = document.getElementById('chart-panel');
+    //    dom.style.width = 780 + 'px';
+    //    dom.style.height = 600 + 'px';
     var option12 = {
         tooltip: {
             show: false

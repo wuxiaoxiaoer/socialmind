@@ -122,7 +122,6 @@
 
     addEvent.setOption(option);
     addEvent.on('click', function (params) {
-        alert(params.name);
         window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=${object}&&object=' + params.name);
     });
 </script>

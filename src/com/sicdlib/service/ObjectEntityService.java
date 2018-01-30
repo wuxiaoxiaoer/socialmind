@@ -2,11 +2,18 @@ package com.sicdlib.service;
 
 import com.sicdlib.entity.EventEntity;
 import com.sicdlib.entity.ObjectEntity;
+import com.sicdlib.util.DBUtil.DBUtil;
 import edu.xjtsoft.base.service.DefaultEntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -44,5 +51,63 @@ public class ObjectEntityService extends DefaultEntityManager<ObjectEntity> {
         List<ObjectEntity> objectInfo = getEntityDao().find(hql);
         return objectInfo;
     }
+
+    //后台查找实体总数
+    public List<String> findObjectList(){
+        try {
+            List<String> result = new ArrayList<>();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select name from object o where o.objectType = '实体' ";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                result.add(rs.getString(1));
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return result;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
+    //后台查找所有事件的类型
+    public List<Map> objectType(){
+        try {
+            List<Map> list = new ArrayList<>();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select name,objectID from object o where ISNULL(o.objectFatherID)";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("name",rs.getString(1));
+                map.put("objectID",rs.getString(2));
+                list.add(map);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+        }
+        return null;
+
+    }
+
+    //查询不同类型的事件数量
+    public String objectNumofType(String objectId){
+        try {
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select count(o.name) from object o where o.objectFatherID = '"+objectId+"' ";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                return rs.getString(1);
+            }
+
+        }catch (Exception e){
+        }
+        return null;
+
+    }
+
 
 }

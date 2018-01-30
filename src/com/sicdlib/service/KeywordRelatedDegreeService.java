@@ -50,7 +50,7 @@ public class KeywordRelatedDegreeService extends DefaultEntityManager<KeywordRel
     public int insertKeywordRelated(KeywordRelatedDegreeEntity object){
         try {
             Connection conn = new DBUtil().GetConnection();
-            String sql2 = "INSERT INTO keyword_related_degree (keywordDegreeID,keywordOneID,keywordTwoID,relatedDegree) VALUES (?,?,?,?);";
+            String sql2 = "INSERT INTO keyword_related_degree (keywordDegreeID,keywordOneID,keywordTwoID,relatedDegree) VALUES (?,?,?,?)";
             PreparedStatement psmt2 = conn.prepareStatement(sql2);
             psmt2.setString(1, object.getKeywordDegreeId());
             psmt2.setString(2, object.getKeywordEntityOne().getKeywordId());

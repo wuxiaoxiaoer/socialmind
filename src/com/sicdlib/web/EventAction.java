@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -52,6 +52,8 @@ public class EventAction {
     private AuthorEntityService authorEntityService;
     @Autowired
     private WebsiteEntityService websiteEntityService;
+    @Autowired
+    private EventOpinionService eventOpinionService;
     @Autowired
     private IndicatorValueEntityService indicatorValueEntityService;
 
@@ -89,139 +91,256 @@ public class EventAction {
         String objectId = req.getParameter("objectId");
         //查找事件下所有文章列表
         List<ArticleEntity> artileList = articleEntityService.findArticleList(objectId);
-        //查找事件下文章的相似度
-        findEventSimilar(objectId,artileList);
-        //查找事件关键词
-        List<Map> keywords = findKeywords(objectId);
-        //查找事件关键词之间的相关度
-        List<Map> keywordRelatedList = keywordRelated(objectId,keywords);
-        //事件关键词的关联度
-        List<Map> keywordRelated = new ArrayList<>();
-        for (int i =0 ;i<keywordRelatedList.size();i++){
-            Map keyrelatedMap = new HashMap();
-            keyrelatedMap.put("source",keywords.get(0).get("name").toString());
+        if (artileList.size()==0){
+            return "/WEB-INF/foreground/error";
+        }else {
+            //查找事件下文章的相似度
+            findEventSimilar(objectId,artileList);
+            //查找事件关键词
+            List<Map> keywords = findKeywords(objectId);
+            //查找事件关键词之间的相关度
+            List<Map> keywordRelatedList = keywordRelated(objectId,keywords);
+            //事件关键词的关联度
+            List<Map> keywordRelated = new ArrayList<>();
+            for (int i =0 ;i<keywordRelatedList.size();i++){
+                Map keyrelatedMap = new HashMap();
+                keyrelatedMap.put("source",keywords.get(0).get("name").toString());
 
-            keyrelatedMap.put("target",keywordRelatedList.get(i).get("name").toString());
-            keyrelatedMap.put("value",keywordRelatedList.get(i).get("value"));
-            keywordRelated.add(keyrelatedMap);
-        }
-//        System.out.println(keywordRelated.toString());
+                keyrelatedMap.put("target",keywordRelatedList.get(i).get("name").toString());
+                keyrelatedMap.put("value",keywordRelatedList.get(i).get("value"));
+                keywordRelated.add(keyrelatedMap);
+            }
 
-        //文章传播
-        List<String> categoryName = websiteEntityService.findWebsitesByEvent(objectId);
-        Map<String, List> nodesAndEdges = getNodeAndEdgeAttributes(objectId);
-        List<Object> SNAList = getSNA(nodesAndEdges.get("nodes"),nodesAndEdges.get("edges"));
+            //计算页面点击量--是否有事件点击量
+            String result = eventEntityService.isAddClickNum(objectId);
+            if ("null".equals(result)||result==null){
+                eventEntityService.addClick(objectId);
+            }else {
+                eventEntityService.updateClick(objectId);
+            }
 
-        //网站传播
-        /*Map<String, List> webNodesAndEdges = getWebsNodeAndEdge(objectId);
-        List<Object> SNALists = getSNA(webNodesAndEdges.get("nodes"),webNodesAndEdges.get("edges"));
+            //文章传播
+            List<String> categoryName = websiteEntityService.findWebsitesByEvent(objectId);
+            Map<String, List> nodesAndEdges = getNodeAndEdgeAttributes(objectId);
+            List<Object> SNAList = getSNA(nodesAndEdges.get("nodes"),nodesAndEdges.get("edges"));
 
-*/
-//        Map<String, List> webNodesAndEdges = test(objectId);
-//        List<Object> SNALists = getSNA(webNodesAndEdges.get("nodes"),webNodesAndEdges.get("edges"));
+            //查找事件下媒体来源信息
+            List<Map> mediaSource = websiteEntityService.findMediaSource(objectId);
 
-        //查找事件下媒体来源信息
-        List<Map> mediaSource = websiteEntityService.findMediaSource(objectId);
-
-        //各媒体的观点
+            //各媒体的观点
 //      List<ArticleCommentEntity> articleCommentList = articleCommentEntityService.findArticleComment(hotAuthor.get(0).getAuthorId());
-        List mediaList = new ArrayList();
-        for(int i = 0 ; i < allMedias().size() ; i++) {
-            mediaList.add(allMedias().get(i).getAttributeValue());
-            Map map = new HashMap();
-            for (int j = 0; j< mediaSource.size();j++){
-                if (!mediaSource.get(j).get("name").equals(allMedias().get(i).getAttributeValue())){
-                    map.put("name",allMedias().get(i).getAttributeValue());
-                    map.put("value",0);
-                    mediaSource.add(map);
+            List mediaList = new ArrayList();
+            for(int i = 0 ; i < allMedias().size() ; i++) {
+                mediaList.add(allMedias().get(i).getAttributeValue());
+                Map map = new HashMap();
+                for (int j = 0; j< mediaSource.size();j++){
+                    if (!mediaSource.get(j).get("name").equals(allMedias().get(i).getAttributeValue())){
+                        map.put("name",allMedias().get(i).getAttributeValue());
+                        map.put("value",0);
+                        mediaSource.add(map);
+                    }
+                }
+            }
+
+            List hotOpinionList = new ArrayList();
+            List opinionSource = new ArrayList();
+            for (int m = 0; m< allMedias().size();m++){
+                String media = allMedias().get(m).getAttributeValue();
+                List hotOpinion = articleEntityService.finfHotOpinion(media,objectId);
+                Map map = new HashMap();
+                map.put("name",media);
+                map.put("value",hotOpinion.size());
+                opinionSource.add(map);
+                hotOpinionList.add(hotOpinion);
+            }
+
+            //统计事件下所有时间下的网站上数据最多的信息
+            List time = findPeriod(objectId);
+            List timeList = new ArrayList();
+            List<Map> mapList = new ArrayList<>();
+            for (int i=0;i<time.size();i++){
+                //先统计每天的数量
+                int count  = articleEntityService.findArticleNum(objectId,time.get(i).toString());
+                Map map = new HashMap();
+                map.put("time",time.get(i).toString());
+                map.put("count",count);
+                mapList.add(map);
+                timeList.add(count);
+            }
+            List maxArticleList = new ArrayList();
+            int average = (Integer.parseInt(Collections.max(timeList).toString())+Integer.parseInt(Collections.min(timeList).toString()))/2;
+            for (int j=0;j<mapList.size();j++){
+                if(Integer.parseInt(mapList.get(j).get("count").toString())>=average){
+                    //按照最高的文章数的时间 统计文章信息
+                    String maxtime = mapList.get(j).get("time").toString();
+                    maxArticleList.add(articleEntityService.findMaxArticle(objectId,maxtime));
+                }
+            }
+
+            //事件观点
+            List<Map> isHaveOpinion = eventOpinionService.findEventOpinion(objectId);
+            if (isHaveOpinion.size()!=0){
+                //数据库中已有观点，查询观点
+                mode.addAttribute("opinion", isHaveOpinion);
+            }else {
+                //数据库中没有观点，需要添加观点
+                eventOpinionService.addEventOpinion(objectId,getEventOpinion(objectId));
+                List list = eventOpinionService.findEventOpinion(objectId);
+                mode.addAttribute("opinion", list);
+            }
+
+            //该事件下含有指示词的文章
+
+
+
+//            mode.addAttribute("direct", JSON.toJSON(direct));
+            mode.addAttribute("time", JSON.toJSON(time));
+            mode.addAttribute("webAndTimeCount", JSON.toJSON(timeList));
+            mode.addAttribute("topkeywords", findTopKeywords(objectId));
+            mode.addAttribute("firstWeb", categoryName.get(0).toString());
+            mode.addAttribute("allWebsiteArticle", allWebsiteArticle(objectId));
+            mode.addAttribute("maxArticleList", maxArticleList);
+            mode.addAttribute("transwebsList", JSON.toJSON(transwebList(objectId)));
+            mode.addAttribute("clickNum", JSON.toJSON(eventEntityService.isAddClickNum(objectId)));
+            mode.addAttribute("timePeriodWeb", JSON.toJSON(timePeriodWeb(objectId)));
+            mode.addAttribute("hotOpinionList", JSON.toJSON(hotOpinionList));
+            mode.addAttribute("keywordRelateds", JSON.toJSON(keywordRelated));
+            mode.addAttribute("mediaList", JSON.toJSON(mediaList));
+            mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
+            mode.addAttribute("opinionSource", JSON.toJSON(opinionSource));
+//        mode.addAttribute("areaSource", JSON.toJSON(areaSource(objectId)));
+            mode.addAttribute("periodList", JSON.toJSON(findPeriod(objectId)));
+            mode.addAttribute("webs",JSON.toJSON(getWebsiteName()));
+            mode.addAttribute("websiteStatistic",JSON.toJSON(websiteStatistic(objectId)));
+            mode.addAttribute("artileSize",artileList.size() );
+            mode.addAttribute("transferweb",JSON.toJSON(transferWebs(objectId)));
+            mode.addAttribute("keywordList", JSON.toJSON(keywordList(keywords)).toString());
+            mode.addAttribute("event", event(objectId));
+            mode.addAttribute("category", JSON.toJSONString(categoryName).replace("'", "\\\'"));
+//        mode.addAttribute("webnodesAndEdges", JSON.toJSONString(webNodesAndEdges).replace("'", "\\\'"));
+//        mode.addAttribute("webSNAList", JSON.toJSONString(SNALists, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
+            mode.addAttribute("nodesAndEdges", JSON.toJSONString(nodesAndEdges).replace("'", "\\\'"));
+            mode.addAttribute("SNAList", JSON.toJSONString(SNAList, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
+            //mode.addAttribute("listkey", JSON.toJSON(listkey).toString());
+            //mode.addAttribute("articleCommentList", articleCommentList);
+            mode.addAttribute("keywordRelatedList", JSON.toJSON(keywordRelatedList).toString());
+
+            mode.addAttribute("objectId", objectId);
+
+            return "/WEB-INF/foreground/eventInfo";
+        }
+
+    }
+
+
+    //提取观点句
+    public List<Map> getEventOpinion(String objectId){
+        List<DynamicSensitiveArticle> direct = directWords(objectId);
+        List<Map> directMap = new ArrayList<>();
+        for (DynamicSensitiveArticle dy:direct) {
+            String [] str = dy.getArticle().getContent().split("。|\\？");
+            for(int i=0;i<str.length;i++){
+                if (str[i].contains(dy.getSensitiveWord())){
+                    String br = "[br/]";
+                    //第一个换行符的位置
+                    int firstIndex = dy.getArticle().getContent().indexOf(br);
+                    //最后一个换行符的位置
+                    int lastIndex = dy.getArticle().getContent().indexOf(br);
+                    //句子的位置
+                    int senteceIndex = dy.getArticle().getContent().indexOf(str[i]);
+                    //指示词的位置
+                    int wordsIndex = str[i].indexOf(dy.getSensitiveWord());
+                    //截取指示词后边的句子
+//                    String lastsentence = str[i].substring(wordsIndex+dy.getSensitiveWord().length());
+                    String result1 = str[i].replaceFirst("：|，","");
+                    String result = result1.replace("[br/]|"," ").replace(" ","");
+
+                    Map mapDirect = new HashMap();
+                    mapDirect.put("articleId",dy.getArticle().getArticleId());
+                    mapDirect.put("content",result);
+                    mapDirect.put("directword",dy.getSensitiveWord());
+                    if ("感知".equals(dy.getSensitiveType())){
+                        mapDirect.put("wordweight",0.25);
+                        if (senteceIndex<firstIndex||senteceIndex>lastIndex){
+                            mapDirect.put("placeweight",0.15);
+                        }else {
+                            mapDirect.put("placeweight",0.1);
+                        }
+
+                    }else if ("认为".equals(dy.getSensitiveType())){
+                        mapDirect.put("wordweight",0.3);
+                        if (senteceIndex<firstIndex||senteceIndex>lastIndex){
+                            mapDirect.put("placeweight",0.15);
+                        }else {
+                            mapDirect.put("placeweight",0.1);
+                        }
+                    }
+
+                    //判断句子与标题的相似度
+                    Word2Vec vec = new Word2Vec();
+                    try {
+                        vec.loadGoogleModel("E:\\wiki_chinese_word2vec(Google).model");
+//			vec.loadJavaModel("data/wikichinese.model");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    List<String> title = Segment.getWords(objectEntityService.findObjectInfo(objectId).get(0).getName());
+                    List<String> sentence = Segment.getWords(result);
+                    mapDirect.put("similar_title",vec.sentenceSimilarity(title, sentence));
+                    directMap.add(mapDirect);
+                }
+            }
+
+        }
+        return directMap;
+    }
+
+    //该事件下含有指示词的文章
+    public List<DynamicSensitiveArticle> directWords(String objectId){
+        File csv = new File("E:\\learn\\ideaproject\\socialmind\\data\\dictionary\\opinion\\directwords.txt");
+        BufferedReader breader = null;
+        try {
+            breader = new BufferedReader(new InputStreamReader(new FileInputStream(csv), "gbk"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String line = "";
+        List<DynamicSensitiveArticle> sensitiveList = new ArrayList<>();
+        try {
+            while ((line = breader.readLine()) != null){
+                DynamicSensitiveArticle dySenArticle = new DynamicSensitiveArticle();
+                String [] str = line.split("\t");
+                //敏感词word
+                dySenArticle.setSensitiveWord(str[2]);
+                dySenArticle.setSensitiveType(str[1]);
+                sensitiveList.add(dySenArticle);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<DynamicSensitiveArticle> list = new ArrayList();
+        List<ArticleEntity> articleList = articleEntityService.findArticleList(objectId);
+        for (ArticleEntity article: articleList) {
+            DynamicSensitiveArticle sensitiveArticle = new DynamicSensitiveArticle();
+            for (DynamicSensitiveArticle dySenArticle : sensitiveList){
+                if (article.getContent().contains(dySenArticle.getSensitiveWord())){
+                    sensitiveArticle.setArticle(article);
+                    sensitiveArticle.setSensitiveWord(dySenArticle.getSensitiveWord());
+                    sensitiveArticle.setSensitiveType(dySenArticle.getSensitiveType());
+                    if(!dySenArticle.getSensitiveWord().equals(" ")){
+                        list.add(sensitiveArticle);
+                    }
+                    break;
                 }
             }
         }
+        return list;
 
-        List hotOpinionList = new ArrayList();
-        List opinionSource = new ArrayList();
-        for (int m = 0; m< allMedias().size();m++){
-            String media = allMedias().get(m).getAttributeValue();
-            List hotOpinion = articleEntityService.finfHotOpinion(media,objectId);
-            Map map = new HashMap();
-            map.put("name",media);
-            map.put("value",hotOpinion.size());
-            opinionSource.add(map);
-            hotOpinionList.add(hotOpinion);
-        }
-
-        //统计事件下所有时间下的网站上数据最多的信息
-        List time = findPeriod(objectId);
-        List timeList = new ArrayList();
-        List<Map> mapList = new ArrayList<>();
-        for (int i=0;i<time.size();i++){
-            //先统计每天的数量
-            int count  = articleEntityService.findArticleNum(objectId,time.get(i).toString());
-            Map map = new HashMap();
-            map.put("time",time.get(i).toString());
-            map.put("count",count);
-            mapList.add(map);
-            timeList.add(count);
-        }
-        List maxArticleList = new ArrayList();
-        int average = (Integer.parseInt(Collections.max(timeList).toString())+Integer.parseInt(Collections.min(timeList).toString()))/2;
-        for (int j=0;j<mapList.size();j++){
-            if(Integer.parseInt(mapList.get(j).get("count").toString())>=average){
-                //按照最高的文章数的时间 统计文章信息
-                String maxtime = mapList.get(j).get("time").toString();
-                maxArticleList.add(articleEntityService.findMaxArticle(objectId,maxtime));
-            }
-        }
-
-        List<Map> data = new ArrayList<>();
-        Map datamap = new HashMap();
-        datamap.put("name","askdjfaklsdj");
-        datamap.put("size",16800);
-        data.add(datamap);
-//        mode.addAttribute("treeGraph", JSON.toJSON(treeGraph(objectId)));
-
-        mode.addAttribute("objectId", objectId);
-        mode.addAttribute("data", JSON.toJSON(data));
-        mode.addAttribute("time", JSON.toJSON(time));
-        mode.addAttribute("webAndTimeCount", JSON.toJSON(timeList));
-        mode.addAttribute("topkeywords", findTopKeywords(objectId));
-        mode.addAttribute("firstWeb", categoryName.get(0).toString());
-        mode.addAttribute("allWebsiteArticle", allWebsiteArticle(objectId));
-        mode.addAttribute("maxArticleList", maxArticleList);
-        mode.addAttribute("transwebsList", JSON.toJSON(transwebList(objectId)));
-
-        mode.addAttribute("timePeriodWeb", JSON.toJSON(timePeriodWeb(objectId)));
-        mode.addAttribute("hotOpinionList", JSON.toJSON(hotOpinionList));
-        mode.addAttribute("keywordRelateds", JSON.toJSON(keywordRelated));
-        mode.addAttribute("mediaList", JSON.toJSON(mediaList));
-        mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
-        mode.addAttribute("opinionSource", JSON.toJSON(opinionSource));
-//        mode.addAttribute("areaSource", JSON.toJSON(areaSource(objectId)));
-        mode.addAttribute("periodList", JSON.toJSON(findPeriod(objectId)));
-        mode.addAttribute("webs",JSON.toJSON(getWebsiteName()));
-        mode.addAttribute("websiteStatistic",JSON.toJSON(websiteStatistic(objectId)));
-        mode.addAttribute("artileSize",artileList.size() );
-        mode.addAttribute("transferweb",JSON.toJSON(transferWebs(objectId)));
-        mode.addAttribute("keywordList", JSON.toJSON(keywordList(keywords)).toString());
-        mode.addAttribute("event", event(objectId));
-        mode.addAttribute("category", JSON.toJSONString(categoryName).replace("'", "\\\'"));
-//        mode.addAttribute("webnodesAndEdges", JSON.toJSONString(webNodesAndEdges).replace("'", "\\\'"));
-//        mode.addAttribute("webSNAList", JSON.toJSONString(SNALists, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
-        mode.addAttribute("nodesAndEdges", JSON.toJSONString(nodesAndEdges).replace("'", "\\\'"));
-        mode.addAttribute("SNAList", JSON.toJSONString(SNAList, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
-        //mode.addAttribute("listkey", JSON.toJSON(listkey).toString());
-        //mode.addAttribute("articleCommentList", articleCommentList);
-        mode.addAttribute("keywordRelatedList", JSON.toJSON(keywordRelatedList).toString());
-//        mode.addAttribute("reliablity", reliablity); //可信度
-        return "/WEB-INF/foreground/eventInfo";
     }
 
-    @Test
-    public void test(){
-        double[][] a = {{0,3,2},{5,6,4},{7,8,9}};
-        Matrix matrix = new Matrix(a);
-        matrix.print(4,0);
-    }
 
     //获取事件的全部信息
     public List event(String objectId){
@@ -296,14 +415,6 @@ public class EventAction {
             }else {
                 map.put("y",300-i*50);
             }
-
-//            if (i==0){
-//                map.put("x",200);
-//                map.put("y",300);
-//            }else {
-//                map.put("x",(int)(Math.random()*9+3)*100);
-//                map.put("y",(int)(Math.random()*4+1)*100);
-//            }
 
             mapList.add(map);
         }
@@ -475,12 +586,7 @@ public class EventAction {
         }
         long between=(end.getTime()-begin.getTime())/1000;//除以1000是为了转换成秒
         return between;
-/*
-        long day1=between/(24*3600);
-        long hour1=between%(24*3600)/3600;
-        long minute1=between%3600/60;
-        long second1=between%60/60;
-        System.out.println(""+day1+"天"+hour1+"小时"+minute1+"分"+second1+"秒");*/
+
     }
     /*//统计事件下热门信息
     public List hotInformation(String objectId){
@@ -617,56 +723,6 @@ public class EventAction {
         return keywordList;
     }
 
-    //网站之间传播生成节点和边
-    /*public Map<String, List> getWebsNodeAndEdge(String objectId) {
-
-        String edgeSource = "";
-        String edgeTarget = "";
-        double[][] timeMatrix = transferWebs(objectId);
-
-        int count = 0;
-        List<Map> timeFirstList = timeFirstList(objectId);
-        for (int i=0;i<timeMatrix.length;i++){
-            for (int j=0;j<timeMatrix[i].length;j++){
-                if (timeMatrix[i][j]>0){
-                    for (int z=0;z<timeFirstList.size();z++){
-                        edgeSource = timeFirstList.get(i).get(i).toString();
-                        edgeTarget = timeFirstList.get(j).get(j).toString();
-
-                    }
-                    ++count;
-                }
-            }
-        }
-        System.out.println(count);
-        Vector<Vector<Map<String, Object>>> edgeList = new Vector<>();
-        for(int i = 0; i <= count; i++) {
-            AtomicReference<Vector<Map<String, Object>>> vector = new AtomicReference<>(new Vector<>());
-            edgeList.add(vector.get());
-        }
-        for (int m = 0; m<count;m++){
-            Map<String, Object> edgeMap = new HashMap<>();
-            edgeMap.put("source", edgeSource);
-            edgeMap.put("target", edgeTarget);
-
-            Vector<Map<String, Object>> vector = edgeList.get(m);
-            vector.add(edgeMap);
-            edgeList.set(m, vector);
-        }
-
-        List<Map<String, Object>> nodeList = new ArrayList<>();
-        List<String> webs = websiteEntityService.findWebsitesByEvent(objectId);
-        for (int i =0;i<webs.size();i++) {
-            Map<String, Object> element = new HashMap<>();
-            element.put("website",webs.get(i).toString());
-            nodeList.add(element);
-        }
-
-        Map<String, List> result = new HashMap<>();
-        result.put("nodes", nodeList);
-        result.put("edges", edgeList);
-        return result;
-    }*/
 
     public Map<String, List> test(String objectId) {
         int sliceNum = 10; //将相似度分为10份

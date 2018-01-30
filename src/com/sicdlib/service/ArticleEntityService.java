@@ -98,7 +98,7 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
 //                    "and a.authorID = au.authorID " +
                     "and a.objectID = '" +objectId+"' and " +
                     "a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
-                    "order by a.postTime";
+                    "group by a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
@@ -116,11 +116,6 @@ public class ArticleEntityService extends DefaultEntityManager<ArticleEntity> {
                 a.setRecommendNumber(rs.getInt(9));
                 a.setCollectNumber(rs.getInt(10));
                 a.setSimilarDegree(rs.getDouble(11));
-               /* AuthorEntity authorEntity = new AuthorEntity();
-                authorEntity.setAuthorId(rs.getString(12));
-                authorEntity.setName(rs.getString(13));
-                a.setAuthorEntity(authorEntity);*/
-               //,au.authorID,au.name
                 list.add(a);
             }
             new DBUtil().closeConn(rs,psmt,conn);

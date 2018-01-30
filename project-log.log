@@ -2289,3 +2289,43 @@ com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
 2017-12-07 20:21:28,935 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
 2017-12-07 20:21:29,434 INFO [DICLOG] - init core library ok use time :479
 2017-12-07 20:21:29,970 INFO [DICLOG] - init ngram ok use time :525
+2018-01-27 19:15:24,931 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-27 19:15:25,095 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-27 19:15:25,104 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-27 19:15:25,770 INFO [DICLOG] - init core library ok use time :624
+2018-01-27 19:15:26,352 INFO [DICLOG] - init ngram ok use time :566
+2018-01-27 19:16:02,099 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-27 19:16:02,103 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-27 19:16:02,105 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-27 19:16:02,867 INFO [DICLOG] - init core library ok use time :712
+2018-01-27 19:16:03,550 INFO [DICLOG] - init ngram ok use time :668
+2018-01-27 19:16:06,360 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-27 19:16:06,362 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-27 19:16:06,364 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-27 19:16:06,889 INFO [DICLOG] - init core library ok use time :502
+2018-01-27 19:16:07,475 INFO [DICLOG] - init ngram ok use time :569
+2018-01-27 19:26:06,332 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-27 19:26:06,334 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-27 19:26:06,336 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-27 19:26:06,900 INFO [DICLOG] - init core library ok use time :536
+2018-01-27 19:26:07,372 INFO [DICLOG] - init ngram ok use time :451
+2018-01-27 20:58:55,473 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-27 20:58:55,488 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-27 20:58:55,498 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-27 20:58:56,229 INFO [DICLOG] - init core library ok use time :684
+2018-01-27 20:58:56,655 INFO [DICLOG] - init ngram ok use time :415
+2018-01-27 21:42:05,000 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-27 21:42:05,003 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-27 21:42:05,004 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-27 21:42:05,529 INFO [DICLOG] - init core library ok use time :502
+2018-01-27 21:42:05,995 INFO [DICLOG] - init ngram ok use time :387
+2018-01-30 17:14:53,998 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-30 17:14:54,025 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-30 17:14:54,029 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-30 17:14:54,742 INFO [DICLOG] - init core library ok use time :673
+2018-01-30 17:14:55,213 INFO [DICLOG] - init ngram ok use time :400
+2018-01-30 17:16:30,221 WARN [DICLOG] - not find library.properties in classpath use it by default !
+2018-01-30 17:16:30,223 WARN [DICLOG] - init userLibrary  warning :E:\learn\ideaproject\socialmind\library\default.dic because : file not found or failed to read !
+2018-01-30 17:16:30,225 WARN [DICLOG] - init ambiguity  error :E:\learn\ideaproject\socialmind\library\ambiguity.dic because : not find that file or can not found!
+2018-01-30 17:16:30,783 INFO [DICLOG] - init core library ok use time :533
+2018-01-30 17:16:31,338 INFO [DICLOG] - init ngram ok use time :483
