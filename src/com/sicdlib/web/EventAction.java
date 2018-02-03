@@ -2,6 +2,9 @@ package com.sicdlib.web;
 
 import Jama.Matrix;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
@@ -15,7 +18,11 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -37,11 +44,7 @@ public class EventAction {
     @Autowired
     private ArticleEntityService articleEntityService;
     @Autowired
-    private ArticleCommentEntityService articleCommentEntityService;
-    @Autowired
     private ArticleSimilarityService articleSimilarityService;
-    @Autowired
-    private CommentEntityService commentEntityService;
     @Autowired
     private KeywordRelatedDegreeService keywordRelatedDegreeService;
     @Autowired
@@ -49,13 +52,9 @@ public class EventAction {
     @Autowired
     private KeywordEntityService keywordEntityService;
     @Autowired
-    private AuthorEntityService authorEntityService;
-    @Autowired
     private WebsiteEntityService websiteEntityService;
     @Autowired
     private EventOpinionService eventOpinionService;
-    @Autowired
-    private IndicatorValueEntityService indicatorValueEntityService;
 
     //查找事件列表
     @RequestMapping("all")
@@ -189,11 +188,6 @@ public class EventAction {
                 mode.addAttribute("opinion", list);
             }
 
-            //该事件下含有指示词的文章
-
-
-
-//            mode.addAttribute("direct", JSON.toJSON(direct));
             mode.addAttribute("time", JSON.toJSON(time));
             mode.addAttribute("webAndTimeCount", JSON.toJSON(timeList));
             mode.addAttribute("topkeywords", findTopKeywords(objectId));
@@ -208,7 +202,6 @@ public class EventAction {
             mode.addAttribute("mediaList", JSON.toJSON(mediaList));
             mode.addAttribute("mediaSource", JSON.toJSON(mediaSource));
             mode.addAttribute("opinionSource", JSON.toJSON(opinionSource));
-//        mode.addAttribute("areaSource", JSON.toJSON(areaSource(objectId)));
             mode.addAttribute("periodList", JSON.toJSON(findPeriod(objectId)));
             mode.addAttribute("webs",JSON.toJSON(getWebsiteName()));
             mode.addAttribute("websiteStatistic",JSON.toJSON(websiteStatistic(objectId)));
@@ -217,14 +210,9 @@ public class EventAction {
             mode.addAttribute("keywordList", JSON.toJSON(keywordList(keywords)).toString());
             mode.addAttribute("event", event(objectId));
             mode.addAttribute("category", JSON.toJSONString(categoryName).replace("'", "\\\'"));
-//        mode.addAttribute("webnodesAndEdges", JSON.toJSONString(webNodesAndEdges).replace("'", "\\\'"));
-//        mode.addAttribute("webSNAList", JSON.toJSONString(SNALists, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
             mode.addAttribute("nodesAndEdges", JSON.toJSONString(nodesAndEdges).replace("'", "\\\'"));
             mode.addAttribute("SNAList", JSON.toJSONString(SNAList, SerializerFeature.DisableCircularReferenceDetect));//各个阈值下的SNA参数列表
-            //mode.addAttribute("listkey", JSON.toJSON(listkey).toString());
-            //mode.addAttribute("articleCommentList", articleCommentList);
             mode.addAttribute("keywordRelatedList", JSON.toJSON(keywordRelatedList).toString());
-
             mode.addAttribute("objectId", objectId);
 
             return "/WEB-INF/foreground/eventInfo";
@@ -369,12 +357,6 @@ public class EventAction {
         mode.addAttribute("articleInfo", articleInfo);
         return "/WEB-INF/foreground/infodetail";
     }
-
-    //统计事件的国内国外信息
-    /*public List areaSource(String objectId){
-        return indicatorValueEntityService.getObjectArea(objectId);
-    }*/
-
 
     //查找数据字典中的所有媒体名称
     public List<DataDictionaryEntity> allMedias(){
@@ -694,12 +676,6 @@ public class EventAction {
             map.put("name",keywords.get(i).get("name"));
             map.put("value",keywords.get(i).get("value"));
             map.put("keywordId",keywords.get(i).get("keywordId"));
-            /*map.put("draggable",keywords.get(i).get("draggable"));
-            if (i==0){
-                map.put("category","核心");
-            }else {
-                map.put("category", "非核心");
-            }*/
             list.add(map);
         }
         return list;
@@ -799,76 +775,7 @@ public class EventAction {
                 }
             }
         }
-       /* for (ArticleSimilarEntity articleSimi:articleSimiList) {
-            String articleAID = articleSimi.getArticleEntityOne().getArticleId();
-            String articleBID = articleSimi.getArticleEntityTwo().getArticleId();
-            //初始化节点相关节点的个数
-//            if (!articleSimiNumMap.containsKey(articleAID)) {
-//                //获取文章标题
-//                String articleATitle = articleEntityService.findTitle(articleAID,objectId);
-//                //初始化每个节点在不同相似度下节点的大小,初始化为0
-//                Vector<Integer> nodeSizeList = new Vector<>();
-//                for (int i = 0; i <= sliceNum; i++) {
-//                    nodeSizeList.add(0);
-//                }
-//                articleSimiNumMap.put(articleAID, nodeSizeList);
-////                articleTitleMap.put(articleAID, articleATitle);
-//                //来源网站
-//                String sourceWebsite = websiteEntityService.findWebsitesByArticle(objectId,articleAID);
-////                articleWebsite.put(articleAID, sourceWebsite);
-//            }
-            if(!articleSimiNumMap.containsKey(articleBID)) {
-                //获取文章标题
-                String articleBTitle = articleEntityService.findTitle(articleBID,objectId);
-                //初始化每个节点在不同相似度下节点的大小,初始化为0
-                Vector<Integer> nodeSizeList = new Vector<>();
-                for (int i = 0; i <= sliceNum; i++) {
-                    nodeSizeList.add(0);
-                }
-                articleSimiNumMap.put(articleBID, nodeSizeList);
-                //文章标题
-//                articleTitleMap.put(articleBID, articleBTitle);
-                //来源网站
-                String sourceWebsite = websiteEntityService.findWebsitesByArticle(objectId,articleBID);
-//                articleWebsite.put(articleBID, sourceWebsite);
 
-            }
-
-            //时间早的作为source，晚的为target
-            //如果相似度高于simi，连接两个节点
-            String edgeSource = "";
-            String edgeTarget = "";
-            if(articleTitleMap.get(articleAID).compareTo(articleTitleMap.get(articleBID)) > 0) {
-                edgeSource = articleBID;
-                edgeTarget = articleAID;
-            } else {
-                edgeSource = articleAID;
-                edgeTarget = articleBID;
-            }
-
-            //对相应的相似度阈值+1
-            Vector<Integer> simiAList = articleSimiNumMap.get(articleAID);
-            Vector<Integer> simiBList = articleSimiNumMap.get(articleBID);
-
-            //循环，加入相应的阈值数组
-            for (int i = 0; i <= (int)(articleSimi.getSimilarDegree() / sliceSize); i++) {
-                AtomicInteger countA = new AtomicInteger(simiAList.get(i));
-                AtomicInteger countB = new AtomicInteger(simiBList.get(i));
-
-                simiAList.set(i, countA.incrementAndGet());
-                simiBList.set(i, countB.incrementAndGet());
-
-                Map<String, Object> edgeMap = new HashMap<>();
-                edgeMap.put("source", edgeSource);
-                edgeMap.put("target", edgeTarget);
-
-                Vector<Map<String, Object>> vector = edgeList.get(i);
-                vector.add(edgeMap);
-                edgeList.set(i, vector);
-            }
-            articleSimiNumMap.put(articleAID, simiAList);
-            articleSimiNumMap.put(articleBID, simiBList);
-        }*/
 
         List<Map<String, Object>> nodeList = new ArrayList<>();
         for (int i =0;i<webs.size();i++) {
@@ -1058,8 +965,6 @@ public class EventAction {
                 keywordRelatedDegreeEntity.setRelatedDegree(correlated);
                 //向关联度表中添加数据，调用方法
                 int insert = keywordRelatedDegreeService.insertKeywordRelated(keywordRelatedDegreeEntity);
-                System.out.println("000000000000000000insert:::"+insert);
-
             }
         }
         //
@@ -1068,7 +973,6 @@ public class EventAction {
 
         for(int a = 0 ; a < keywordRelated.size() ; a++) {
             double r = 200;
-//                        Double.parseDouble(keywordRelated.get(a).getRelatedDegree().toString())*100*3;
             double x = Math.random()*400+100;
             double z = Math.sqrt(r*r-(x-300)*(x-300));
             double[] y = {300-z,300+z};
@@ -1078,18 +982,14 @@ public class EventAction {
             map.put("value",keywordRelated.get(a).getRelatedDegree());
 
             map.put("draggable","true");
-//                map.put("x",x);
-//                map.put("y",y[index]);
+
             listkey.add(map);
 
         }
         return listkey;
     }
 
-    //统计事件的可信度
-    public void reliablity(){
-        //        List<IndicatorValueEntity> reliablity = indicatorValueEntityService.getObjectReliablity(objectId);
-    }
+
 
 
 }

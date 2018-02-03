@@ -222,7 +222,7 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
         try {
             List<Map> list = new ArrayList<>();
             Connection conn = new DBUtil().GetConnection();
-            String sql = "select o.name,e.eventBeginTime,e.eventEndTime from object o,event e " +
+            String sql = "select o.name,e.eventBeginTime,e.eventEndTime,e.introduction,o.objectID  from object o,event e " +
                     "where o.objectID = e.objectID and o.objectType = \"事件\"";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
@@ -230,6 +230,10 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
             while (rs.next()){
                 Map map = new HashMap();
                 map.put("name",rs.getString(1));
+                map.put("beginTime",rs.getString(2));
+                map.put("endTime",rs.getString(3));
+                map.put("introduction",rs.getString(4));
+                map.put("objectID",rs.getString(5));
                 map.put("num",subTimeDay(rs.getString(2),rs.getString(3)));
                 list.add(map);
             }
@@ -258,6 +262,24 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
         long day1=between/(24*3600);
         String time = day1+"";
         return time;
+    }
+
+    //根据事件名称查找事件ID
+    public String findEventID(String eventName){
+        try {
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select o.objectID from object o where o.`name` = '"+eventName+"'";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                return rs.getString(1);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return null;
+        }catch (Exception e){
+
+        }
+        return null;
     }
 
 

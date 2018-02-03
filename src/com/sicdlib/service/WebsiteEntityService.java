@@ -106,7 +106,8 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
                     "a.collectNumber,a.similarDegree,au.authorID,au.name "+
                     "from article a,website w,data_dictionary d,author au  " +
                     "where a.objectID = '"+objectId+"' "+
-                    "and a.websiteID = w.websiteID and w.websiteTypeID = d.dataDictionaryID " +
+                    "and w.websiteID in (select a.websiteID from article a where a.objectID='"+objectId+"' GROUP BY a.websiteID)   " +
+                    "and w.websiteTypeID = d.dataDictionaryID " +
                     "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
                     "and d.attributeValue ='"+object+"' GROUP BY a.postTime";
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -152,7 +153,7 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
                     "a.collectNumber,a.similarDegree,au.authorID,au.name "+
                     "from article a,website w,author au  " +
                     "where a.objectID = '"+objectId+"' "+
-                    "and a.websiteID = w.websiteID " +
+                    "and w.websiteID in (select a.websiteID from article a where a.objectID='" +objectId+"' GROUP BY a.websiteID) " +
                     "and w.websiteName ='"+object+"' " +
                     "and a.similarDegree > (SELECT AVG(similarDegree) aver from article where objectID = '" +objectId+"') " +
                     "GROUP BY a.postTime ";
@@ -232,4 +233,29 @@ public class WebsiteEntityService extends DefaultEntityManager<WebsiteEntity> {
     }
 
     //根据文章时间找文章的来源
+
+    //各大网站的活跃数
+    public List<Map> allWebsites(){
+        try {
+            List<Map> list = new ArrayList();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "SELECT w.websiteName,COUNT(a.articleID) as co " +
+                    "from article a,website w " +
+                    "where a.websiteID = w.websiteID " +
+                    "GROUP BY w.websiteName ORDER BY co desc ";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("name",rs.getString(1));
+                map.put("value",rs.getInt(2));
+                list.add(map);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+
+        }
+        return null;
+    }
 }

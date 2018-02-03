@@ -1,6 +1,7 @@
 package com.sicdlib.web;
 
 import com.alibaba.fastjson.JSON;
+import com.sicdlib.entity.EventEntity;
 import com.sicdlib.service.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class EventAnalysisBackAction {
     private EventEntityService eventEntityService;
     @Autowired
     private ArticleEntityService articleEntityService;
+    @Autowired
+    private WebsiteEntityService websiteEntityService;
 
     @RequestMapping("eventAnalysis")
     public String eventAnalysis(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
@@ -65,6 +68,13 @@ public class EventAnalysisBackAction {
             eventPeriod.add(map.get("num").toString());
         }
 
+        //各大网站的活跃数
+        List<Map> websites = websiteEntityService.allWebsites();
+        List<String> websiteName = new ArrayList<>();
+        for (Map map:websites) {
+            websiteName.add(map.get("name").toString());
+        }
+
         mode.addAttribute("years", JSON.toJSON(years));
         mode.addAttribute("yearCount",JSON.toJSON(yearCount));
         mode.addAttribute("eventClickNum",JSON.toJSON(eventClickNum));
@@ -75,6 +85,8 @@ public class EventAnalysisBackAction {
         mode.addAttribute("objects", JSON.toJSON(objects));
         mode.addAttribute("entity", JSON.toJSON(entityList));
         mode.addAttribute("entityNum", JSON.toJSON(entityList.size()));
+        mode.addAttribute("websites", JSON.toJSON(websites));
+        mode.addAttribute("websiteName", JSON.toJSON(websiteName));
 
         return "/WEB-INF/admin/eventAnalysis";
     }
@@ -115,6 +127,20 @@ public class EventAnalysisBackAction {
         }
 
         return "/WEB-INF/admin/newEventInfo";
+    }
+
+    @RequestMapping("clickBackEventInfo")
+    public String clickTextInfo(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
+
+        //事件列表
+        List<Map> periodEvent = eventEntityService.eventPeriod();
+        //实体列表
+        List<String> entityList = objectEntityService.findObjectList();
+        List<Map> eventOfType = objectEntityService.eventOfType();
+        mode.addAttribute("eventList", periodEvent);
+        mode.addAttribute("entityList", entityList);
+        mode.addAttribute("eventOfType", eventOfType);
+        return "/WEB-INF/admin/eventTextInfo";
     }
 
 }

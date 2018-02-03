@@ -30,9 +30,6 @@ public class InfoDetectionAction {
 	private ObjectEntityService objectEntityService;
 	@Autowired
 	private EventEntityService eventEntityService;
-	@Autowired
-	private ProvinceService provinceService;
-	
 
 	//搜索
 	@RequestMapping("search")
@@ -122,7 +119,6 @@ public class InfoDetectionAction {
 				}
 			provinceList.add(map);
 		}
-//		List<Map> provinceList = provinceList(articleList);
 
 		mode.addAttribute("objectId",objectId);
 		mode.addAttribute("count", maxcount(provinceList));
@@ -252,7 +248,6 @@ public class InfoDetectionAction {
 			for (int i=0;i<mediaType.length;i++){
 				if(mediaType[i].equals(object)){
 					mediaList = websiteEntityService.findMediaList(objectId,object);
-					break;
 				}
 			}
 			mode.addAttribute("mediaList", mediaList);
@@ -265,7 +260,6 @@ public class InfoDetectionAction {
 			for (int j=0; j<websiteName.size();j++){
 				if(websiteName.get(j).getWebsiteName().equals(object)){
 					websiteList = websiteEntityService.findWebsiteList(objectId,object);
-					break;
 				}
 			}
 			mode.addAttribute("websiteList", websiteList);

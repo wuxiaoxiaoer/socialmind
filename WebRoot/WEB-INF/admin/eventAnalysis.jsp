@@ -38,20 +38,21 @@
                 <a href="" class="current">舆情分析</a>
             </div>
             <br>
-            <div style=" margin-left: 15%;">
+            <div style=" margin-left: 5%;">
 
-                <a onclick="document.getElementById('001').scrollIntoView();" class="btn btn-primary btn-large">事件访问次数</a>
-                <a onclick="document.getElementById('002').scrollIntoView();" class="btn btn-primary btn-large">新增事件数</a>
+                <a onclick="document.getElementById('001').scrollIntoView();" class="btn btn-primary btn-large">全部事件统计</a>
+                <a onclick="document.getElementById('002').scrollIntoView();" class="btn btn-primary btn-large">全部实体统计</a>
                 <a onclick="document.getElementById('003').scrollIntoView();" class="btn btn-primary btn-large">事件分类</a>
-                <a onclick="document.getElementById('004').scrollIntoView();" class="btn btn-primary btn-large">事件延续时间</a>
-                <a onclick="document.getElementById('005').scrollIntoView();" class="btn btn-primary btn-large">事件情感统计</a>
+                <a onclick="document.getElementById('004').scrollIntoView();" class="btn btn-primary btn-large">事件访问量</a>
+                <a onclick="document.getElementById('005').scrollIntoView();" class="btn btn-primary btn-large">事件新增数量</a>
+                <a onclick="document.getElementById('006').scrollIntoView();" class="btn btn-primary btn-large">事件持续时间</a>
             </div>
         </div>
 
         <div class="container-fluid" style="width: 95%;">
 
             <div class="row-fluid">
-                <div class="span6">
+                <div class="span6" id="001">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
@@ -61,12 +62,13 @@
                         </div>
                         <div class="widget-content">
                             <div id="allevent" style="width: 100%;height: 300px"></div>
+                            <div align="center">全部事件总数为<b>${allEvent}</b>件</div>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="span6">
+                <div class="span6" id="002">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
@@ -76,13 +78,14 @@
                         </div>
                         <div class="widget-content">
                             <div id="allobject" style="width: 100%;height: 300px"></div>
+                            <div align="center">全部实体总数为<b>${entityNum}</b>件</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row-fluid">
-                <div class="span6">
+                <div class="span6" id="003">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
@@ -91,13 +94,14 @@
                             <h5>事件分类</h5>
                         </div>
                         <div class="widget-content">
-                            <div id="classify" style="width: 100%;height: 300px"></div>
+                            <div id="classify" style="width: 100%;height: 450px"></div>
+                            <div align="center">该图表示不同类型事件的数量</div>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="span6">
+                <div class="span6" id="004">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
@@ -106,14 +110,15 @@
                             <h5>事件访问量</h5>
                         </div>
                         <div class="widget-content">
-                            <div id="visit" style="width: 100%;height: 300px"></div>
+                            <div id="visit" style="width: 100%;height: 450px"></div>
+                            <div align="center">该图表示不同事件的访问量</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row-fluid">
-                <div class="span6">
+                <div class="span6" id="005">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
@@ -122,42 +127,62 @@
                             <h5>新增事件数</h5>
                         </div>
                         <div class="widget-content">
-                            <div id="addEvent" style="width: 100%;height: 300px"></div>
+                            <div id="addEvent" style="width: 100%;height: 400px"></div>
+                            <div align="center">该图表示不同年份新增的事件的数量</div>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="span6">
+                <div class="span6" id="006">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
 									<i class="icon-signal"></i>
 								</span>
-                            <h5>事件延续时间</h5>
+                            <h5>事件持续时间</h5>
                         </div>
                         <div class="widget-content">
-                            <div id="periodTime" style="width: 100%;height: 300px"></div>
+                            <div id="periodTime" style="width: 100%;height: 400px"></div>
+                            <div align="center">该图表示不同事件的持续时间</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            <%--<div class="row-fluid">
-                <div class="widget-box" id="005">
-                    <div class="widget-title">
-						<span class="icon">
-							<i class="icon-eye-open"></i>
-						</span>
-                        <h5>事件情感统计</h5>
+            <div class="row-fluid">
+                <div class="span6" id="007">
+                    <div class="widget-box">
+                        <div class="widget-title">
+								<span class="icon">
+									<i class="icon-signal"></i>
+								</span>
+                            <h5>网站活跃量</h5>
+                        </div>
+                        <div class="widget-content">
+                            <div id="website" style="width: 100%;height: 450px"></div>
+                            <div align="center">该图表示不同网站的活跃量</div>
+                        </div>
                     </div>
-                    <div class="widget-content">
-                        <div id="sensitiveInfo" style="width: 80%; height:200px;">123123</div>
+                </div>
+
+
+                <div class="span6" id="008">
+                    <div class="widget-box">
+                        <div class="widget-title">
+								<span class="icon">
+									<i class="icon-signal"></i>
+								</span>
+                            <h5>事件访问量</h5>
+                        </div>
+                        <div class="widget-content">
+                            <div id="visit" style="width: 100%;height: 450px"></div>
+                            <div align="center">该图表示不同事件的访问量</div>
+                        </div>
                     </div>
                 </div>
             </div>
---%>
+
         </div>
     </div>
 
@@ -209,7 +234,7 @@
     };
     allevent.setOption(eventOption);
     allevent.on('click', function (params) {
-//        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=null&&object=' + params.name);
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -227,7 +252,7 @@
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['全部对象数']
+            data: ['全部实体数']
         },
         series : [
             {
@@ -237,7 +262,7 @@
                 center: ['50%', '60%'],
                 data:[
 
-                    {value:objectNum, name:'全部对象数'}
+                    {value:objectNum, name:'全部实体数'}
                 ],
                 itemStyle: {
                     emphasis: {
@@ -251,7 +276,7 @@
     };
     allobject.setOption(objectOption);
     allobject.on('click', function (params) {
-//        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=null&&object=' + params.name);
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -290,7 +315,7 @@
     };
     visit.setOption(visitOption);
     visit.on('click', function (params) {
-//        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=null&&object=' + params.name);
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -372,7 +397,7 @@
 
     periodTime.setOption(option2);
     periodTime.on('click', function (params) {
-        <%--window.open('http://localhost:8080/socialmind/event/eventInfo?type=view&&objectId=${eventClickNum.objectID}');--%>
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 <script type="text/javascript">
@@ -416,6 +441,53 @@
 
     objectType.setOption(option3);
     objectType.on('click', function (params) {
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+    });
+</script>
+
+
+<script type="text/javascript">
+    var allwebsite = echarts.init(document.getElementById('website'));
+    var websiteOption  = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:${websiteName}
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:${websites}
+            }
+        ]
+    };
+    allwebsite.setOption(websiteOption);
+    allwebsite.on('click', function (params) {
 //        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=null&&object=' + params.name);
     });
 </script>

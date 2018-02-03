@@ -109,5 +109,28 @@ public class ObjectEntityService extends DefaultEntityManager<ObjectEntity> {
 
     }
 
+    //不同类型的事件
+    public List<Map> eventOfType(){
+        try {
+            List<Map> list = new ArrayList<>();
+            Connection conn = new DBUtil().GetConnection();
+            String sql = "select a.name,o.name,o.objectID from object o,(select name,objectID from object o where ISNULL(o.objectFatherID)) a " +
+                    "where o.objectFatherID = a.objectID";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet rs = psmt.executeQuery(sql);
+            while (rs.next()){
+                Map map = new HashMap();
+                map.put("type",rs.getString(1));
+                map.put("eventName",rs.getString(2));
+                map.put("objectID",rs.getString(3));
+                list.add(map);
+            }
+            new DBUtil().closeConn(rs,psmt,conn);
+            return list;
+        }catch (Exception e){
+        }
+        return null;
+    }
+
 
 }

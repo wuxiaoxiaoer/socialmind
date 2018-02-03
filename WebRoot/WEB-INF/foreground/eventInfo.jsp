@@ -28,6 +28,23 @@
     <![endif]-->
     <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
+<%--<script>
+    function async(){
+        if(window.attachEvent){
+            window.attachEvent("load", asyncLoad);
+        }else{
+            window.addEventListener("load", asyncLoad);
+        }
+        var asyncLoad = function(){
+            var ga = document.getElementById("mycharts");
+            ga.type = 'text/javascript';
+            ga.async = true;
+            var data = Json.parse(${maps});
+            ga.src = 'http://localhost:8080/socialmind/event/eventInfo?map='+data;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        }
+</script>--%>
 <body style="overflow: hidden">
 <!-- 引入头模板 -->
 <jsp:include page="/static/fore_header.jsp"/>
@@ -71,10 +88,12 @@
             </ul>
         </div>
         <!--/span-->
+
         <c:forEach items="${event}" var="e" varStatus="sts">
         <div class="span9" id="content" style="height:90%; overflow-y:auto">
             <!-- morris stacked chart -->
             <div class="row-fluid">
+                <%--<div id="mycharts" style="width: 600px;height: 500px"></div>--%>
                 <!-- block -->
                 <div class="alert alert-info alert-block">
                     <div style="margin-left:40%" id="objectName"><a style="size: 60pc">${e.object.name}</a></div>
@@ -122,45 +141,6 @@
                     </div>
 
                 </div>
-
-                <%--<div class="block">
-                    <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="">网站统计</div>
-
-                    </div>
-                    <div class="block-content collapse in">
-                        <div class="span12">
-
-                            <c:if test="${direct!=null}">
-                                <c:forEach items="${direct}" var="w" varStatus="sts">
-                                    <tr class="gradeA odd">
-
-                                        <td class="">
-
-                                            <a ><span class="badge badge-info" style="background-color: #118ecc; float: left;">${w.article.name}</span></a>
-                                            <br>
-
-                                            <b>
-                                                    &lt;%&ndash;<a href="${a.newsResource}" target="_blank">&ndash;%&gt;
-                                                <a>${w.title}</a></b>
-
-                                            <div class="pull-right">
-                                                <span class="badge badge-info" style="background-color: #f89406">相似度：${w.article.similarDegree}</span>
-                                            </div>
-                                            <div id="content${sts.index}" class="text" style="">${w.article.content}</div>
-                                            <br/>
-                                                ${w.article.postTime}
-
-
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </c:if>
-                        </div>
-
-                    </div>
-                </div>--%>
-
 
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
@@ -344,6 +324,7 @@
             </div>
 
         </div>
+
 
     </div>
     <hr>
@@ -667,66 +648,8 @@
                     }
                 },
                 data:  ${transwebsList},
-//                    [{"name":"猫扑社区","x":300,"y":300},{"name":"天涯BBS","x": 800, "y": 300},{"name":"新华网","x": 550, "y": 100},{"name":"人民网BBS","x": 550, "y": 500}],
-
-                /* [{
-                 name: '节点1',
-                 x: 300,
-                 y: 300
-             }, {
-                 name: '节点2',
-                 x: 800,
-                 y: 300
-             }, {
-                 name: '节点3',
-                 x: 550,
-                 y: 100
-             }, {
-                 name: '节点4',
-                 x: 550,
-                 y: 500
-             }],*/
-                // links: [],
                 links:${transferweb},
-                /*[{
-                source: 0,
-                target: 1,
-                symbolSize: [5, 20],
-                label: {
-                    normal: {
-                        show: true
-                    }
-                },
-                lineStyle: {
-                    normal: {
-                        width: 5,
-                        curveness: 0.2
-                    }
-                }
-            }, {
-                source: '节点2',
-                target: '节点1',
-                label: {
-                    normal: {
-                        show: true
-                    }
-                },
-                lineStyle: {
-                    normal: { curveness: 0.2 }
-                }
-            }, {
-                source: '节点1',
-                target: '节点3'
-            }, {
-                source: '节点2',
-                target: '节点3'
-            }, {
-                source: '节点2',
-                target: '节点4'
-            }, {
-                source: '节点1',
-                target: '节点4'
-            }],*/
+
                 lineStyle: {
                     normal: {
                         opacity: 0.9,
@@ -852,7 +775,7 @@
         window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=media&&object=' + params.name);
     });
 </script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
+
 <style>
 
     circle {
@@ -873,67 +796,7 @@
     }
 
 </style>
-<script type="text/javascript">
-    var w = 960,
-        h = 500;
 
-    var vertices = d3.range(100).map(function(d) {
-        return [Math.random() * w, Math.random() * h];
-    });
-
-    var svg = d3.select("#chart")
-        .append("svg:svg")
-        .attr("width", w)
-        .attr("height", h);
-    var paths, points, clips;
-    clips = svg.append("svg:g").attr("id", "point-clips");
-    points = svg.append("svg:g").attr("id", "points");
-    paths = svg.append("svg:g").attr("id", "point-paths");
-
-    clips.selectAll("clipPath")
-        .data(vertices)
-        .enter().append("svg:clipPath")
-        .attr("id", function(d, i) { return "clip-"+i;})
-        .append("svg:circle")
-        .attr('cx', function(d) { return d[0]; })
-        .attr('cy', function(d) { return d[1]; })
-        .attr('r', 20);
-
-    paths.selectAll("path")
-        .data(d3.geom.voronoi(vertices))
-        .enter().append("svg:path")
-        .attr("d", function(d) { return "M" + d.join(",") + "Z"; })
-        .attr("id", function(d,i) {
-            return "path-"+i; })
-        .attr("clip-path", function(d,i) { return "url(#clip-"+i+")"; })
-        .style("fill", d3.rgb(230, 230, 230))
-        .style('fill-opacity', 0.4)
-        .style("stroke", d3.rgb(200,200,200));
-
-    paths.selectAll("path")
-        .on("mouseover", function(d, i) {
-            d3.select(this)
-                .style('fill', d3.rgb(31, 120, 180));
-            svg.select('circle#point-'+i)
-                .style('fill', d3.rgb(31, 120, 180))
-        })
-        .on("mouseout", function(d, i) {
-            d3.select(this)
-                .style("fill", d3.rgb(230, 230, 230));
-            svg.select('circle#point-'+i)
-                .style('fill', 'black')
-        });
-
-    points.selectAll("circle")
-        .data(vertices)
-        .enter().append("svg:circle")
-        .attr("id", function(d, i) {
-            return "point-"+i; })
-        .attr("transform", function(d) { return "translate(" + d + ")"; })
-        .attr("r", 2)
-        .attr('stroke', 'none');
-
-</script>
 
 <script type="text/javascript">
     //基于准备好的dom,初始化echarts实例
@@ -1289,243 +1152,6 @@
 <script>
     var myChart12 = echarts.init(document.getElementById("keyword_related"));
 
-    /*var  option12 = {
-    title: {
-        text: '网络拓扑信息',
-    },
-    tooltip:{},
-    animationDurationUpdate: 1500,
-    animationEasingUpdate: 'quinticInOut',
-    series : [
-        {
-            type: 'graph',
-            layout: 'none',
-            symbolSize: 50,//图形的大小（示例中的圆的大小）
-            roam: true,//鼠标缩放及平移
-            focusNodeAdjacency:true,//是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点
-            label: {
-                normal: {
-                    show: true ,  //控制非高亮时节点名称是否显示
-                    position:'top',
-                    fontSize:20
-                }
-            },
-
-            edgeSymbol: ['circle', 'arrow'],
-            edgeSymbolSize: [1, 10],    //箭头的大小
-            edgeLabel: {
-                normal:{
-                    show:false
-                },
-                emphasis: {
-                    textStyle: {
-                        fontSize: 20  //边节点显示的字体大小
-                    }
-                }
-            },
-
-//节点信息
-
-            data:
-            <%--${keywordRelated}--%>
-                /!*[
-                    {
-                        name:'h1',
-                        value:'10.108.50.101',
-                        isnode:true,
-                        x:100,
-                        y:300,
-                        // symbol:'image://服务器-20.png',
-                    },
-                    {
-                        name:'h2',
-                        value:'10.108.50.102',
-                        isnode:true,
-                        x:200,
-                        y:470,
-                        // symbol:'image://服务器-20.png',
-                    },
-                    {
-                        name:'h3',
-                        value:'10.108.50.103',
-                        isnode:true,
-                        x:400,
-                        y:470,
-                        // symbol:'image://服务器-20.png',
-                    },
-                    {
-                        name:'h4',
-                        value:'10.108.50.104',
-                        isnode:true,
-                        x:500,
-                        y:300,
-                        // symbol:'image://服务器-20.png',
-                    },
-                    {
-                        name:'h5',
-                        value:'10.108.50.105',
-                        isnode:true,
-                        x:400,
-                        y:130,
-                        // symbol:'image://服务器-20.png',
-                    },
-                    {
-                        name:'h6',
-                        value:'10.108.50.106',
-                        isnode:true,
-                        x:200,
-                        y:130,
-                        // symbol:'image://服务器-20.png',
-                    },
-                    {
-                        name:'h7',
-                        value:'10.108.50.107',
-                        isnode:true,
-                        x:300,
-                        y:300,
-                        // symbol:'image://服务器-20.png',
-                    },
-
-                ]*!/,
-
-            links:
-            <%--${keywordRelated}--%>
-                [
-                    {
-                        source:'天涯博客',
-                        target:'米花糖糖',
-                        islink:"true",
-                        name:'链路1',
-//                        bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-//                        timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                        PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                    },
-                    {
-                        source:'h2',
-                        target:'h3',
-                        islink:true,
-                        name:'链路2',
-                        bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                        timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                        PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                    },{
-                    source:'h3',
-                    target:'h4',
-                    islink:true,
-                    name:'链路3',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },{
-                    source:'h4',
-                    target:'h5',
-                    islink:true,
-                    name:'链路4',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },{
-                    source:'h5',
-                    target:'h6',
-                    islink:true,
-                    name:'链路5',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },{
-                    source:'h6',
-                    target:'h1',
-                    islink:true,
-                    name:'链路6',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },{
-                    source:'h1',
-                    target:'h7',
-                    islink:true,
-                    name:'链路7',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },{
-                    source:'h2',
-                    target:'h7',
-                    islink:true,
-                    name:'链路8',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },{
-                    source:'h3',
-                    target:'h7',
-                    islink:true,
-                    name:'链路9',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },{
-                    source:'h7',
-                    target:'h5',
-                    islink:true,
-                    name:'链路10',
-                    bandwith:Math.round(Math.random()*50+50)+'M',//50-100间的随机整数
-                    timeout:Math.round(Math.random()*10)+1+'ms',   //1-10间的整数
-                    PacketLossRate:'0.0'+Math.round(Math.random()*10)+'%', //0.01%--0.09%
-                },
-                ],
-            lineStyle: {
-                normal: {
-                    show:true,
-                    color:
-                        {
-                            type: 'linear',
-                            x: 0,
-                            y: 0,
-                            x2: 0,
-                            y2: 1,
-                            colorStops: [
-                                {
-                                    offset: 0, color: 'red' // 0% 处的颜色
-                                }
-                                ,{
-                                    offset: 1, color: 'blue' // 100% 处的颜色
-                                }],
-                            globalCoord: false // 缺省为 false
-                        },
-
-                    // curveness: 0.2
-
-                },
-                emphasis:{
-                    color:'red',
-                    width:3,
-                    type:'dashed',//虚线
-
-                }
-            },
-
-            tooltip:
-                {
-                    position:'bottom',//悬浮时显示的位置
-                    backgroundColor:'green',
-                    textStyle:{fontSize:18,
-
-                    },
-
-                    formatter:function(params){//悬浮提示框显示的内容
-                        if (params.data.islink) {return '带宽：&nbsp'+params.data.bandwith+'<br />'+'时延：&nbsp'+params.data.timeout+'<br />'+'丢包率：'+params.data.PacketLossRate;}
-                        else if (params.data.isnode) {return params.data.value;}
-                    }
-                },//悬浮时的提示框，不设置时是随鼠标移动
-
-        }
-    ]
-};*/
-
-    //    var dom = document.getElementById('chart-panel');
-    //    dom.style.width = 780 + 'px';
-    //    dom.style.height = 600 + 'px';
     var option12 = {
         tooltip: {
             show: false
@@ -1609,6 +1235,7 @@
     myChart12.setOption(option12);
 
 </script>
+
 
 </body>
 

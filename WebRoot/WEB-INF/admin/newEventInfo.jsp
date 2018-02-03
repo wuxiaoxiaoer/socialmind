@@ -38,7 +38,7 @@
 
     </div>
     <c:if test="${monthCount!=null}">
-        <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+        <div class="widget-box" style="width:80%; margin-left: 10%;" align="center">
             <div class="widget-title">
                             <span class="icon">
                                 <i class="icon-eye-open"></i>
@@ -56,7 +56,7 @@
     </c:if>
 
     <c:if test="${dayCount!=null}">
-        <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+        <div class="widget-box" style="width:80%; margin-left: 10%;" align="center">
             <div class="widget-title">
                             <span class="icon">
                                 <i class="icon-eye-open"></i>
@@ -175,8 +175,7 @@
 
     addEvent1.setOption(option1);
     addEvent1.on('click', function (params) {
-        alert(params.name);
-        <%--window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=${object}&&object=' + params.name);--%>
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
