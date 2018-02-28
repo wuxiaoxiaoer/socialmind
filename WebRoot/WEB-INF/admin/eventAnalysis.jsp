@@ -25,322 +25,106 @@
 </head>
 <body>
 
-<div>
 <!-- 引入后台头模板-->
 <jsp:include page="/static/admin_header.jsp"></jsp:include>
 
 <!--close-top-Header-menu-->
-
-    <div id="content">
-        <div id="content-header">
-            <div id="breadcrumb">
-                <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-                <a href="" class="current">舆情分析</a>
-            </div>
-            <br>
-            <div style=" margin-left: 5%;">
-
-                <a onclick="document.getElementById('001').scrollIntoView();" class="btn btn-primary btn-large">全部事件统计</a>
-                <a onclick="document.getElementById('002').scrollIntoView();" class="btn btn-primary btn-large">全部实体统计</a>
-                <a onclick="document.getElementById('003').scrollIntoView();" class="btn btn-primary btn-large">事件分类</a>
-                <a onclick="document.getElementById('004').scrollIntoView();" class="btn btn-primary btn-large">事件访问量</a>
-                <a onclick="document.getElementById('005').scrollIntoView();" class="btn btn-primary btn-large">事件新增数量</a>
-                <a onclick="document.getElementById('006').scrollIntoView();" class="btn btn-primary btn-large">事件持续时间</a>
-            </div>
+<div id="content" style="width:100%; height:100%;">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+            <a href="" class="current">舆情分析</a>
         </div>
-
-        <div class="container-fluid" style="width: 95%;">
-
-            <div class="row-fluid">
-                <div class="span6" id="001">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>全部事件统计</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="allevent" style="width: 100%;height: 300px"></div>
-                            <div align="center">全部事件总数为<b>${allEvent}</b>件</div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="span6" id="002">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>全部实体统计</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="allobject" style="width: 100%;height: 300px"></div>
-                            <div align="center">全部实体总数为<b>${entityNum}</b>件</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="span6" id="003">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>事件分类</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="classify" style="width: 100%;height: 450px"></div>
-                            <div align="center">该图表示不同类型事件的数量</div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="span6" id="004">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>事件访问量</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="visit" style="width: 100%;height: 450px"></div>
-                            <div align="center">该图表示不同事件的访问量</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row-fluid">
-                <div class="span6" id="007">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>网站活跃量</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="website" style="width: 100%;height: 400px"></div>
-                            <div align="center">该图表示不同网站的活跃量</div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="span6" id="005">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>每年事件数</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="addEvent" style="width: 100%;height: 400px"></div>
-                            <div align="center">该图表示不同年份的事件的数量</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="row-fluid">
-                <div class="span12" id="006">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>事件持续时间</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="periodTime" style="width: 100%;height: 400px"></div>
-                            <div align="center">该图表示不同事件的持续时间</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+        <div style=" margin-left: 15%;">
+            <h2>事件分析</h2>
+            <a href="" class="btn btn-primary btn-large">新增事件数</a>
+            <a href="" class="btn btn-primary btn-large">最活跃事件</a>
+            <a href="" class="btn btn-primary btn-large">事件情感统计</a>
+            <a href="" class="btn btn-primary btn-large">事件访问次数</a>
+            <a href="" class="btn btn-primary btn-large">事件延续时间</a>
 
         </div>
     </div>
 
-<!-- 引入后台尾部模板 -->
-<jsp:include page="/static/admin_footer.jsp"></jsp:include>
+    <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+        <div class="widget-title">
+						<span class="icon">
+							<i class="icon-eye-open"></i>
+						</span>
+            <h5>新增事件数</h5>
+            <label>时间段：
+                <select size="1" name="example_length" aria-controls="example">
+                    <option value="1" selected="selected">年</option>
+                    <option value="2">月</option>
+                    <option value="3">周</option>
+                </select>
+            </label>
+        </div>
 
-</body>
+        <div class="widget-content nopadding">
+            <div id="addEvent" style="width: 80%; height:400px;">
 
-<script src="admin/js/jquery.min.js"></script>
-<script src="admin/js/jquery.ui.custom.js"></script>
-<script src="admin/js/bootstrap.min.js"></script>
-<script src="admin/js/maruti.js"></script>
+            </div>
+        </div>
+    </div>
 
-<script type="text/javascript">
-    var allevent = echarts.init(document.getElementById('allevent'));
-    var eventNum = ${allEvent};
-    var eventOption = {
-        title : {
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['全部事件数']
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
+    <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+        <div class="widget-title">
+						<span class="icon">
+							<i class="icon-eye-open"></i>
+						</span>
+            <h5>最活跃事件</h5>
+        </div>
 
-                    {value:eventNum, name:'全部事件数'}
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-    allevent.setOption(eventOption);
-    allevent.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
-    });
-</script>
+        <div class="widget-content nopadding">
+            <div id="activeEvent" style="width: 80%; height:600px;">123123</div>
+        </div>
+    </div>
+    <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+        <div class="widget-title">
+						<span class="icon">
+							<i class="icon-eye-open"></i>
+						</span>
+            <h5>事件情感统计</h5>
+        </div>
 
-<script type="text/javascript">
-    var allobject = echarts.init(document.getElementById('allobject'));
-    var objectNum = ${entityNum};
-    var objectOption = {
-        title : {
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['全部实体数']
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
+        <div class="widget-content nopadding">
+            <div id="sensitiveInfo" style="width: 80%; height:600px;">123123</div>
+        </div>
+    </div>
 
-                    {value:objectNum, name:'全部实体数'}
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-    allobject.setOption(objectOption);
-    allobject.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
-    });
-</script>
+    <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+        <div class="widget-title">
+						<span class="icon">
+							<i class="icon-eye-open"></i>
+						</span>
+            <h5>事件访问次数</h5>
+        </div>
 
-<script type="text/javascript">
-    var visit = echarts.init(document.getElementById('visit'));
-    var visitOption = {
-        title : {
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ${eventName}
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:${eventClickNum}
-                ,
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-    visit.setOption(visitOption);
-    visit.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
-    });
-</script>
+        <div class="widget-content nopadding">
+            <div id="visitNum" style="width: 80%; height:600px;">123123</div>
+        </div>
+    </div>
 
+    <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+        <div class="widget-title">
+						<span class="icon">
+							<i class="icon-eye-open"></i>
+						</span>
+            <h5>事件延续时间</h5>
+        </div>
+
+        <div class="widget-content nopadding">
+            <div id="periodTime" style="width: 80%; height:600px;">123123</div>
+        </div>
+    </div>
+
+
+</div>
+<!-- 用户性别分布 -->
 <script type="text/javascript">
     var addEvent = echarts.init(document.getElementById('addEvent'));
     var option = {
-        xAxis: {
-            type: 'category',
-            data: ${years},
-            axisLabel: {
-                formatter: '{value}年'
-            }
-        },
-        yAxis: {
-            type: 'value',
-            axisLabel: {
-                formatter: '{value}条'
-            }
-        },
-        series: [{
-            data: ${yearCount},
-            type: 'line',
-            smooth: true
-        }]
-    };
-
-
-    addEvent.setOption(option);
-    addEvent.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType=year&&object=' + params.name);
-    });
-</script>
-
-<script type="text/javascript">
-    var periodTime = echarts.init(document.getElementById('periodTime'));
-    var option2 = {
         color: ['#3398DB'],
         tooltip : {
             trigger: 'axis',
@@ -357,7 +141,7 @@
         xAxis : [
             {
                 type : 'category',
-                data : ${eventName},
+                data : ${years},
                 axisTick: {
                     alignWithLabel: true
                 },
@@ -370,7 +154,7 @@
             {
                 type : 'value',
                 axisLabel: {
-                    formatter: '{value}天'
+                    formatter: '{value}条'
                 }
             }
         ],
@@ -379,106 +163,34 @@
                 name:'数量',
                 type:'bar',
                 barWidth: '60%',
-                data:${eventPeriod}
+                data:${yearCount}
             }
         ]
     };
 
-    periodTime.setOption(option2);
-    periodTime.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
-    });
-</script>
-<script type="text/javascript">
-    var objectType = echarts.init(document.getElementById('classify'));
-    var option3 = {
-        title : {
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ${objects}
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:${objectList},
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: function() {
-                            return 'rgb(' + [
-                                Math.round(Math.random() * 160),
-                                Math.round(Math.random() * 160),
-                                Math.round(Math.random() * 160)
-                            ].join(',') + ')';
-                        }
-                    }
-                }
-            }
-        ]
-    };
-
-    objectType.setOption(option3);
-    objectType.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+    addEvent.setOption(option);
+    addEvent.on('click', function (params) {
+        alert(params.name);
+        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=null&&object=' + params.name);
     });
 </script>
 
 
-<script type="text/javascript">
-    var allwebsite = echarts.init(document.getElementById('website'));
-    var websiteOption  = {
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            x: 'left',
-            data:${websiteName}
-        },
-        series: [
-            {
-                name:'访问来源',
-                type:'pie',
-                radius: ['50%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:${websites}
-            }
-        ]
-    };
-    allwebsite.setOption(websiteOption);
-    allwebsite.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType=year&&object=' + params.name);
-    });
+<script>
 </script>
+
+<script>
+
+</script>
+
+<!-- 引入后台尾部模板 -->
+<jsp:include page="/static/admin_footer.jsp"></jsp:include>
+
+<script src="admin/js/jquery.min.js"></script>
+<script src="admin/js/jquery.ui.custom.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<script src="admin/js/maruti.js"></script>
+</body>
+
 </html>
 

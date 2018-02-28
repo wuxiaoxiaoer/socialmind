@@ -31,34 +31,46 @@
 <!--close-top-Header-menu-->
 <div id="content" style="width:100%; height:100%;">
     <div id="content-header">
-        <div id="breadcrumb"> <a title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a class="current">舆情分析</a> </div>
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+            <a href="" class="current">舆情分析</a>
+        </div>
+
     </div>
-
-        <div class="container-fluid">
-            <div class="btn-group">
-                <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">选择查看的年份<span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <c:forEach items="${yearCount}" var="e" varStatus="sts">
-                        <li><a href="<%=basePath%>clickBackEvent?objecType=year&&object=${e.time} ">${e.time}</a></li>
-                    </c:forEach>
-                </ul>
-            </div>
-        <div class="row-fluid">
-            <div class="span12">
-
-                <div class="widget-box">
-                    <div class="widget-title">
-                        <span class="icon"><i class="icon-th"></i></span>
-
-                    </div>
-                    <div class="widget-content nopadding">
-                <div id="addEvent" style="width: 100%; height:400px;"></div>
-                </div>
-                </div>
+    <c:if test="${monthCount!=null}">
+        <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+            <div class="widget-title">
+                            <span class="icon">
+                                <i class="icon-eye-open"></i>
+                            </span>
+                <h5>${object}年事件数</h5>
 
             </div>
+
+            <div class="widget-content nopadding">
+                <div id="addEvent" style="width: 80%; height:400px;">
+
+                </div>
+            </div>
         </div>
+    </c:if>
+
+    <c:if test="${dayCount!=null}">
+        <div class="widget-box" style="width:60%; margin-left: 15%;" align="center">
+            <div class="widget-title">
+                            <span class="icon">
+                                <i class="icon-eye-open"></i>
+                            </span>
+                <h5>${year}年${object}月事件数</h5>
+
+            </div>
+
+            <div class="widget-content nopadding">
+                <div id="addEvent1" style="width: 80%; height:400px;">
+                </div>
+            </div>
         </div>
+    </c:if>
 
 </div>
 
@@ -81,7 +93,7 @@
         xAxis : [
             {
                 type : 'category',
-                data : [1,2,3,4,5,6,7,8,9,10,11,12],
+                data : ${month},
                 axisTick: {
                     alignWithLabel: true
                 },
@@ -110,7 +122,8 @@
 
     addEvent.setOption(option);
     addEvent.on('click', function (params) {
-        <%--window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=${object}&&object=' + params.name);--%>
+        alert(params.name);
+        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=${object}&&object=' + params.name);
     });
 </script>
 
@@ -163,7 +176,8 @@
 
     addEvent1.setOption(option1);
     addEvent1.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+        alert(params.name);
+        <%--window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=${object}&&object=' + params.name);--%>
     });
 </script>
 

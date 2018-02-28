@@ -111,11 +111,10 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery(sql);
             while (rs.next()){
-                String result = rs.getString(1);
-                new DBUtil().closeConn(rs,psmt,conn);
-                return result;
+               return rs.getString(1);
             }
-
+            new DBUtil().closeConn(rs,psmt,conn);
+            return null;
         }catch (Exception e){
 
         }
@@ -209,7 +208,6 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
 //                map.put("objectID",rs.getString(3));
                 list.add(map);
             }
-            new DBUtil().closeConn(rs,psmt,conn);
             return list;
 
         }catch (Exception e){
@@ -239,7 +237,6 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
                 map.put("num",subTimeDay(rs.getString(2),rs.getString(3)));
                 list.add(map);
             }
-            new DBUtil().closeConn(rs,psmt,conn);
             return list;
 
         }catch (Exception e){
@@ -284,6 +281,5 @@ public class EventEntityService extends DefaultEntityManager<EventEntity> {
         }
         return null;
     }
-
 
 }
