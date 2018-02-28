@@ -110,35 +110,12 @@ public class EventAnalysisBackAction {
             mode.addAttribute("yearCount", JSON.toJSON(eventByYear));
             mode.addAttribute("monthCount", JSON.toJSON(monthCount));
 
-            /*if (!"null".equals(year)){
-                // //当year不为null，object的内容为月份，查询每个月的数据
-                List<String> dayCount = new ArrayList<>();
-                String[] days = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-                for (int i=0;i<days.length;i++){
-                    dayCount.add(eventEntityService.eventByYearAndMonthAndDay(year,object,days[i]));
-                }
-                mode.addAttribute("year", JSON.toJSON(year));
-                mode.addAttribute("object", JSON.toJSON(object));
-                mode.addAttribute("days", JSON.toJSON(days));
-                mode.addAttribute("dayCount", JSON.toJSON(dayCount));
-            }*/
+
         }
 
         return "/WEB-INF/admin/newEventInfo";
     }
 
-    @RequestMapping("clickBackEventInfo")
-    public String clickTextInfo(HttpServletRequest req, HttpServletResponse resp, Model mode) throws IOException {
 
-        //事件列表
-        List<Map> periodEvent = eventEntityService.eventPeriod();
-        //实体列表
-        List<String> entityList = objectEntityService.findObjectList();
-        List<Map> eventOfType = objectEntityService.eventOfType();
-        mode.addAttribute("eventList", periodEvent);
-        mode.addAttribute("entityList", entityList);
-        mode.addAttribute("eventOfType", eventOfType);
-        return "/WEB-INF/admin/eventTextInfo";
-    }
 
 }

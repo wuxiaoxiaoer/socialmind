@@ -223,7 +223,7 @@
     };
     allevent.setOption(eventOption);
     allevent.on('click', function (params) {
-//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -265,7 +265,7 @@
     };
     allobject.setOption(objectOption);
     allobject.on('click', function (params) {
-//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -304,7 +304,7 @@
     };
     visit.setOption(visitOption);
     visit.on('click', function (params) {
-//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -386,7 +386,7 @@
 
     periodTime.setOption(option2);
     periodTime.on('click', function (params) {
-//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 <script type="text/javascript">
@@ -430,7 +430,7 @@
 
     objectType.setOption(option3);
     objectType.on('click', function (params) {
-//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
