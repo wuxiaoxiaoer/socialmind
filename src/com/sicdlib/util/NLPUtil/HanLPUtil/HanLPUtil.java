@@ -231,9 +231,18 @@ public class HanLPUtil {
         String text_per = "签约仪式前，秦光荣、李纪恒、仇和等一同会见了参加签约的企业家。";
         String text_plc = "蓝翔给宁夏固原市彭阳县红河镇黑牛沟村捐赠了挖掘机";
         String text_org = "2016年7月，北京大学出版社";
-        HashMap<String, String> persons = getNERPersonsMap(text_per);
+        String test = "江西九江发生6.9级地震";
+        /*HashMap<String, String> persons = getNERPersonsMap(text_per);
         HashMap<String, String> places = getNERPlacesMap(text_plc);
-        HashMap<String, String> orgs = getNEROrganizationsMap(text_org);
+        HashMap<String, String> orgs = getNEROrganizationsMap(text_org);*/
+        HashMap<String, String> persons = getNERPersonsMap(test);
+        HashMap<String, String> places = getNERPlacesMap(test);
+        HashMap<String, String> orgs = getNEROrganizationsMap(test);
+
+        List<String> verb = getNERVerbs(test);
         System.out.println(places.toString());
+        System.out.println(persons.toString());
+        System.out.println(orgs.toString());
+        System.out.println(verb.toString());
     }
 }

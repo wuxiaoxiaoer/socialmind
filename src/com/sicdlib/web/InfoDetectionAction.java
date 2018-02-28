@@ -30,9 +30,6 @@ public class InfoDetectionAction {
 	private ObjectEntityService objectEntityService;
 	@Autowired
 	private EventEntityService eventEntityService;
-	@Autowired
-	private ProvinceService provinceService;
-	
 
 	//搜索
 	@RequestMapping("search")
@@ -122,7 +119,6 @@ public class InfoDetectionAction {
 				}
 			provinceList.add(map);
 		}
-//		List<Map> provinceList = provinceList(articleList);
 
 		mode.addAttribute("objectId",objectId);
 		mode.addAttribute("count", maxcount(provinceList));
@@ -206,68 +202,82 @@ public class InfoDetectionAction {
 
 		String object = req.getParameter("object");
 		String objectId = req.getParameter("objectId");
+		String objectType = req.getParameter("objectType");
 
 		//点击敏感事件
-		List<DynamicSensitiveArticle> sensitiveList = new ArrayList<>();
-		String[] sensitiveType= {"色情","暴恐","反动","贪腐","民生","其他"};
-		if ("敏感".equals(object)){
-			sensitiveList = sensitive(objectId);
-			mode.addAttribute("sensitiveList", sensitiveList);
-		}else if("非敏感".equals(object)){
-			sensitiveList = sensitive(objectId);
-			List nosensitive = articleEntityService.findEventNoSensitive(sensitiveList);
-			mode.addAttribute("nosensitive", nosensitive);
-		}
-		//点击敏感的详细类型
-		List<DynamicSensitiveArticle> sensitiveInfoList = new ArrayList<>();
-		for (int i=0;i<sensitiveType.length;i++){
-			if (sensitiveType[i].equals(object)){
+		if ("sensitive".equals(objectType)){
+			List<DynamicSensitiveArticle> sensitiveList = new ArrayList<>();
+			String[] sensitiveType= {"色情","暴恐","反动","贪腐","民生","其他"};
+			if ("敏感".equals(object)){
 				sensitiveList = sensitive(objectId);
-				for (int j=0;j<sensitiveList.size();j++) {
-					if (object.equals(sensitiveList.get(j).getSensitiveType())){
-						DynamicSensitiveArticle dy = new DynamicSensitiveArticle();
-						dy.setSensitiveType(object);
-						dy.setArticle(sensitiveList.get(j).getArticle());
-						dy.setSensitiveWord(sensitiveList.get(j).getSensitiveWord());
-						sensitiveInfoList.add(dy);
+				mode.addAttribute("sensitiveList", sensitiveList);
+				return "/WEB-INF/foreground/infodetail";
+
+			}else if("非敏感".equals(object)){
+				sensitiveList = sensitive(objectId);
+				List nosensitive = articleEntityService.findEventNoSensitive(sensitiveList);
+				mode.addAttribute("nosensitive", nosensitive);
+				return "/WEB-INF/foreground/infodetail";
+			}else{
+				//点击敏感的详细类型
+				List<DynamicSensitiveArticle> sensitiveInfoList = new ArrayList<>();
+				for (int i=0;i<sensitiveType.length;i++){
+					if (sensitiveType[i].equals(object)){
+						sensitiveList = sensitive(objectId);
+						for (int j=0;j<sensitiveList.size();j++) {
+							if (object.equals(sensitiveList.get(j).getSensitiveType())){
+								DynamicSensitiveArticle dy = new DynamicSensitiveArticle();
+								dy.setSensitiveType(object);
+								dy.setArticle(sensitiveList.get(j).getArticle());
+								dy.setSensitiveWord(sensitiveList.get(j).getSensitiveWord());
+								sensitiveInfoList.add(dy);
+//								break;
+							}
+						}
 					}
 				}
+				mode.addAttribute("sensitiveInfo", sensitiveInfoList);
 			}
+
 		}
 
-		//点击媒体类型
-		List<ArticleEntity> mediaList = new ArrayList<>();
-		String[] mediaType= {"政府","论坛","博客","新闻","社交媒体"};
-		for (int i=0;i<mediaType.length;i++){
-			if(mediaType[i].equals(object)){
-				mediaList = websiteEntityService.findMediaList(objectId,object);
-				break;
+		if ("media".equals(objectType)){
+			//点击媒体类型
+			List<ArticleEntity> mediaList = new ArrayList<>();
+			String[] mediaType= {"政府","论坛","博客","新闻","社交媒体"};
+			for (int i=0;i<mediaType.length;i++){
+				if(mediaType[i].equals(object)){
+					mediaList = websiteEntityService.findMediaList(objectId,object);
+				}
 			}
+			mode.addAttribute("mediaList", mediaList);
 		}
 
-		//点击网站类型
-		List<ArticleEntity> websiteList = new ArrayList<>();
-		List<WebsiteEntity> websiteName= websiteEntityService.findWebsite();
-		for (int j=0; j<websiteName.size();j++){
-			if(websiteName.get(j).getWebsiteName().equals(object)){
-				websiteList = websiteEntityService.findWebsiteList(objectId,object);
-				break;
+		if ("website".equals(objectType)){
+			//点击网站类型
+			List<ArticleEntity> websiteList = new ArrayList<>();
+			List<WebsiteEntity> websiteName= websiteEntityService.findWebsite();
+			for (int j=0; j<websiteName.size();j++){
+				if(websiteName.get(j).getWebsiteName().equals(object)){
+					websiteList = websiteEntityService.findWebsiteList(objectId,object);
+				}
 			}
+			mode.addAttribute("websiteList", websiteList);
 		}
 
-		//点击地点
-		List<ArticleEntity> articleList = articleEntityService.findArticleList(objectId);
-		List<List> arealist = new ArrayList();
-		for (ArticleEntity articles : articleList) {
-			if (articles.getContent().contains(object)){
-				List<ArticleEntity> areaInfo = articleEntityService.findArticleInfo(articles.getArticleId());
-				arealist.add(areaInfo);
+		if ("area".equals(objectType)){
+			//点击地点
+			List<ArticleEntity> articleList = articleEntityService.findArticleList(objectId);
+			List<List> arealist = new ArrayList();
+			for (ArticleEntity articles : articleList) {
+				if (articles.getContent().contains(object)){
+					List<ArticleEntity> areaInfo = articleEntityService.findArticleInfo(articles.getArticleId());
+					arealist.add(areaInfo);
+				}
 			}
+			mode.addAttribute("arealist", arealist);
 		}
-		mode.addAttribute("arealist", arealist);
-		mode.addAttribute("websiteList", websiteList);
-		mode.addAttribute("mediaList", mediaList);
-		mode.addAttribute("sensitiveInfo", sensitiveInfoList);
+
 		return "/WEB-INF/foreground/infodetail";
 	}
 

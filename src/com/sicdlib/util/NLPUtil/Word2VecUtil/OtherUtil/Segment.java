@@ -18,7 +18,8 @@ public class Segment {
 //				"以期增进国际社会对共建“一带一路”倡议的进一步了解，展示共建“一带一路”的丰富成果，" +
 //				"增进各国战略互信和对话合作，为携手打造你中有我、" +
 //				"我中有你的人类命运共同体作出新的更大贡献。";
-		String str="巴彦淖尔市";
+//		String str="巴彦淖尔市";
+		String str="江西九江发生6.9级地震";
 		UserDefineLibrary.insertWord("一带一路", "n", 1000);
 		Result terms = ToAnalysis.parse(str);
 		System.out.println(terms.toString());

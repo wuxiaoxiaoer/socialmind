@@ -42,28 +42,31 @@
                     <a onclick="document.getElementById('002').scrollIntoView();"><i class="icon-chevron-right"></i>事件走势</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('003').scrollIntoView();"><i class="icon-chevron-right"></i>网站统计</a>
+                    <a onclick="document.getElementById('003').scrollIntoView();"><i class="icon-chevron-right"></i> 网站统计</a>
                 </li>
-                <li>
+               <%-- <li>
                     <a onclick="document.getElementById('004').scrollIntoView();"><i class="icon-chevron-right"></i>数据类型</a>
+                </li>--%>
+                <%--<li>
+                    <a onclick="document.getElementById('005').scrollIntoView();"><i class="icon-chevron-right"></i>关键词云</a>
+                </li>--%>
+                <%--<li>
+                    <a onclick="document.getElementById('006').scrollIntoView();"><i class="icon-chevron-right"></i>热门信息</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('005').scrollIntoView();"><i class="icon-chevron-right"></i>网站传播</a>
+                    <a onclick="document.getElementById('007').scrollIntoView();"><i class="icon-chevron-right"></i>热点网民</a>
+                </li>--%>
+                <li>
+                    <a onclick="document.getElementById('008').scrollIntoView();"><i class="icon-chevron-right"></i> 传播路径</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('006').scrollIntoView();"><i class="icon-chevron-right"></i>文章传播</a>
+                    <a onclick="document.getElementById('009').scrollIntoView();"><i class="icon-chevron-right"></i>关联词</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('007').scrollIntoView();"><i class="icon-chevron-right"></i>关联词</a>
+                    <a onclick="document.getElementById('010').scrollIntoView();"><i class="icon-chevron-right"></i>网民观点</a>
                 </li>
                 <li>
-                    <a onclick="document.getElementById('008').scrollIntoView();"><i class="icon-chevron-right"></i>媒体关注时间</a>
-                </li>
-                <li>
-                    <a onclick="document.getElementById('009').scrollIntoView();"><i class="icon-chevron-right"></i>网民观点</a>
-                </li>
-                <li>
-                    <a onclick="document.getElementById('010').scrollIntoView();"><i class="icon-chevron-right"></i>舆情总结</a>
+                    <a onclick="document.getElementById('011').scrollIntoView();"><i class="icon-chevron-right"></i> 舆情总结</a>
                 </li>
             </ul>
         </div>
@@ -135,7 +138,7 @@
 --%>
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="003">全网统计</div>
+                        <div class="muted pull-left" id="000">全网统计</div>
 
                     </div>
                     <div class="block-content collapse in">
@@ -198,7 +201,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="006">传播路径</div>
+                        <div class="muted pull-left" id="008">传播路径</div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -215,7 +218,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="007">网站关注时间</div>
+                        <div class="muted pull-left" id="">网站传播持续时间</div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -231,7 +234,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="008">关联词</div>
+                        <div class="muted pull-left" id="009">关联词</div>
                     </div>
                     <div class="block-content collapse in">
                         <div class="span12">
@@ -247,7 +250,7 @@
                 <!-- block -->
                 <div class="block">
                     <div class="navbar navbar-inner block-header">
-                        <div class="muted pull-left" id="009">网民观点</div>
+                        <div class="muted pull-left" id="010">网民观点</div>
                     </div>
                     <div class="block-content collapse in">
 
@@ -296,16 +299,14 @@
 
             <div class="alert alert-block">
                 <c:forEach items="${event}" var="e">
-                <h4 class="alert-heading" id="010">舆情总结</h4>
+                <h4 class="alert-heading" id="011">舆情总结</h4>
                     &nbsp;&nbsp;&nbsp;&nbsp;${e.event.eventSummary}
-
-                <div class="alert alert-success">
-                    <%--<c:forEach items="${reliablity}" var="r">--%>
-                    综合信息可得，在[${e.object.name}]事件/话题中，媒体的主流报道为：。。。。。，网民的主要观点为：。。。。。。
-                        应深入挖掘网民意见和情感倾向，识别事件传播过程中的意见领袖和主要信息来源，预测或追踪舆论走向，以便对不良舆论进行疏导。
-                    <%--</c:forEach>--%>
-                </div>
                 </c:forEach>
+                <div class="alert alert-success">
+                    <c:forEach items="${reliablity}" var="r">
+                    综合信息可得，该事件可信度为&nbsp;&nbsp;<strong>${r.indicatorValue}</strong>
+                    </c:forEach>
+                </div>
             </div>
 
         </div>

@@ -162,6 +162,7 @@
                                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable" id="example" aria-describedby="example_info">
 
                                     <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                    <c:if test="${sensitiveList!=null}">
                                     <c:forEach items="${sensitiveList}" var="s" varStatus="sts">
                                         <tr class="gradeA odd">
 
@@ -192,6 +193,8 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    </c:if>
+                                    <c:if test="${sensitiveInfo!=null}">
                                     <c:forEach items="${sensitiveInfo}" var="a" varStatus="sts">
                                         <tr class="gradeA odd">
 
@@ -222,6 +225,8 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    </c:if>
+                                    <c:if test="${mediaList!=null}">
                                     <c:forEach items="${mediaList}" var="m" varStatus="sts">
                                         <tr class="gradeA odd">
 
@@ -252,6 +257,8 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    </c:if>
+                                    <c:if test="${websiteList!=null}">
                                     <c:forEach items="${websiteList}" var="w" varStatus="sts">
                                         <tr class="gradeA odd">
 
@@ -282,6 +289,8 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    </c:if>
+                                    <c:if test="${articleInfo!=null}">
                                     <c:forEach items="${articleInfo}" var="w" varStatus="sts">
                                         <tr class="gradeA odd">
 
@@ -312,6 +321,8 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    </c:if>
+                                    <c:if test="${nosensitive!=null}">
                                     <c:forEach items="${nosensitive}" var="w" varStatus="sts">
                                         <tr class="gradeA odd">
 
@@ -343,6 +354,7 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    </c:if>
                                     <c:if test="${!empty arealist}">
                                     <c:forEach items="${arealist}" var="area" varStatus="sts">
                                         <c:forEach items="${area}" var="w">

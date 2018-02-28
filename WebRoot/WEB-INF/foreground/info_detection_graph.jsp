@@ -263,8 +263,7 @@
     // 为echarts对象加载数据
     myChart.setOption(option);
     myChart.on('click', function (params) {
-        alert((params.name));
-        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=media&&object=' + params.name);
     });
 </script>
 <script>
@@ -372,7 +371,7 @@
     // 为echarts对象加载数据
     myChart2.setOption(option2);
     myChart2.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=website&&object=' + params.name);
     });
 </script>
 <script>
@@ -435,7 +434,7 @@
     };
     myChart4.setOption(option4);
     myChart4.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=area&&object=' + params.name);
     });
 
 </script>
@@ -504,7 +503,7 @@
     // 为echarts对象加载数据
     myChart5.setOption(option5);
     myChart5.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=sensitive&&object=' + params.name);
     });
 </script>
 <script>
@@ -572,8 +571,8 @@
     // 为echarts对象加载数据
     myChart6.setOption(option6);
     myChart6.on('click', function (params) {
-        alert((params.name));
-        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&object=' + params.name);
+
+        window.open('http://localhost:8080/socialmind/infodetection/click?objectId=${objectId}&&objectType=sensitive&&object=' + params.name);
     });
 </script>
 </body>
