@@ -1,27 +1,17 @@
 package com.sicdlib.web;
 
-import Jama.Matrix;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sicdlib.entity.*;
 import com.sicdlib.service.*;
-import com.sicdlib.util.GraphUtil.Graph;
-import com.sicdlib.util.NLPUtil.HanLPUtil.HanLPUtil;
 import com.sicdlib.util.NLPUtil.Word2VecUtil.OtherUtil.Segment;
 import com.sicdlib.util.NLPUtil.Word2VecUtil.Test.Word2Vec;
 import com.sicdlib.util.SNAUtil.SNAUtil;
 import com.sicdlib.util.UUIDUtil.UUIDUtil;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -127,7 +117,6 @@ public class EventAction {
             List<Map> mediaSource = websiteEntityService.findMediaSource(objectId);
 
             //各媒体的观点
-//      List<ArticleCommentEntity> articleCommentList = articleCommentEntityService.findArticleComment(hotAuthor.get(0).getAuthorId());
             List mediaList = new ArrayList();
             for(int i = 0 ; i < allMedias().size() ; i++) {
                 mediaList.add(allMedias().get(i).getAttributeValue());
@@ -413,7 +402,6 @@ public class EventAction {
             String webName = webs.get(k).toString();
             Map map = new HashMap();
             map.put(k, articleEntityService.findFirstTimeByWeb(webName,objectId));
-//            map.put("value",webName);
             timeFirstList.add(map);
         }
         return timeFirstList;
@@ -433,7 +421,6 @@ public class EventAction {
             String webName = webs.get(k).toString();
             Map map = new HashMap();
             map.put(k, articleEntityService.findEndTimeByWeb(webName,objectId));
-//            map.put("value",webName);
             timeEndList.add(map);
         }
         return timeEndList;
@@ -570,14 +557,7 @@ public class EventAction {
         return between;
 
     }
-    /*//统计事件下热门信息
-    public List hotInformation(String objectId){
-        return articleEntityService.findHotInformation(objectId);
-    }
-    //统计事件下热门作者
-    public List<AuthorEntity> hotAuthor(String objectId){
-        return authorEntityService.findHotAuthor(objectId);
-    }*/
+
 
     //统计所有网站
     public List<WebsiteEntity> webs(){
@@ -698,99 +678,6 @@ public class EventAction {
         }
         return keywordList;
     }
-
-
-    public Map<String, List> test(String objectId) {
-        int sliceNum = 10; //将相似度分为10份
-        double sliceSize = 1.0 / sliceNum;
-//        double simi = 0.35;
-        //找见该事件下所有相似文章的相似度
-        List<String> webs = websiteEntityService.findWebsitesByEvent(objectId);
-
-        //存放在不同相似度情况下每个节点的大小
-        Map<String, Vector<Integer>> articleSimiNumMap = new ConcurrentHashMap<>();
-
-        //??????????
-        Vector<Vector<Map<String, Object>>> edgeList = new Vector<>();
-        for(int i = 0; i <= sliceNum; i++) {
-            AtomicReference<Vector<Map<String, Object>>> vector = new AtomicReference<>(new Vector<>());
-            edgeList.add(vector.get());
-        }
-        List<Map> timeFirstList = timeFirstList(objectId);
-        double[][] timeMatrix = new double[webs.size()][webs.size()];
-        for(int m =0;m<timeMatrix.length;m++){
-            for (int n = 0;n<timeMatrix[m].length;n++){
-                if(m ==n){
-                    timeMatrix[m][n] =0;
-                }else {
-                    String articleAID = timeFirstList.get(m).get(m).toString();
-                    String articleBID = timeFirstList.get(n).get(n).toString();
-                    timeMatrix[m][n] =subTime(articleAID, articleBID);
-                    if (timeMatrix[m][n]<0){
-                        timeMatrix[m][n]=0;
-                    }
-                    //初始化节点相关节点的个数
-                    if (!articleSimiNumMap.containsKey(articleAID)) {
-                        //初始化每个节点在不同相似度下节点的大小,初始化为0
-                        Vector<Integer> nodeSizeList = new Vector<>();
-                        for (int i = 0; i <= sliceNum; i++) {
-                            nodeSizeList.add(0);
-                        }
-                        articleSimiNumMap.put(articleAID, nodeSizeList);
-                    }
-                    //时间早的作为source，晚的为target
-                    //如果相似度高于simi，连接两个节点
-                    String edgeSource = "";
-                    String edgeTarget = "";
-                    if (timeMatrix[m][n]>0){
-                        edgeSource = articleAID;
-                        edgeTarget = articleBID;
-                    }else {
-                        break;
-                    }
-
-
-                    //对相应的相似度阈值+1
-                    Vector<Integer> simiAList = articleSimiNumMap.get(articleAID);
-                    Vector<Integer> simiBList = articleSimiNumMap.get(articleBID);
-
-                    //循环，加入相应的阈值数组
-                    for (int i = 0; i <= 1; i++) {
-//                        AtomicInteger countA = new AtomicInteger(simiAList.get(i));
-//                        AtomicInteger countB = new AtomicInteger(simiBList.get(i));
-//
-//                        simiAList.set(i, countA.incrementAndGet());
-//                        simiBList.set(i, countB.incrementAndGet());
-
-                        Map<String, Object> edgeMap = new HashMap<>();
-                        edgeMap.put("source", edgeSource);
-                        edgeMap.put("target", edgeTarget);
-
-                        Vector<Map<String, Object>> vector = edgeList.get(i);
-                        vector.add(edgeMap);
-                        edgeList.set(i, vector);
-                    }
-//                    articleSimiNumMap.put(articleAID, simiAList);
-//                    articleSimiNumMap.put(articleBID, simiAList);
-                }
-            }
-        }
-
-
-        List<Map<String, Object>> nodeList = new ArrayList<>();
-        for (int i =0;i<webs.size();i++) {
-            Map<String, Object> element = new HashMap<>();
-            element.put("website",webs.get(i).toString());
-            nodeList.add(element);
-        }
-
-        Map<String, List> result = new HashMap<>();
-        result.put("nodes", nodeList);
-        result.put("edges", edgeList);
-        return result;
-    }
-
-
 
 
     //文章传播生成节点和边
@@ -988,8 +875,6 @@ public class EventAction {
         }
         return listkey;
     }
-
-
 
 
 }

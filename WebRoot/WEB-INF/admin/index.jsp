@@ -156,11 +156,7 @@
 										<li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-pdf"></i> 最活跃的网站 </a> </li>
 										<li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-people"></i> 最活跃事件 </a> </li>
 										<li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-shopping-bag"></i>访问次数最多事件 </a> </li>
-										<%--<li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-survey"></i> 该系统访问次数最多主题 </a> </li>
-										<li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-tag"></i> 包含事件最多的主题 </a> </li>
-										<li> <a href="<%=basePath%>eventAnalysis"><i class="icon-user"></i> 包含事件最少的主题</a> </li>
-										<li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-user"></i> 近月包含事件最多的主题</a> </li>
-										<li> <a href="<%=basePath%>eventAnalysis"> <i class="icon-user"></i> 近月包含事件最少的主题</a> </li>--%>
+
 									</ul>
 
 									</ul>

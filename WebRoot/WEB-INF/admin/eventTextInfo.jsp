@@ -39,17 +39,26 @@
             </div>
             <br>
             <div style=" margin-left: 5%;">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                    <li>
+                        <a onclick="document.getElementById('001').scrollIntoView();"><i class="icon-arrow-right"></i> 全部事件</a>
+                    </li>
+                    <li>
+                        <a onclick="document.getElementById('002').scrollIntoView();"><i class="icon-arrow-right"></i>全部实体</a>
+                    </li>
+                    <li>
+                        <a onclick="document.getElementById('003').scrollIntoView();"><i class="icon-arrow-right"></i>事件分类</a>
+                    </li>
 
-                <a onclick="document.getElementById('001').scrollIntoView();" class="btn btn-primary btn-large">全部事件列表</a>
-                <a onclick="document.getElementById('002').scrollIntoView();" class="btn btn-primary btn-large">全部实体列表</a>
-                <a onclick="document.getElementById('003').scrollIntoView();" class="btn btn-primary btn-large">事件分类列表</a>
+                </ul>
+
             </div>
         </div>
 
         <div class="container-fluid">
 
             <div class="row-fluid" style="height:70%">
-                <div class="span4">
+                <div class="span7">
                     <div class="widget-box" style="height: 250px">
                         <div class="widget-title">
 								<span class="icon">
@@ -81,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="span4">
+                <div class="span7">
                     <div class="widget-box"  style="height: 250px">
                         <div class="widget-title">
 								<span class="icon">
@@ -108,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="span4">
+                <div class="span7">
                     <div class="widget-box" style="height: 250px">
                         <div class="widget-title">
 								<span class="icon">

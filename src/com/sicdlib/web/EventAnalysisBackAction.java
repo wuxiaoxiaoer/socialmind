@@ -96,23 +96,21 @@ public class EventAnalysisBackAction {
 
         String objecType = req.getParameter("objecType");
         String object = req.getParameter("object");
-        String year = req.getParameter("year");
+//        String year = req.getParameter("year");
 
-
-        if ("\"年\"".equals(objecType)){
-            if ("null".equals(year)){
-                //当year为null，object的内容为年份，查询12个月数据
-                List<String> monthCount = new ArrayList<>();
-                int[] months = {1,2,3,4,5,6,7,8,9,10,11,12};
-                //根据年份查询每个月的数据
-                for (int i=0;i<months.length;i++){
-                    monthCount.add(eventEntityService.eventByYearAndMonth(object,months[i]));
-                }
-                mode.addAttribute("object", JSON.toJSON(object));
-                mode.addAttribute("month", JSON.toJSON(months));
-                mode.addAttribute("monthCount", JSON.toJSON(monthCount));
+        if ("year".equals(objecType)){
+            List<Map> eventByYear = eventEntityService.eventByYear();
+            List<String> monthCount = new ArrayList<>();
+            int[] months = {1,2,3,4,5,6,7,8,9,10,11,12};
+            //根据年份查询每个月的数据
+            for (int i=0;i<months.length;i++){
+                monthCount.add(eventEntityService.eventByYearAndMonth(object,months[i]));
             }
-            if (!"null".equals(year)){
+
+            mode.addAttribute("yearCount", JSON.toJSON(eventByYear));
+            mode.addAttribute("monthCount", JSON.toJSON(monthCount));
+
+            /*if (!"null".equals(year)){
                 // //当year不为null，object的内容为月份，查询每个月的数据
                 List<String> dayCount = new ArrayList<>();
                 String[] days = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
@@ -123,7 +121,7 @@ public class EventAnalysisBackAction {
                 mode.addAttribute("object", JSON.toJSON(object));
                 mode.addAttribute("days", JSON.toJSON(days));
                 mode.addAttribute("dayCount", JSON.toJSON(dayCount));
-            }
+            }*/
         }
 
         return "/WEB-INF/admin/newEventInfo";

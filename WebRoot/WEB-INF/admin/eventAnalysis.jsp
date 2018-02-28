@@ -117,24 +117,44 @@
                 </div>
             </div>
 
+
             <div class="row-fluid">
+                <div class="span6" id="007">
+                    <div class="widget-box">
+                        <div class="widget-title">
+								<span class="icon">
+									<i class="icon-signal"></i>
+								</span>
+                            <h5>网站活跃量</h5>
+                        </div>
+                        <div class="widget-content">
+                            <div id="website" style="width: 100%;height: 400px"></div>
+                            <div align="center">该图表示不同网站的活跃量</div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="span6" id="005">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
 									<i class="icon-signal"></i>
 								</span>
-                            <h5>新增事件数</h5>
+                            <h5>每年事件数</h5>
                         </div>
                         <div class="widget-content">
                             <div id="addEvent" style="width: 100%;height: 400px"></div>
-                            <div align="center">该图表示不同年份新增的事件的数量</div>
+                            <div align="center">该图表示不同年份的事件的数量</div>
                         </div>
                     </div>
                 </div>
 
+            </div>
 
-                <div class="span6" id="006">
+
+            <div class="row-fluid">
+                <div class="span12" id="006">
                     <div class="widget-box">
                         <div class="widget-title">
 								<span class="icon">
@@ -150,38 +170,7 @@
                 </div>
             </div>
 
-            <div class="row-fluid">
-                <div class="span6" id="007">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>网站活跃量</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="website" style="width: 100%;height: 450px"></div>
-                            <div align="center">该图表示不同网站的活跃量</div>
-                        </div>
-                    </div>
-                </div>
 
-
-                <div class="span6" id="008">
-                    <div class="widget-box">
-                        <div class="widget-title">
-								<span class="icon">
-									<i class="icon-signal"></i>
-								</span>
-                            <h5>事件访问量</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div id="visit" style="width: 100%;height: 450px"></div>
-                            <div align="center">该图表示不同事件的访问量</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -234,7 +223,7 @@
     };
     allevent.setOption(eventOption);
     allevent.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -276,7 +265,7 @@
     };
     allobject.setOption(objectOption);
     allobject.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -315,7 +304,7 @@
     };
     visit.setOption(visitOption);
     visit.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -345,7 +334,7 @@
 
     addEvent.setOption(option);
     addEvent.on('click', function (params) {
-        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=null&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType=year&&object=' + params.name);
     });
 </script>
 
@@ -397,7 +386,7 @@
 
     periodTime.setOption(option2);
     periodTime.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 <script type="text/javascript">
@@ -441,7 +430,7 @@
 
     objectType.setOption(option3);
     objectType.on('click', function (params) {
-        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
+//        window.location.href = 'http://localhost:8080/socialmind/clickBackEventInfo';
     });
 </script>
 
@@ -488,7 +477,7 @@
     };
     allwebsite.setOption(websiteOption);
     allwebsite.on('click', function (params) {
-//        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType="年"&&year=null&&object=' + params.name);
+        window.open('http://localhost:8080/socialmind/clickBackEvent?objecType=year&&object=' + params.name);
     });
 </script>
 </html>
